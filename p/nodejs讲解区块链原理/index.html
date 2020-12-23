@@ -1,0 +1,269 @@
+<!doctype html><html lang=zh-cn><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="前言 今天在YouTube上看到了一个系列视频，总共三集，讲解了怎么用 js 实现区块链，感觉浅显易懂，为了加深理解，凭着记忆和自己的理解再次自己实现一遍。
+代码总共实现了三个类，
+1、Block类用于生成区块实例，主要是存储信息，生成 hash；
+2、BlockChain类用于将区块添加到链上，以及暴露添加交易记录、挖矿、获取用户账户资金、校验区块链安全性等方法。
+3、Transaction类用于生成交易信息.
+1、Block 类 区块链字面意思上理解就是区块构成的链，区块主要是存储着一些信息，其中不可或缺的有主体，即交易信息（当然本篇主要讲的是区块链货币，区块链也可能用于其他方面）， 时间戳，即区块生成时间，上一个区块的哈希值，本区块的哈希值（由上一个区块的哈希与本区块的数据共同生成，这样，当上一个区块被修改，那么本区块的哈希也需要被修改，才能与上一个区块的哈希对应起来，这样的话修改信息的人需要修改往后所有区块的信息）。
+其中值得注意的是在区块链中有一个挖矿的概念，这个挖矿就是通过计算使得本区快的哈希值满足预设的要求，比如说比特币就是要求生成的区块的哈希值的前几位是n个0，这个n就代表了挖矿的难度系数，比特币会随着比特币的产出不断加大这个难度系数，使得挖矿变的越来越难
+class Block { /** * * @param {Number} timestamp 时间戳 * @param {Array} transactions 交易信息 * @param {String} preHash 上一个区块的哈希值 * @param {Number} difficulty 难度系数 */ constructor(timestamp, transactions, preHash, difficulty) { Object.assign(this, { timestamp, transactions, preHash, hash: this.getHash(difficulty), }); } getHash(difficulty) { let hash = &amp;#34;&amp;#34;; let nonce = 0; do { const msg = `${this.timestamp}${JSON.stringify(this.data)}${nonce}`; hash = crypto."><title>Nodejs讲解区块链原理</title><link rel=canonical href=https://jo-hnny.github.io/p/nodejs%E8%AE%B2%E8%A7%A3%E5%8C%BA%E5%9D%97%E9%93%BE%E5%8E%9F%E7%90%86/><link rel=stylesheet href=/scss/style.min.css><meta property="og:title" content="Nodejs讲解区块链原理"><meta property="og:description" content="前言 今天在YouTube上看到了一个系列视频，总共三集，讲解了怎么用 js 实现区块链，感觉浅显易懂，为了加深理解，凭着记忆和自己的理解再次自己实现一遍。
+代码总共实现了三个类，
+1、Block类用于生成区块实例，主要是存储信息，生成 hash；
+2、BlockChain类用于将区块添加到链上，以及暴露添加交易记录、挖矿、获取用户账户资金、校验区块链安全性等方法。
+3、Transaction类用于生成交易信息.
+1、Block 类 区块链字面意思上理解就是区块构成的链，区块主要是存储着一些信息，其中不可或缺的有主体，即交易信息（当然本篇主要讲的是区块链货币，区块链也可能用于其他方面）， 时间戳，即区块生成时间，上一个区块的哈希值，本区块的哈希值（由上一个区块的哈希与本区块的数据共同生成，这样，当上一个区块被修改，那么本区块的哈希也需要被修改，才能与上一个区块的哈希对应起来，这样的话修改信息的人需要修改往后所有区块的信息）。
+其中值得注意的是在区块链中有一个挖矿的概念，这个挖矿就是通过计算使得本区快的哈希值满足预设的要求，比如说比特币就是要求生成的区块的哈希值的前几位是n个0，这个n就代表了挖矿的难度系数，比特币会随着比特币的产出不断加大这个难度系数，使得挖矿变的越来越难
+class Block { /** * * @param {Number} timestamp 时间戳 * @param {Array} transactions 交易信息 * @param {String} preHash 上一个区块的哈希值 * @param {Number} difficulty 难度系数 */ constructor(timestamp, transactions, preHash, difficulty) { Object.assign(this, { timestamp, transactions, preHash, hash: this.getHash(difficulty), }); } getHash(difficulty) { let hash = &amp;#34;&amp;#34;; let nonce = 0; do { const msg = `${this.timestamp}${JSON.stringify(this.data)}${nonce}`; hash = crypto."><meta property="og:url" content="https://jo-hnny.github.io/p/nodejs%E8%AE%B2%E8%A7%A3%E5%8C%BA%E5%9D%97%E9%93%BE%E5%8E%9F%E7%90%86/"><meta property="og:site_name" content="冷宫"><meta property="og:type" content="article"><meta property="article:section" content="Post"><meta property="article:published_time" content="2019-09-18T20:53:59+08:00"><meta property="article:modified_time" content="2019-09-18T20:53:59+08:00"><meta name=twitter:title content="Nodejs讲解区块链原理"><meta name=twitter:description content="前言 今天在YouTube上看到了一个系列视频，总共三集，讲解了怎么用 js 实现区块链，感觉浅显易懂，为了加深理解，凭着记忆和自己的理解再次自己实现一遍。
+代码总共实现了三个类，
+1、Block类用于生成区块实例，主要是存储信息，生成 hash；
+2、BlockChain类用于将区块添加到链上，以及暴露添加交易记录、挖矿、获取用户账户资金、校验区块链安全性等方法。
+3、Transaction类用于生成交易信息.
+1、Block 类 区块链字面意思上理解就是区块构成的链，区块主要是存储着一些信息，其中不可或缺的有主体，即交易信息（当然本篇主要讲的是区块链货币，区块链也可能用于其他方面）， 时间戳，即区块生成时间，上一个区块的哈希值，本区块的哈希值（由上一个区块的哈希与本区块的数据共同生成，这样，当上一个区块被修改，那么本区块的哈希也需要被修改，才能与上一个区块的哈希对应起来，这样的话修改信息的人需要修改往后所有区块的信息）。
+其中值得注意的是在区块链中有一个挖矿的概念，这个挖矿就是通过计算使得本区快的哈希值满足预设的要求，比如说比特币就是要求生成的区块的哈希值的前几位是n个0，这个n就代表了挖矿的难度系数，比特币会随着比特币的产出不断加大这个难度系数，使得挖矿变的越来越难
+class Block { /** * * @param {Number} timestamp 时间戳 * @param {Array} transactions 交易信息 * @param {String} preHash 上一个区块的哈希值 * @param {Number} difficulty 难度系数 */ constructor(timestamp, transactions, preHash, difficulty) { Object.assign(this, { timestamp, transactions, preHash, hash: this.getHash(difficulty), }); } getHash(difficulty) { let hash = &amp;#34;&amp;#34;; let nonce = 0; do { const msg = `${this.timestamp}${JSON.stringify(this.data)}${nonce}`; hash = crypto."></head><body><div class="container flex on-phone--column align-items--flex-start extended article-page with-toolbar"><aside class="sidebar left-sidebar sticky"><button class="hamburger hamburger--spin" type=button id=toggle-menu aria-label="Toggle Menu">
+<span class=hamburger-box><span class=hamburger-inner></span></span></button><header class=site-info><figure class=site-avatar><img src=/img/avatar_hud170f2c6bd12f3a098a294aad792bf80_1699879_300x0_resize_box_2.png width=300 height=195 class=site-logo loading=lazy alt=Avatar>
+<span class=emoji>🍥</span></figure><h1 class=site-name><a href=https://jo-hnny.github.io/>冷宫</a></h1><h2 class=site-description>这里也曾热闹过</h2></header><ol class=menu id=main-menu><li><a href=/><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><polyline points="5 12 3 12 12 3 21 12 19 12"/><path d="M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"/><path d="M9 21v-6a2 2 0 012-2h2a2 2 0 012 2v6"/></svg><span>Home</span></a></li><li><a href=/about><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="7" r="4"/><path d="M6 21v-2a4 4 0 014-4h4a4 4 0 014 4v2"/></svg><span>About</span></a></li><li><a href=/archives><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><rect x="3" y="4" width="18" height="4" rx="2"/><path d="M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8"/><line x1="10" y1="12" x2="14" y2="12"/></svg><span>Archives</span></a></li><li><a href=/search><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="10" cy="10" r="7"/><line x1="21" y1="21" x2="15" y2="15"/></svg><span>Search</span></a></li></ol></aside><main class="main full-width"><div id=article-toolbar><a href=https://jo-hnny.github.io/ class=back-home><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevron-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><polyline points="15 6 9 12 15 18"/></svg><span>Back</span></a></div><article class=main-article><header class=article-header><div class=article-details><h2 class=article-title><a href=/p/nodejs%E8%AE%B2%E8%A7%A3%E5%8C%BA%E5%9D%97%E9%93%BE%E5%8E%9F%E7%90%86/>Nodejs讲解区块链原理</a></h2><footer class=article-time><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 15"/></svg><time class=article-time--published>Sep 18, 2019</time></footer></div></header><section class=article-content><h2 id=前言>前言</h2><p>今天在<a class=link href="https://www.youtube.com/watch?v=zVqczFZr124&feature=youtu.be" target=_blank rel=noopener>YouTube</a>上看到了一个系列视频，总共三集，讲解了怎么用 js 实现区块链，感觉浅显易懂，为了加深理解，凭着记忆和自己的理解再次自己实现一遍。<br>代码总共实现了三个类，<br>1、<code>Block</code>类用于生成区块实例，主要是存储信息，生成 hash；<br>2、<code>BlockChain</code>类用于将区块添加到链上，以及暴露添加交易记录、挖矿、获取用户账户资金、校验区块链安全性等方法。<br>3、<code>Transaction</code>类用于生成交易信息.</p><h2 id=1block-类>1、Block 类</h2><p>区块链字面意思上理解就是区块构成的链，区块主要是存储着一些信息，其中不可或缺的有主体，即交易信息（当然本篇主要讲的是区块链货币，区块链也可能用于其他方面），
+时间戳，即区块生成时间，上一个区块的哈希值，本区块的哈希值（由上一个区块的哈希与本区块的数据共同生成，这样，当上一个区块被修改，那么本区块的哈希也需要被修改，才能与上一个区块的哈希对应起来，这样的话修改信息的人需要修改往后所有区块的信息）。<br><code>其中值得注意的是在区块链中有一个挖矿的概念，这个挖矿就是通过计算使得本区快的哈希值满足预设的要求，比如说比特币就是要求生成的区块的哈希值的前几位是n个0，这个n就代表了挖矿的难度系数，比特币会随着比特币的产出不断加大这个难度系数，使得挖矿变的越来越难</code></p><div class=highlight><pre class=chroma><code class=language-js data-lang=js><span class=kr>class</span> <span class=nx>Block</span> <span class=p>{</span>
+  <span class=cm>/**
+</span><span class=cm>   *
+</span><span class=cm>   * @param {Number} timestamp 时间戳
+</span><span class=cm>   * @param {Array} transactions 交易信息
+</span><span class=cm>   * @param {String} preHash 上一个区块的哈希值
+</span><span class=cm>   * @param {Number} difficulty 难度系数
+</span><span class=cm>   */</span>
+  <span class=nx>constructor</span><span class=p>(</span><span class=nx>timestamp</span><span class=p>,</span> <span class=nx>transactions</span><span class=p>,</span> <span class=nx>preHash</span><span class=p>,</span> <span class=nx>difficulty</span><span class=p>)</span> <span class=p>{</span>
+    <span class=nb>Object</span><span class=p>.</span><span class=nx>assign</span><span class=p>(</span><span class=k>this</span><span class=p>,</span> <span class=p>{</span>
+      <span class=nx>timestamp</span><span class=p>,</span>
+      <span class=nx>transactions</span><span class=p>,</span>
+      <span class=nx>preHash</span><span class=p>,</span>
+      <span class=nx>hash</span><span class=o>:</span> <span class=k>this</span><span class=p>.</span><span class=nx>getHash</span><span class=p>(</span><span class=nx>difficulty</span><span class=p>),</span>
+    <span class=p>});</span>
+  <span class=p>}</span>
+
+  <span class=nx>getHash</span><span class=p>(</span><span class=nx>difficulty</span><span class=p>)</span> <span class=p>{</span>
+    <span class=kd>let</span> <span class=nx>hash</span> <span class=o>=</span> <span class=s2>&#34;&#34;</span><span class=p>;</span>
+    <span class=kd>let</span> <span class=nx>nonce</span> <span class=o>=</span> <span class=mi>0</span><span class=p>;</span>
+
+    <span class=k>do</span> <span class=p>{</span>
+      <span class=kr>const</span> <span class=nx>msg</span> <span class=o>=</span> <span class=sb>`</span><span class=si>${</span><span class=k>this</span><span class=p>.</span><span class=nx>timestamp</span><span class=si>}${</span><span class=nx>JSON</span><span class=p>.</span><span class=nx>stringify</span><span class=p>(</span><span class=k>this</span><span class=p>.</span><span class=nx>data</span><span class=p>)</span><span class=si>}${</span><span class=nx>nonce</span><span class=si>}</span><span class=sb>`</span><span class=p>;</span>
+
+      <span class=nx>hash</span> <span class=o>=</span> <span class=nx>crypto</span><span class=p>.</span><span class=nx>createHash</span><span class=p>(</span><span class=s2>&#34;sha256&#34;</span><span class=p>).</span><span class=nx>update</span><span class=p>(</span><span class=nx>msg</span><span class=p>).</span><span class=nx>digest</span><span class=p>(</span><span class=s2>&#34;hex&#34;</span><span class=p>);</span>
+
+      <span class=nx>nonce</span><span class=o>++</span><span class=p>;</span>
+    <span class=p>}</span> <span class=k>while</span> <span class=p>(</span><span class=nx>hash</span><span class=p>.</span><span class=nx>substr</span><span class=p>(</span><span class=mi>0</span><span class=p>,</span> <span class=nx>difficulty</span><span class=p>)</span> <span class=o>!==</span> <span class=nb>Array</span><span class=p>(</span><span class=nx>difficulty</span><span class=p>).</span><span class=nx>fill</span><span class=p>(</span><span class=mi>0</span><span class=p>).</span><span class=nx>join</span><span class=p>(</span><span class=s2>&#34;&#34;</span><span class=p>));</span>
+
+    <span class=k>return</span> <span class=nx>hash</span><span class=p>;</span>
+  <span class=p>}</span>
+<span class=p>}</span>
+</code></pre></div><h2 id=2blockchain-类>2、BlockChain 类</h2><p>BlockChain 类在生成实例的时候会把第一个元区块放入到链中，这个区块不存储任何有用的信息，
+使用者可以向实例中添加交易信息，实例会把这些交易信息暂存起来，直到矿工开始挖矿，挖矿成功后所暂存的交易信息就被写入了新生成的区块中，同时给予矿工的奖励会暂存起来，直到下一个区块生成，矿工就算真的收到了奖励。</p><div class=highlight><pre class=chroma><code class=language-js data-lang=js><span class=kr>class</span> <span class=nx>BlockChain</span> <span class=p>{</span>
+  <span class=nx>constructor</span><span class=p>()</span> <span class=p>{</span>
+    <span class=k>this</span><span class=p>.</span><span class=nx>chain</span> <span class=o>=</span> <span class=p>[</span><span class=k>this</span><span class=p>.</span><span class=nx>createGenesisBlock</span><span class=p>()];</span>
+
+    <span class=k>this</span><span class=p>.</span><span class=nx>pendingTransactions</span> <span class=o>=</span> <span class=p>[];</span> <span class=c1>// 暂存交易信息的地方
+</span><span class=c1></span>
+    <span class=k>this</span><span class=p>.</span><span class=nx>miningReward</span> <span class=o>=</span> <span class=mi>100</span><span class=p>;</span> <span class=c1>// 给与矿工的奖励
+</span><span class=c1></span>
+    <span class=k>this</span><span class=p>.</span><span class=nx>difficulty</span> <span class=o>=</span> <span class=mi>3</span><span class=p>;</span> <span class=c1>// 难度系数
+</span><span class=c1></span>  <span class=p>}</span>
+
+  <span class=nx>createGenesisBlock</span><span class=p>()</span> <span class=p>{</span>
+    <span class=k>return</span> <span class=k>new</span> <span class=nx>Block</span><span class=p>(</span><span class=nb>Date</span><span class=p>.</span><span class=nx>now</span><span class=p>(),</span> <span class=p>[],</span> <span class=mi>0</span><span class=p>,</span> <span class=mi>1</span><span class=p>);</span>
+  <span class=p>}</span>
+
+  <span class=nx>lastBlock</span><span class=p>()</span> <span class=p>{</span>
+    <span class=k>return</span> <span class=k>this</span><span class=p>.</span><span class=nx>chain</span><span class=p>[</span><span class=k>this</span><span class=p>.</span><span class=nx>chain</span><span class=p>.</span><span class=nx>length</span> <span class=o>-</span> <span class=mi>1</span><span class=p>];</span>
+  <span class=p>}</span>
+
+  <span class=nx>mine</span><span class=p>(</span><span class=nx>miningRewardAddress</span><span class=p>)</span> <span class=p>{</span>
+    <span class=kr>const</span> <span class=nx>preHash</span> <span class=o>=</span> <span class=k>this</span><span class=p>.</span><span class=nx>lastBlock</span><span class=p>().</span><span class=nx>hash</span><span class=p>;</span>
+    <span class=kr>const</span> <span class=nx>block</span> <span class=o>=</span> <span class=k>new</span> <span class=nx>Block</span><span class=p>(</span>
+      <span class=nb>Date</span><span class=p>.</span><span class=nx>now</span><span class=p>(),</span>
+      <span class=k>this</span><span class=p>.</span><span class=nx>pendingTransactions</span><span class=p>,</span>
+      <span class=nx>preHash</span><span class=p>,</span>
+      <span class=k>this</span><span class=p>.</span><span class=nx>difficulty</span>
+    <span class=p>);</span>
+    <span class=k>this</span><span class=p>.</span><span class=nx>chain</span><span class=p>.</span><span class=nx>push</span><span class=p>(</span><span class=nx>block</span><span class=p>);</span>
+    <span class=k>this</span><span class=p>.</span><span class=nx>pendingTransactions</span> <span class=o>=</span> <span class=p>[</span>
+      <span class=k>new</span> <span class=nx>Transaction</span><span class=p>(</span><span class=kc>null</span><span class=p>,</span> <span class=nx>miningRewardAddress</span><span class=p>,</span> <span class=k>this</span><span class=p>.</span><span class=nx>miningReward</span><span class=p>),</span>
+    <span class=p>];</span>
+  <span class=p>}</span>
+
+  <span class=nx>createTransactions</span><span class=p>(</span><span class=nx>transaction</span><span class=p>)</span> <span class=p>{</span>
+    <span class=k>if</span> <span class=p>(</span><span class=o>!</span><span class=k>this</span><span class=p>.</span><span class=nx>isChainValid</span><span class=p>)</span> <span class=k>return</span> <span class=kc>false</span><span class=p>;</span>
+    <span class=k>this</span><span class=p>.</span><span class=nx>pendingTransactions</span><span class=p>.</span><span class=nx>push</span><span class=p>(</span><span class=nx>transaction</span><span class=p>);</span>
+  <span class=p>}</span>
+
+  <span class=nx>isChainValid</span><span class=p>()</span> <span class=p>{</span>
+    <span class=c1>// 校验区块链是否未被修改
+</span><span class=c1></span>    <span class=kr>const</span> <span class=nx>len</span> <span class=o>=</span> <span class=k>this</span><span class=p>.</span><span class=nx>chain</span><span class=p>.</span><span class=nx>length</span><span class=p>;</span>
+    <span class=k>for</span> <span class=p>(</span><span class=kd>let</span> <span class=nx>i</span> <span class=o>=</span> <span class=mi>1</span><span class=p>;</span> <span class=nx>i</span> <span class=o>&lt;</span> <span class=nx>len</span><span class=p>;</span> <span class=nx>i</span><span class=o>++</span><span class=p>)</span> <span class=p>{</span>
+      <span class=kr>const</span> <span class=nx>curBlock</span> <span class=o>=</span> <span class=k>this</span><span class=p>.</span><span class=nx>chain</span><span class=p>[</span><span class=nx>i</span><span class=p>];</span>
+      <span class=kr>const</span> <span class=nx>preBlock</span> <span class=o>=</span> <span class=k>this</span><span class=p>.</span><span class=nx>chain</span><span class=p>[</span><span class=nx>i</span> <span class=o>-</span> <span class=mi>1</span><span class=p>];</span>
+
+      <span class=k>if</span> <span class=p>(</span><span class=nx>curBlock</span><span class=p>.</span><span class=nx>hash</span> <span class=o>!==</span> <span class=nx>curBlock</span><span class=p>.</span><span class=nx>getHash</span><span class=p>())</span> <span class=k>return</span> <span class=kc>false</span><span class=p>;</span>
+      <span class=k>if</span> <span class=p>(</span><span class=nx>curBlock</span><span class=p>.</span><span class=nx>preHash</span> <span class=o>!==</span> <span class=nx>preBlock</span><span class=p>.</span><span class=nx>hash</span><span class=p>)</span> <span class=k>return</span> <span class=kc>false</span><span class=p>;</span>
+    <span class=p>}</span>
+
+    <span class=k>return</span> <span class=kc>true</span><span class=p>;</span>
+  <span class=p>}</span>
+
+  <span class=nx>getBalanceOfAddress</span><span class=p>(</span><span class=nx>address</span><span class=p>)</span> <span class=p>{</span>
+    <span class=c1>// 获得某个账户的余额
+</span><span class=c1></span>    <span class=kd>let</span> <span class=nx>balance</span> <span class=o>=</span> <span class=mi>0</span><span class=p>;</span>
+
+    <span class=k>this</span><span class=p>.</span><span class=nx>chain</span><span class=p>.</span><span class=nx>forEach</span><span class=p>(({</span> <span class=nx>transactions</span> <span class=p>})</span> <span class=p>=&gt;</span> <span class=p>{</span>
+      <span class=nx>transactions</span><span class=p>.</span><span class=nx>forEach</span><span class=p>(({</span> <span class=nx>fromAddress</span><span class=p>,</span> <span class=nx>toAddress</span><span class=p>,</span> <span class=nx>amount</span> <span class=p>})</span> <span class=p>=&gt;</span> <span class=p>{</span>
+        <span class=k>if</span> <span class=p>(</span><span class=nx>fromAddress</span> <span class=o>===</span> <span class=nx>address</span><span class=p>)</span> <span class=nx>balance</span> <span class=o>-=</span> <span class=nx>amount</span><span class=p>;</span>
+
+        <span class=k>if</span> <span class=p>(</span><span class=nx>toAddress</span> <span class=o>===</span> <span class=nx>address</span><span class=p>)</span> <span class=nx>balance</span> <span class=o>+=</span> <span class=nx>amount</span><span class=p>;</span>
+      <span class=p>});</span>
+    <span class=p>});</span>
+
+    <span class=k>return</span> <span class=nx>balance</span><span class=p>;</span>
+  <span class=p>}</span>
+<span class=p>}</span>
+</code></pre></div><h2 id=3transaction-类>3、Transaction 类</h2><p>Transaction 类没什么好说的，就是生成交易信息。</p><div class=highlight><pre class=chroma><code class=language-js data-lang=js><span class=kr>class</span> <span class=nx>Transaction</span> <span class=p>{</span>
+  <span class=nx>constructor</span><span class=p>(</span><span class=nx>fromAddress</span><span class=p>,</span> <span class=nx>toAddress</span><span class=p>,</span> <span class=nx>amount</span><span class=p>)</span> <span class=p>{</span>
+    <span class=nb>Object</span><span class=p>.</span><span class=nx>assign</span><span class=p>(</span><span class=k>this</span><span class=p>,</span> <span class=p>{</span>
+      <span class=nx>fromAddress</span><span class=p>,</span>
+      <span class=nx>toAddress</span><span class=p>,</span>
+      <span class=nx>amount</span><span class=p>,</span>
+    <span class=p>});</span>
+  <span class=p>}</span>
+<span class=p>}</span>
+</code></pre></div><h2 id=后语>后语</h2><p>前言还是要搭一下后语的，上面只是用代码来讲了一下区块链的原理，真正的区块链细节要更加复杂，也还有其它的东西，比如说很重要的 p2p，对 p2p 还是很有兴趣的，后面有时间了再学习一下。<br>另外，我还是很看好区块链的，它的作用远不止被用来圈钱割韭菜，我也买过 EOS，当然是亏了，但是我还是很看好它作为区块链平台的出发点。</p><h2 id=添一个所有代码代码不多就不新建仓库了>添一个所有代码（代码不多就不新建仓库了）</h2><div class=highlight><pre class=chroma><code class=language-js data-lang=js><span class=kr>const</span> <span class=nx>crypto</span> <span class=o>=</span> <span class=nx>require</span><span class=p>(</span><span class=s2>&#34;crypto&#34;</span><span class=p>);</span>
+
+<span class=kr>class</span> <span class=nx>Block</span> <span class=p>{</span>
+  <span class=cm>/**
+</span><span class=cm>   *
+</span><span class=cm>   * @param {Number} timestamp 时间戳
+</span><span class=cm>   * @param {Array} transactions 交易信息
+</span><span class=cm>   * @param {String} preHash 上一个区块的哈希值
+</span><span class=cm>   * @param {Number} difficulty 难度系数
+</span><span class=cm>   */</span>
+  <span class=nx>constructor</span><span class=p>(</span><span class=nx>timestamp</span><span class=p>,</span> <span class=nx>transactions</span><span class=p>,</span> <span class=nx>preHash</span><span class=p>,</span> <span class=nx>difficulty</span><span class=p>)</span> <span class=p>{</span>
+    <span class=nb>Object</span><span class=p>.</span><span class=nx>assign</span><span class=p>(</span><span class=k>this</span><span class=p>,</span> <span class=p>{</span>
+      <span class=nx>timestamp</span><span class=p>,</span>
+      <span class=nx>transactions</span><span class=p>,</span>
+      <span class=nx>preHash</span><span class=p>,</span>
+      <span class=nx>hash</span><span class=o>:</span> <span class=k>this</span><span class=p>.</span><span class=nx>getHash</span><span class=p>(</span><span class=nx>difficulty</span><span class=p>),</span>
+    <span class=p>});</span>
+  <span class=p>}</span>
+
+  <span class=nx>getHash</span><span class=p>(</span><span class=nx>difficulty</span><span class=p>)</span> <span class=p>{</span>
+    <span class=c1>// 计算哈希直到满足要求
+</span><span class=c1></span>    <span class=kd>let</span> <span class=nx>hash</span> <span class=o>=</span> <span class=s2>&#34;&#34;</span><span class=p>;</span>
+    <span class=kd>let</span> <span class=nx>nonce</span> <span class=o>=</span> <span class=mi>0</span><span class=p>;</span>
+
+    <span class=k>do</span> <span class=p>{</span>
+      <span class=kr>const</span> <span class=nx>msg</span> <span class=o>=</span> <span class=sb>`</span><span class=si>${</span><span class=k>this</span><span class=p>.</span><span class=nx>timestamp</span><span class=si>}${</span><span class=nx>JSON</span><span class=p>.</span><span class=nx>stringify</span><span class=p>(</span><span class=k>this</span><span class=p>.</span><span class=nx>data</span><span class=p>)</span><span class=si>}${</span><span class=nx>nonce</span><span class=si>}</span><span class=sb>`</span><span class=p>;</span>
+
+      <span class=nx>hash</span> <span class=o>=</span> <span class=nx>crypto</span><span class=p>.</span><span class=nx>createHash</span><span class=p>(</span><span class=s2>&#34;sha256&#34;</span><span class=p>).</span><span class=nx>update</span><span class=p>(</span><span class=nx>msg</span><span class=p>).</span><span class=nx>digest</span><span class=p>(</span><span class=s2>&#34;hex&#34;</span><span class=p>);</span>
+
+      <span class=nx>nonce</span><span class=o>++</span><span class=p>;</span>
+    <span class=p>}</span> <span class=k>while</span> <span class=p>(</span><span class=nx>hash</span><span class=p>.</span><span class=nx>substr</span><span class=p>(</span><span class=mi>0</span><span class=p>,</span> <span class=nx>difficulty</span><span class=p>)</span> <span class=o>!==</span> <span class=nb>Array</span><span class=p>(</span><span class=nx>difficulty</span><span class=p>).</span><span class=nx>fill</span><span class=p>(</span><span class=mi>0</span><span class=p>).</span><span class=nx>join</span><span class=p>(</span><span class=s2>&#34;&#34;</span><span class=p>));</span>
+
+    <span class=k>return</span> <span class=nx>hash</span><span class=p>;</span>
+  <span class=p>}</span>
+<span class=p>}</span>
+
+<span class=kr>class</span> <span class=nx>BlockChain</span> <span class=p>{</span>
+  <span class=nx>constructor</span><span class=p>()</span> <span class=p>{</span>
+    <span class=k>this</span><span class=p>.</span><span class=nx>chain</span> <span class=o>=</span> <span class=p>[</span><span class=k>this</span><span class=p>.</span><span class=nx>createGenesisBlock</span><span class=p>()];</span>
+
+    <span class=k>this</span><span class=p>.</span><span class=nx>pendingTransactions</span> <span class=o>=</span> <span class=p>[];</span> <span class=c1>// 暂存交易信息的地方
+</span><span class=c1></span>
+    <span class=k>this</span><span class=p>.</span><span class=nx>miningReward</span> <span class=o>=</span> <span class=mi>100</span><span class=p>;</span> <span class=c1>// 给与矿工的奖励
+</span><span class=c1></span>
+    <span class=k>this</span><span class=p>.</span><span class=nx>difficulty</span> <span class=o>=</span> <span class=mi>3</span><span class=p>;</span> <span class=c1>// 难度系数
+</span><span class=c1></span>  <span class=p>}</span>
+
+  <span class=nx>createGenesisBlock</span><span class=p>()</span> <span class=p>{</span>
+    <span class=k>return</span> <span class=k>new</span> <span class=nx>Block</span><span class=p>(</span><span class=nb>Date</span><span class=p>.</span><span class=nx>now</span><span class=p>(),</span> <span class=p>[],</span> <span class=mi>0</span><span class=p>,</span> <span class=mi>1</span><span class=p>);</span>
+  <span class=p>}</span>
+
+  <span class=nx>lastBlock</span><span class=p>()</span> <span class=p>{</span>
+    <span class=k>return</span> <span class=k>this</span><span class=p>.</span><span class=nx>chain</span><span class=p>[</span><span class=k>this</span><span class=p>.</span><span class=nx>chain</span><span class=p>.</span><span class=nx>length</span> <span class=o>-</span> <span class=mi>1</span><span class=p>];</span>
+  <span class=p>}</span>
+
+  <span class=nx>mine</span><span class=p>(</span><span class=nx>miningRewardAddress</span><span class=p>)</span> <span class=p>{</span>
+    <span class=kr>const</span> <span class=nx>preHash</span> <span class=o>=</span> <span class=k>this</span><span class=p>.</span><span class=nx>lastBlock</span><span class=p>().</span><span class=nx>hash</span><span class=p>;</span>
+    <span class=kr>const</span> <span class=nx>block</span> <span class=o>=</span> <span class=k>new</span> <span class=nx>Block</span><span class=p>(</span>
+      <span class=nb>Date</span><span class=p>.</span><span class=nx>now</span><span class=p>(),</span>
+      <span class=k>this</span><span class=p>.</span><span class=nx>pendingTransactions</span><span class=p>,</span>
+      <span class=nx>preHash</span><span class=p>,</span>
+      <span class=k>this</span><span class=p>.</span><span class=nx>difficulty</span>
+    <span class=p>);</span>
+    <span class=k>this</span><span class=p>.</span><span class=nx>chain</span><span class=p>.</span><span class=nx>push</span><span class=p>(</span><span class=nx>block</span><span class=p>);</span>
+    <span class=k>this</span><span class=p>.</span><span class=nx>pendingTransactions</span> <span class=o>=</span> <span class=p>[</span>
+      <span class=k>new</span> <span class=nx>Transaction</span><span class=p>(</span><span class=kc>null</span><span class=p>,</span> <span class=nx>miningRewardAddress</span><span class=p>,</span> <span class=k>this</span><span class=p>.</span><span class=nx>miningReward</span><span class=p>),</span>
+    <span class=p>];</span>
+  <span class=p>}</span>
+
+  <span class=nx>createTransactions</span><span class=p>(</span><span class=nx>transaction</span><span class=p>)</span> <span class=p>{</span>
+    <span class=k>if</span> <span class=p>(</span><span class=o>!</span><span class=k>this</span><span class=p>.</span><span class=nx>isChainValid</span><span class=p>)</span> <span class=k>return</span> <span class=kc>false</span><span class=p>;</span>
+    <span class=k>this</span><span class=p>.</span><span class=nx>pendingTransactions</span><span class=p>.</span><span class=nx>push</span><span class=p>(</span><span class=nx>transaction</span><span class=p>);</span>
+  <span class=p>}</span>
+
+  <span class=nx>isChainValid</span><span class=p>()</span> <span class=p>{</span>
+    <span class=c1>// 校验区块链是否未被修改
+</span><span class=c1></span>    <span class=kr>const</span> <span class=nx>len</span> <span class=o>=</span> <span class=k>this</span><span class=p>.</span><span class=nx>chain</span><span class=p>.</span><span class=nx>length</span><span class=p>;</span>
+    <span class=k>for</span> <span class=p>(</span><span class=kd>let</span> <span class=nx>i</span> <span class=o>=</span> <span class=mi>1</span><span class=p>;</span> <span class=nx>i</span> <span class=o>&lt;</span> <span class=nx>len</span><span class=p>;</span> <span class=nx>i</span><span class=o>++</span><span class=p>)</span> <span class=p>{</span>
+      <span class=kr>const</span> <span class=nx>curBlock</span> <span class=o>=</span> <span class=k>this</span><span class=p>.</span><span class=nx>chain</span><span class=p>[</span><span class=nx>i</span><span class=p>];</span>
+      <span class=kr>const</span> <span class=nx>preBlock</span> <span class=o>=</span> <span class=k>this</span><span class=p>.</span><span class=nx>chain</span><span class=p>[</span><span class=nx>i</span> <span class=o>-</span> <span class=mi>1</span><span class=p>];</span>
+
+      <span class=k>if</span> <span class=p>(</span><span class=nx>curBlock</span><span class=p>.</span><span class=nx>hash</span> <span class=o>!==</span> <span class=nx>curBlock</span><span class=p>.</span><span class=nx>getHash</span><span class=p>())</span> <span class=k>return</span> <span class=kc>false</span><span class=p>;</span>
+      <span class=k>if</span> <span class=p>(</span><span class=nx>curBlock</span><span class=p>.</span><span class=nx>preHash</span> <span class=o>!==</span> <span class=nx>preBlock</span><span class=p>.</span><span class=nx>hash</span><span class=p>)</span> <span class=k>return</span> <span class=kc>false</span><span class=p>;</span>
+    <span class=p>}</span>
+
+    <span class=k>return</span> <span class=kc>true</span><span class=p>;</span>
+  <span class=p>}</span>
+
+  <span class=nx>getBalanceOfAddress</span><span class=p>(</span><span class=nx>address</span><span class=p>)</span> <span class=p>{</span>
+    <span class=c1>// 获得某个账户的余额
+</span><span class=c1></span>    <span class=kd>let</span> <span class=nx>balance</span> <span class=o>=</span> <span class=mi>0</span><span class=p>;</span>
+
+    <span class=k>this</span><span class=p>.</span><span class=nx>chain</span><span class=p>.</span><span class=nx>forEach</span><span class=p>(({</span> <span class=nx>transactions</span> <span class=p>})</span> <span class=p>=&gt;</span> <span class=p>{</span>
+      <span class=nx>transactions</span><span class=p>.</span><span class=nx>forEach</span><span class=p>(({</span> <span class=nx>fromAddress</span><span class=p>,</span> <span class=nx>toAddress</span><span class=p>,</span> <span class=nx>amount</span> <span class=p>})</span> <span class=p>=&gt;</span> <span class=p>{</span>
+        <span class=k>if</span> <span class=p>(</span><span class=nx>fromAddress</span> <span class=o>===</span> <span class=nx>address</span><span class=p>)</span> <span class=nx>balance</span> <span class=o>-=</span> <span class=nx>amount</span><span class=p>;</span>
+
+        <span class=k>if</span> <span class=p>(</span><span class=nx>toAddress</span> <span class=o>===</span> <span class=nx>address</span><span class=p>)</span> <span class=nx>balance</span> <span class=o>+=</span> <span class=nx>amount</span><span class=p>;</span>
+      <span class=p>});</span>
+    <span class=p>});</span>
+
+    <span class=k>return</span> <span class=nx>balance</span><span class=p>;</span>
+  <span class=p>}</span>
+<span class=p>}</span>
+
+<span class=kr>class</span> <span class=nx>Transaction</span> <span class=p>{</span>
+  <span class=nx>constructor</span><span class=p>(</span><span class=nx>fromAddress</span><span class=p>,</span> <span class=nx>toAddress</span><span class=p>,</span> <span class=nx>amount</span><span class=p>)</span> <span class=p>{</span>
+    <span class=nb>Object</span><span class=p>.</span><span class=nx>assign</span><span class=p>(</span><span class=k>this</span><span class=p>,</span> <span class=p>{</span>
+      <span class=nx>fromAddress</span><span class=p>,</span>
+      <span class=nx>toAddress</span><span class=p>,</span>
+      <span class=nx>amount</span><span class=p>,</span>
+    <span class=p>});</span>
+  <span class=p>}</span>
+<span class=p>}</span>
+
+<span class=kr>const</span> <span class=nx>myChain</span> <span class=o>=</span> <span class=k>new</span> <span class=nx>BlockChain</span><span class=p>();</span>
+
+<span class=kr>const</span> <span class=nx>tran1</span> <span class=o>=</span> <span class=k>new</span> <span class=nx>Transaction</span><span class=p>(</span><span class=s2>&#34;addr1&#34;</span><span class=p>,</span> <span class=s2>&#34;addr2&#34;</span><span class=p>,</span> <span class=mi>10</span><span class=p>);</span>
+
+<span class=nx>myChain</span><span class=p>.</span><span class=nx>createTransactions</span><span class=p>(</span><span class=nx>tran1</span><span class=p>);</span>
+
+<span class=kr>const</span> <span class=nx>tran2</span> <span class=o>=</span> <span class=k>new</span> <span class=nx>Transaction</span><span class=p>(</span><span class=s2>&#34;addr1&#34;</span><span class=p>,</span> <span class=s2>&#34;addr2&#34;</span><span class=p>,</span> <span class=mi>1</span><span class=p>);</span>
+
+<span class=nx>myChain</span><span class=p>.</span><span class=nx>createTransactions</span><span class=p>(</span><span class=nx>tran2</span><span class=p>);</span>
+
+<span class=nx>myChain</span><span class=p>.</span><span class=nx>mine</span><span class=p>(</span><span class=s2>&#34;myAddr&#34;</span><span class=p>);</span>
+
+<span class=nx>myChain</span><span class=p>.</span><span class=nx>mine</span><span class=p>(</span><span class=s2>&#34;myAddr&#34;</span><span class=p>);</span>
+
+<span class=nx>console</span><span class=p>.</span><span class=nx>log</span><span class=p>(</span><span class=nx>myChain</span><span class=p>.</span><span class=nx>getBalanceOfAddress</span><span class=p>(</span><span class=s2>&#34;myAddr&#34;</span><span class=p>));</span>
+</code></pre></div></section><footer class=article-footer><section class=article-copyright><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><path d="M14.5 9a3.5 4 0 100 6"/></svg><span>Licensed under CC BY-NC-SA 4.0</span></section></footer></article><aside class=related-contents--wrapper></aside><div class=disqus-container><div id=disqus_thread></div><script type=application/javascript>var disqus_config=function(){};(function(){if(["localhost","127.0.0.1"].indexOf(window.location.hostname)!=-1){document.getElementById('disqus_thread').innerHTML='Disqus comments not available by default when the website is previewed locally.';return;}
+var d=document,s=d.createElement('script');s.async=true;s.src='//'+"jo-hnny"+'.disqus.com/embed.js';s.setAttribute('data-timestamp',+new Date());(d.head||d.body).appendChild(s);})();</script><noscript>Please enable JavaScript to view the <a href=https://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript><a href=https://disqus.com class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a></div><style>.disqus-container{background-color:var(--card-background);border-radius:var(--card-border-radius);box-shadow:var(--shadow-l1);padding:var(--card-padding)}</style><footer class=site-footer><section class=copyright>&copy;
+2020 冷宫</section><section class=powerby>Built with <a href=https://gohugo.io/ target=_blank rel=noopener>Hugo</a><br>Theme <b><a href=https://github.com/CaiJimmy/hugo-theme-stack target=_blank rel=noopener data-version=1.1.0>Stack</a></b> designed by <a href=https://jimmycai.com target=_blank rel=noopener>Jimmy</a></section></footer><div class=pswp tabindex=-1 role=dialog aria-hidden=true><div class=pswp__bg></div><div class=pswp__scroll-wrap><div class=pswp__container><div class=pswp__item></div><div class=pswp__item></div><div class=pswp__item></div></div><div class="pswp__ui pswp__ui--hidden"><div class=pswp__top-bar><div class=pswp__counter></div><button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+<button class="pswp__button pswp__button--share" title=Share></button>
+<button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+<button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button><div class=pswp__preloader><div class=pswp__preloader__icn><div class=pswp__preloader__cut><div class=pswp__preloader__donut></div></div></div></div></div><div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap"><div class=pswp__share-tooltip></div></div><button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)"></button>
+<button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button><div class=pswp__caption><div class=pswp__caption__center></div></div></div></div></div><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js></script><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js></script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.css></main></div><script src=https://cdn.jsdelivr.net/npm/node-vibrant@3.1.5/dist/vibrant.min.js integrity="sha256-5NovOZc4iwiAWTYIFiIM7DxKUXKWvpVEuMEPLzcm5/g=" crossorigin=anonymous></script><script type=text/javascript src=/ts/main.js defer></script><script>(function(){const customFont=document.createElement('link');customFont.href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";customFont.type="text/css";customFont.rel="stylesheet";document.head.appendChild(customFont);}());</script><link rel=stylesheet href=/css/highlight/light.min.css media="(prefers-color-scheme: light)"><link rel=stylesheet href=/css/highlight/dark.min.css media="(prefers-color-scheme: dark)"></body></html>
