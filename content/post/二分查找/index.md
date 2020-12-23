@@ -2,6 +2,11 @@
 title: "二分查找"
 date: 2020-12-23T11:55:21+08:00
 draft: true
+image: cover.jpg
+categories:
+  - 编程
+tags:
+  - 算法
 ---
 
 ## 循环

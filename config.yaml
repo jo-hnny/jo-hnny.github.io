@@ -1,11 +1,11 @@
-baseurl: https://example.com
+baseurl: https://jo-hnny.github.io/
 languageCode: zh-cn
-theme: hugo-theme-stack
+theme: stack
 paginate: 5
-title: Example Site
+title: 冷宫
 
 # Change it to your Disqus shortname before using
-disqusShortname: hugo-theme-stack
+disqusShortname: jo-hnny
 
 # Theme i18n support
 # Available values: en, fr, id, ja, ko, pt-br, zh-cn
@@ -32,7 +32,7 @@ params:
 
   sidebar:
     emoji: 🍥
-    subtitle: Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+    subtitle: 这里也曾热闹过
     avatar:
       local: true
       src: img/avatar.png
