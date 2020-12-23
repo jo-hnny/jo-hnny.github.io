@@ -2,6 +2,12 @@
 title: "React项目中同时添加css Modules与普通class"
 date: 2019-09-18T21:16:58+08:00
 draft: false
+image: cover.jpg
+categories:
+  - 编程
+tags:
+  - react
+  - css
 ---
 
 当我在 react 项目中为一个元素添加了 css modules 的样式，但是由于我要使用 iconfont，必须在元素上添加一个名为 iconfont 的 class 名称，搜来搜去也没找到什么优雅的实现，那就按照 class 的本质实现吧，class 本质就是一个字符串，多个 class 名由空格分割，故:
