@@ -1,7 +1,7 @@
 ---
 title: "在scss和css_module环境中切换主题"
 date: 2020-12-23T11:41:47+08:00
-draft: true
+draft: false
 ---
 
 ## 今天尝试在项目中完成切换主题的功能，目前已经实现，故做个记录
