@@ -32,7 +32,7 @@ params:
 
   sidebar:
     emoji: 🏂🏻
-    subtitle: 这里也曾热闹过
+    subtitle: 把时光冻在这里
     avatar:
       local: true
       src: img/avatar.png
@@ -93,6 +93,12 @@ menu:
       weight: -90
       pre: user
 
+    - identifier: talks
+      name: Talks
+      url: talks
+      weight: -80
+      pre: talks
+
     - identifier: archives
       name: Archives
       url: archives
@@ -108,7 +114,7 @@ menu:
     - identifier: feed
       name: Feed
       url: index.xml
-      weight: -60
+      weight: -50
       pre: feed
 
 related:
