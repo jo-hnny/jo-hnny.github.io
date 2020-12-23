@@ -105,6 +105,12 @@ menu:
       weight: -60
       pre: search
 
+    - identifier: feed
+      name: Feed
+      url: index.xml
+      weight: -60
+      pre: feed
+
 related:
   includeNewer: true
   threshold: 60
