@@ -1,4 +1,142 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>冷宫</title><link>https://jo-hnny.github.io/</link><description>Recent content on 冷宫</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Wed, 18 Sep 2019 21:16:58 +0800</lastBuildDate><atom:link href="https://jo-hnny.github.io/index.xml" rel="self" type="application/rss+xml"/><item><title>React项目中同时添加css Modules与普通class</title><link>https://jo-hnny.github.io/p/react%E9%A1%B9%E7%9B%AE%E4%B8%AD%E5%90%8C%E6%97%B6%E6%B7%BB%E5%8A%A0css-modules%E4%B8%8E%E6%99%AE%E9%80%9Aclass/</link><pubDate>Wed, 18 Sep 2019 21:16:58 +0800</pubDate><guid>https://jo-hnny.github.io/p/react%E9%A1%B9%E7%9B%AE%E4%B8%AD%E5%90%8C%E6%97%B6%E6%B7%BB%E5%8A%A0css-modules%E4%B8%8E%E6%99%AE%E9%80%9Aclass/</guid><description>&lt;p>当我在 react 项目中为一个元素添加了 css modules 的样式，但是由于我要使用 iconfont，必须在元素上添加一个名为 iconfont 的 class 名称，搜来搜去也没找到什么优雅的实现，那就按照 class 的本质实现吧，class 本质就是一个字符串，多个 class 名由空格分割，故:&lt;/p>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>冷宫</title><link>https://jo-hnny.github.io/</link><description>Recent content on 冷宫</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Wed, 23 Dec 2020 11:55:21 +0800</lastBuildDate><atom:link href="https://jo-hnny.github.io/index.xml" rel="self" type="application/rss+xml"/><item><title>二分查找</title><link>https://jo-hnny.github.io/p/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE/</link><pubDate>Wed, 23 Dec 2020 11:55:21 +0800</pubDate><guid>https://jo-hnny.github.io/p/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE/</guid><description>&lt;img src="https://jo-hnny.github.io/p/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE/cover.jpg" alt="Featured image of post 二分查找" />&lt;h2 id="循环">循环&lt;/h2>
+&lt;div class="highlight">&lt;pre class="chroma">&lt;code class="language-typescript" data-lang="typescript">&lt;span class="kd">function&lt;/span> &lt;span class="nx">find2&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">data&lt;/span>: &lt;span class="kt">number&lt;/span>&lt;span class="p">[],&lt;/span> &lt;span class="nx">n&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="kd">let&lt;/span> &lt;span class="nx">low&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="kd">let&lt;/span> &lt;span class="nx">higth&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">data&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">length&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="kd">let&lt;/span> &lt;span class="nx">middleIndex&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">low&lt;/span> &lt;span class="o">+&lt;/span> &lt;span class="nb">Math&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">floor&lt;/span>&lt;span class="p">((&lt;/span>&lt;span class="nx">higth&lt;/span> &lt;span class="o">-&lt;/span> &lt;span class="nx">low&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">/&lt;/span> &lt;span class="mi">2&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;span class="kd">let&lt;/span> &lt;span class="nx">middleValue&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">data&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="nx">middleIndex&lt;/span>&lt;span class="p">];&lt;/span>
+&lt;span class="k">while&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="nx">n&lt;/span> &lt;span class="o">!==&lt;/span> &lt;span class="nx">middleValue&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="nx">higth&lt;/span> &lt;span class="o">&amp;lt;=&lt;/span> &lt;span class="nx">low&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="k">return&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="nx">n&lt;/span> &lt;span class="o">&amp;lt;&lt;/span> &lt;span class="nx">middleValue&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="nx">higth&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">middleIndex&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="p">}&lt;/span> &lt;span class="k">else&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="nx">low&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">middleIndex&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;span class="nx">middleIndex&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">low&lt;/span> &lt;span class="o">+&lt;/span> &lt;span class="nb">Math&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">floor&lt;/span>&lt;span class="p">((&lt;/span>&lt;span class="nx">higth&lt;/span> &lt;span class="o">-&lt;/span> &lt;span class="nx">low&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">/&lt;/span> &lt;span class="mi">2&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;span class="nx">middleValue&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">data&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="nx">middleIndex&lt;/span>&lt;span class="p">];&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;span class="k">return&lt;/span> &lt;span class="nx">middleIndex&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;span class="c1">// test
+&lt;/span>&lt;span class="c1">&lt;/span>
+&lt;span class="kr">const&lt;/span> &lt;span class="nx">array&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">[...&lt;/span>&lt;span class="k">new&lt;/span> &lt;span class="nb">Array&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">1000&lt;/span>&lt;span class="p">)].&lt;/span>&lt;span class="nx">map&lt;/span>&lt;span class="p">((&lt;/span>&lt;span class="nx">_&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">index&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="nx">index&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;span class="kr">const&lt;/span> &lt;span class="nx">n&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">500&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="nx">console&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">find2&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">array&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">n&lt;/span>&lt;span class="p">));&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="递归">递归&lt;/h2>
+&lt;div class="highlight">&lt;pre class="chroma">&lt;code class="language-typescript" data-lang="typescript">&lt;span class="c1">// 二分查找 - 递归法
+&lt;/span>&lt;span class="c1">&lt;/span>&lt;span class="kd">function&lt;/span> &lt;span class="nx">find2&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">data&lt;/span>: &lt;span class="kt">number&lt;/span>&lt;span class="p">[],&lt;/span> &lt;span class="nx">n&lt;/span>: &lt;span class="kt">number&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">preIndex&lt;/span>: &lt;span class="kt">number&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="kr">const&lt;/span> &lt;span class="nx">len&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">data&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">length&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="nx">len&lt;/span> &lt;span class="o">&amp;lt;=&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="k">return&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;span class="kr">const&lt;/span> &lt;span class="nx">middleIndex&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nb">Math&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">floor&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">len&lt;/span> &lt;span class="o">/&lt;/span> &lt;span class="mi">2&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;span class="kr">const&lt;/span> &lt;span class="nx">middleValue&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">data&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="nx">middleIndex&lt;/span>&lt;span class="p">];&lt;/span>
+&lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="nx">n&lt;/span> &lt;span class="o">&amp;lt;&lt;/span> &lt;span class="nx">middleValue&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="k">return&lt;/span> &lt;span class="nx">find2&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">data&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">slice&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">0&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">middleIndex&lt;/span>&lt;span class="p">),&lt;/span> &lt;span class="nx">n&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">preIndex&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="nx">n&lt;/span> &lt;span class="o">===&lt;/span> &lt;span class="nx">middleValue&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="k">return&lt;/span> &lt;span class="nx">preIndex&lt;/span> &lt;span class="o">+&lt;/span> &lt;span class="nx">middleIndex&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="nx">n&lt;/span> &lt;span class="o">&amp;gt;&lt;/span> &lt;span class="nx">middleValue&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="k">return&lt;/span> &lt;span class="nx">find2&lt;/span>&lt;span class="p">(&lt;/span>
+&lt;span class="nx">data&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">slice&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">middleIndex&lt;/span> &lt;span class="o">+&lt;/span> &lt;span class="mi">1&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">len&lt;/span>&lt;span class="p">),&lt;/span>
+&lt;span class="nx">n&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;span class="nx">preIndex&lt;/span> &lt;span class="o">+&lt;/span> &lt;span class="nx">middleIndex&lt;/span> &lt;span class="o">+&lt;/span> &lt;span class="mi">1&lt;/span>
+&lt;span class="p">);&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;span class="c1">// test
+&lt;/span>&lt;span class="c1">&lt;/span>
+&lt;span class="kr">const&lt;/span> &lt;span class="nx">array&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">[...&lt;/span>&lt;span class="k">new&lt;/span> &lt;span class="nb">Array&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">1000&lt;/span>&lt;span class="p">)].&lt;/span>&lt;span class="nx">map&lt;/span>&lt;span class="p">((&lt;/span>&lt;span class="nx">_&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">index&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="nx">index&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;span class="kr">const&lt;/span> &lt;span class="nx">n&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">500&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="nx">console&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">find2&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">array&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">n&lt;/span>&lt;span class="p">));&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>在scss和css_module环境中切换主题</title><link>https://jo-hnny.github.io/p/%E5%9C%A8scss%E5%92%8Ccss_module%E7%8E%AF%E5%A2%83%E4%B8%AD%E5%88%87%E6%8D%A2%E4%B8%BB%E9%A2%98/</link><pubDate>Wed, 23 Dec 2020 11:41:47 +0800</pubDate><guid>https://jo-hnny.github.io/p/%E5%9C%A8scss%E5%92%8Ccss_module%E7%8E%AF%E5%A2%83%E4%B8%AD%E5%88%87%E6%8D%A2%E4%B8%BB%E9%A2%98/</guid><description>&lt;h2 id="今天尝试在项目中完成切换主题的功能目前已经实现故做个记录">今天尝试在项目中完成切换主题的功能，目前已经实现，故做个记录&lt;/h2>
+&lt;ol>
+&lt;li>新建一个 scss 文件保存颜色配置，例如：&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre class="chroma">&lt;code class="language-scss" data-lang="scss">&lt;span class="c1">// themes.scss
+&lt;/span>&lt;span class="c1">&lt;/span>
+&lt;span class="nv">$themes&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="p">(&lt;/span>
+&lt;span class="n">light&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="p">(&lt;/span>
+&lt;span class="n">main&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="mh">#364f6b&lt;/span>&lt;span class="o">,&lt;/span>
+&lt;span class="n">second&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="mh">#3fc1c9&lt;/span>&lt;span class="o">,&lt;/span>
+&lt;span class="n">third&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="mh">#f5f5f5&lt;/span>&lt;span class="o">,&lt;/span>
+&lt;span class="n">fourth&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="mh">#fc5185&lt;/span>&lt;span class="o">,&lt;/span>
+&lt;span class="p">)&lt;/span>&lt;span class="o">,&lt;/span>
+&lt;span class="n">dark&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="p">(&lt;/span>
+&lt;span class="n">main&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="mh">#e4f9f5&lt;/span>&lt;span class="o">,&lt;/span>
+&lt;span class="n">second&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="mh">#30e3ca&lt;/span>&lt;span class="o">,&lt;/span>
+&lt;span class="n">third&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="mh">#11999e&lt;/span>&lt;span class="o">,&lt;/span>
+&lt;span class="n">fourth&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="mh">#40514e&lt;/span>&lt;span class="o">,&lt;/span>
+&lt;span class="p">)&lt;/span>&lt;span class="o">,&lt;/span>
+&lt;span class="p">);&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="2">
+&lt;li>新建另一个 scss 文件，创建 mixin：&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre class="chroma">&lt;code class="language-scss" data-lang="scss">&lt;span class="c1">// themify.scss
+&lt;/span>&lt;span class="c1">&lt;/span>&lt;span class="k">@import&lt;/span> &lt;span class="s2">&amp;#34;./themes.scss&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="k">@mixin&lt;/span>&lt;span class="nf"> themify&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nv">$themes&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="nv">$themes&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="k">@each&lt;/span> &lt;span class="err">$&lt;/span>&lt;span class="nt">theme&lt;/span>&lt;span class="o">,&lt;/span> &lt;span class="err">$&lt;/span>&lt;span class="nt">map&lt;/span> &lt;span class="nt">in&lt;/span> &lt;span class="err">$&lt;/span>&lt;span class="nt">themes&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="nd">:global&lt;/span>&lt;span class="o">(&lt;/span>&lt;span class="nc">.theme-&lt;/span>&lt;span class="si">#{&lt;/span>&lt;span class="nv">$theme&lt;/span>&lt;span class="si">}&lt;/span>&lt;span class="o">)&lt;/span> &lt;span class="k">&amp;amp;&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="nv">$theme-map&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="p">()&lt;/span> &lt;span class="nv">!global&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="k">@each&lt;/span> &lt;span class="err">$&lt;/span>&lt;span class="nt">key&lt;/span>&lt;span class="o">,&lt;/span> &lt;span class="err">$&lt;/span>&lt;span class="nt">submap&lt;/span> &lt;span class="nt">in&lt;/span> &lt;span class="err">$&lt;/span>&lt;span class="nt">map&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="nv">$value&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="nf">map-get&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nf">map-get&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nv">$themes&lt;/span>&lt;span class="o">,&lt;/span> &lt;span class="nv">$theme&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="o">,&lt;/span> &lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="si">#{&lt;/span>&lt;span class="nv">$key&lt;/span>&lt;span class="si">}&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;span class="nv">$theme-map&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="nf">map-merge&lt;/span>&lt;span class="p">(&lt;/span>
+&lt;span class="nv">$theme-map&lt;/span>&lt;span class="o">,&lt;/span>
+&lt;span class="p">(&lt;/span>
+&lt;span class="nv">$key&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="nv">$value&lt;/span>&lt;span class="o">,&lt;/span>
+&lt;span class="p">)&lt;/span>
+&lt;span class="p">)&lt;/span> &lt;span class="nv">!global&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;span class="k">@content&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="nv">$theme-map&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="n">null&lt;/span> &lt;span class="nv">!global&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;span class="k">@function&lt;/span> &lt;span class="nt">themed&lt;/span>&lt;span class="o">(&lt;/span>&lt;span class="err">$&lt;/span>&lt;span class="nt">key&lt;/span>&lt;span class="o">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="k">@return&lt;/span> &lt;span class="nt">map-get&lt;/span>&lt;span class="o">(&lt;/span>&lt;span class="err">$&lt;/span>&lt;span class="nt">theme-map&lt;/span>&lt;span class="o">,&lt;/span> &lt;span class="err">$&lt;/span>&lt;span class="nt">key&lt;/span>&lt;span class="o">)&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="3">
+&lt;li>使用：&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre class="chroma">&lt;code class="language-scss" data-lang="scss">&lt;span class="k">@import&lt;/span> &lt;span class="s2">&amp;#34;../../assets/styles/themify.scss&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="nc">.header&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="nt">width&lt;/span>&lt;span class="nd">:&lt;/span> &lt;span class="nt">100&lt;/span>&lt;span class="err">%&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="nt">height&lt;/span>&lt;span class="nd">:&lt;/span> &lt;span class="nt">60px&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="nt">padding&lt;/span>&lt;span class="nd">:&lt;/span> &lt;span class="nt">0&lt;/span> &lt;span class="nt">20px&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="nt">display&lt;/span>&lt;span class="nd">:&lt;/span> &lt;span class="nt">flex&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="nt">justify-content&lt;/span>&lt;span class="nd">:&lt;/span> &lt;span class="nt">flex-end&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="nt">align-items&lt;/span>&lt;span class="nd">:&lt;/span> &lt;span class="nt">center&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="k">@include&lt;/span>&lt;span class="nd"> themify&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="nt">background-color&lt;/span>&lt;span class="nd">:&lt;/span> &lt;span class="nt">themed&lt;/span>&lt;span class="o">(&lt;/span>&lt;span class="s2">&amp;#34;main&amp;#34;&lt;/span>&lt;span class="o">)&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="nt">color&lt;/span>&lt;span class="nd">:&lt;/span> &lt;span class="nt">themed&lt;/span>&lt;span class="o">(&lt;/span>&lt;span class="s2">&amp;#34;third&amp;#34;&lt;/span>&lt;span class="o">)&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="4">
+&lt;li>最后：&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre class="chroma">&lt;code class="language-typescript" data-lang="typescript">&lt;span class="kr">import&lt;/span> &lt;span class="nx">React&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="nx">useState&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="kr">from&lt;/span> &lt;span class="s2">&amp;#34;react&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="kr">import&lt;/span> &lt;span class="nx">styles&lt;/span> &lt;span class="kr">from&lt;/span> &lt;span class="s2">&amp;#34;./app.module.scss&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="kr">import&lt;/span> &lt;span class="nx">classNames&lt;/span> &lt;span class="kr">from&lt;/span> &lt;span class="s2">&amp;#34;classnames&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="kr">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="nx">Header&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="kr">from&lt;/span> &lt;span class="s2">&amp;#34;./components/header&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="kr">enum&lt;/span> &lt;span class="nx">Themes&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="nx">Light&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s2">&amp;#34;light&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;span class="nx">Dark&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s2">&amp;#34;dark&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;span class="kd">function&lt;/span> &lt;span class="nx">App() {&lt;/span>
+&lt;span class="kr">const&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="nx">theme&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">setTheme&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">useState&lt;/span>&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">Themes&lt;/span>&lt;span class="p">&amp;gt;(&lt;/span>&lt;span class="nx">Themes&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">Light&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;span class="kd">function&lt;/span> &lt;span class="nx">toggleTheme() {&lt;/span>
+&lt;span class="nx">setTheme&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">theme&lt;/span> &lt;span class="o">===&lt;/span> &lt;span class="nx">Themes&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">Light&lt;/span> &lt;span class="o">?&lt;/span> &lt;span class="nx">Themes.Dark&lt;/span> : &lt;span class="kt">Themes.Light&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;span class="k">return&lt;/span> &lt;span class="p">(&lt;/span>
+&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">div&lt;/span> &lt;span class="na">className&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="p">{&lt;/span>&lt;span class="nx">classNames&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">styles&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">app&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="sb">`theme-&lt;/span>&lt;span class="si">${&lt;/span>&lt;span class="nx">theme&lt;/span>&lt;span class="si">}&lt;/span>&lt;span class="sb">`&lt;/span>&lt;span class="p">)}&amp;gt;&lt;/span>
+&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">Header&lt;/span> &lt;span class="na">toogleTheme&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="p">{&lt;/span>&lt;span class="nx">toggleTheme&lt;/span>&lt;span class="p">}&lt;/span> &lt;span class="p">/&amp;gt;&lt;/span>
+&lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">div&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;span class="p">);&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;span class="kr">export&lt;/span> &lt;span class="k">default&lt;/span> &lt;span class="nx">App&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>React项目中同时添加css Modules与普通class</title><link>https://jo-hnny.github.io/p/react%E9%A1%B9%E7%9B%AE%E4%B8%AD%E5%90%8C%E6%97%B6%E6%B7%BB%E5%8A%A0css-modules%E4%B8%8E%E6%99%AE%E9%80%9Aclass/</link><pubDate>Wed, 18 Sep 2019 21:16:58 +0800</pubDate><guid>https://jo-hnny.github.io/p/react%E9%A1%B9%E7%9B%AE%E4%B8%AD%E5%90%8C%E6%97%B6%E6%B7%BB%E5%8A%A0css-modules%E4%B8%8E%E6%99%AE%E9%80%9Aclass/</guid><description>&lt;p>当我在 react 项目中为一个元素添加了 css modules 的样式，但是由于我要使用 iconfont，必须在元素上添加一个名为 iconfont 的 class 名称，搜来搜去也没找到什么优雅的实现，那就按照 class 的本质实现吧，class 本质就是一个字符串，多个 class 名由空格分割，故:&lt;/p>
 &lt;div class="highlight">&lt;pre class="chroma">&lt;code class="language-tsx" data-lang="tsx">&lt;span class="kr">public&lt;/span> &lt;span class="nx">render() {&lt;/span>
 &lt;span class="k">return&lt;/span> &lt;span class="p">(&lt;/span>
 &lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">div&lt;/span> &lt;span class="na">className&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="p">{&lt;/span>&lt;span class="sb">`&lt;/span>&lt;span class="si">${&lt;/span>&lt;span class="nx">styles&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">uploader&lt;/span>&lt;span class="si">}&lt;/span>&lt;span class="sb"> iconfont`&lt;/span>&lt;span class="p">}&amp;gt;&lt;/span>
@@ -1151,7 +1289,48 @@ Mocha 内置对 Promise 的支持，允许直接返回 Promise，等到它的状
 &lt;span class="nx">myChain&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">mine&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;myAddr&amp;#34;&lt;/span>&lt;span class="p">);&lt;/span>
 &lt;span class="nx">myChain&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">mine&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;myAddr&amp;#34;&lt;/span>&lt;span class="p">);&lt;/span>
 &lt;span class="nx">console&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">myChain&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">getBalanceOfAddress&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;myAddr&amp;#34;&lt;/span>&lt;span class="p">));&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>初探react Native</title><link>https://jo-hnny.github.io/p/%E5%88%9D%E6%8E%A2react-native/</link><pubDate>Wed, 18 Sep 2019 20:51:20 +0800</pubDate><guid>https://jo-hnny.github.io/p/%E5%88%9D%E6%8E%A2react-native/</guid><description>&lt;p>本文不介绍 React Native 的 API，API 可以参考官网或者 react native 中文网，主要是从环境搭建开始，利用豆瓣的开放 api 搭建一个豆瓣电影的应用。
+&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>__Proto__与prototype</title><link>https://jo-hnny.github.io/p/__proto__%E4%B8%8Eprototype/</link><pubDate>Wed, 18 Sep 2019 20:52:35 +0800</pubDate><guid>https://jo-hnny.github.io/p/__proto__%E4%B8%8Eprototype/</guid><description>&lt;p>之前也有看过资料，当时觉得明白了，但是时间一久就忘记了，一方面是平时工作中没有使用，另一方面是只是看，没有自己去思考，所以这次决定自己理一理。&lt;/p>
+&lt;h2 id="首先看几个概念">首先看几个概念&lt;/h2>
+&lt;h3 id="1__proto__原型对象">1、&lt;code>__proto__&lt;/code>原型对象&lt;/h3>
+&lt;p>对象的&lt;code>__proto__&lt;/code>指向创建它的构造函数的&lt;code>prototype&lt;/code>,当你调用该对象的属性的时候，如果它自身没有这个属性，它会去&lt;code>__proto__&lt;/code>上找这个属性&lt;/p>
+&lt;h3 id="2prototype">2、&lt;code>prototype&lt;/code>&lt;/h3>
+&lt;p>只有函数才有&lt;code>prototype&lt;/code>属性，当你创建一个函数的时候，JS 会为这个函数添加&lt;code>prototype&lt;/code>属性，值是一个有&lt;code>constructor&lt;/code>属性的&lt;code>对象&lt;/code>,(对象两个字很关键，这意味着这个对象也有&lt;code>__proto__&lt;/code>属性,它指向创建它的构造函数即&lt;code>Object&lt;/code>的&lt;code>prototype&lt;/code>。)&lt;/p>
+&lt;h2 id="接下来看看代码">接下来看看代码&lt;/h2>
+&lt;div class="highlight">&lt;pre class="chroma">&lt;code class="language-js" data-lang="js">&lt;span class="kd">function&lt;/span> &lt;span class="nx">A&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="p">{}&lt;/span>
+&lt;span class="kd">var&lt;/span> &lt;span class="nx">a&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="k">new&lt;/span> &lt;span class="nx">A&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;span class="nx">console&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">A&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">__proto__&lt;/span> &lt;span class="o">===&lt;/span> &lt;span class="nb">Function&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">prototype&lt;/span>&lt;span class="p">);&lt;/span> &lt;span class="c1">// true
+&lt;/span>&lt;span class="c1">&lt;/span>
+&lt;span class="nx">console&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">a&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">__proto__&lt;/span> &lt;span class="o">===&lt;/span> &lt;span class="nx">A&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">prototype&lt;/span>&lt;span class="p">);&lt;/span> &lt;span class="c1">// true
+&lt;/span>&lt;span class="c1">&lt;/span>
+&lt;span class="nx">console&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">a&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">__proto__&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">__proto__&lt;/span> &lt;span class="o">===&lt;/span> &lt;span class="nb">Object&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">prototype&lt;/span>&lt;span class="p">);&lt;/span> &lt;span class="c1">// true
+&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>然后同理我觉得下边的也应该成立&lt;/p>
+&lt;div class="highlight">&lt;pre class="chroma">&lt;code class="language-js" data-lang="js">&lt;span class="nx">console&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nb">Object&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">prototype&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">__proto__&lt;/span> &lt;span class="o">===&lt;/span> &lt;span class="nb">Object&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">prototype&lt;/span>&lt;span class="p">);&lt;/span> &lt;span class="c1">// false
+&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>但是事实很不幸，得到的是 false.&lt;/p>
+&lt;div class="highlight">&lt;pre class="chroma">&lt;code class="language-js" data-lang="js">&lt;span class="nx">console&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nb">Object&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">prototype&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">__proto__&lt;/span>&lt;span class="p">);&lt;/span> &lt;span class="c1">// null
+&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>打印一看是 null，然后再想想，其实 js 就是这样设计的而已，要不这个原型链不得没完没了了嘛,你想想有个对象找一个属性，它找到&lt;code>Object.prototype&lt;/code>就应该到头了，要不它就会一直找下去，无尽循环。&lt;/p>
+&lt;h2 id="然后我们看一个问题就是function与object的问题">然后我们看一个问题，就是&lt;code>Function&lt;/code>与&lt;code>Object&lt;/code>的问题&lt;/h2>
+&lt;div class="highlight">&lt;pre class="chroma">&lt;code class="language-js" data-lang="js">&lt;span class="nx">console&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nb">Object&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">__proto__&lt;/span> &lt;span class="o">===&lt;/span> &lt;span class="nb">Function&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">prototype&lt;/span>&lt;span class="p">);&lt;/span> &lt;span class="c1">// true
+&lt;/span>&lt;span class="c1">&lt;/span>
+&lt;span class="nx">console&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nb">Function&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">__proto__&lt;/span> &lt;span class="o">===&lt;/span> &lt;span class="nb">Function&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">prototype&lt;/span>&lt;span class="p">);&lt;/span> &lt;span class="c1">// true
+&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>可以看出&lt;code>Object&lt;/code>是由&lt;code>Function&lt;/code>构造出来的，而&lt;code>Function&lt;/code>是由&lt;code>Function&lt;/code>自己构造出来的，这个听起来好奇怪，自己构造自己。&lt;/p>
+&lt;h2 id="constructor">&lt;code>constructor&lt;/code>&lt;/h2>
+&lt;p>下面再看看&lt;code>prototype.constructor&lt;/code>&lt;/p>
+&lt;div class="highlight">&lt;pre class="chroma">&lt;code class="language-js" data-lang="js">&lt;span class="kd">function&lt;/span> &lt;span class="nx">A&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="p">{}&lt;/span>
+&lt;span class="kd">var&lt;/span> &lt;span class="nx">a&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="k">new&lt;/span> &lt;span class="nx">A&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;span class="nx">console&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">A&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">prototype&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">constructor&lt;/span> &lt;span class="o">===&lt;/span> &lt;span class="nx">A&lt;/span>&lt;span class="p">);&lt;/span> &lt;span class="c1">// true
+&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>函数的&lt;code>prototype.constructor&lt;/code>指向了自己，除此之外，我目前还没发现这个有什么用。&lt;/p>
+&lt;div class="highlight">&lt;pre class="chroma">&lt;code class="language-js" data-lang="js">&lt;span class="kd">function&lt;/span> &lt;span class="nx">A&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="p">{}&lt;/span>
+&lt;span class="kd">var&lt;/span> &lt;span class="nx">a&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="k">new&lt;/span> &lt;span class="nx">A&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;span class="nx">console&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">A&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">prototype&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">constructor&lt;/span> &lt;span class="o">===&lt;/span> &lt;span class="nx">A&lt;/span>&lt;span class="p">);&lt;/span> &lt;span class="c1">// true
+&lt;/span>&lt;span class="c1">&lt;/span>
+&lt;span class="nx">console&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">a&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">constructor&lt;/span> &lt;span class="o">===&lt;/span> &lt;span class="nx">A&lt;/span>&lt;span class="p">);&lt;/span> &lt;span class="c1">// true
+&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>找到一个说法&lt;/p>
+&lt;pre>&lt;code>constructor属性不影响任何JavaScript的内部属性。instanceof检测对象的原型链，通常你是无法修改的（不过某些引擎通过私有的__proto__属性暴露出来）。constructor其实没有什么用处，只是JavaScript语言设计的历史遗留物。由于constructor属性是可以变更的，所以未必真的指向对象的构造函数，只是一个提示。不过，从编程习惯上，我们应该尽量让对象的constructor指向其构造函数，以维持这个惯例。
+作者：贺师俊
+链接：https://www.zhihu.com/question/19951896/answer/13457869
+来源：知乎
+著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
+&lt;/code>&lt;/pre></description></item><item><title>初探react Native</title><link>https://jo-hnny.github.io/p/%E5%88%9D%E6%8E%A2react-native/</link><pubDate>Wed, 18 Sep 2019 20:51:20 +0800</pubDate><guid>https://jo-hnny.github.io/p/%E5%88%9D%E6%8E%A2react-native/</guid><description>&lt;p>本文不介绍 React Native 的 API，API 可以参考官网或者 react native 中文网，主要是从环境搭建开始，利用豆瓣的开放 api 搭建一个豆瓣电影的应用。
 &lt;img src="https://raw.githubusercontent.com/johnny19941216/storage-room/master/img/Screenshot_2018-01-02-16-02-39-091_host.exp.expon.png" alt="app截图" />&lt;/p>
 &lt;h2 id="一环境搭建">一、环境搭建&lt;/h2>
 &lt;p>环境搭建可以参考&lt;a class="link" href="https://reactnative.cn/docs/0.50/getting-started.html" target="_blank" rel="noopener"
