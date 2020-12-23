@@ -25,10 +25,4 @@ jobs:
         uses: peaceiris/actions-gh-pages@v3
         with:
           personal_token: ${{ secrets.TOKEN }}
-          external_repository: jo-hnny/jo-hnny.github.io
           publish_dir: ./public
-          #   keep_files: true
-          user_name: jo-hnny
-          user_email: wuzhiqiang94@hotmail.com
-          publish_branch: master
-        #   cname: example.com
