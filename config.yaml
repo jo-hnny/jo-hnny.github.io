@@ -79,6 +79,19 @@ params:
       local: false
       src:
 
+  colorScheme:
+    # Display toggle
+    toggle: true
+
+    # Available values: auto, light, dark
+    default: auto
+
+  imageProcessing:
+    cover:
+      enabled: true
+    content:
+      enabled: true
+
 menu:
   main:
     - identifier: home
