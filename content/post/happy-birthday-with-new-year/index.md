@@ -22,4 +22,4 @@ tags:
 
 ### 插图来自最近喜欢的日本画师 [天凪える](//twitter.com/amanagiel)
 
-{{< twitter 1343043691972231168 >}}
+{{< twitter_simple 1343043691972231168 >}}
