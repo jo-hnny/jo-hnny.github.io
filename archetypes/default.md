@@ -3,7 +3,7 @@ title: "{{ replace .Name "-" " " | title }}"
 description:
 date: {{ .Date }}
 draft: true
-image:
+image: cover.jpg
 categories:
   - 编程
   - 生活
