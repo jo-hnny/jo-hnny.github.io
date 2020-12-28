@@ -17,3 +17,9 @@ tags:
 ## 祝大家新年新气象
 
 ![Happy New Year](new-year.PNG)
+![Rabbit Girl](rabbit.PNG)
+![Cat Girl](cat.PNG)
+
+### 插图来自最近喜欢的日本画师 [天凪える](//twitter.com/amanagiel)
+
+{{< twitter 1343043691972231168 >}}
