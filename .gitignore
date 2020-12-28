@@ -1,4 +1,4 @@
-public/*
-resources/*
-themes/*
+/public
+/resources
+/themes
 .DS_Store

@@ -1,5 +1,5 @@
 ---
-title: "Happy Birthday With New year"
+title: "Happy Birthday With New Year"
 description:
 date: 2020-12-28T11:08:45+08:00
 draft: false
