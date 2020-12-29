@@ -6,6 +6,10 @@ draft: false
 image: cover.jpg
 ---
 
+## 2020-12-29
+
+[hugo-paper](https://github.com/nanxiaobei/hugo-paper)这个主题也很好看，也好想试一试，突然感觉我像个渣男
+
 ## 2020-12-23
 
 以后我就在这里发牢骚啦
