@@ -9,7 +9,7 @@ disqusShortname: jo-hnny
 
 # Theme i18n support
 # Available values: en, fr, id, ja, ko, pt-br, zh-cn
-DefaultContentLanguage: en
+DefaultContentLanguage: zh-cn
 
 permalinks:
   post: /p/:slug/
@@ -68,7 +68,7 @@ params:
   opengraph:
     twitter:
       # Your Twitter username
-      site:
+      site: johnnyN70389377
 
       # Available values: summary, summary_large_image
       card: summary_large_image
