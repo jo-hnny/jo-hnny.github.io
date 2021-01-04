@@ -1,4 +1,55 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>冷宫</title><link>https://jo-hnny.github.io/</link><description>Recent content on 冷宫</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Mon, 28 Dec 2020 11:08:45 +0800</lastBuildDate><atom:link href="https://jo-hnny.github.io/index.xml" rel="self" type="application/rss+xml"/><item><title>Happy Birthday With New Year</title><link>https://jo-hnny.github.io/p/happy-birthday-with-new-year/</link><pubDate>Mon, 28 Dec 2020 11:08:45 +0800</pubDate><guid>https://jo-hnny.github.io/p/happy-birthday-with-new-year/</guid><description>&lt;img src="https://jo-hnny.github.io/p/happy-birthday-with-new-year/cover.jpg" alt="Featured image of post Happy Birthday With New Year" />&lt;h2 id="又长了一岁">又长了一岁&lt;/h2>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>冷宫</title><link>https://jo-hnny.github.io/</link><description>Recent content on 冷宫</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Mon, 04 Jan 2021 10:39:16 +0800</lastBuildDate><atom:link href="https://jo-hnny.github.io/index.xml" rel="self" type="application/rss+xml"/><item><title>ZSH配置指南</title><link>https://jo-hnny.github.io/p/zsh%E9%85%8D%E7%BD%AE%E6%8C%87%E5%8D%97/</link><pubDate>Mon, 04 Jan 2021 10:39:16 +0800</pubDate><guid>https://jo-hnny.github.io/p/zsh%E9%85%8D%E7%BD%AE%E6%8C%87%E5%8D%97/</guid><description>&lt;img src="https://jo-hnny.github.io/p/zsh%E9%85%8D%E7%BD%AE%E6%8C%87%E5%8D%97/cover.jpg" alt="Featured image of post ZSH配置指南" />&lt;blockquote>
+&lt;p>图摄于西湖&lt;/p>
+&lt;/blockquote>
+&lt;p>本文以 ubuntu18.0.4 为例&lt;/p>
+&lt;h2 id="安装-zsh">安装 ZSH&lt;/h2>
+&lt;p>&lt;code>sudo apt-get install zsh&lt;/code>&lt;/p>
+&lt;h2 id="设置-zsh-为默认-shell">设置 ZSH 为默认 shell&lt;/h2>
+&lt;p>&lt;code>chsh -s $(which zsh)&lt;/code>&lt;/p>
+&lt;h2 id="安装ohmyzshhttpsohmyzsh">安装&lt;a class="link" href="https://ohmyz.sh/" target="_blank" rel="noopener"
+>ohmyzsh&lt;/a>&lt;/h2>
+&lt;p>&lt;code>sh -c &amp;quot;$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)&amp;quot;&lt;/code>&lt;br>
+但是由于网络的问题，我总是遇到这个错误：&lt;br>
+&lt;code>Failed to connect to raw.github.com port 443: Connection refused&lt;/code>&lt;br>
+所以我换了个方法，先把 ohmyzsh 的 GitHub 仓库克隆下来,然后再安装：&lt;/p>
+&lt;ol>
+&lt;li>&lt;code>git clone https://github.com/ohmyzsh/ohmyzsh.git&lt;/code>&lt;/li>
+&lt;li>&lt;code>sh -c ohmyzsh/tools/install.sh&lt;/code>&lt;/li>
+&lt;/ol>
+&lt;h2 id="zsh-插件和主题配置">zsh 插件和主题配置&lt;/h2>
+&lt;h3 id="安装spaceshiphttpsgithubcomdenysdovhanspaceship-prompt主题">安装&lt;a class="link" href="https://github.com/denysdovhan/spaceship-prompt" target="_blank" rel="noopener"
+>spaceship&lt;/a>主题&lt;/h3>
+&lt;ol>
+&lt;li>&lt;code>git clone https://github.com/denysdovhan/spaceship-prompt.git &amp;quot;$ZSH_CUSTOM/themes/spaceship-prompt&amp;quot; --depth=1&lt;/code>&lt;/li>
+&lt;li>&lt;code>ln -s &amp;quot;$ZSH_CUSTOM/themes/spaceship-prompt/spaceship.zsh-theme&amp;quot; &amp;quot;$ZSH_CUSTOM/themes/spaceship.zsh-theme&amp;quot;&lt;/code>&lt;/li>
+&lt;/ol>
+&lt;h3 id="安装zsh-autosuggestionshttpsgithubcomzsh-userszsh-autosuggestions插件">安装&lt;a class="link" href="https://github.com/zsh-users/zsh-autosuggestions" target="_blank" rel="noopener"
+>zsh-autosuggestions&lt;/a>插件&lt;/h3>
+&lt;p>这个插件主要作用是记录下历史命令，在你输入一部分时自动提示补全&lt;br>
+&lt;code>git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions&lt;/code>&lt;/p>
+&lt;h3 id="安装zsh-syntax-highlightinghttpsgithubcomzsh-userszsh-syntax-highlighting插件">安装&lt;a class="link" href="https://github.com/zsh-users/zsh-syntax-highlighting" target="_blank" rel="noopener"
+>zsh-syntax-highlighting&lt;/a>插件&lt;/h3>
+&lt;p>这个插件主要功能是高亮你输入的正确的命令&lt;br>
+&lt;code>git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting&lt;/code>&lt;/p>
+&lt;h3 id="最后配置zshrc-文件">最后配置.zshrc 文件&lt;/h3>
+&lt;ol>
+&lt;li>&lt;code>vi ~/.zshrc&lt;/code>&lt;/li>
+&lt;li>&lt;code>ZSH_THEME=&amp;quot;spaceship&amp;quot;&lt;/code>&lt;/li>
+&lt;li>&lt;code>plugins=(git zsh-autosuggestions zsh-syntax-highlighting)&lt;/code>&lt;/li>
+&lt;li>&lt;code>source ~/.zshrc&lt;/code>&lt;/li>
+&lt;/ol>
+&lt;h2 id="最后记录一下-ssh-登录-ubuntu-root-所需要的一些配置">最后记录一下 ssh 登录 ubuntu root 所需要的一些配置&lt;/h2>
+&lt;p>默认 ubuntu root 账号无法 ssh 连接，一开始不知道，死活连不上&lt;/p>
+&lt;h3 id="设置-root-账户密码">设置 root 账户密码&lt;/h3>
+&lt;p>&lt;code>sudo passwd&lt;/code>&lt;br>
+按照提示输入并确认密码&lt;/p>
+&lt;h3 id="修改-ssh-配置">修改 ssh 配置&lt;/h3>
+&lt;ol>
+&lt;li>打开 ssh 配置 &lt;code>sudo vi /etc/ssh/sshd_config&lt;/code>&lt;/li>
+&lt;li>修改 &lt;code>PermitRootLogin yes&lt;/code>&lt;/li>
+&lt;li>重启 ssh &lt;code>sudo service ssh restart&lt;/code>&lt;/li>
+&lt;li>重新 ssh 连接 root 用户&lt;/li>
+&lt;/ol></description></item><item><title>Happy Birthday With New Year</title><link>https://jo-hnny.github.io/p/happy-birthday-with-new-year/</link><pubDate>Mon, 28 Dec 2020 11:08:45 +0800</pubDate><guid>https://jo-hnny.github.io/p/happy-birthday-with-new-year/</guid><description>&lt;img src="https://jo-hnny.github.io/p/happy-birthday-with-new-year/cover.jpg" alt="Featured image of post Happy Birthday With New Year" />&lt;h2 id="又长了一岁">又长了一岁&lt;/h2>
 &lt;p>越来越没办法忽视自己的年龄，但是每个人的路注定是不一样的，也许我的注定坎坷一点，加油， better than better&lt;/p>
 &lt;h2 id="祝大家新年新气象">祝大家新年新气象&lt;/h2>
 &lt;p>&lt;figure style="flex-grow: 66; flex-basis: 158px">

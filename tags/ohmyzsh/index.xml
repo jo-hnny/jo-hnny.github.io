@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>ohmyzsh on 冷宫</title><link>https://jo-hnny.github.io/tags/ohmyzsh/</link><description>Recent content in ohmyzsh on 冷宫</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Mon, 04 Jan 2021 10:39:16 +0800</lastBuildDate><atom:link href="https://jo-hnny.github.io/tags/ohmyzsh/index.xml" rel="self" type="application/rss+xml"/><item><title>ZSH配置指南</title><link>https://jo-hnny.github.io/p/zsh%E9%85%8D%E7%BD%AE%E6%8C%87%E5%8D%97/</link><pubDate>Mon, 04 Jan 2021 10:39:16 +0800</pubDate><guid>https://jo-hnny.github.io/p/zsh%E9%85%8D%E7%BD%AE%E6%8C%87%E5%8D%97/</guid><description>图摄于西湖
+本文以 ubuntu18.0.4 为例
+安装 ZSH sudo apt-get install zsh
+设置 ZSH 为默认 shell chsh -s $(which zsh)
+安装ohmyzsh sh -c &amp;quot;$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)&amp;quot;
+但是由于网络的问题，我总是遇到这个错误：
+Failed to connect to raw.github.com port 443: Connection refused
+所以我换了个方法，先把 ohmyzsh 的 GitHub 仓库克隆下来,然后再安装：
+git clone https://github.com/ohmyzsh/ohmyzsh.git sh -c ohmyzsh/tools/install.sh zsh 插件和主题配置 安装spaceship主题 git clone https://github.com/denysdovhan/spaceship-prompt.git &amp;quot;$ZSH_CUSTOM/themes/spaceship-prompt&amp;quot; --depth=1 ln -s &amp;quot;$ZSH_CUSTOM/themes/spaceship-prompt/spaceship.zsh-theme&amp;quot; &amp;quot;$ZSH_CUSTOM/themes/spaceship.zsh-theme&amp;quot; 安装zsh-autosuggestions插件 这个插件主要作用是记录下历史命令，在你输入一部分时自动提示补全
+git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+安装zsh-syntax-highlighting插件 这个插件主要功能是高亮你输入的正确的命令</description></item></channel></rss>
