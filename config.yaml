@@ -47,7 +47,7 @@ params:
     enabled: true
     provider: utterances
     utterances:
-      repo:
+      repo: jo-hnny/jo-hnny.github.io
       issueTerm: pathname
       label:
       theme: preferred-color-scheme
