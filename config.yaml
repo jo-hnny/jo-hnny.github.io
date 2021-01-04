@@ -48,8 +48,8 @@ params:
     provider: utterances
     utterances:
       repo: jo-hnny/jo-hnny.github.io
-      issueTerm: pathname
-      label:
+      issueTerm: title
+      label: comments
       theme: preferred-color-scheme
 
   widgets:
