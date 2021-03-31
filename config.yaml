@@ -102,31 +102,31 @@ menu:
 
     - identifier: about
       name: About
-      url: about
+      url: /about
       weight: -90
       pre: user
 
     - identifier: talks
       name: Talks
-      url: talks
+      url: /talks
       weight: -80
       pre: talks
 
     - identifier: archives
       name: Archives
-      url: archives
+      url: /archives
       weight: -70
       pre: archives
 
     - identifier: search
       name: Search
-      url: search
+      url: /search
       weight: -60
       pre: search
 
     - identifier: feed
       name: Feed
-      url: index.xml
+      url: /index.xml
       weight: -50
       pre: feed
 
