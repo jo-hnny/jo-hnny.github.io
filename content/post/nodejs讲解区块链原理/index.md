@@ -1,6 +1,7 @@
 ---
 title: "Nodejs讲解区块链原理"
 date: 2019-09-18T20:53:59+08:00
+image: https://picsum.photos/seed/c6a1438cfc9d4682b65330ff7573994d/4096/2160
 draft: false
 ---
 

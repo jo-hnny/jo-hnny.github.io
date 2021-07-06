@@ -1,6 +1,7 @@
 ---
 title: "基于mocha的nodejs单元测试"
 date: 2019-09-18T21:01:55+08:00
+image: https://picsum.photos/seed/ccbd0034a97a40f299bb27b18bf93999/4096/2160
 draft: false
 ---
 

@@ -1,6 +1,7 @@
 ---
 title: "Parcel简单试用"
 date: 2019-09-18T21:11:32+08:00
+image: https://picsum.photos/seed/0d93939eee4441478b76522c689dfce3/4096/2160
 draft: false
 ---
 

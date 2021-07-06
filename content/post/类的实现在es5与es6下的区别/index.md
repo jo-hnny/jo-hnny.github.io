@@ -1,6 +1,7 @@
 ---
 title: "类的实现在es5与es6下的区别"
 date: 2019-09-18T21:00:58+08:00
+image: https://picsum.photos/seed/064c5fca816c45068b6c3cd7fa82dcf2/4096/2160
 draft: false
 ---
 

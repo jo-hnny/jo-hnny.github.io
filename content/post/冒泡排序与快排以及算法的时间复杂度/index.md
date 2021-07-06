@@ -1,6 +1,7 @@
 ---
 title: "冒泡排序与快排以及算法的时间复杂度"
 date: 2019-09-18T21:10:17+08:00
+image: https://picsum.photos/seed/2b71bb853ecf406b9f615b4d6f90b521/4096/2160
 draft: false
 ---
 

@@ -1,6 +1,7 @@
 ---
 title: "模拟实现call和apply以及bind"
 date: 2019-09-18T21:08:52+08:00
+image: https://picsum.photos/seed/42a9af59d3a34710adcf0d7b8bf521d9/4096/2160
 draft: false
 ---
 

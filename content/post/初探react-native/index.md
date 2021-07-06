@@ -1,6 +1,7 @@
 ---
 title: "初探react Native"
 date: 2019-09-18T20:51:20+08:00
+image: https://picsum.photos/seed/c2c7c029452b45aa8117a63cd653cdb4/4096/2160
 draft: false
 ---
 

@@ -1,6 +1,7 @@
 ---
 title: "__Proto__与prototype"
 date: 2019-09-18T20:52:35+08:00
+image: https://picsum.photos/seed/7a25d1e14d8d44d08048f21ffe09c5fe/4096/2160
 draft: false
 ---
 

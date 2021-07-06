@@ -1,6 +1,7 @@
 ---
 title: "面试记录"
 date: 2019-09-18T21:00:11+08:00
+image: https://picsum.photos/seed/dced38d5da1f47a591d1011c5276f6b4/4096/2160
 draft: false
 ---
 

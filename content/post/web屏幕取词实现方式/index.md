@@ -1,6 +1,7 @@
 ---
 title: "Web屏幕取词实现方式"
 date: 2019-09-18T20:47:53+08:00
+image: https://picsum.photos/seed/72184b95064c4307b47f42fcf2c85619/4096/2160
 draft: false
 ---
 

@@ -1,6 +1,7 @@
 ---
 title: "学习RxJS"
 date: 2019-09-18T20:58:39+08:00
+image: https://picsum.photos/seed/b950dc5fee90419792f927c90bc40a88/4096/2160
 draft: false
 ---
 

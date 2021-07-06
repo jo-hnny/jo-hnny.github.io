@@ -1,6 +1,7 @@
 ---
 title: "实现拉格朗日插值算法"
 date: 2019-09-18T21:10:50+08:00
+image: https://picsum.photos/seed/a06caa46404f48529f7fd8cba609add4/4096/2160
 draft: false
 ---
 

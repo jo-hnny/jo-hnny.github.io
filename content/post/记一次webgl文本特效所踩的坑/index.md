@@ -1,6 +1,7 @@
 ---
 title: "记一次webgl文本特效所踩的坑"
 date: 2019-09-18T21:06:15+08:00
+image: https://picsum.photos/seed/8b427e54cff84b0fbdfdce68b842a094/4096/2160
 draft: false
 ---
 

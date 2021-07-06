@@ -1,6 +1,7 @@
 ---
 title: "随笔"
 date: 2019-09-18T20:50:02+08:00
+image: https://picsum.photos/seed/a0fe4c2dd95249899623f35136c16e97/4096/2160
 draft: false
 ---
 
