@@ -50,7 +50,7 @@ npm i husky -D
 // .huskyrc
 {
   "hooks": {
-    "pre-commit": "npm test"
+    "pre-commit": "lint-staged"
   }
 }
 ```
@@ -234,3 +234,14 @@ post-commit (native) → husky/runner.js (node)
 [husky doc](https://typicode.github.io/husky)
 
 [Why husky has dropped conventional JS config](https://blog.typicode.com/husky-git-hooks-javascript-config/)
+
+## 2021.07.21 补充
+
+有后端同学遇到了无法提交代码的问题，具体表现是修改了后端代码，然后提交，发现触发的 husky 的 commit 钩子，经过排查是后端同学在前端目录执行了 npm install，导致挂载了 husky 的钩子
+，解决方案：
+
+```bash
+git config --unset core.hooksPath
+```
+
+因为 v6 版本的 husky 的原理就是设置了 core.hooksPath， 所以我们重置它就好了
