@@ -21,7 +21,7 @@
 &lt;div class="highlight">&lt;pre class="chroma">&lt;code class="language-json" data-lang="json">&lt;span class="err">//&lt;/span> &lt;span class="err">.huskyrc&lt;/span>
 &lt;span class="p">{&lt;/span>
 &lt;span class="nt">&amp;#34;hooks&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">{&lt;/span>
-&lt;span class="nt">&amp;#34;pre-commit&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s2">&amp;#34;npm test&amp;#34;&lt;/span>
+&lt;span class="nt">&amp;#34;pre-commit&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s2">&amp;#34;lint-staged&amp;#34;&lt;/span>
 &lt;span class="p">}&lt;/span>
 &lt;span class="p">}&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="v6-配置方式">v6+ 配置方式&lt;/h2>
@@ -128,7 +128,12 @@ post-commit &lt;span class="o">(&lt;/span>native&lt;span class="o">)&lt;/span> �
 &lt;p>&lt;a class="link" href="https://typicode.github.io/husky" target="_blank" rel="noopener"
 >husky doc&lt;/a>&lt;/p>
 &lt;p>&lt;a class="link" href="https://blog.typicode.com/husky-git-hooks-javascript-config/" target="_blank" rel="noopener"
->Why husky has dropped conventional JS config&lt;/a>&lt;/p></description></item><item><title>ZSH配置指南</title><link>https://jo-hnny.github.io/p/zsh%E9%85%8D%E7%BD%AE%E6%8C%87%E5%8D%97/</link><pubDate>Mon, 04 Jan 2021 10:39:16 +0800</pubDate><guid>https://jo-hnny.github.io/p/zsh%E9%85%8D%E7%BD%AE%E6%8C%87%E5%8D%97/</guid><description>&lt;img src="https://jo-hnny.github.io/p/zsh%E9%85%8D%E7%BD%AE%E6%8C%87%E5%8D%97/cover.jpg" alt="Featured image of post ZSH配置指南" />&lt;blockquote>
+>Why husky has dropped conventional JS config&lt;/a>&lt;/p>
+&lt;h2 id="20210721-补充">2021.07.21 补充&lt;/h2>
+&lt;p>有后端同学遇到了无法提交代码的问题，具体表现是修改了后端代码，然后提交，发现触发的 husky 的 commit 钩子，经过排查是后端同学在前端目录执行了 npm install，导致挂载了 husky 的钩子
+，解决方案：&lt;/p>
+&lt;div class="highlight">&lt;pre class="chroma">&lt;code class="language-bash" data-lang="bash">git config --unset core.hooksPath
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>因为 v6 版本的 husky 的原理就是设置了 core.hooksPath， 所以我们重置它就好了&lt;/p></description></item><item><title>ZSH配置指南</title><link>https://jo-hnny.github.io/p/zsh%E9%85%8D%E7%BD%AE%E6%8C%87%E5%8D%97/</link><pubDate>Mon, 04 Jan 2021 10:39:16 +0800</pubDate><guid>https://jo-hnny.github.io/p/zsh%E9%85%8D%E7%BD%AE%E6%8C%87%E5%8D%97/</guid><description>&lt;img src="https://jo-hnny.github.io/p/zsh%E9%85%8D%E7%BD%AE%E6%8C%87%E5%8D%97/cover.jpg" alt="Featured image of post ZSH配置指南" />&lt;blockquote>
 &lt;p>图摄于西湖&lt;/p>
 &lt;/blockquote>
 &lt;p>本文以 ubuntu18.0.4 为例&lt;/p>
