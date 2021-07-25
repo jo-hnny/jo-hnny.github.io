@@ -2,10 +2,10 @@
 &lt;p>最近我为开源项目 &lt;code>tkestack&lt;/code> 的前端控制台部分添加了对 commit 的 lint，在添加过程中遇到了一些困难和疑惑，在此记录一下&lt;/p>
 &lt;h2 id="v4-配置方式">v4 配置方式&lt;/h2>
 &lt;h3 id="安装-husky">安装 husky&lt;/h3>
-&lt;div class="highlight">&lt;pre class="chroma">&lt;code class="language-bash" data-lang="bash">npm i husky -D
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">npm i husky -D
 &lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="添加配置">添加配置&lt;/h3>
 &lt;p>在 package.json 中添加如下配置&lt;/p>
-&lt;div class="highlight">&lt;pre class="chroma">&lt;code class="language-json" data-lang="json">&lt;span class="err">//package.json&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-json" data-lang="json">&lt;span class="err">//package.json&lt;/span>
 &lt;span class="s2">&amp;#34;lint-staged&amp;#34;&lt;/span>&lt;span class="err">:&lt;/span> &lt;span class="p">{&lt;/span>
 &lt;span class="nt">&amp;#34;./**/*.{ts,tsx,js,jsx}&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">[&lt;/span>
 &lt;span class="s2">&amp;#34;eslint&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>
@@ -18,7 +18,7 @@
 &lt;span class="p">}&lt;/span>
 &lt;span class="p">}&lt;/span>&lt;span class="err">,&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>或者添加.huskyrc 文件&lt;/p>
-&lt;div class="highlight">&lt;pre class="chroma">&lt;code class="language-json" data-lang="json">&lt;span class="err">//&lt;/span> &lt;span class="err">.huskyrc&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-json" data-lang="json">&lt;span class="err">//&lt;/span> &lt;span class="err">.huskyrc&lt;/span>
 &lt;span class="p">{&lt;/span>
 &lt;span class="nt">&amp;#34;hooks&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">{&lt;/span>
 &lt;span class="nt">&amp;#34;pre-commit&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s2">&amp;#34;lint-staged&amp;#34;&lt;/span>
@@ -27,11 +27,11 @@
 &lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="v6-配置方式">v6+ 配置方式&lt;/h2>
 &lt;p>第一次使用，按照 husky doc 进行配置&lt;/p>
 &lt;h3 id="安装-husky-1">安装 husky&lt;/h3>
-&lt;div class="highlight">&lt;pre class="chroma">&lt;code class="language-bash" data-lang="bash">npm i husky -D
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">npm i husky -D
 &lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="开启-git-hooks">开启 Git hooks&lt;/h3>
-&lt;div class="highlight">&lt;pre class="chroma">&lt;code class="language-bash" data-lang="bash">npx husky install
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">npx husky install
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>执行到这里，我得到一个错误&lt;/p>
-&lt;div class="highlight">&lt;pre class="chroma">&lt;code class="language-bash" data-lang="bash">npx husky install
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">npx husky install
 .git can&lt;span class="err">&amp;#39;&lt;/span>t be found &lt;span class="o">(&lt;/span>see https://git.io/Jc3F9&lt;span class="o">)&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>可以推断出原因是这条命令需要在项目根目录执行。即&lt;code>.git&lt;/code>所在的目录
 tkestack 是一个前后端同在一个仓库的项目，目录结构如下&lt;/p>
@@ -39,35 +39,35 @@ tkestack 是一个前后端同在一个仓库的项目，目录结构如下&lt;/
 └── web
 └── console
 &lt;/code>&lt;/pre>&lt;p>我们现在在 console 目录，所以正确的方式应该是&lt;/p>
-&lt;div class="highlight">&lt;pre class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="nb">cd&lt;/span> ../../
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="nb">cd&lt;/span> ../../
 npx husky install ./web/console/.husky
 &lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="添加自动执行husky-install的钩子">添加自动执行&lt;code>husky install&lt;/code>的钩子&lt;/h3>
 &lt;p>如果其他用户进行开发，显然我们是不希望他需要先阅读 husky 的文档，然后手动执行&lt;code>npx husky install&lt;/code>的，所以我们添加一个 npm scripts 的钩子&lt;/p>
-&lt;div class="highlight">&lt;pre class="chroma">&lt;code class="language-bash" data-lang="bash">npm set-script prepare &lt;span class="s2">&amp;#34;husky install&amp;#34;&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">npm set-script prepare &lt;span class="s2">&amp;#34;husky install&amp;#34;&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>由于目录的原因，对应的调整为&lt;/p>
-&lt;div class="highlight">&lt;pre class="chroma">&lt;code class="language-bash" data-lang="bash">npm set-script prepare &lt;span class="s2">&amp;#34;cd ../../ &amp;amp;&amp;amp; husky install ./web/console/.husky&amp;#34;&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">npm set-script prepare &lt;span class="s2">&amp;#34;cd ../../ &amp;amp;&amp;amp; husky install ./web/console/.husky&amp;#34;&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>注意 ⚠️：&lt;code>npm set-script&lt;/code> 只在 npm version 7.x 生效,如果你用的是 6.x 或者更低，还是手动在&lt;code>package.json&lt;/code>中添加吧&lt;/p>
 &lt;p>现在查看&lt;code>package.json&lt;/code> 应该可以看到&lt;/p>
-&lt;div class="highlight">&lt;pre class="chroma">&lt;code class="language-json" data-lang="json">&lt;span class="err">//&lt;/span> &lt;span class="err">package.json&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-json" data-lang="json">&lt;span class="err">//&lt;/span> &lt;span class="err">package.json&lt;/span>
 &lt;span class="p">{&lt;/span>
 &lt;span class="nt">&amp;#34;scripts&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">{&lt;/span>
 &lt;span class="nt">&amp;#34;prepare&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s2">&amp;#34;cd ../../ &amp;amp;&amp;amp; husky install ./web/console/.husky&amp;#34;&lt;/span>
 &lt;span class="p">}&lt;/span>
 &lt;span class="p">}&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="添加我们的-hook">添加我们的 hook&lt;/h3>
-&lt;div class="highlight">&lt;pre class="chroma">&lt;code class="language-bash" data-lang="bash">npx husky add .husky/pre-commit &lt;span class="s2">&amp;#34;lint-staged&amp;#34;&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">npx husky add .husky/pre-commit &lt;span class="s2">&amp;#34;lint-staged&amp;#34;&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="测试一下">测试一下&lt;/h3>
 &lt;p>修改一个文件使之不符合 eslint 规范，然后我们做一次提交&lt;/p>
-&lt;div class="highlight">&lt;pre class="chroma">&lt;code class="language-bash" data-lang="bash">git add .
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">git add .
 git commit &lt;span class="s1">&amp;#39;test husky&amp;#39;&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>结果居然成功提交了，显然我们的 lint 没有生效&lt;/p>
 &lt;p>我们检查一下现在我们的 console 目录有哪些变化，会发现多了一个.husky 目录，目录下有一个&lt;code>pre-commit&lt;/code>文件,文件内容如下：&lt;/p>
-&lt;div class="highlight">&lt;pre class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="cp">#!/bin/sh
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="cp">#!/bin/sh
 &lt;/span>&lt;span class="cp">&lt;/span>. &lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="k">$(&lt;/span>dirname &lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="nv">$0&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="k">)&lt;/span>&lt;span class="s2">/_/husky.sh&amp;#34;&lt;/span>
 lint-staged
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>大致可以猜测到当 pre-commit 时，实际是执行了这个 shell 脚本，由于我们的 lint-staged 并不是全局安装，在这里并不能执行
 所以我们在 package.json 中添加一个 script&lt;/p>
-&lt;div class="highlight">&lt;pre class="chroma">&lt;code class="language-json" data-lang="json">&lt;span class="err">//&lt;/span> &lt;span class="err">package.json&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-json" data-lang="json">&lt;span class="err">//&lt;/span> &lt;span class="err">package.json&lt;/span>
 &lt;span class="p">{&lt;/span>
 &lt;span class="nt">&amp;#34;scripts&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">{&lt;/span>
 &lt;span class="nt">&amp;#34;prepare&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s2">&amp;#34;cd ../../ &amp;amp;&amp;amp; husky install&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>
@@ -75,13 +75,13 @@ lint-staged
 &lt;span class="p">}&lt;/span>
 &lt;span class="p">}&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>接着修改&lt;code>.husky/pre-commit&lt;/code>文件&lt;/p>
-&lt;div class="highlight">&lt;pre class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="cp">#!/bin/sh
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="cp">#!/bin/sh
 &lt;/span>&lt;span class="cp">&lt;/span>. &lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="k">$(&lt;/span>dirname &lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="nv">$0&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="k">)&lt;/span>&lt;span class="s2">/_/husky.sh&amp;#34;&lt;/span>
 npm run pre-commit
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>再尝试一下修改一个文件并提交&lt;/p>
 &lt;p>还是成功了，lint 依然没有生效，&lt;/p>
 &lt;p>查看文档可知&lt;code>pre-commit&lt;/code>这个 shell 实际执行目录是在&lt;code>.git&lt;/code>所在目录，所以接着修改&lt;code>.husky/pre-commit&lt;/code>文件&lt;/p>
-&lt;div class="highlight">&lt;pre class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="cp">#!/bin/sh
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="cp">#!/bin/sh
 &lt;/span>&lt;span class="cp">&lt;/span>. &lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="k">$(&lt;/span>dirname &lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="nv">$0&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="k">)&lt;/span>&lt;span class="s2">/_/husky.sh&amp;#34;&lt;/span>
 &lt;span class="nb">cd&lt;/span> ./web/console
 npm run pre-commit
@@ -92,7 +92,7 @@ npm run pre-commit
 &lt;h3 id="huskyv4-是如何运行的">husky@v4 是如何运行的&lt;/h3>
 &lt;p>首先 husky 在安装时会在 .git/hooks/ 目录安装所有可能会使用到的 hooks&lt;/p>
 &lt;p>比如当我们进行一次提交时，每个 git hook 检查我们有没有在 package.json 或者.huskyrc 中定义对应的钩子:&lt;/p>
-&lt;div class="highlight">&lt;pre class="chroma">&lt;code class="language-bash" data-lang="bash">$ git commit
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">$ git commit
 pre-commit &lt;span class="o">(&lt;/span>native&lt;span class="o">)&lt;/span> → husky/runner.js &lt;span class="o">(&lt;/span>node&lt;span class="o">)&lt;/span>
 → is a pre-commit defined in &lt;span class="sb">`&lt;/span>.huskyrc.js&lt;span class="sb">`&lt;/span>? → YES, run it
 prepare-commit-msg &lt;span class="o">(&lt;/span>native&lt;span class="o">)&lt;/span> → husky/runner.js &lt;span class="o">(&lt;/span>node&lt;span class="o">)&lt;/span>
@@ -132,7 +132,7 @@ post-commit &lt;span class="o">(&lt;/span>native&lt;span class="o">)&lt;/span> �
 &lt;h2 id="20210721-补充">2021.07.21 补充&lt;/h2>
 &lt;p>有后端同学遇到了无法提交代码的问题，具体表现是修改了后端代码，然后提交，发现触发的 husky 的 commit 钩子，经过排查是后端同学在前端目录执行了 npm install，导致挂载了 husky 的钩子
 ，解决方案：&lt;/p>
-&lt;div class="highlight">&lt;pre class="chroma">&lt;code class="language-bash" data-lang="bash">git config --unset core.hooksPath
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">git config --unset core.hooksPath
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>因为 v6 版本的 husky 的原理就是设置了 core.hooksPath， 所以我们重置它就好了&lt;/p></description></item><item><title>ZSH配置指南</title><link>https://jo-hnny.github.io/p/zsh%E9%85%8D%E7%BD%AE%E6%8C%87%E5%8D%97/</link><pubDate>Mon, 04 Jan 2021 10:39:16 +0800</pubDate><guid>https://jo-hnny.github.io/p/zsh%E9%85%8D%E7%BD%AE%E6%8C%87%E5%8D%97/</guid><description>&lt;img src="https://jo-hnny.github.io/p/zsh%E9%85%8D%E7%BD%AE%E6%8C%87%E5%8D%97/cover.jpg" alt="Featured image of post ZSH配置指南" />&lt;blockquote>
 &lt;p>图摄于西湖&lt;/p>
 &lt;/blockquote>
@@ -189,7 +189,7 @@ post-commit &lt;span class="o">(&lt;/span>native&lt;span class="o">)&lt;/span> �
 &lt;h2 id="祝大家新年新气象">祝大家新年新气象&lt;/h2>
 &lt;p>&lt;figure style="flex-grow: 66; flex-basis: 158px">
 &lt;a href="https://jo-hnny.github.io/p/happy-birthday-with-new-year/new-year.PNG" data-size="3784x5716">&lt;img src="https://jo-hnny.github.io/p/happy-birthday-with-new-year/new-year.PNG"
-srcset="https://jo-hnny.github.io/p/happy-birthday-with-new-year/new-year_huebb6f38c275b6fe8087980db183c0f07_30347436_480x0_resize_box_2.PNG 480w, https://jo-hnny.github.io/p/happy-birthday-with-new-year/new-year_huebb6f38c275b6fe8087980db183c0f07_30347436_1024x0_resize_box_2.PNG 1024w"
+srcset="https://jo-hnny.github.io/p/happy-birthday-with-new-year/new-year_huebb6f38c275b6fe8087980db183c0f07_30347436_480x0_resize_box_3.PNG 480w, https://jo-hnny.github.io/p/happy-birthday-with-new-year/new-year_huebb6f38c275b6fe8087980db183c0f07_30347436_1024x0_resize_box_3.PNG 1024w"
 width="3784"
 height="5716"
 loading="lazy"
@@ -199,7 +199,7 @@ alt="Happy New Year">
 &lt;/figure>
 &lt;figure style="flex-grow: 71; flex-basis: 171px">
 &lt;a href="https://jo-hnny.github.io/p/happy-birthday-with-new-year/rabbit.PNG" data-size="1190x1670">&lt;img src="https://jo-hnny.github.io/p/happy-birthday-with-new-year/rabbit.PNG"
-srcset="https://jo-hnny.github.io/p/happy-birthday-with-new-year/rabbit_huee5fe307af317435b697f2dc2593050e_3407597_480x0_resize_box_2.PNG 480w, https://jo-hnny.github.io/p/happy-birthday-with-new-year/rabbit_huee5fe307af317435b697f2dc2593050e_3407597_1024x0_resize_box_2.PNG 1024w"
+srcset="https://jo-hnny.github.io/p/happy-birthday-with-new-year/rabbit_huee5fe307af317435b697f2dc2593050e_3407597_480x0_resize_box_3.PNG 480w, https://jo-hnny.github.io/p/happy-birthday-with-new-year/rabbit_huee5fe307af317435b697f2dc2593050e_3407597_1024x0_resize_box_3.PNG 1024w"
 width="1190"
 height="1670"
 loading="lazy"
@@ -209,7 +209,7 @@ alt="Rabbit Girl">
 &lt;/figure>
 &lt;figure style="flex-grow: 140; flex-basis: 337px">
 &lt;a href="https://jo-hnny.github.io/p/happy-birthday-with-new-year/cat.PNG" data-size="1529x1087">&lt;img src="https://jo-hnny.github.io/p/happy-birthday-with-new-year/cat.PNG"
-srcset="https://jo-hnny.github.io/p/happy-birthday-with-new-year/cat_hucb6d5b96b67e3dd6dde42589d2255763_2955063_480x0_resize_box_2.PNG 480w, https://jo-hnny.github.io/p/happy-birthday-with-new-year/cat_hucb6d5b96b67e3dd6dde42589d2255763_2955063_1024x0_resize_box_2.PNG 1024w"
+srcset="https://jo-hnny.github.io/p/happy-birthday-with-new-year/cat_hucb6d5b96b67e3dd6dde42589d2255763_2955063_480x0_resize_box_3.PNG 480w, https://jo-hnny.github.io/p/happy-birthday-with-new-year/cat_hucb6d5b96b67e3dd6dde42589d2255763_2955063_1024x0_resize_box_3.PNG 1024w"
 width="1529"
 height="1087"
 loading="lazy"
@@ -280,7 +280,7 @@ text-decoration: underline;
 &lt;/ul>
 &lt;/li>
 &lt;/ul></description></item><item><title>二分查找</title><link>https://jo-hnny.github.io/p/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE/</link><pubDate>Wed, 23 Dec 2020 11:55:21 +0800</pubDate><guid>https://jo-hnny.github.io/p/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE/</guid><description>&lt;img src="https://jo-hnny.github.io/p/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE/cover.jpg" alt="Featured image of post 二分查找" />&lt;h2 id="循环">循环&lt;/h2>
-&lt;div class="highlight">&lt;pre class="chroma">&lt;code class="language-typescript" data-lang="typescript">&lt;span class="kd">function&lt;/span> &lt;span class="nx">find2&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">data&lt;/span>: &lt;span class="kt">number&lt;/span>&lt;span class="p">[],&lt;/span> &lt;span class="nx">n&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-typescript" data-lang="typescript">&lt;span class="kd">function&lt;/span> &lt;span class="nx">find2&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">data&lt;/span>: &lt;span class="kt">number&lt;/span>&lt;span class="p">[],&lt;/span> &lt;span class="nx">n&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
 &lt;span class="kd">let&lt;/span> &lt;span class="nx">low&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">;&lt;/span>
 &lt;span class="kd">let&lt;/span> &lt;span class="nx">higth&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">data&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">length&lt;/span>&lt;span class="p">;&lt;/span>
 &lt;span class="kd">let&lt;/span> &lt;span class="nx">middleIndex&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">low&lt;/span> &lt;span class="o">+&lt;/span> &lt;span class="nb">Math&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">floor&lt;/span>&lt;span class="p">((&lt;/span>&lt;span class="nx">higth&lt;/span> &lt;span class="o">-&lt;/span> &lt;span class="nx">low&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">/&lt;/span> &lt;span class="mi">2&lt;/span>&lt;span class="p">);&lt;/span>
@@ -305,7 +305,7 @@ text-decoration: underline;
 &lt;span class="kr">const&lt;/span> &lt;span class="nx">n&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">500&lt;/span>&lt;span class="p">;&lt;/span>
 &lt;span class="nx">console&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">find2&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">array&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">n&lt;/span>&lt;span class="p">));&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="递归">递归&lt;/h2>
-&lt;div class="highlight">&lt;pre class="chroma">&lt;code class="language-typescript" data-lang="typescript">&lt;span class="c1">// 二分查找 - 递归法
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-typescript" data-lang="typescript">&lt;span class="c1">// 二分查找 - 递归法
 &lt;/span>&lt;span class="c1">&lt;/span>&lt;span class="kd">function&lt;/span> &lt;span class="nx">find2&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">data&lt;/span>: &lt;span class="kt">number&lt;/span>&lt;span class="p">[],&lt;/span> &lt;span class="nx">n&lt;/span>: &lt;span class="kt">number&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">preIndex&lt;/span>: &lt;span class="kt">number&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
 &lt;span class="kr">const&lt;/span> &lt;span class="nx">len&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">data&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">length&lt;/span>&lt;span class="p">;&lt;/span>
 &lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="nx">len&lt;/span> &lt;span class="o">&amp;lt;=&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
@@ -336,7 +336,7 @@ text-decoration: underline;
 &lt;ol>
 &lt;li>新建一个 scss 文件保存颜色配置，例如：&lt;/li>
 &lt;/ol>
-&lt;div class="highlight">&lt;pre class="chroma">&lt;code class="language-scss" data-lang="scss">&lt;span class="c1">// themes.scss
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-scss" data-lang="scss">&lt;span class="c1">// themes.scss
 &lt;/span>&lt;span class="c1">&lt;/span>
 &lt;span class="nv">$themes&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="p">(&lt;/span>
 &lt;span class="na">light&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="p">(&lt;/span>
@@ -355,7 +355,7 @@ text-decoration: underline;
 &lt;/code>&lt;/pre>&lt;/div>&lt;ol start="2">
 &lt;li>新建另一个 scss 文件，创建 mixin：&lt;/li>
 &lt;/ol>
-&lt;div class="highlight">&lt;pre class="chroma">&lt;code class="language-scss" data-lang="scss">&lt;span class="c1">// themify.scss
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-scss" data-lang="scss">&lt;span class="c1">// themify.scss
 &lt;/span>&lt;span class="c1">&lt;/span>&lt;span class="k">@import&lt;/span> &lt;span class="s2">&amp;#34;./themes.scss&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
 &lt;span class="k">@mixin&lt;/span>&lt;span class="nf"> themify&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nv">$themes&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="nv">$themes&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
 &lt;span class="k">@each&lt;/span> &lt;span class="nv">$theme&lt;/span>&lt;span class="o">,&lt;/span> &lt;span class="nv">$map&lt;/span> &lt;span class="ow">in&lt;/span> &lt;span class="nv">$themes&lt;/span> &lt;span class="p">{&lt;/span>
@@ -381,7 +381,7 @@ text-decoration: underline;
 &lt;/code>&lt;/pre>&lt;/div>&lt;ol start="3">
 &lt;li>使用：&lt;/li>
 &lt;/ol>
-&lt;div class="highlight">&lt;pre class="chroma">&lt;code class="language-scss" data-lang="scss">&lt;span class="k">@import&lt;/span> &lt;span class="s2">&amp;#34;../../assets/styles/themify.scss&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-scss" data-lang="scss">&lt;span class="k">@import&lt;/span> &lt;span class="s2">&amp;#34;../../assets/styles/themify.scss&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
 &lt;span class="nc">.header&lt;/span> &lt;span class="p">{&lt;/span>
 &lt;span class="na">width&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="mi">100&lt;/span>&lt;span class="kt">%&lt;/span>&lt;span class="p">;&lt;/span>
 &lt;span class="na">height&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="mi">60&lt;/span>&lt;span class="kt">px&lt;/span>&lt;span class="p">;&lt;/span>
@@ -397,7 +397,7 @@ text-decoration: underline;
 &lt;/code>&lt;/pre>&lt;/div>&lt;ol start="4">
 &lt;li>最后：&lt;/li>
 &lt;/ol>
-&lt;div class="highlight">&lt;pre class="chroma">&lt;code class="language-typescript" data-lang="typescript">&lt;span class="kr">import&lt;/span> &lt;span class="nx">React&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="nx">useState&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="kr">from&lt;/span> &lt;span class="s2">&amp;#34;react&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-typescript" data-lang="typescript">&lt;span class="kr">import&lt;/span> &lt;span class="nx">React&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="nx">useState&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="kr">from&lt;/span> &lt;span class="s2">&amp;#34;react&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
 &lt;span class="kr">import&lt;/span> &lt;span class="nx">styles&lt;/span> &lt;span class="kr">from&lt;/span> &lt;span class="s2">&amp;#34;./app.module.scss&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
 &lt;span class="kr">import&lt;/span> &lt;span class="nx">classNames&lt;/span> &lt;span class="kr">from&lt;/span> &lt;span class="s2">&amp;#34;classnames&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
 &lt;span class="kr">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="nx">Header&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="kr">from&lt;/span> &lt;span class="s2">&amp;#34;./components/header&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
@@ -418,7 +418,7 @@ text-decoration: underline;
 &lt;span class="p">}&lt;/span>
 &lt;span class="kr">export&lt;/span> &lt;span class="k">default&lt;/span> &lt;span class="nx">App&lt;/span>&lt;span class="p">;&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div></description></item><item><title>React项目中同时添加css Modules与普通class</title><link>https://jo-hnny.github.io/p/react%E9%A1%B9%E7%9B%AE%E4%B8%AD%E5%90%8C%E6%97%B6%E6%B7%BB%E5%8A%A0css-modules%E4%B8%8E%E6%99%AE%E9%80%9Aclass/</link><pubDate>Wed, 18 Sep 2019 21:16:58 +0800</pubDate><guid>https://jo-hnny.github.io/p/react%E9%A1%B9%E7%9B%AE%E4%B8%AD%E5%90%8C%E6%97%B6%E6%B7%BB%E5%8A%A0css-modules%E4%B8%8E%E6%99%AE%E9%80%9Aclass/</guid><description>&lt;img src="https://jo-hnny.github.io/p/react%E9%A1%B9%E7%9B%AE%E4%B8%AD%E5%90%8C%E6%97%B6%E6%B7%BB%E5%8A%A0css-modules%E4%B8%8E%E6%99%AE%E9%80%9Aclass/cover.jpg" alt="Featured image of post React项目中同时添加css Modules与普通class" />&lt;p>当我在 react 项目中为一个元素添加了 css modules 的样式，但是由于我要使用 iconfont，必须在元素上添加一个名为 iconfont 的 class 名称，搜来搜去也没找到什么优雅的实现，那就按照 class 的本质实现吧，class 本质就是一个字符串，多个 class 名由空格分割，故:&lt;/p>
-&lt;div class="highlight">&lt;pre class="chroma">&lt;code class="language-tsx" data-lang="tsx">&lt;span class="kr">public&lt;/span> &lt;span class="nx">render() {&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-tsx" data-lang="tsx">&lt;span class="kr">public&lt;/span> &lt;span class="nx">render() {&lt;/span>
 &lt;span class="k">return&lt;/span> &lt;span class="p">(&lt;/span>
 &lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">div&lt;/span> &lt;span class="na">className&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="p">{&lt;/span>&lt;span class="sb">`&lt;/span>&lt;span class="si">${&lt;/span>&lt;span class="nx">styles&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">uploader&lt;/span>&lt;span class="si">}&lt;/span>&lt;span class="sb"> iconfont`&lt;/span>&lt;span class="p">}&amp;gt;&lt;/span>
 &lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">input&lt;/span> &lt;span class="na">type&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;file&amp;#34;&lt;/span> &lt;span class="na">className&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="p">{&lt;/span>&lt;span class="nx">styles&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="s1">&amp;#39;file-input&amp;#39;&lt;/span>&lt;span class="p">]}&lt;/span> &lt;span class="p">/&amp;gt;&lt;/span>
@@ -428,7 +428,7 @@ text-decoration: underline;
 &lt;span class="p">}&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>今天新发现一个库&lt;a class="link" href="https://github.com/JedWatson/classnames" target="_blank" rel="noopener"
 >classnames&lt;/a>可以很好的解决这个问题,使用如下：&lt;/p>
-&lt;div class="highlight">&lt;pre class="chroma">&lt;code class="language-tsx" data-lang="tsx">&lt;span class="kr">import&lt;/span> &lt;span class="nx">classNames&lt;/span> &lt;span class="kr">from&lt;/span> &lt;span class="s2">&amp;#34;classnames&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-tsx" data-lang="tsx">&lt;span class="kr">import&lt;/span> &lt;span class="nx">classNames&lt;/span> &lt;span class="kr">from&lt;/span> &lt;span class="s2">&amp;#34;classnames&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
 &lt;span class="kr">import&lt;/span> &lt;span class="nx">React&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="nx">Component&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="kr">from&lt;/span> &lt;span class="s2">&amp;#34;react&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
 &lt;span class="kr">import&lt;/span> &lt;span class="nx">styles&lt;/span> &lt;span class="kr">from&lt;/span> &lt;span class="s2">&amp;#34;./index.module.scss&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
 &lt;span class="kr">export&lt;/span> &lt;span class="k">default&lt;/span> &lt;span class="kr">class&lt;/span> &lt;span class="kr">extends&lt;/span> &lt;span class="nx">Component&lt;/span> &lt;span class="p">{&lt;/span>
@@ -474,7 +474,7 @@ text-decoration: underline;
 >在此处&lt;/a>阅读更多相关信息），在编写 React 项目时您可以轻松输入 Props 和 State，比如你使用一个组件时，IDE 会提示该组件所需要的所有 props，如果你忘记了添加组件需要的必须属性，Typescript 也会提醒你（确实会避免很多低级错误，往往这种低级 bug 最为致命，浪费极多的时间）。&lt;/p>
 &lt;p>但是不仅如此，使用 Typescript 扩展 Redux 还有更多的好处，你的 store 键入就是其中之一，你无须点击跳转到 Reducer 来推测 store 的数据结构，此外当你键入 action 或者 action 生成器（工厂模式）时不用猜测它们接收什么类型的参数。&lt;/p>
 &lt;p>让我们来写个示例：&lt;/p>
-&lt;div class="highlight">&lt;pre class="chroma">&lt;code class="language-js" data-lang="js">&lt;span class="kd">function&lt;/span> &lt;span class="nx">searchAction&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">options&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-js" data-lang="js">&lt;span class="kd">function&lt;/span> &lt;span class="nx">searchAction&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">options&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
 &lt;span class="k">return&lt;/span> &lt;span class="p">{&lt;/span>
 &lt;span class="nx">type&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="err">‘&lt;/span>&lt;span class="nx">SEARCH&lt;/span>&lt;span class="err">’&lt;/span>&lt;span class="p">,&lt;/span>
 &lt;span class="p">...&lt;/span>&lt;span class="nx">options&lt;/span>
@@ -483,7 +483,7 @@ text-decoration: underline;
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>这是一个简单的 action 生成器，它接收 options 参数生成一个 type 为 SEARCH 的新 action，你能告诉我它到底要接收一个什么样的 options 吗？&lt;/p>
 &lt;p>没有任何提示我们到底要传递什么参数给它，你可能会找遍整个项目来搞明白 options 对象到底是个什么，但是很有可能你找遍整个项目还是不知道到底要传什么参数！（深有体会，有时候甚至需要打开开发者工具查看接口到底返回了什么，然后再去推导数据结构）&lt;/p>
 &lt;p>下面是重写为 Typescript 的版本，一眼看去可能会觉得有点复杂，但是附加的 interface 清除了所有混乱，使用此代码，你可以清晰的看到该函数需要唯一的一个包含有必要属性 text 和可选属性 tags（由数字构成的数组）的对象。&lt;/p>
-&lt;div class="highlight">&lt;pre class="chroma">&lt;code class="language-typescript" data-lang="typescript">&lt;span class="kr">interface&lt;/span> &lt;span class="nx">SearchActionOptions&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-typescript" data-lang="typescript">&lt;span class="kr">interface&lt;/span> &lt;span class="nx">SearchActionOptions&lt;/span> &lt;span class="p">{&lt;/span>
 &lt;span class="nx">text&lt;/span>: &lt;span class="kt">string&lt;/span>&lt;span class="p">;&lt;/span>
 &lt;span class="nx">tags?&lt;/span>: &lt;span class="kt">number&lt;/span>&lt;span class="p">[];&lt;/span>
 &lt;span class="p">}&lt;/span>
@@ -509,7 +509,7 @@ text-decoration: underline;
 &lt;li>&lt;em>NOTES_FETCH_SUCCESS&lt;/em> 应用获取数据成功时调用&lt;/li>
 &lt;li>&lt;em>NOTES_FETCH_ERROR&lt;/em> 应用获取数据出错时调用&lt;/li>
 &lt;/ul>
-&lt;div class="highlight">&lt;pre class="chroma">&lt;code class="language-typescript" data-lang="typescript">&lt;span class="kr">export&lt;/span> &lt;span class="kr">interface&lt;/span> &lt;span class="nx">IActionNotesFetch&lt;/span> &lt;span class="kr">extends&lt;/span> &lt;span class="nx">Action&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-typescript" data-lang="typescript">&lt;span class="kr">export&lt;/span> &lt;span class="kr">interface&lt;/span> &lt;span class="nx">IActionNotesFetch&lt;/span> &lt;span class="kr">extends&lt;/span> &lt;span class="nx">Action&lt;/span> &lt;span class="p">{&lt;/span>
 &lt;span class="kr">type&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="s2">&amp;#34;NOTES_FETCH&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
 &lt;span class="p">}&lt;/span>
 &lt;span class="kr">export&lt;/span> &lt;span class="kr">interface&lt;/span> &lt;span class="nx">IActionNotesFetchSuccess&lt;/span> &lt;span class="kr">extends&lt;/span> &lt;span class="nx">Action&lt;/span> &lt;span class="p">{&lt;/span>
@@ -527,7 +527,7 @@ text-decoration: underline;
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>我们应该如何构造 store 以方便向用户展示数据？&lt;/p>
 &lt;h2 id="常见不推荐方法">常见（不推荐）方法&lt;/h2>
 &lt;p>最基本的 store 构造可能如下所示：&lt;/p>
-&lt;div class="highlight">&lt;pre class="chroma">&lt;code class="language-typescript" data-lang="typescript">&lt;span class="kr">export&lt;/span> &lt;span class="kr">interface&lt;/span> &lt;span class="nx">NotesListState&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-typescript" data-lang="typescript">&lt;span class="kr">export&lt;/span> &lt;span class="kr">interface&lt;/span> &lt;span class="nx">NotesListState&lt;/span> &lt;span class="p">{&lt;/span>
 &lt;span class="nx">state&lt;/span>: &lt;span class="kt">string&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="c1">// &amp;#39;INIT&amp;#39;, &amp;#39;LOADING&amp;#39; | &amp;#39;LOADED&amp;#39; | &amp;#39;ERROR&amp;#39;,
 &lt;/span>&lt;span class="c1">&lt;/span> &lt;span class="nx">notes&lt;/span>: &lt;span class="kt">NoteModel&lt;/span>&lt;span class="p">[];&lt;/span>
 &lt;span class="nx">errorMessage?&lt;/span>: &lt;span class="kt">string&lt;/span>&lt;span class="p">;&lt;/span>
@@ -540,7 +540,7 @@ text-decoration: underline;
 &lt;li>错误 - 无法连接或者服务器错误&lt;/li>
 &lt;/ul>
 &lt;p>在此架构中对应的 reducer 可能如下：&lt;/p>
-&lt;div class="highlight">&lt;pre class="chroma">&lt;code class="language-typescript" data-lang="typescript">&lt;span class="kr">export&lt;/span> &lt;span class="kd">function&lt;/span> &lt;span class="nx">notesListReducer&lt;/span>&lt;span class="p">(&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-typescript" data-lang="typescript">&lt;span class="kr">export&lt;/span> &lt;span class="kd">function&lt;/span> &lt;span class="nx">notesListReducer&lt;/span>&lt;span class="p">(&lt;/span>
 &lt;span class="nx">state&lt;/span>: &lt;span class="kt">NotesListState&lt;/span>&lt;span class="p">,&lt;/span>
 &lt;span class="nx">action&lt;/span>: &lt;span class="kt">AppActions&lt;/span>
 &lt;span class="p">)&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="nx">NotesListState&lt;/span> &lt;span class="p">{&lt;/span>
@@ -570,7 +570,7 @@ text-decoration: underline;
 &lt;span class="p">}&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>这是一个简单的函数，只有三个条件语句，分别对每个 action 做出反应。&lt;/p>
 &lt;p>接下来唯一要做的就是把 store 与 React 组件连接起来，Redux 有一个函数 connect 可以很方便的帮我们实现这个功能，它接收两个回调函数，第一个将我们的全局 state 转换为组件的 props，第二个回调函数定义组件可用的 actions，我们把第一个函数更新为以下形式：&lt;/p>
-&lt;div class="highlight">&lt;pre class="chroma">&lt;code class="language-typescript" data-lang="typescript">&lt;span class="kr">const&lt;/span> &lt;span class="nx">mapStateToProps&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="nx">state&lt;/span>: &lt;span class="kt">AppState&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">ownProps&lt;/span>: &lt;span class="kt">HomeViewProps&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-typescript" data-lang="typescript">&lt;span class="kr">const&lt;/span> &lt;span class="nx">mapStateToProps&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="nx">state&lt;/span>: &lt;span class="kt">AppState&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">ownProps&lt;/span>: &lt;span class="kt">HomeViewProps&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
 &lt;span class="k">return&lt;/span> &lt;span class="p">{&lt;/span>
 &lt;span class="nx">notes&lt;/span>: &lt;span class="kt">state.list.notes&lt;/span>&lt;span class="p">,&lt;/span>
 &lt;span class="nx">state&lt;/span>: &lt;span class="kt">state.list.state&lt;/span>&lt;span class="p">,&lt;/span>
@@ -590,7 +590,7 @@ text-decoration: underline;
 &lt;/ul>
 &lt;p>&lt;a class="link" href="https://redux.js.org/recipes/structuringreducers/normalizingstateshape" target="_blank" rel="noopener"
 >Redux 本身推荐的结构&lt;/a>如下：&lt;/p>
-&lt;div class="highlight">&lt;pre class="chroma">&lt;code class="language-typescript" data-lang="typescript">&lt;span class="p">{&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-typescript" data-lang="typescript">&lt;span class="p">{&lt;/span>
 &lt;span class="nx">entities&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="p">{&lt;/span>
 &lt;span class="nx">notes&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="p">{&lt;/span>
 &lt;span class="nx">byId&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="p">{&lt;/span>
@@ -626,7 +626,7 @@ text-decoration: underline;
 >Redux - Why normalize?&lt;/a>&lt;/p>
 &lt;h2 id="改良版">改良版&lt;/h2>
 &lt;p>让我们使用规范化重写一下，首先我们需要将 reducer 转换为 UI store，然后使用.map 函数将笔记映射到 ID 属性下：&lt;/p>
-&lt;div class="highlight">&lt;pre class="chroma">&lt;code class="language-typescript" data-lang="typescript">&lt;span class="kr">export&lt;/span> &lt;span class="kd">function&lt;/span> &lt;span class="nx">notesListReducer&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">state&lt;/span>: &lt;span class="kt">NotesListState&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">action&lt;/span>: &lt;span class="kt">AppActions&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="nx">NotesListState&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-typescript" data-lang="typescript">&lt;span class="kr">export&lt;/span> &lt;span class="kd">function&lt;/span> &lt;span class="nx">notesListReducer&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">state&lt;/span>: &lt;span class="kt">NotesListState&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">action&lt;/span>: &lt;span class="kt">AppActions&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="nx">NotesListState&lt;/span> &lt;span class="p">{&lt;/span>
 &lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="nx">action&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="kr">type&lt;/span> &lt;span class="o">===&lt;/span> &lt;span class="s1">&amp;#39;NOTES_FETCH&amp;#39;&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
 &lt;span class="k">return&lt;/span> &lt;span class="p">{&lt;/span>
 &lt;span class="p">...&lt;/span>&lt;span class="nx">state&lt;/span>&lt;span class="p">,&lt;/span>
@@ -652,7 +652,7 @@ text-decoration: underline;
 &lt;span class="k">return&lt;/span> &lt;span class="nx">state&lt;/span>&lt;span class="p">;&lt;/span>
 &lt;span class="p">}&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>接下来我们需要为数据 store 定义 type，我们可以通过以下方式实现：&lt;/p>
-&lt;div class="highlight">&lt;pre class="chroma">&lt;code class="language-typescript" data-lang="typescript">&lt;span class="kr">export&lt;/span> &lt;span class="kr">type&lt;/span> &lt;span class="nx">NotesDict&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-typescript" data-lang="typescript">&lt;span class="kr">export&lt;/span> &lt;span class="kr">type&lt;/span> &lt;span class="nx">NotesDict&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">{&lt;/span>
 &lt;span class="p">[&lt;/span>&lt;span class="nx">Key&lt;/span>: &lt;span class="kt">number&lt;/span>&lt;span class="p">]&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="nx">NoteModel&lt;/span>&lt;span class="p">;&lt;/span>
 &lt;span class="p">};&lt;/span>
 &lt;span class="kr">export&lt;/span> &lt;span class="kr">type&lt;/span> &lt;span class="nx">NotesDictState&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">{&lt;/span>
@@ -661,7 +661,7 @@ text-decoration: underline;
 &lt;span class="p">};&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>第一个 interface 是用 Typescript 的方式声明特定形式的对象，在这里我们定义 ById 为一个对象，以数字 id 作为键，NoteModel 作为属性。&lt;/p>
 &lt;p>现在我们重新编写一个 reducer 更新 store：&lt;/p>
-&lt;div class="highlight">&lt;pre class="chroma">&lt;code class="language-typescript" data-lang="typescript">&lt;span class="kr">export&lt;/span> &lt;span class="kd">function&lt;/span> &lt;span class="nx">notesDictReducer&lt;/span>&lt;span class="p">(&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-typescript" data-lang="typescript">&lt;span class="kr">export&lt;/span> &lt;span class="kd">function&lt;/span> &lt;span class="nx">notesDictReducer&lt;/span>&lt;span class="p">(&lt;/span>
 &lt;span class="nx">state&lt;/span>: &lt;span class="kt">NotesDictState&lt;/span>&lt;span class="p">,&lt;/span>
 &lt;span class="nx">action&lt;/span>: &lt;span class="kt">AppActions&lt;/span>
 &lt;span class="p">)&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="nx">NotesDictState&lt;/span> &lt;span class="p">{&lt;/span>
@@ -678,7 +678,7 @@ text-decoration: underline;
 &lt;span class="p">}&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>我们只对&lt;em>NOTES_FETCH_SUCCESS&lt;/em>这个 action 做出反应，因为这是提供新数据的唯一操作，然后我们构建以 id 作为键的对象和包含所有 id 的数组。&lt;/p>
 &lt;p>现在我们需要合并所有的 reducer 并且创建一个 main store 来保存这些数据：&lt;/p>
-&lt;div class="highlight">&lt;pre class="chroma">&lt;code class="language-typescript" data-lang="typescript">&lt;span class="kr">export&lt;/span> &lt;span class="kd">function&lt;/span> &lt;span class="nx">mainReducer&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">state&lt;/span>: &lt;span class="kt">AppState&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">defaultState&lt;/span>&lt;span class="p">(),&lt;/span> &lt;span class="nx">action&lt;/span>: &lt;span class="kt">Action&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-typescript" data-lang="typescript">&lt;span class="kr">export&lt;/span> &lt;span class="kd">function&lt;/span> &lt;span class="nx">mainReducer&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">state&lt;/span>: &lt;span class="kt">AppState&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">defaultState&lt;/span>&lt;span class="p">(),&lt;/span> &lt;span class="nx">action&lt;/span>: &lt;span class="kt">Action&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
 &lt;span class="k">return&lt;/span> &lt;span class="p">{&lt;/span>
 &lt;span class="nx">entities&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="p">{&lt;/span>
 &lt;span class="nx">notes&lt;/span>: &lt;span class="kt">notesDictReducer&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">state&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">entities&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">notes&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">action&lt;/span>&lt;span class="p">),&lt;/span>
@@ -690,7 +690,7 @@ text-decoration: underline;
 &lt;span class="p">}&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>在实际项目中你可能会使用&lt;em>combineReducers&lt;/em>来简化代码。&lt;/p>
 &lt;p>接下来唯一要做的事就是更新我们的连接器（connector），现在我们的 UI 笔记列表只包含 id，因此我们需要将它映射到实际的笔记对象：&lt;/p>
-&lt;div class="highlight">&lt;pre class="chroma">&lt;code class="language-typescript" data-lang="typescript">&lt;span class="kr">const&lt;/span> &lt;span class="nx">mapStateToProps&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="nx">state&lt;/span>: &lt;span class="kt">AppState&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">ownProps&lt;/span>: &lt;span class="kt">HomeViewProps&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-typescript" data-lang="typescript">&lt;span class="kr">const&lt;/span> &lt;span class="nx">mapStateToProps&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="nx">state&lt;/span>: &lt;span class="kt">AppState&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">ownProps&lt;/span>: &lt;span class="kt">HomeViewProps&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
 &lt;span class="k">return&lt;/span> &lt;span class="p">{&lt;/span>
 &lt;span class="nx">notes&lt;/span>: &lt;span class="kt">state.ui.list.notes.map&lt;/span>&lt;span class="p">(&lt;/span>
 &lt;span class="p">(&lt;/span>&lt;span class="nx">noteId&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="nx">state&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">entities&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">notes&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">byId&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="nx">noteId&lt;/span>&lt;span class="p">]&lt;/span>
@@ -701,14 +701,14 @@ text-decoration: underline;
 &lt;span class="p">};&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="添加搜索">添加搜索&lt;/h2>
 &lt;p>使用新架构添加搜索完全不是问题，首先，我们需要创建一个新的 action interface，看起来像下面这样：&lt;/p>
-&lt;div class="highlight">&lt;pre class="chroma">&lt;code class="language-typescript" data-lang="typescript">&lt;span class="kr">export&lt;/span> &lt;span class="kr">interface&lt;/span> &lt;span class="nx">IActionSearchNotes&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-typescript" data-lang="typescript">&lt;span class="kr">export&lt;/span> &lt;span class="kr">interface&lt;/span> &lt;span class="nx">IActionSearchNotes&lt;/span> &lt;span class="p">{&lt;/span>
 &lt;span class="kr">type&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="s2">&amp;#34;NOTES_SEARCH&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
 &lt;span class="nx">options&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="p">{&lt;/span>
 &lt;span class="nx">searchText&lt;/span>: &lt;span class="kt">string&lt;/span>&lt;span class="p">;&lt;/span>
 &lt;span class="p">};&lt;/span>
 &lt;span class="p">}&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>接下里我们需要更新 UI reducer：&lt;/p>
-&lt;div class="highlight">&lt;pre class="chroma">&lt;code class="language-typescript" data-lang="typescript">&lt;span class="kr">export&lt;/span> &lt;span class="kd">function&lt;/span> &lt;span class="nx">notesListReducer&lt;/span>&lt;span class="p">(&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-typescript" data-lang="typescript">&lt;span class="kr">export&lt;/span> &lt;span class="kd">function&lt;/span> &lt;span class="nx">notesListReducer&lt;/span>&lt;span class="p">(&lt;/span>
 &lt;span class="nx">state&lt;/span>: &lt;span class="kt">NotesListState&lt;/span>&lt;span class="p">,&lt;/span>
 &lt;span class="nx">action&lt;/span>: &lt;span class="kt">AppActions&lt;/span>&lt;span class="p">,&lt;/span>
 &lt;span class="nx">notes&lt;/span>: &lt;span class="kt">NotesDictState&lt;/span>
@@ -726,7 +726,7 @@ text-decoration: underline;
 &lt;span class="k">return&lt;/span> &lt;span class="nx">state&lt;/span>&lt;span class="p">;&lt;/span>
 &lt;span class="p">}&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>请注意，我们需要将数据 store 传递到 reducer 中，以便能够遍历所有元素并仅过滤出与搜索字符匹配的结果，你可以通过各种方式实现 filterByText 函数，下面是其中一种实现方式：&lt;/p>
-&lt;div class="highlight">&lt;pre class="chroma">&lt;code class="language-typescript" data-lang="typescript">&lt;span class="kd">function&lt;/span> &lt;span class="nx">filterByText&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">text&lt;/span>: &lt;span class="kt">string&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="nx">n&lt;/span>: &lt;span class="kt">NoteModel&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="kr">boolean&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-typescript" data-lang="typescript">&lt;span class="kd">function&lt;/span> &lt;span class="nx">filterByText&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">text&lt;/span>: &lt;span class="kt">string&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="nx">n&lt;/span>: &lt;span class="kt">NoteModel&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="kr">boolean&lt;/span> &lt;span class="p">{&lt;/span>
 &lt;span class="k">return&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="nx">note&lt;/span>: &lt;span class="kt">NoteModel&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="kr">boolean&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
 &lt;span class="k">return&lt;/span> &lt;span class="p">(&lt;/span>
 &lt;span class="nx">note&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">title&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">toLowerCase&lt;/span>&lt;span class="p">().&lt;/span>&lt;span class="nx">indexOf&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">text&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">&amp;gt;&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="mi">1&lt;/span> &lt;span class="o">||&lt;/span>
@@ -748,13 +748,13 @@ text-decoration: underline;
 &lt;p>有时候我想写个简单的 demo，但是我依然想要使用 ES6+的语法，还有 scss 以，node modules 包括一些其它的依赖，比如我要写 webgl 的 demo，我可能还需要引入一些 shader 文件，这个时候最先想到的肯定是 webpack 了，但是 webpack 的配置是真的麻烦，而我只是想写个 demo 而已，所以我把目光放到了 parcel 上，我 17 年就看到这货了，以为它能颠覆 webpack 呢，然并卵，我现在开始新项目还是得配置一大堆的 webpack 属性，但是在这种写个小 demo 的需求下，我想 parcel 应该能发挥它的价值。&lt;/p>
 &lt;h2 id="开始">开始&lt;/h2>
 &lt;h3 id="新建项目文件">新建项目文件&lt;/h3>
-&lt;div class="highlight">&lt;pre class="chroma">&lt;code class="language-bash" data-lang="bash">mkdir webgl-demo
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">mkdir webgl-demo
 &lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="初始化项目">初始化项目&lt;/h3>
-&lt;div class="highlight">&lt;pre class="chroma">&lt;code class="language-bash" data-lang="bash">npm init -y
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">npm init -y
 &lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="新建文件">新建文件&lt;/h3>
 &lt;p>&lt;img src="https://raw.githubusercontent.com/johnny19941216/storage-room/master/img/20190918203412.png" alt="" />&lt;/p>
 &lt;h3 id="在-indexhtml-文件中引入-indexjs-文件然后其他的依赖我们都会在-indexjs-文件中引入">在 index.html 文件中引入 index.js 文件，然后其他的依赖我们都会在 index.js 文件中引入&lt;/h3>
-&lt;div class="highlight">&lt;pre class="chroma">&lt;code class="language-html" data-lang="html">&lt;span class="cp">&amp;lt;!DOCTYPE html&amp;gt;&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-html" data-lang="html">&lt;span class="cp">&amp;lt;!DOCTYPE html&amp;gt;&lt;/span>
 &lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">html&lt;/span> &lt;span class="na">lang&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;en&amp;#34;&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
 &lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">head&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
 &lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">meta&lt;/span> &lt;span class="na">charset&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;UTF-8&amp;#34;&lt;/span> &lt;span class="p">/&amp;gt;&lt;/span>
@@ -768,13 +768,13 @@ text-decoration: underline;
 &lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">body&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
 &lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">html&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="在-indexjs-中编写代码引入依赖我这代码就不写了引入一下依赖吧">在 index.js 中编写代码，引入依赖,我这代码就不写了，引入一下依赖吧&lt;/h3>
-&lt;div class="highlight">&lt;pre class="chroma">&lt;code class="language-javascript" data-lang="javascript">&lt;span class="kr">import&lt;/span> &lt;span class="nx">fragShader&lt;/span> &lt;span class="nx">from&lt;/span> &lt;span class="s2">&amp;#34;./index.frag&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-javascript" data-lang="javascript">&lt;span class="kr">import&lt;/span> &lt;span class="nx">fragShader&lt;/span> &lt;span class="nx">from&lt;/span> &lt;span class="s2">&amp;#34;./index.frag&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
 &lt;span class="kr">import&lt;/span> &lt;span class="nx">vertShader&lt;/span> &lt;span class="nx">from&lt;/span> &lt;span class="s2">&amp;#34;./index.vert&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
 &lt;span class="kr">import&lt;/span> &lt;span class="s2">&amp;#34;./index.scss&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="安装-parcel可以全局安装也可以安装到项目我这就安装到项目了推荐安装到项目这样不会别人拿去不知道怎么用">安装 parcel,可以全局安装，也可以安装到项目，我这就安装到项目了,推荐安装到项目，这样不会别人拿去不知道怎么用&lt;/h3>
-&lt;div class="highlight">&lt;pre class="chroma">&lt;code class="language-bash" data-lang="bash">npm i parcel-bundler -D
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">npm i parcel-bundler -D
 &lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="启动项目实际上我把它加到-npm-script-里面了">启动项目，实际上我把它加到 npm script 里面了&lt;/h3>
-&lt;div class="highlight">&lt;pre class="chroma">&lt;code class="language-json" data-lang="json">&lt;span class="p">{&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-json" data-lang="json">&lt;span class="p">{&lt;/span>
 &lt;span class="nt">&amp;#34;name&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s2">&amp;#34;webgl-demo&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>
 &lt;span class="nt">&amp;#34;version&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s2">&amp;#34;1.0.0&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>
 &lt;span class="nt">&amp;#34;description&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s2">&amp;#34;&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>
@@ -795,7 +795,7 @@ text-decoration: underline;
 &lt;span class="p">}&lt;/span>
 &lt;span class="p">}&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>接着启动项目&lt;/p>
-&lt;div class="highlight">&lt;pre class="chroma">&lt;code class="language-bash" data-lang="bash">npm start
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">npm start
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>它就这么跑起来了，我真的是有点惊讶，我以为起码要自己安装一下其他的 loader 什么的，但是完全不需要，它会自己根据文件后缀，自动安装 loader 什么的，反正你是真的什么配置文件都不用写。&lt;/p>
 &lt;h2 id="结束">结束&lt;/h2>
 &lt;p>parcel 是真的强大，我以后终于可以随心所欲的写 demo 了，用我自己最喜欢的方式。&lt;/p></description></item><item><title>实现拉格朗日插值算法</title><link>https://jo-hnny.github.io/p/%E5%AE%9E%E7%8E%B0%E6%8B%89%E6%A0%BC%E6%9C%97%E6%97%A5%E6%8F%92%E5%80%BC%E7%AE%97%E6%B3%95/</link><pubDate>Wed, 18 Sep 2019 21:10:50 +0800</pubDate><guid>https://jo-hnny.github.io/p/%E5%AE%9E%E7%8E%B0%E6%8B%89%E6%A0%BC%E6%9C%97%E6%97%A5%E6%8F%92%E5%80%BC%E7%AE%97%E6%B3%95/</guid><description>&lt;img src="https://picsum.photos/seed/a06caa46404f48529f7fd8cba609add4/4096/2160" alt="Featured image of post 实现拉格朗日插值算法" />&lt;h1 id="实现拉格朗日插值算法">实现拉格朗日插值算法&lt;/h1>
@@ -808,7 +808,7 @@ text-decoration: underline;
 &lt;h2 id="示例">示例&lt;/h2>
 &lt;p>&lt;img src="https://raw.githubusercontent.com/johnny19941216/storage-room/master/img/20190918203341.png" alt="" />&lt;/p>
 &lt;h2 id="维基百科上交代的算是比较明白了然后我们要做的就是用代码去实现这个算法了下面给出我的实现">维基百科上交代的算是比较明白了，然后我们要做的就是用代码去实现这个算法了，下面给出我的实现&lt;/h2>
-&lt;div class="highlight">&lt;pre class="chroma">&lt;code class="language-javascript" data-lang="javascript">&lt;span class="kr">const&lt;/span> &lt;span class="nx">points&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">[&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-javascript" data-lang="javascript">&lt;span class="kr">const&lt;/span> &lt;span class="nx">points&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">[&lt;/span>
 &lt;span class="p">[&lt;/span>&lt;span class="mi">4&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">10&lt;/span>&lt;span class="p">],&lt;/span>
 &lt;span class="p">[&lt;/span>&lt;span class="mi">5&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mf">5.25&lt;/span>&lt;span class="p">],&lt;/span>
 &lt;span class="p">[&lt;/span>&lt;span class="mi">6&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">1&lt;/span>&lt;span class="p">],&lt;/span>
@@ -837,7 +837,7 @@ text-decoration: underline;
 &lt;p>推荐一个很好的 APP - 算法动画图解，以下解法都是参考该 APP 实现&lt;/p>
 &lt;h2 id="冒泡排序">冒泡排序&lt;/h2>
 &lt;p>我不太好把 APP 的动画贴上来，大家可以自己搜索一下，但是主要的思想就是，从数组末位开始，依次和上一位两两比较，将较小的数交换到左边，那么第一轮下来之后，最左侧就是该数组最小的值，接下来重复之前的动作，将第二小的数字排在左侧倒数第二个，重复数组长度的次数之后即完成排序，下面是我的实现：&lt;/p>
-&lt;div class="highlight">&lt;pre class="chroma">&lt;code class="language-javascript" data-lang="javascript">&lt;span class="c1">// 定义一个工具函数，用于交换数组中两个位置的值
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-javascript" data-lang="javascript">&lt;span class="c1">// 定义一个工具函数，用于交换数组中两个位置的值
 &lt;/span>&lt;span class="c1">&lt;/span>&lt;span class="kd">function&lt;/span> &lt;span class="nx">exchange&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">list&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">index1&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">index2&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
 &lt;span class="p">[&lt;/span>&lt;span class="nx">list&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="nx">index1&lt;/span>&lt;span class="p">],&lt;/span> &lt;span class="nx">list&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="nx">index2&lt;/span>&lt;span class="p">]]&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="nx">list&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="nx">index2&lt;/span>&lt;span class="p">],&lt;/span> &lt;span class="nx">list&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="nx">index1&lt;/span>&lt;span class="p">]];&lt;/span>
 &lt;span class="p">}&lt;/span>
@@ -856,7 +856,7 @@ text-decoration: underline;
 &lt;span class="p">}&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="快速排序">快速排序&lt;/h2>
 &lt;p>顾名思义，该排序的特点就是快，主要思想就是从原始数组中取一个基准值，然后比此值大的都放到右边，小的都放左边，然后取基准值左边的和右边的各为新数组，重复之前的步骤，也就是一种递归，最后直至左侧、右侧都只有一个元素或者 0 个元素，我的实现如下：&lt;/p>
-&lt;div class="highlight">&lt;pre class="chroma">&lt;code class="language-javascript" data-lang="javascript">&lt;span class="kd">function&lt;/span> &lt;span class="nx">quickSort&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">list&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-javascript" data-lang="javascript">&lt;span class="kd">function&lt;/span> &lt;span class="nx">quickSort&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">list&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
 &lt;span class="kr">const&lt;/span> &lt;span class="nx">len&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">list&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">length&lt;/span>&lt;span class="p">;&lt;/span>
 &lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="nx">len&lt;/span> &lt;span class="o">&amp;lt;&lt;/span> &lt;span class="mi">2&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="k">return&lt;/span> &lt;span class="nx">list&lt;/span>&lt;span class="p">;&lt;/span>
 &lt;span class="kr">const&lt;/span> &lt;span class="nx">left&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">[];&lt;/span>
@@ -870,12 +870,12 @@ text-decoration: underline;
 &lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="算法时间复杂度">算法时间复杂度&lt;/h2>
 &lt;p>算法有好有坏，那么我们怎么衡量算法的好怀呢？这里就引入了时间复杂度的概念，比如上边的冒泡排序的时间复杂度为 O(n^2),而快排的时间复杂度则为 O(n*Logn),那么这个复杂度到底是如何得来的,我在知乎上边找到一篇&lt;a class="link" href="https://www.zhihu.com/question/21387264/answer/422323594" target="_blank" rel="noopener"
 >回答&lt;/a>讲的很好&lt;/p></description></item><item><title>模拟实现call和apply以及bind</title><link>https://jo-hnny.github.io/p/%E6%A8%A1%E6%8B%9F%E5%AE%9E%E7%8E%B0call%E5%92%8Capply%E4%BB%A5%E5%8F%8Abind/</link><pubDate>Wed, 18 Sep 2019 21:08:52 +0800</pubDate><guid>https://jo-hnny.github.io/p/%E6%A8%A1%E6%8B%9F%E5%AE%9E%E7%8E%B0call%E5%92%8Capply%E4%BB%A5%E5%8F%8Abind/</guid><description>&lt;img src="https://picsum.photos/seed/42a9af59d3a34710adcf0d7b8bf521d9/4096/2160" alt="Featured image of post 模拟实现call和apply以及bind" />&lt;h2 id="模拟实现-callapply-我就不写了很相似">模拟实现 call，apply 我就不写了，很相似&lt;/h2>
-&lt;div class="highlight">&lt;pre class="chroma">&lt;code class="language-javascript" data-lang="javascript">&lt;span class="nb">Function&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">prototype&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">callMe&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="kd">function&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="nx">that&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="p">...&lt;/span>&lt;span class="nx">args&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-javascript" data-lang="javascript">&lt;span class="nb">Function&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">prototype&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">callMe&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="kd">function&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="nx">that&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="p">...&lt;/span>&lt;span class="nx">args&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
 &lt;span class="nx">that&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="k">this&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">name&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="k">this&lt;/span>&lt;span class="p">;&lt;/span>
 &lt;span class="nx">that&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="k">this&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">name&lt;/span>&lt;span class="p">](...&lt;/span>&lt;span class="nx">args&lt;/span>&lt;span class="p">);&lt;/span>
 &lt;span class="p">};&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="模拟实现-bind">模拟实现 bind&lt;/h2>
-&lt;div class="highlight">&lt;pre class="chroma">&lt;code class="language-javascript" data-lang="javascript">&lt;span class="nb">Function&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">prototype&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">bindMe&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="kd">function&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="nx">that&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="p">...&lt;/span>&lt;span class="nx">args&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-javascript" data-lang="javascript">&lt;span class="nb">Function&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">prototype&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">bindMe&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="kd">function&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="nx">that&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="p">...&lt;/span>&lt;span class="nx">args&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
 &lt;span class="nx">that&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="k">this&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">name&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="k">this&lt;/span>&lt;span class="p">;&lt;/span>
 &lt;span class="k">return&lt;/span> &lt;span class="kd">function&lt;/span> &lt;span class="p">()&lt;/span> &lt;span class="p">{&lt;/span>
 &lt;span class="nx">that&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="k">this&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">name&lt;/span>&lt;span class="p">](...&lt;/span>&lt;span class="nx">args&lt;/span>&lt;span class="p">);&lt;/span>
@@ -899,7 +899,7 @@ text-decoration: underline;
 &lt;h2 id="1首先需要安装依赖">1、首先需要安装依赖&lt;/h2>
 &lt;p>&lt;code>npm i supertest mocha chai --save-dev&lt;/code>&lt;/p>
 &lt;h2 id="2npm-script">2、npm script&lt;/h2>
-&lt;div class="highlight">&lt;pre class="chroma">&lt;code class="language-json" data-lang="json">&lt;span class="p">[&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-json" data-lang="json">&lt;span class="p">[&lt;/span>
 &lt;span class="s2">&amp;#34;scripts&amp;#34;&lt;/span>&lt;span class="err">:&lt;/span> &lt;span class="p">{&lt;/span>
 &lt;span class="nt">&amp;#34;start&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s2">&amp;#34;nodemon app.js&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>
 &lt;span class="nt">&amp;#34;test&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s2">&amp;#34;mocha&amp;#34;&lt;/span>
@@ -909,20 +909,20 @@ text-decoration: underline;
 &lt;p>Mocha 默认运行 test 子目录里面的测试脚本。所以，一般都会把测试脚本放在 test 目录里面，然后执行 mocha 就不需要参数了&lt;/p>
 &lt;h2 id="4编写测试文件">4、编写测试文件&lt;/h2>
 &lt;p>在我的项目中有一个关于 user 的 rest 接口，user 的数据模型大致如下：&lt;/p>
-&lt;div class="highlight">&lt;pre class="chroma">&lt;code class="language-json" data-lang="json">&lt;span class="p">{&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-json" data-lang="json">&lt;span class="p">{&lt;/span>
 &lt;span class="nt">&amp;#34;name&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s2">&amp;#34;wu&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>
 &lt;span class="nt">&amp;#34;age&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mi">24&lt;/span>&lt;span class="p">,&lt;/span>
 &lt;span class="nt">&amp;#34;likes&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="s2">&amp;#34;movie&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s2">&amp;#34;music&amp;#34;&lt;/span>&lt;span class="p">]&lt;/span>
 &lt;span class="p">}&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="41引入需要的模块">4.1、引入需要的模块&lt;/h3>
-&lt;div class="highlight">&lt;pre class="chroma">&lt;code class="language-js" data-lang="js">&lt;span class="kr">const&lt;/span> &lt;span class="nx">request&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">require&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;supertest&amp;#34;&lt;/span>&lt;span class="p">)(&lt;/span>&lt;span class="s2">&amp;#34;http://127.0.0.1:3000&amp;#34;&lt;/span>&lt;span class="p">);&lt;/span> &lt;span class="c1">//初始化supertest
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-js" data-lang="js">&lt;span class="kr">const&lt;/span> &lt;span class="nx">request&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">require&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;supertest&amp;#34;&lt;/span>&lt;span class="p">)(&lt;/span>&lt;span class="s2">&amp;#34;http://127.0.0.1:3000&amp;#34;&lt;/span>&lt;span class="p">);&lt;/span> &lt;span class="c1">//初始化supertest
 &lt;/span>&lt;span class="c1">&lt;/span>&lt;span class="kr">const&lt;/span> &lt;span class="nx">DB&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">require&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;../db&amp;#34;&lt;/span>&lt;span class="p">);&lt;/span>
 &lt;span class="kr">const&lt;/span> &lt;span class="nx">USERS&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="k">new&lt;/span> &lt;span class="nx">DB&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;users&amp;#34;&lt;/span>&lt;span class="p">);&lt;/span>
 &lt;span class="kr">const&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="nx">expect&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">require&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;chai&amp;#34;&lt;/span>&lt;span class="p">);&lt;/span> &lt;span class="c1">// 引入chai的expect断言
 &lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>关于&lt;code>chai&lt;/code>的使用可以去官网查看，比较简单&lt;/p>
 &lt;h3 id="42describe">4.2、describe&lt;/h3>
 &lt;p>对测试进行描述,可以进行嵌套&lt;/p>
-&lt;div class="highlight">&lt;pre class="chroma">&lt;code class="language-js" data-lang="js">&lt;span class="nx">describe&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;users api&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="p">()&lt;/span> &lt;span class="p">=&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-js" data-lang="js">&lt;span class="nx">describe&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;users api&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="p">()&lt;/span> &lt;span class="p">=&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
 &lt;span class="nx">describe&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;post: 新增一个用户&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="p">()&lt;/span> &lt;span class="p">=&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
 &lt;span class="p">})&lt;/span>
 &lt;span class="p">}&lt;/span>
@@ -930,7 +930,7 @@ text-decoration: underline;
 &lt;p>&lt;code>mocha&lt;/code>提供了四个钩子函数&lt;code>before、 after、afterEach 和 beforeEach&lt;/code>。&lt;br>
 其中&lt;code>before&lt;/code>钩子会在本区块的所有测试用例之前执行，&lt;code>beforeEach&lt;/code>钩子会在本区快的每个测试用例之前执行，&lt;code>after&lt;/code>与&lt;code>afterEach&lt;/code>同理。&lt;br>
 比如我想在所有测试用例开始之前清空数据库中 USERS 的数据。&lt;/p>
-&lt;div class="highlight">&lt;pre class="chroma">&lt;code class="language-js" data-lang="js">&lt;span class="nx">describe&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;users api&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="p">()&lt;/span> &lt;span class="p">=&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-js" data-lang="js">&lt;span class="nx">describe&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;users api&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="p">()&lt;/span> &lt;span class="p">=&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
 &lt;span class="nx">before&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="kr">async&lt;/span> &lt;span class="p">()&lt;/span> &lt;span class="p">=&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
 &lt;span class="k">this&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">user&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">{&lt;/span>
 &lt;span class="nx">name&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="s1">&amp;#39;walala&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span>
@@ -944,7 +944,7 @@ text-decoration: underline;
 Mocha 内置对 Promise 的支持，允许直接返回 Promise，等到它的状态改变，再执行断言，而不用显式调用 done 方法&lt;/p>
 &lt;h3 id="44it">4.4、it&lt;/h3>
 &lt;p>&lt;code>it&lt;/code>第一个参数是对预期结果的描述，第二个参数是一个 callback，是详细的测试行为。&lt;/p>
-&lt;div class="highlight">&lt;pre class="chroma">&lt;code class="language-js" data-lang="js">&lt;span class="nx">describe&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;users api&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="p">()&lt;/span> &lt;span class="p">=&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-js" data-lang="js">&lt;span class="nx">describe&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;users api&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="p">()&lt;/span> &lt;span class="p">=&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
 &lt;span class="nx">before&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="kr">async&lt;/span> &lt;span class="p">()&lt;/span> &lt;span class="p">=&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
 &lt;span class="k">this&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">user&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">{&lt;/span>
 &lt;span class="nx">name&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="s2">&amp;#34;walala&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>
@@ -1016,7 +1016,7 @@ Mocha 内置对 Promise 的支持，允许直接返回 Promise，等到它的状
 测试就完成了&lt;br>
 &lt;img src="https://jo-hnny.github.io/images/mocha-end.png" alt="测试完成" />&lt;/p></description></item><item><title>类的实现在es5与es6下的区别</title><link>https://jo-hnny.github.io/p/%E7%B1%BB%E7%9A%84%E5%AE%9E%E7%8E%B0%E5%9C%A8es5%E4%B8%8Ees6%E4%B8%8B%E7%9A%84%E5%8C%BA%E5%88%AB/</link><pubDate>Wed, 18 Sep 2019 21:00:58 +0800</pubDate><guid>https://jo-hnny.github.io/p/%E7%B1%BB%E7%9A%84%E5%AE%9E%E7%8E%B0%E5%9C%A8es5%E4%B8%8Ees6%E4%B8%8B%E7%9A%84%E5%8C%BA%E5%88%AB/</guid><description>&lt;img src="https://picsum.photos/seed/064c5fca816c45068b6c3cd7fa82dcf2/4096/2160" alt="Featured image of post 类的实现在es5与es6下的区别" />&lt;p>写完标题就后悔了，es6 的 class 只是语法糖，那么我要想知道 es5 的类的实现不是应该去看 es6 的源码吗？虽然这样，但是我的例子都已经写完了，我还是 po 上来吧，回头再看看 es6 是怎么实现的。&lt;/p>
 &lt;h2 id="首先看看-es6-的-class">首先看看 ES6 的 class&lt;/h2>
-&lt;div class="highlight">&lt;pre class="chroma">&lt;code class="language-js" data-lang="js">&lt;span class="kr">class&lt;/span> &lt;span class="nx">A&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-js" data-lang="js">&lt;span class="kr">class&lt;/span> &lt;span class="nx">A&lt;/span> &lt;span class="p">{&lt;/span>
 &lt;span class="nx">constructor&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">x&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
 &lt;span class="c1">// 构造函数
 &lt;/span>&lt;span class="c1">&lt;/span> &lt;span class="k">this&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">x&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">x&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="c1">// 为A的实例添加props属性
@@ -1047,7 +1047,7 @@ Mocha 内置对 Promise 的支持，允许直接返回 Promise，等到它的状
 &lt;/span>&lt;span class="c1">&lt;/span>&lt;span class="nx">console&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">b&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">y&lt;/span>&lt;span class="p">);&lt;/span> &lt;span class="c1">// 2
 &lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>写起来很简单&lt;/p>
 &lt;h2 id="es5-的实现">es5 的实现&lt;/h2>
-&lt;div class="highlight">&lt;pre class="chroma">&lt;code class="language-js" data-lang="js">&lt;span class="kd">function&lt;/span> &lt;span class="nx">A&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">x&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-js" data-lang="js">&lt;span class="kd">function&lt;/span> &lt;span class="nx">A&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">x&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
 &lt;span class="c1">// 构造方法
 &lt;/span>&lt;span class="c1">&lt;/span> &lt;span class="k">this&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">x&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">x&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="c1">// 为A的实例添加props属性
 &lt;/span>&lt;span class="c1">&lt;/span>&lt;span class="p">}&lt;/span>
@@ -1101,22 +1101,22 @@ Mocha 内置对 Promise 的支持，允许直接返回 Promise，等到它的状
 注：对于(2)，函数被赋值为函数定义的字符串，并不会对函数体中的JS代码做特殊处理(如运算等)，只是将函数体JS代码的扫描结果(字符串)保存在活动对象(变量对象)的与此函数名对应的属性上，在函数执行时再做进一步处理。
 &lt;/code>&lt;/pre>&lt;h2 id="2数组去重">2、数组去重&lt;/h2>
 &lt;p>这是一个很经典的问题，当然最简单的回答就是使用 Set&lt;/p>
-&lt;div class="highlight">&lt;pre class="chroma">&lt;code class="language-js" data-lang="js">&lt;span class="kr">const&lt;/span> &lt;span class="nx">array&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="mi">2&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="mi">3&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="mi">2&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="mi">4&lt;/span>&lt;span class="p">]&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-js" data-lang="js">&lt;span class="kr">const&lt;/span> &lt;span class="nx">array&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="mi">2&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="mi">3&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="mi">2&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="mi">4&lt;/span>&lt;span class="p">]&lt;/span>
 &lt;span class="p">[...&lt;/span> &lt;span class="k">new&lt;/span> &lt;span class="nx">Set&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">array&lt;/span>&lt;span class="p">)]&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>很明显面试官不想再听到这个回答，然后我说了另一种方式&lt;/p>
-&lt;div class="highlight">&lt;pre class="chroma">&lt;code class="language-js" data-lang="js">&lt;span class="kr">const&lt;/span> &lt;span class="nx">array&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">2&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">3&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">2&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">4&lt;/span>&lt;span class="p">];&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-js" data-lang="js">&lt;span class="kr">const&lt;/span> &lt;span class="nx">array&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">2&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">3&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">2&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">4&lt;/span>&lt;span class="p">];&lt;/span>
 &lt;span class="nx">array&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">reduce&lt;/span>&lt;span class="p">((&lt;/span>&lt;span class="nx">targetAarr&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">item&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">=&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
 &lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="o">!&lt;/span>&lt;span class="nx">targetAarr&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">includes&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">item&lt;/span>&lt;span class="p">))&lt;/span> &lt;span class="nx">targetAarr&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">push&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">item&lt;/span>&lt;span class="p">);&lt;/span>
 &lt;span class="k">return&lt;/span> &lt;span class="nx">targetAarr&lt;/span>&lt;span class="p">;&lt;/span>
 &lt;span class="p">},&lt;/span> &lt;span class="p">[]);&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>然后面试官还想听到其他的方法，我就又说了一个对象键值对的方式&lt;/p>
-&lt;div class="highlight">&lt;pre class="chroma">&lt;code class="language-js" data-lang="js">&lt;span class="kr">const&lt;/span> &lt;span class="nx">array&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">2&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">3&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">2&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">4&lt;/span>&lt;span class="p">];&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-js" data-lang="js">&lt;span class="kr">const&lt;/span> &lt;span class="nx">array&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">2&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">3&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">2&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">4&lt;/span>&lt;span class="p">];&lt;/span>
 &lt;span class="kr">const&lt;/span> &lt;span class="nx">targetObject&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">{};&lt;/span>
 &lt;span class="nx">array&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">forEach&lt;/span>&lt;span class="p">((&lt;/span>&lt;span class="nx">item&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">=&amp;gt;&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="nx">targetObject&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="nx">item&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">item&lt;/span>&lt;span class="p">));&lt;/span>
 &lt;span class="nb">Object&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">keys&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">targetObject&lt;/span>&lt;span class="p">);&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>很明显这种方式有个问题，不能区分&lt;code>'1'&lt;/code>和&lt;code>1&lt;/code>
 再问我，我说了可以先排序，再查看相邻项是否相同，代码实现大概是这个样子，这儿不得不说到 sort 方法传参的问题，我之前一直是有自定义 callback 来排序的，面试官问我如果不传参是什么情况，这个我还正没注意到原来可以不传参，当然我直觉是如果不传参，应该是从小到大排序，但是我不知道的东西当然不敢胡说，就直接回答了不知道，回来一看，不传参的话，元素按照转换为的字符串的各个字符的 Unicode 位点进行排序。&lt;/p>
-&lt;div class="highlight">&lt;pre class="chroma">&lt;code class="language-js" data-lang="js">&lt;span class="kr">const&lt;/span> &lt;span class="nx">array&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">2&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">3&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">2&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">4&lt;/span>&lt;span class="p">];&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-js" data-lang="js">&lt;span class="kr">const&lt;/span> &lt;span class="nx">array&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">2&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">3&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">2&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">4&lt;/span>&lt;span class="p">];&lt;/span>
 &lt;span class="kr">const&lt;/span> &lt;span class="nx">targetArr&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">array&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">sort&lt;/span>&lt;span class="p">();&lt;/span>
 &lt;span class="nx">targetArr&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">forEach&lt;/span>&lt;span class="p">((&lt;/span>&lt;span class="nx">item&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">index&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">arr&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">=&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
 &lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="nx">item&lt;/span> &lt;span class="o">===&lt;/span> &lt;span class="nx">arr&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="nx">index&lt;/span> &lt;span class="o">+&lt;/span> &lt;span class="mi">1&lt;/span>&lt;span class="p">])&lt;/span> &lt;span class="nx">arr&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">splice&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">index&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">1&lt;/span>&lt;span class="p">);&lt;/span>
@@ -1124,7 +1124,7 @@ Mocha 内置对 Promise 的支持，允许直接返回 Promise，等到它的状
 &lt;span class="nx">console&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">targetArr&lt;/span>&lt;span class="p">);&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>说到这了，我再记录一下数组和字符串常常弄混的几个方法，之前每次用到这几个方法都会打开 mdn 的文档，虽然我觉得这样没什么，但是万一被问到了呢，我感觉我回答的时候好像就有说混了的。&lt;br>
 1、&lt;code>Array.prototype.slice&lt;/code>:方法返回一个从开始到结束（不包括结束）选择的数组的一部分浅拷贝到一个新数组对象。且原始数组不会被修改。&lt;/p>
-&lt;div class="highlight">&lt;pre class="chroma">&lt;code class="language-js" data-lang="js">&lt;span class="nx">arr&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">slice&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-js" data-lang="js">&lt;span class="nx">arr&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">slice&lt;/span>&lt;span class="p">();&lt;/span>
 &lt;span class="c1">// [0, end]
 &lt;/span>&lt;span class="c1">&lt;/span>
 &lt;span class="nx">arr&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">slice&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">begin&lt;/span>&lt;span class="p">);&lt;/span>
@@ -1133,7 +1133,7 @@ Mocha 内置对 Promise 的支持，允许直接返回 Promise，等到它的状
 &lt;span class="nx">arr&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">slice&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">begin&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">end&lt;/span>&lt;span class="p">);&lt;/span>
 &lt;span class="c1">// [begin, end)
 &lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>2、&lt;code>Aarray.prototype.splice&lt;/code>:方法通过删除现有元素和/或添加新元素来更改一个数组的内容。&lt;/p>
-&lt;div class="highlight">&lt;pre class="chroma">&lt;code class="language-js" data-lang="js">&lt;span class="nx">array&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">splice&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">start&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-js" data-lang="js">&lt;span class="nx">array&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">splice&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">start&lt;/span>&lt;span class="p">)&lt;/span>
 &lt;span class="c1">// 删除start - end
 &lt;/span>&lt;span class="c1">&lt;/span>&lt;span class="nx">array&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">splice&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">start&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">deleteCount&lt;/span>&lt;span class="p">)&lt;/span>
 &lt;span class="c1">// 从start开始，包括start，删除deletecount个元素
@@ -1141,7 +1141,7 @@ Mocha 内置对 Promise 的支持，允许直接返回 Promise，等到它的状
 &lt;span class="nx">array&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">splice&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">start&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">deleteCount&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">item1&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">item2&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="p">...)&lt;/span>
 &lt;span class="c1">// 删除元素，并且从start位置开始添加若干个元素
 &lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>3、&lt;code>String.prototype.slice&lt;/code>:方法提取一个字符串的一部分，并返回一新的字符串。不修改原字符串。&lt;/p>
-&lt;div class="highlight">&lt;pre class="chroma">&lt;code class="language-js" data-lang="js">&lt;span class="nx">str&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">slice&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">beginSlice&lt;/span>&lt;span class="p">[,&lt;/span> &lt;span class="nx">endSlice&lt;/span>&lt;span class="p">])&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-js" data-lang="js">&lt;span class="nx">str&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">slice&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">beginSlice&lt;/span>&lt;span class="p">[,&lt;/span> &lt;span class="nx">endSlice&lt;/span>&lt;span class="p">])&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;code>beginSlice&lt;/code>&lt;br>
 从该索引（以 0 为基数）处开始提取原字符串中的字符。如果值为负数，会被当做 sourceLength + beginSlice 看待，这里的 sourceLength 是字符串的长度 (例如， 如果 beginSlice 是 -3 则看作是: sourceLength - 3)&lt;br>
 &lt;code>endSlice&lt;/code>&lt;br>
@@ -1152,13 +1152,13 @@ Mocha 内置对 Promise 的支持，允许直接返回 Promise，等到它的状
 &lt;h2 id="update-20180323">update 2018.03.23&lt;/h2>
 &lt;h2 id="3promise-返回值的问题">3、Promise 返回值的问题&lt;/h2>
 &lt;p>被面试官问到 promise 连续点 then，第二个点 then 会返回什么，我很自信的说如果自己不指定返回值的话是 resolve 的值，事实上我错了：&lt;/p>
-&lt;div class="highlight">&lt;pre class="chroma">&lt;code class="language-js" data-lang="js">&lt;span class="nb">Promise&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">resolve&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-js" data-lang="js">&lt;span class="nb">Promise&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">resolve&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="p">)&lt;/span>
 &lt;span class="p">.&lt;/span>&lt;span class="nx">then&lt;/span>&lt;span class="p">((&lt;/span>&lt;span class="nx">rsp&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">=&amp;gt;&lt;/span> &lt;span class="nx">console&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">rsp&lt;/span>&lt;span class="p">))&lt;/span> &lt;span class="c1">// 1
 &lt;/span>&lt;span class="c1">&lt;/span> &lt;span class="p">.&lt;/span>&lt;span class="nx">then&lt;/span>&lt;span class="p">((&lt;/span>&lt;span class="nx">rsp&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">=&amp;gt;&lt;/span> &lt;span class="nx">console&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">rsp&lt;/span>&lt;span class="p">));&lt;/span> &lt;span class="c1">// undefined
 &lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>so then 函数 callback 接收的值应该是上一个 thencallback 返回的值。&lt;/p>
 &lt;h2 id="4自己实现一个-co">4、自己实现一个 co&lt;/h2>
 &lt;p>下面是我一个简单的实现，主要就是要做到不断的递归调用：&lt;/p>
-&lt;div class="highlight">&lt;pre class="chroma">&lt;code class="language-js" data-lang="js">&lt;span class="kd">function&lt;/span> &lt;span class="nx">co&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">gn&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-js" data-lang="js">&lt;span class="kd">function&lt;/span> &lt;span class="nx">co&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">gn&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
 &lt;span class="nx">gn&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">gn&lt;/span>&lt;span class="p">();&lt;/span>
 &lt;span class="k">return&lt;/span> &lt;span class="k">new&lt;/span> &lt;span class="nb">Promise&lt;/span>&lt;span class="p">((&lt;/span>&lt;span class="nx">resolve&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">reject&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">=&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
 &lt;span class="nx">next&lt;/span>&lt;span class="p">();&lt;/span>
@@ -1180,7 +1180,7 @@ Mocha 内置对 Promise 的支持，允许直接返回 Promise，等到它的状
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>建议这种问题最好能让上机写一下代码，让我干想和在纸上写实在是有点困难。&lt;/p>
 &lt;h2 id="5prototype-的问题">5、prototype 的问题&lt;/h2>
 &lt;p>现在才回想起来自己全说错了，当时还信誓旦旦，真是羞愧,都是自己的惯性思维，没有注意到这次是直接修改了 prototype 的指向,说到底还是对象引用的问题&lt;/p>
-&lt;div class="highlight">&lt;pre class="chroma">&lt;code class="language-js" data-lang="js">&lt;span class="kd">function&lt;/span> &lt;span class="nx">A&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="p">{}&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-js" data-lang="js">&lt;span class="kd">function&lt;/span> &lt;span class="nx">A&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="p">{}&lt;/span>
 &lt;span class="kd">function&lt;/span> &lt;span class="nx">B&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="p">{&lt;/span>
 &lt;span class="k">this&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">hello&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s2">&amp;#34;hello&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
 &lt;span class="p">}&lt;/span>
@@ -1193,7 +1193,7 @@ Mocha 内置对 Promise 的支持，允许直接返回 Promise，等到它的状
 &lt;h2 id="6如何定义一个真正的常量">6、如何定义一个真正的常量&lt;/h2>
 &lt;p>大家都知道 ES6 引入了 const 表示常量，但是大家也知道 const 并不能防止用户修改对象的属性，添加、删除属性，那么如何定义一个真正意义上的常量，这个并没有什么技术上的含量（当然我也试着从其他方面去实现，像是代理之类的，现在先不说），打开红宝书，翻到高级技巧-防篡改对象，在这里给大家介绍了几个对象的方法：&lt;/p>
 &lt;h3 id="61不可扩展对象-即无法为对象添加属性">6.1、不可扩展对象-即无法为对象添加属性；&lt;/h3>
-&lt;div class="highlight">&lt;pre class="chroma">&lt;code class="language-js" data-lang="js">&lt;span class="kd">var&lt;/span> &lt;span class="nx">a&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="nx">name&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="s2">&amp;#34;johnny&amp;#34;&lt;/span> &lt;span class="p">};&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-js" data-lang="js">&lt;span class="kd">var&lt;/span> &lt;span class="nx">a&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="nx">name&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="s2">&amp;#34;johnny&amp;#34;&lt;/span> &lt;span class="p">};&lt;/span>
 &lt;span class="nb">Object&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">preventExtensions&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">a&lt;/span>&lt;span class="p">);&lt;/span>
 &lt;span class="nx">a&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">age&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">10&lt;/span>&lt;span class="p">;&lt;/span>
 &lt;span class="nx">console&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">a&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">age&lt;/span>&lt;span class="p">);&lt;/span> &lt;span class="c1">// undefined
@@ -1204,7 +1204,7 @@ Mocha 内置对 Promise 的支持，允许直接返回 Promise，等到它的状
 &lt;span class="k">delete&lt;/span> &lt;span class="nx">a&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">name&lt;/span>&lt;span class="p">;&lt;/span>
 &lt;span class="nx">console&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">a&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">name&lt;/span>&lt;span class="p">);&lt;/span> &lt;span class="c1">// undefined
 &lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="62密封的对象-不能添加删除属性">6.2、密封的对象-不能添加、删除属性：&lt;/h3>
-&lt;div class="highlight">&lt;pre class="chroma">&lt;code class="language-js" data-lang="js">&lt;span class="kd">var&lt;/span> &lt;span class="nx">a&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="nx">name&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="s2">&amp;#34;johnny&amp;#34;&lt;/span> &lt;span class="p">};&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-js" data-lang="js">&lt;span class="kd">var&lt;/span> &lt;span class="nx">a&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="nx">name&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="s2">&amp;#34;johnny&amp;#34;&lt;/span> &lt;span class="p">};&lt;/span>
 &lt;span class="nb">Object&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">seal&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">a&lt;/span>&lt;span class="p">);&lt;/span>
 &lt;span class="nx">a&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">age&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">10&lt;/span>&lt;span class="p">;&lt;/span>
 &lt;span class="nx">console&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">a&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">age&lt;/span>&lt;span class="p">);&lt;/span> &lt;span class="c1">// undefined
@@ -1215,7 +1215,7 @@ Mocha 内置对 Promise 的支持，允许直接返回 Promise，等到它的状
 &lt;span class="k">delete&lt;/span> &lt;span class="nx">a&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">name&lt;/span>&lt;span class="p">;&lt;/span>
 &lt;span class="nx">console&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">a&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">name&lt;/span>&lt;span class="p">);&lt;/span> &lt;span class="c1">// saber
 &lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="63冻结的对象-无法添加删除修改属性真正的常量">6.3、冻结的对象-无法添加、删除、修改属性，真正的常量：&lt;/h3>
-&lt;div class="highlight">&lt;pre class="chroma">&lt;code class="language-js" data-lang="js">&lt;span class="kd">var&lt;/span> &lt;span class="nx">a&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="nx">name&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="s2">&amp;#34;johnny&amp;#34;&lt;/span> &lt;span class="p">};&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-js" data-lang="js">&lt;span class="kd">var&lt;/span> &lt;span class="nx">a&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="nx">name&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="s2">&amp;#34;johnny&amp;#34;&lt;/span> &lt;span class="p">};&lt;/span>
 &lt;span class="nb">Object&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">freeze&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">a&lt;/span>&lt;span class="p">);&lt;/span>
 &lt;span class="nx">a&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">age&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">10&lt;/span>&lt;span class="p">;&lt;/span>
 &lt;span class="nx">console&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">a&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">age&lt;/span>&lt;span class="p">);&lt;/span> &lt;span class="c1">// undefined
@@ -1229,7 +1229,7 @@ Mocha 内置对 Promise 的支持，允许直接返回 Promise，等到它的状
 &lt;h2 id="1observable-可观察对象">1、Observable (可观察对象)&lt;/h2>
 &lt;p>RxJS 的核心概念就是观察者模式，也就是一个可观察对象会推送数据，一个观察者通过订阅接受这些数据，&lt;br>
 创建一个可观察对象&lt;/p>
-&lt;div class="highlight">&lt;pre class="chroma">&lt;code class="language-js" data-lang="js">&lt;span class="kd">var&lt;/span> &lt;span class="nx">observable&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">Rx&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">Observable&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">create&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="kd">function&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="nx">observer&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-js" data-lang="js">&lt;span class="kd">var&lt;/span> &lt;span class="nx">observable&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">Rx&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">Observable&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">create&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="kd">function&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="nx">observer&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
 &lt;span class="nx">observer&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">next&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="p">);&lt;/span>
 &lt;span class="nx">observer&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">next&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">2&lt;/span>&lt;span class="p">);&lt;/span>
 &lt;span class="nx">observer&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">next&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">3&lt;/span>&lt;span class="p">);&lt;/span>
@@ -1242,7 +1242,7 @@ Mocha 内置对 Promise 的支持，允许直接返回 Promise，等到它的状
 &lt;h2 id="2observer-观察者">2、Observer (观察者)&lt;/h2>
 &lt;p>观察者通过订阅来拉取可观察对象的数据。&lt;br>
 创建一个观察者&lt;/p>
-&lt;div class="highlight">&lt;pre class="chroma">&lt;code class="language-js" data-lang="js">&lt;span class="kd">var&lt;/span> &lt;span class="nx">observer&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-js" data-lang="js">&lt;span class="kd">var&lt;/span> &lt;span class="nx">observer&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">{&lt;/span>
 &lt;span class="nx">next&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="nx">x&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">=&amp;gt;&lt;/span> &lt;span class="nx">console&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;Observer got a next value: &amp;#34;&lt;/span> &lt;span class="o">+&lt;/span> &lt;span class="nx">x&lt;/span>&lt;span class="p">),&lt;/span>
 &lt;span class="nx">error&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="nx">err&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">=&amp;gt;&lt;/span> &lt;span class="nx">console&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">error&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;Observer got an error: &amp;#34;&lt;/span> &lt;span class="o">+&lt;/span> &lt;span class="nx">err&lt;/span>&lt;span class="p">),&lt;/span>
 &lt;span class="nx">complete&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="p">()&lt;/span> &lt;span class="p">=&amp;gt;&lt;/span> &lt;span class="nx">console&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;Observer got a complete notification&amp;#34;&lt;/span>&lt;span class="p">),&lt;/span>
@@ -1250,7 +1250,7 @@ Mocha 内置对 Promise 的支持，允许直接返回 Promise，等到它的状
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>观察者对象中你可以省略某一个函数，另外观察者也可以只是一个函数，那么它对应的就是 next 通知的处理方法。&lt;/p>
 &lt;h2 id="3subscription-订阅">3、Subscription (订阅)&lt;/h2>
 &lt;p>上边我们有了一个可观察对象和以一个可观察者，那么现在我们就需要使用订阅将他们联系起来&lt;/p>
-&lt;div class="highlight">&lt;pre class="chroma">&lt;code class="language-js" data-lang="js">&lt;span class="kd">var&lt;/span> &lt;span class="nx">subscription&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">observable&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">subscribe&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">observer&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-js" data-lang="js">&lt;span class="kd">var&lt;/span> &lt;span class="nx">subscription&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">observable&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">subscribe&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">observer&lt;/span>&lt;span class="p">);&lt;/span>
 &lt;span class="c1">// Observer got a next value: 1
 &lt;/span>&lt;span class="c1">// Observer got a next value: 2
 &lt;/span>&lt;span class="c1">// Observer got a next value: 3
@@ -1261,7 +1261,7 @@ Mocha 内置对 Promise 的支持，允许直接返回 Promise，等到它的状
 &lt;h2 id="4subject-主体">4、Subject (主体)&lt;/h2>
 &lt;p>subject 即是 Observable，又是 Observer&lt;/p>
 &lt;h3 id="作为-observable可观察对象">作为 Observable（可观察对象）&lt;/h3>
-&lt;div class="highlight">&lt;pre class="chroma">&lt;code class="language-js" data-lang="js">&lt;span class="kd">var&lt;/span> &lt;span class="nx">subject&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="k">new&lt;/span> &lt;span class="nx">Rx&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">Subject&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-js" data-lang="js">&lt;span class="kd">var&lt;/span> &lt;span class="nx">subject&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="k">new&lt;/span> &lt;span class="nx">Rx&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">Subject&lt;/span>&lt;span class="p">();&lt;/span>
 &lt;span class="nx">subject&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">subscribe&lt;/span>&lt;span class="p">({&lt;/span>
 &lt;span class="nx">next&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="nx">v&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">=&amp;gt;&lt;/span> &lt;span class="nx">console&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;observerA: &amp;#34;&lt;/span> &lt;span class="o">+&lt;/span> &lt;span class="nx">v&lt;/span>&lt;span class="p">),&lt;/span>
 &lt;span class="p">});&lt;/span>
@@ -1279,7 +1279,7 @@ Mocha 内置对 Promise 的支持，允许直接返回 Promise，等到它的状
 &lt;/span>&lt;span class="cm">observerB: 2
 &lt;/span>&lt;span class="cm">*/&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="作为-observer观察者">作为 Observer（观察者）&lt;/h3>
-&lt;div class="highlight">&lt;pre class="chroma">&lt;code class="language-js" data-lang="js">&lt;span class="kd">var&lt;/span> &lt;span class="nx">subject&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="k">new&lt;/span> &lt;span class="nx">Rx&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">Subject&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-js" data-lang="js">&lt;span class="kd">var&lt;/span> &lt;span class="nx">subject&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="k">new&lt;/span> &lt;span class="nx">Rx&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">Subject&lt;/span>&lt;span class="p">();&lt;/span>
 &lt;span class="nx">subject&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">subscribe&lt;/span>&lt;span class="p">({&lt;/span>
 &lt;span class="nx">next&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="nx">v&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">=&amp;gt;&lt;/span> &lt;span class="nx">console&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;observerA: &amp;#34;&lt;/span> &lt;span class="o">+&lt;/span> &lt;span class="nx">v&lt;/span>&lt;span class="p">),&lt;/span>
 &lt;span class="p">});&lt;/span>
@@ -1301,7 +1301,7 @@ Mocha 内置对 Promise 的支持，允许直接返回 Promise，等到它的状
 &lt;/span>&lt;span class="cm">*/&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="subject-的多播">subject 的多播&lt;/h3>
 &lt;p>多播这个我有点不知道怎么说，普通的 observable 是单播的，意思就是两个订阅是互不影响、独立的，一个订阅完毕之后再进行下一个订阅，但是 subject 是多播的，下边通过代码看一下他们的区别：&lt;/p>
-&lt;div class="highlight">&lt;pre class="chroma">&lt;code class="language-js" data-lang="js">&lt;span class="c1">// 普通observable单播
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-js" data-lang="js">&lt;span class="c1">// 普通observable单播
 &lt;/span>&lt;span class="c1">&lt;/span>&lt;span class="kr">const&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="nx">Observable&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">Subject&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">require&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;rxjs&amp;#34;&lt;/span>&lt;span class="p">);&lt;/span>
 &lt;span class="kr">const&lt;/span> &lt;span class="nx">observable&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">Observable&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">create&lt;/span>&lt;span class="p">((&lt;/span>&lt;span class="nx">observer&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">=&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
 &lt;span class="nx">observer&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">next&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="p">);&lt;/span>
@@ -1314,7 +1314,7 @@ Mocha 内置对 Promise 的支持，允许直接返回 Promise，等到它的状
 &lt;/span>&lt;span class="c1">// from observer b: 1
 &lt;/span>&lt;span class="c1">// from observer b: 2
 &lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>可以通过打印结果看出来，两个订阅是独立的，先打印完了 a，再打印完了 b。&lt;/p>
-&lt;div class="highlight">&lt;pre class="chroma">&lt;code class="language-js" data-lang="js">&lt;span class="kr">const&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="nx">Observable&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">Subject&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">require&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;rxjs&amp;#34;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-js" data-lang="js">&lt;span class="kr">const&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="nx">Observable&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">Subject&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">require&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;rxjs&amp;#34;&lt;/span>&lt;span class="p">);&lt;/span>
 &lt;span class="kr">const&lt;/span> &lt;span class="nx">subject&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="k">new&lt;/span> &lt;span class="nx">Subject&lt;/span>&lt;span class="p">();&lt;/span>
 &lt;span class="kr">const&lt;/span> &lt;span class="nx">observable&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">Observable&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">create&lt;/span>&lt;span class="p">((&lt;/span>&lt;span class="nx">observer&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">=&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
 &lt;span class="nx">observer&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">next&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="p">);&lt;/span>
@@ -1332,25 +1332,25 @@ Mocha 内置对 Promise 的支持，允许直接返回 Promise，等到它的状
 &lt;p>这一次的先讲到这吧，rxjs 的东西好多，头痛，下次更新 observable 的几种创建方法以及常用的操作符&lt;/p>
 &lt;h2 id="5今天补充-observable-的几种创建方法">5、今天补充 observable 的几种创建方法&lt;/h2>
 &lt;h3 id="来自一个或多个值">来自一个或多个值&lt;/h3>
-&lt;div class="highlight">&lt;pre class="chroma">&lt;code class="language-js" data-lang="js">&lt;span class="nx">Rx&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">Observable&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="k">of&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;foo&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s2">&amp;#34;bar&amp;#34;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-js" data-lang="js">&lt;span class="nx">Rx&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">Observable&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="k">of&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;foo&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s2">&amp;#34;bar&amp;#34;&lt;/span>&lt;span class="p">);&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="来自数组">来自数组&lt;/h3>
-&lt;div class="highlight">&lt;pre class="chroma">&lt;code class="language-js" data-lang="js">&lt;span class="nx">Rx&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">Observable&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">from&lt;/span>&lt;span class="p">([&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">2&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">3&lt;/span>&lt;span class="p">]);&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-js" data-lang="js">&lt;span class="nx">Rx&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">Observable&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">from&lt;/span>&lt;span class="p">([&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">2&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">3&lt;/span>&lt;span class="p">]);&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="来自事件">来自事件&lt;/h3>
-&lt;div class="highlight">&lt;pre class="chroma">&lt;code class="language-js" data-lang="js">&lt;span class="nx">Rx&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">Observable&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">fromEvent&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nb">document&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">querySelector&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;button&amp;#34;&lt;/span>&lt;span class="p">),&lt;/span> &lt;span class="s2">&amp;#34;click&amp;#34;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-js" data-lang="js">&lt;span class="nx">Rx&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">Observable&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">fromEvent&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nb">document&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">querySelector&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;button&amp;#34;&lt;/span>&lt;span class="p">),&lt;/span> &lt;span class="s2">&amp;#34;click&amp;#34;&lt;/span>&lt;span class="p">);&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="来自-promise">来自 promise&lt;/h3>
-&lt;div class="highlight">&lt;pre class="chroma">&lt;code class="language-js" data-lang="js">&lt;span class="nx">Rx&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">Observable&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">fromPromise&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">fetch&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;/users&amp;#34;&lt;/span>&lt;span class="p">));&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-js" data-lang="js">&lt;span class="nx">Rx&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">Observable&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">fromPromise&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">fetch&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;/users&amp;#34;&lt;/span>&lt;span class="p">));&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="来自回调函数">来自回调函数&lt;/h3>
-&lt;div class="highlight">&lt;pre class="chroma">&lt;code class="language-js" data-lang="js">&lt;span class="c1">// fs.exists = (path, cb(exists))
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-js" data-lang="js">&lt;span class="c1">// fs.exists = (path, cb(exists))
 &lt;/span>&lt;span class="c1">&lt;/span>&lt;span class="kr">const&lt;/span> &lt;span class="nx">exists&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">Rx&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">Observable&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">bindCallback&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">fs&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">exists&lt;/span>&lt;span class="p">);&lt;/span>
 &lt;span class="nx">exists&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;file.txt&amp;#34;&lt;/span>&lt;span class="p">).&lt;/span>&lt;span class="nx">subscribe&lt;/span>&lt;span class="p">((&lt;/span>&lt;span class="nx">exists&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">=&amp;gt;&lt;/span>
 &lt;span class="nx">console&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;Does file exist?&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">exists&lt;/span>&lt;span class="p">)&lt;/span>
 &lt;span class="p">);&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="自己创建">自己创建&lt;/h3>
 &lt;p>一开始讲到得 observable 都是这种自己创建得。&lt;/p>
-&lt;div class="highlight">&lt;pre class="chroma">&lt;code class="language-js" data-lang="js">&lt;span class="kd">var&lt;/span> &lt;span class="nx">myObservable&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="k">new&lt;/span> &lt;span class="nx">Rx&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">Subject&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-js" data-lang="js">&lt;span class="kd">var&lt;/span> &lt;span class="nx">myObservable&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="k">new&lt;/span> &lt;span class="nx">Rx&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">Subject&lt;/span>&lt;span class="p">();&lt;/span>
 &lt;span class="nx">myObservable&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">subscribe&lt;/span>&lt;span class="p">((&lt;/span>&lt;span class="nx">value&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">=&amp;gt;&lt;/span> &lt;span class="nx">console&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">value&lt;/span>&lt;span class="p">));&lt;/span>
 &lt;span class="nx">myObservable&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">next&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;foo&amp;#34;&lt;/span>&lt;span class="p">);&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre class="chroma">&lt;code class="language-js" data-lang="js">&lt;span class="kd">var&lt;/span> &lt;span class="nx">myObservable&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">Rx&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">Observable&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">create&lt;/span>&lt;span class="p">((&lt;/span>&lt;span class="nx">observer&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">=&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-js" data-lang="js">&lt;span class="kd">var&lt;/span> &lt;span class="nx">myObservable&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">Rx&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">Observable&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">create&lt;/span>&lt;span class="p">((&lt;/span>&lt;span class="nx">observer&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">=&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
 &lt;span class="nx">observer&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">next&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;foo&amp;#34;&lt;/span>&lt;span class="p">);&lt;/span>
 &lt;span class="nx">setTimeout&lt;/span>&lt;span class="p">(()&lt;/span> &lt;span class="p">=&amp;gt;&lt;/span> &lt;span class="nx">observer&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">next&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;bar&amp;#34;&lt;/span>&lt;span class="p">),&lt;/span> &lt;span class="mi">1000&lt;/span>&lt;span class="p">);&lt;/span>
 &lt;span class="p">});&lt;/span>
@@ -1369,7 +1369,7 @@ Mocha 内置对 Promise 的支持，允许直接返回 Promise，等到它的状
 &lt;p>区块链字面意思上理解就是区块构成的链，区块主要是存储着一些信息，其中不可或缺的有主体，即交易信息（当然本篇主要讲的是区块链货币，区块链也可能用于其他方面），
 时间戳，即区块生成时间，上一个区块的哈希值，本区块的哈希值（由上一个区块的哈希与本区块的数据共同生成，这样，当上一个区块被修改，那么本区块的哈希也需要被修改，才能与上一个区块的哈希对应起来，这样的话修改信息的人需要修改往后所有区块的信息）。&lt;br>
 &lt;code>其中值得注意的是在区块链中有一个挖矿的概念，这个挖矿就是通过计算使得本区快的哈希值满足预设的要求，比如说比特币就是要求生成的区块的哈希值的前几位是n个0，这个n就代表了挖矿的难度系数，比特币会随着比特币的产出不断加大这个难度系数，使得挖矿变的越来越难&lt;/code>&lt;/p>
-&lt;div class="highlight">&lt;pre class="chroma">&lt;code class="language-js" data-lang="js">&lt;span class="kr">class&lt;/span> &lt;span class="nx">Block&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-js" data-lang="js">&lt;span class="kr">class&lt;/span> &lt;span class="nx">Block&lt;/span> &lt;span class="p">{&lt;/span>
 &lt;span class="cm">/**
 &lt;/span>&lt;span class="cm"> *
 &lt;/span>&lt;span class="cm"> * @param {Number} timestamp 时间戳
@@ -1399,7 +1399,7 @@ Mocha 内置对 Promise 的支持，允许直接返回 Promise，等到它的状
 &lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="2blockchain-类">2、BlockChain 类&lt;/h2>
 &lt;p>BlockChain 类在生成实例的时候会把第一个元区块放入到链中，这个区块不存储任何有用的信息，
 使用者可以向实例中添加交易信息，实例会把这些交易信息暂存起来，直到矿工开始挖矿，挖矿成功后所暂存的交易信息就被写入了新生成的区块中，同时给予矿工的奖励会暂存起来，直到下一个区块生成，矿工就算真的收到了奖励。&lt;/p>
-&lt;div class="highlight">&lt;pre class="chroma">&lt;code class="language-js" data-lang="js">&lt;span class="kr">class&lt;/span> &lt;span class="nx">BlockChain&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-js" data-lang="js">&lt;span class="kr">class&lt;/span> &lt;span class="nx">BlockChain&lt;/span> &lt;span class="p">{&lt;/span>
 &lt;span class="nx">constructor&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="p">{&lt;/span>
 &lt;span class="k">this&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">chain&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="k">this&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">createGenesisBlock&lt;/span>&lt;span class="p">()];&lt;/span>
 &lt;span class="k">this&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">pendingTransactions&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">[];&lt;/span> &lt;span class="c1">// 暂存交易信息的地方
@@ -1456,7 +1456,7 @@ Mocha 内置对 Promise 的支持，允许直接返回 Promise，等到它的状
 &lt;span class="p">}&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="3transaction-类">3、Transaction 类&lt;/h2>
 &lt;p>Transaction 类没什么好说的，就是生成交易信息。&lt;/p>
-&lt;div class="highlight">&lt;pre class="chroma">&lt;code class="language-js" data-lang="js">&lt;span class="kr">class&lt;/span> &lt;span class="nx">Transaction&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-js" data-lang="js">&lt;span class="kr">class&lt;/span> &lt;span class="nx">Transaction&lt;/span> &lt;span class="p">{&lt;/span>
 &lt;span class="nx">constructor&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">fromAddress&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">toAddress&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">amount&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
 &lt;span class="nb">Object&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">assign&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="k">this&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="p">{&lt;/span>
 &lt;span class="nx">fromAddress&lt;/span>&lt;span class="p">,&lt;/span>
@@ -1469,7 +1469,7 @@ Mocha 内置对 Promise 的支持，允许直接返回 Promise，等到它的状
 &lt;p>前言还是要搭一下后语的，上面只是用代码来讲了一下区块链的原理，真正的区块链细节要更加复杂，也还有其它的东西，比如说很重要的 p2p，对 p2p 还是很有兴趣的，后面有时间了再学习一下。&lt;br>
 另外，我还是很看好区块链的，它的作用远不止被用来圈钱割韭菜，我也买过 EOS，当然是亏了，但是我还是很看好它作为区块链平台的出发点。&lt;/p>
 &lt;h2 id="添一个所有代码代码不多就不新建仓库了">添一个所有代码（代码不多就不新建仓库了）&lt;/h2>
-&lt;div class="highlight">&lt;pre class="chroma">&lt;code class="language-js" data-lang="js">&lt;span class="kr">const&lt;/span> &lt;span class="nx">crypto&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">require&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;crypto&amp;#34;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-js" data-lang="js">&lt;span class="kr">const&lt;/span> &lt;span class="nx">crypto&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">require&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;crypto&amp;#34;&lt;/span>&lt;span class="p">);&lt;/span>
 &lt;span class="kr">class&lt;/span> &lt;span class="nx">Block&lt;/span> &lt;span class="p">{&lt;/span>
 &lt;span class="cm">/**
 &lt;/span>&lt;span class="cm"> *
@@ -1577,7 +1577,7 @@ Mocha 内置对 Promise 的支持，允许直接返回 Promise，等到它的状
 &lt;h3 id="2prototype">2、&lt;code>prototype&lt;/code>&lt;/h3>
 &lt;p>只有函数才有&lt;code>prototype&lt;/code>属性，当你创建一个函数的时候，JS 会为这个函数添加&lt;code>prototype&lt;/code>属性，值是一个有&lt;code>constructor&lt;/code>属性的&lt;code>对象&lt;/code>,(对象两个字很关键，这意味着这个对象也有&lt;code>__proto__&lt;/code>属性,它指向创建它的构造函数即&lt;code>Object&lt;/code>的&lt;code>prototype&lt;/code>。)&lt;/p>
 &lt;h2 id="接下来看看代码">接下来看看代码&lt;/h2>
-&lt;div class="highlight">&lt;pre class="chroma">&lt;code class="language-js" data-lang="js">&lt;span class="kd">function&lt;/span> &lt;span class="nx">A&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="p">{}&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-js" data-lang="js">&lt;span class="kd">function&lt;/span> &lt;span class="nx">A&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="p">{}&lt;/span>
 &lt;span class="kd">var&lt;/span> &lt;span class="nx">a&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="k">new&lt;/span> &lt;span class="nx">A&lt;/span>&lt;span class="p">();&lt;/span>
 &lt;span class="nx">console&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">A&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="mi">__&lt;/span>&lt;span class="nx">proto__&lt;/span> &lt;span class="o">===&lt;/span> &lt;span class="nb">Function&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">prototype&lt;/span>&lt;span class="p">);&lt;/span> &lt;span class="c1">// true
 &lt;/span>&lt;span class="c1">&lt;/span>
@@ -1585,22 +1585,22 @@ Mocha 内置对 Promise 的支持，允许直接返回 Promise，等到它的状
 &lt;/span>&lt;span class="c1">&lt;/span>
 &lt;span class="nx">console&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">a&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="mi">__&lt;/span>&lt;span class="nx">proto__&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="mi">__&lt;/span>&lt;span class="nx">proto__&lt;/span> &lt;span class="o">===&lt;/span> &lt;span class="nb">Object&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">prototype&lt;/span>&lt;span class="p">);&lt;/span> &lt;span class="c1">// true
 &lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>然后同理我觉得下边的也应该成立&lt;/p>
-&lt;div class="highlight">&lt;pre class="chroma">&lt;code class="language-js" data-lang="js">&lt;span class="nx">console&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nb">Object&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">prototype&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="mi">__&lt;/span>&lt;span class="nx">proto__&lt;/span> &lt;span class="o">===&lt;/span> &lt;span class="nb">Object&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">prototype&lt;/span>&lt;span class="p">);&lt;/span> &lt;span class="c1">// false
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-js" data-lang="js">&lt;span class="nx">console&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nb">Object&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">prototype&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="mi">__&lt;/span>&lt;span class="nx">proto__&lt;/span> &lt;span class="o">===&lt;/span> &lt;span class="nb">Object&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">prototype&lt;/span>&lt;span class="p">);&lt;/span> &lt;span class="c1">// false
 &lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>但是事实很不幸，得到的是 false.&lt;/p>
-&lt;div class="highlight">&lt;pre class="chroma">&lt;code class="language-js" data-lang="js">&lt;span class="nx">console&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nb">Object&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">prototype&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="mi">__&lt;/span>&lt;span class="nx">proto__&lt;/span>&lt;span class="p">);&lt;/span> &lt;span class="c1">// null
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-js" data-lang="js">&lt;span class="nx">console&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nb">Object&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">prototype&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="mi">__&lt;/span>&lt;span class="nx">proto__&lt;/span>&lt;span class="p">);&lt;/span> &lt;span class="c1">// null
 &lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>打印一看是 null，然后再想想，其实 js 就是这样设计的而已，要不这个原型链不得没完没了了嘛,你想想有个对象找一个属性，它找到&lt;code>Object.prototype&lt;/code>就应该到头了，要不它就会一直找下去，无尽循环。&lt;/p>
 &lt;h2 id="然后我们看一个问题就是function与object的问题">然后我们看一个问题，就是&lt;code>Function&lt;/code>与&lt;code>Object&lt;/code>的问题&lt;/h2>
-&lt;div class="highlight">&lt;pre class="chroma">&lt;code class="language-js" data-lang="js">&lt;span class="nx">console&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nb">Object&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="mi">__&lt;/span>&lt;span class="nx">proto__&lt;/span> &lt;span class="o">===&lt;/span> &lt;span class="nb">Function&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">prototype&lt;/span>&lt;span class="p">);&lt;/span> &lt;span class="c1">// true
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-js" data-lang="js">&lt;span class="nx">console&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nb">Object&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="mi">__&lt;/span>&lt;span class="nx">proto__&lt;/span> &lt;span class="o">===&lt;/span> &lt;span class="nb">Function&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">prototype&lt;/span>&lt;span class="p">);&lt;/span> &lt;span class="c1">// true
 &lt;/span>&lt;span class="c1">&lt;/span>
 &lt;span class="nx">console&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nb">Function&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="mi">__&lt;/span>&lt;span class="nx">proto__&lt;/span> &lt;span class="o">===&lt;/span> &lt;span class="nb">Function&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">prototype&lt;/span>&lt;span class="p">);&lt;/span> &lt;span class="c1">// true
 &lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>可以看出&lt;code>Object&lt;/code>是由&lt;code>Function&lt;/code>构造出来的，而&lt;code>Function&lt;/code>是由&lt;code>Function&lt;/code>自己构造出来的，这个听起来好奇怪，自己构造自己。&lt;/p>
 &lt;h2 id="constructor">&lt;code>constructor&lt;/code>&lt;/h2>
 &lt;p>下面再看看&lt;code>prototype.constructor&lt;/code>&lt;/p>
-&lt;div class="highlight">&lt;pre class="chroma">&lt;code class="language-js" data-lang="js">&lt;span class="kd">function&lt;/span> &lt;span class="nx">A&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="p">{}&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-js" data-lang="js">&lt;span class="kd">function&lt;/span> &lt;span class="nx">A&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="p">{}&lt;/span>
 &lt;span class="kd">var&lt;/span> &lt;span class="nx">a&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="k">new&lt;/span> &lt;span class="nx">A&lt;/span>&lt;span class="p">();&lt;/span>
 &lt;span class="nx">console&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">A&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">prototype&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">constructor&lt;/span> &lt;span class="o">===&lt;/span> &lt;span class="nx">A&lt;/span>&lt;span class="p">);&lt;/span> &lt;span class="c1">// true
 &lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>函数的&lt;code>prototype.constructor&lt;/code>指向了自己，除此之外，我目前还没发现这个有什么用。&lt;/p>
-&lt;div class="highlight">&lt;pre class="chroma">&lt;code class="language-js" data-lang="js">&lt;span class="kd">function&lt;/span> &lt;span class="nx">A&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="p">{}&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-js" data-lang="js">&lt;span class="kd">function&lt;/span> &lt;span class="nx">A&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="p">{}&lt;/span>
 &lt;span class="kd">var&lt;/span> &lt;span class="nx">a&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="k">new&lt;/span> &lt;span class="nx">A&lt;/span>&lt;span class="p">();&lt;/span>
 &lt;span class="nx">console&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">A&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">prototype&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">constructor&lt;/span> &lt;span class="o">===&lt;/span> &lt;span class="nx">A&lt;/span>&lt;span class="p">);&lt;/span> &lt;span class="c1">// true
 &lt;/span>&lt;span class="c1">&lt;/span>
@@ -1659,14 +1659,14 @@ package.json
 &lt;h4 id="各浏览器对-fetch-的支持情况">各浏览器对 fetch 的支持情况：&lt;/h4>
 &lt;p>&lt;img src="https://raw.githubusercontent.com/johnny19941216/storage-room/master//img/can_i_use_fetch.png" alt="can i use fetch" />&lt;/p>
 &lt;h4 id="httpfetchapijs">/http/fetchApi.js&lt;/h4>
-&lt;div class="highlight">&lt;pre class="chroma">&lt;code class="language-js" data-lang="js">&lt;span class="kr">export&lt;/span> &lt;span class="k">default&lt;/span> &lt;span class="nx">fetchApi&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="nx">url&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">=&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-js" data-lang="js">&lt;span class="kr">export&lt;/span> &lt;span class="k">default&lt;/span> &lt;span class="nx">fetchApi&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="nx">url&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">=&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
 &lt;span class="k">return&lt;/span> &lt;span class="nx">fetch&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">url&lt;/span>&lt;span class="p">).&lt;/span>&lt;span class="nx">then&lt;/span>&lt;span class="p">((&lt;/span>&lt;span class="nx">rsp&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">=&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
 &lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="nx">rsp&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">ok&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="k">return&lt;/span> &lt;span class="nx">rsp&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">json&lt;/span>&lt;span class="p">();&lt;/span>
 &lt;span class="k">return&lt;/span> &lt;span class="nb">Promise&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">reject&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">rsp&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">json&lt;/span>&lt;span class="p">());&lt;/span>
 &lt;span class="p">});&lt;/span>
 &lt;span class="p">};&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="httpapijs">/http/api.js&lt;/h4>
-&lt;div class="highlight">&lt;pre class="chroma">&lt;code class="language-js" data-lang="js">&lt;span class="kr">import&lt;/span> &lt;span class="nx">fetchApi&lt;/span> &lt;span class="nx">from&lt;/span> &lt;span class="s2">&amp;#34;./fetchApi&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-js" data-lang="js">&lt;span class="kr">import&lt;/span> &lt;span class="nx">fetchApi&lt;/span> &lt;span class="nx">from&lt;/span> &lt;span class="s2">&amp;#34;./fetchApi&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
 &lt;span class="kr">const&lt;/span> &lt;span class="nx">baseUrl&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s2">&amp;#34;https://api.douban.com/v2/movie/&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
 &lt;span class="nx">exports&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">movieInfo&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="nx">id&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">=&amp;gt;&lt;/span> &lt;span class="nx">fetchApi&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="sb">`&lt;/span>&lt;span class="si">${&lt;/span>&lt;span class="nx">baseUrl&lt;/span>&lt;span class="si">}&lt;/span>&lt;span class="sb">subject/&lt;/span>&lt;span class="si">${&lt;/span>&lt;span class="nx">id&lt;/span>&lt;span class="si">}&lt;/span>&lt;span class="sb">`&lt;/span>&lt;span class="p">);&lt;/span>
 &lt;span class="nx">exports&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">actorInfo&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="nx">id&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">=&amp;gt;&lt;/span> &lt;span class="nx">fetchApi&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="sb">`&lt;/span>&lt;span class="si">${&lt;/span>&lt;span class="nx">baseUrl&lt;/span>&lt;span class="si">}&lt;/span>&lt;span class="sb">celebrity/&lt;/span>&lt;span class="si">${&lt;/span>&lt;span class="nx">id&lt;/span>&lt;span class="si">}&lt;/span>&lt;span class="sb">`&lt;/span>&lt;span class="p">);&lt;/span>
@@ -1682,7 +1682,7 @@ package.json
 &lt;h4 id="首先需要一个卡片组件来展示最基本的电影信息---电影名称海报评分-componentsmoviecardjs">首先需要一个卡片组件来展示最基本的电影信息&amp;mdash;电影名称、海报、评分 /components/MovieCard.js&lt;/h4>
 &lt;p>这里用到了一个组件库&lt;a class="link" href="https://react-native-training.github.io/react-native-elements/" target="_blank" rel="noopener"
 >react-native-elements&lt;/a>&lt;/p>
-&lt;div class="highlight">&lt;pre class="chroma">&lt;code class="language-jsx" data-lang="jsx">&lt;span class="kr">import&lt;/span> &lt;span class="nx">React&lt;/span> &lt;span class="nx">from&lt;/span> &lt;span class="s2">&amp;#34;react&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-jsx" data-lang="jsx">&lt;span class="kr">import&lt;/span> &lt;span class="nx">React&lt;/span> &lt;span class="nx">from&lt;/span> &lt;span class="s2">&amp;#34;react&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
 &lt;span class="kr">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="nx">StyleSheet&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">Text&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">Image&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="nx">from&lt;/span> &lt;span class="s2">&amp;#34;react-native&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
 &lt;span class="kr">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="nx">Card&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">Rating&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="nx">from&lt;/span> &lt;span class="s2">&amp;#34;react-native-elements&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
 &lt;span class="kr">export&lt;/span> &lt;span class="k">default&lt;/span> &lt;span class="kr">class&lt;/span> &lt;span class="nx">MovieCard&lt;/span> &lt;span class="kr">extends&lt;/span> &lt;span class="nx">React&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">Component&lt;/span> &lt;span class="p">{&lt;/span>
@@ -1716,7 +1716,7 @@ package.json
 &lt;span class="p">},&lt;/span>
 &lt;span class="p">});&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="卡片列表组件-componentslistpagejs">卡片列表组件 /components/ListPage.js&lt;/h4>
-&lt;div class="highlight">&lt;pre class="chroma">&lt;code class="language-jsx" data-lang="jsx">&lt;span class="kr">import&lt;/span> &lt;span class="nx">React&lt;/span> &lt;span class="nx">from&lt;/span> &lt;span class="s2">&amp;#34;react&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-jsx" data-lang="jsx">&lt;span class="kr">import&lt;/span> &lt;span class="nx">React&lt;/span> &lt;span class="nx">from&lt;/span> &lt;span class="s2">&amp;#34;react&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
 &lt;span class="kr">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="nx">FlatList&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">TouchableHighlight&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">View&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">StyleSheet&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="nx">from&lt;/span> &lt;span class="s2">&amp;#34;react-native&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
 &lt;span class="kr">import&lt;/span> &lt;span class="nx">MovieCard&lt;/span> &lt;span class="nx">from&lt;/span> &lt;span class="s2">&amp;#34;./MovieCard&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
 &lt;span class="kr">export&lt;/span> &lt;span class="k">default&lt;/span> &lt;span class="kr">class&lt;/span> &lt;span class="nx">ListPage&lt;/span> &lt;span class="kr">extends&lt;/span> &lt;span class="nx">React&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">Component&lt;/span> &lt;span class="p">{&lt;/span>
@@ -1752,7 +1752,7 @@ package.json
 &lt;span class="p">}&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="4页面-views">4、页面 /views&lt;/h3>
 &lt;h4 id="viewstop250-viewsusboxjs-viewsshowingjs-viewscomingsoonjs-这几个页面的逻辑是相似的只是数据不一样而已就只看一下-top250js-的代码">/views/Top250 /views/UsBox.js /views/Showing.js /views/ComingSoon.js 这几个页面的逻辑是相似的，只是数据不一样而已,就只看一下 Top250.js 的代码&lt;/h4>
-&lt;div class="highlight">&lt;pre class="chroma">&lt;code class="language-jsx" data-lang="jsx">&lt;span class="kr">import&lt;/span> &lt;span class="nx">React&lt;/span> &lt;span class="nx">from&lt;/span> &lt;span class="s2">&amp;#34;react&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-jsx" data-lang="jsx">&lt;span class="kr">import&lt;/span> &lt;span class="nx">React&lt;/span> &lt;span class="nx">from&lt;/span> &lt;span class="s2">&amp;#34;react&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
 &lt;span class="kr">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="nx">top250&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="nx">from&lt;/span> &lt;span class="s2">&amp;#34;../http/api&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
 &lt;span class="kr">import&lt;/span> &lt;span class="nx">ListPage&lt;/span> &lt;span class="nx">from&lt;/span> &lt;span class="s2">&amp;#34;../components/ListPage&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
 &lt;span class="kr">export&lt;/span> &lt;span class="k">default&lt;/span> &lt;span class="kr">class&lt;/span> &lt;span class="nx">Top250&lt;/span> &lt;span class="kr">extends&lt;/span> &lt;span class="nx">React&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">Component&lt;/span> &lt;span class="p">{&lt;/span>
@@ -1788,7 +1788,7 @@ package.json
 &lt;span class="p">}&lt;/span>
 &lt;span class="p">}&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="搜索页面-viewshomejs">搜索页面 /views/Home.js&lt;/h4>
-&lt;div class="highlight">&lt;pre class="chroma">&lt;code class="language-jsx" data-lang="jsx">&lt;span class="kr">import&lt;/span> &lt;span class="nx">React&lt;/span> &lt;span class="nx">from&lt;/span> &lt;span class="s2">&amp;#34;react&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-jsx" data-lang="jsx">&lt;span class="kr">import&lt;/span> &lt;span class="nx">React&lt;/span> &lt;span class="nx">from&lt;/span> &lt;span class="s2">&amp;#34;react&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
 &lt;span class="kr">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="nx">StyleSheet&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">View&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="nx">from&lt;/span> &lt;span class="s2">&amp;#34;react-native&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
 &lt;span class="kr">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="nx">SearchBar&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="nx">from&lt;/span> &lt;span class="s2">&amp;#34;react-native-elements&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
 &lt;span class="kr">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="nx">search&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="nx">from&lt;/span> &lt;span class="s2">&amp;#34;../http/api&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
@@ -1831,7 +1831,7 @@ package.json
 &lt;span class="p">}&lt;/span>
 &lt;span class="p">}&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="5导航实现">5、导航实现&lt;/h3>
-&lt;div class="highlight">&lt;pre class="chroma">&lt;code class="language-jsx" data-lang="jsx">&lt;span class="kr">import&lt;/span> &lt;span class="nx">React&lt;/span> &lt;span class="nx">from&lt;/span> &lt;span class="s2">&amp;#34;react&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-jsx" data-lang="jsx">&lt;span class="kr">import&lt;/span> &lt;span class="nx">React&lt;/span> &lt;span class="nx">from&lt;/span> &lt;span class="s2">&amp;#34;react&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
 &lt;span class="kr">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="nx">TabNavigator&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">StackNavigator&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="nx">from&lt;/span> &lt;span class="s2">&amp;#34;react-navigation&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
 &lt;span class="kr">import&lt;/span> &lt;span class="nx">Home&lt;/span> &lt;span class="nx">from&lt;/span> &lt;span class="s2">&amp;#34;./views/Home&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
 &lt;span class="kr">import&lt;/span> &lt;span class="nx">Top250&lt;/span> &lt;span class="nx">from&lt;/span> &lt;span class="s2">&amp;#34;./views/Top250&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
@@ -1882,17 +1882,17 @@ package.json
 &lt;span class="p">);&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div></description></item><item><title>随笔</title><link>https://jo-hnny.github.io/p/%E9%9A%8F%E7%AC%94/</link><pubDate>Wed, 18 Sep 2019 20:50:02 +0800</pubDate><guid>https://jo-hnny.github.io/p/%E9%9A%8F%E7%AC%94/</guid><description>&lt;img src="https://picsum.photos/seed/a0fe4c2dd95249899623f35136c16e97/4096/2160" alt="Featured image of post 随笔" />&lt;h2 id="1得到一个固定长度的非空的数组">1、得到一个固定长度的非空的数组&lt;/h2>
 &lt;p>比如我需要一个数组，元素是 1-10，首先我不想用直接手写一个数组，以前的实现方式:&lt;/p>
-&lt;div class="highlight">&lt;pre class="chroma">&lt;code class="language-js" data-lang="js">&lt;span class="k">new&lt;/span> &lt;span class="nb">Array&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">10&lt;/span>&lt;span class="p">).&lt;/span>&lt;span class="nx">fill&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">0&lt;/span>&lt;span class="p">).&lt;/span>&lt;span class="nx">map&lt;/span>&lt;span class="p">((&lt;/span>&lt;span class="mi">_&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">index&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">=&amp;gt;&lt;/span> &lt;span class="o">++&lt;/span>&lt;span class="nx">index&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-js" data-lang="js">&lt;span class="k">new&lt;/span> &lt;span class="nb">Array&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">10&lt;/span>&lt;span class="p">).&lt;/span>&lt;span class="nx">fill&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">0&lt;/span>&lt;span class="p">).&lt;/span>&lt;span class="nx">map&lt;/span>&lt;span class="p">((&lt;/span>&lt;span class="mi">_&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">index&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">=&amp;gt;&lt;/span> &lt;span class="o">++&lt;/span>&lt;span class="nx">index&lt;/span>&lt;span class="p">);&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>为什么要加个 fill 呢，是因为 Array 构造函数返回的数组都是空位，就是什么都没有，连 undefined 都不是，map 方法不生效。
 es6 扩展运算符的写法：&lt;/p>
-&lt;div class="highlight">&lt;pre class="chroma">&lt;code class="language-js" data-lang="js">&lt;span class="p">[...&lt;/span>&lt;span class="k">new&lt;/span> &lt;span class="nb">Array&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">10&lt;/span>&lt;span class="p">)].&lt;/span>&lt;span class="nx">map&lt;/span>&lt;span class="p">((&lt;/span>&lt;span class="mi">_&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">index&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">=&amp;gt;&lt;/span> &lt;span class="o">++&lt;/span>&lt;span class="nx">index&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-js" data-lang="js">&lt;span class="p">[...&lt;/span>&lt;span class="k">new&lt;/span> &lt;span class="nb">Array&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">10&lt;/span>&lt;span class="p">)].&lt;/span>&lt;span class="nx">map&lt;/span>&lt;span class="p">((&lt;/span>&lt;span class="mi">_&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">index&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">=&amp;gt;&lt;/span> &lt;span class="o">++&lt;/span>&lt;span class="nx">index&lt;/span>&lt;span class="p">);&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>扩展运算符会将空位都变成 undefined。&lt;/p>
 &lt;h2 id="2es6---symbol">2、es6 - Symbol&lt;/h2>
 &lt;p>好像没什么好说的，最大的特点就是唯一性，但是也感觉到了一个问题，用它作为属性名的时候，要想取出来必须使用这个 Symbol 值，那么跨模块的时候，其它模块想取出这个值，还必须把这个 Symbol 值抛出去。&lt;br>
 又看到了&lt;code>Symbol.for()&lt;/code>，好像能解决问题，但是总感觉哪不对&lt;/p>
 &lt;h2 id="3getter-与-setter">3、getter 与 setter&lt;/h2>
 &lt;h3 id="getter">getter&lt;/h3>
-&lt;div class="highlight">&lt;pre class="chroma">&lt;code class="language-js" data-lang="js">&lt;span class="kd">var&lt;/span> &lt;span class="nx">obj&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-js" data-lang="js">&lt;span class="kd">var&lt;/span> &lt;span class="nx">obj&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">{&lt;/span>
 &lt;span class="nx">log&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="s2">&amp;#34;example&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s2">&amp;#34;test&amp;#34;&lt;/span>&lt;span class="p">],&lt;/span>
 &lt;span class="nx">get&lt;/span> &lt;span class="nx">latest&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="p">{&lt;/span>
 &lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="k">this&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">log&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">length&lt;/span> &lt;span class="o">==&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="k">return&lt;/span> &lt;span class="kc">undefined&lt;/span>&lt;span class="p">;&lt;/span>
@@ -1900,7 +1900,7 @@ es6 扩展运算符的写法：&lt;/p>
 &lt;span class="p">},&lt;/span>
 &lt;span class="p">};&lt;/span>
 &lt;span class="nx">console&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">obj&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">latest&lt;/span>&lt;span class="p">);&lt;/span> &lt;span class="c1">// &amp;#34;test&amp;#34;.
-&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre class="chroma">&lt;code class="language-js" data-lang="js">&lt;span class="kd">var&lt;/span> &lt;span class="nx">obj&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-js" data-lang="js">&lt;span class="kd">var&lt;/span> &lt;span class="nx">obj&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">{&lt;/span>
 &lt;span class="nx">log&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="s2">&amp;#34;example&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s2">&amp;#34;test&amp;#34;&lt;/span>&lt;span class="p">],&lt;/span>
 &lt;span class="nx">latest&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="p">{&lt;/span>
 &lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="k">this&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">log&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">length&lt;/span> &lt;span class="o">==&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="k">return&lt;/span> &lt;span class="kc">undefined&lt;/span>&lt;span class="p">;&lt;/span>
@@ -1909,7 +1909,7 @@ es6 扩展运算符的写法：&lt;/p>
 &lt;span class="p">};&lt;/span>
 &lt;span class="nx">console&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">obj&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">latest&lt;/span>&lt;span class="p">());&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="setter">setter&lt;/h3>
-&lt;div class="highlight">&lt;pre class="chroma">&lt;code class="language-js" data-lang="js">&lt;span class="kd">var&lt;/span> &lt;span class="nx">language&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-js" data-lang="js">&lt;span class="kd">var&lt;/span> &lt;span class="nx">language&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">{&lt;/span>
 &lt;span class="nx">set&lt;/span> &lt;span class="nx">current&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">name&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
 &lt;span class="k">this&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">log&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">push&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">name&lt;/span>&lt;span class="p">);&lt;/span>
 &lt;span class="p">},&lt;/span>
@@ -1920,7 +1920,7 @@ es6 扩展运算符的写法：&lt;/p>
 &lt;/span>&lt;span class="c1">&lt;/span>
 &lt;span class="nx">language&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">current&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s2">&amp;#34;FA&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
 &lt;span class="nx">console&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">language&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">log&lt;/span>&lt;span class="p">);&lt;/span> &lt;span class="c1">// [&amp;#39;EN&amp;#39;, &amp;#39;FA&amp;#39;]
-&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre class="chroma">&lt;code class="language-js" data-lang="js">&lt;span class="kd">var&lt;/span> &lt;span class="nx">language&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-js" data-lang="js">&lt;span class="kd">var&lt;/span> &lt;span class="nx">language&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">{&lt;/span>
 &lt;span class="nx">current&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">name&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
 &lt;span class="k">this&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">log&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">push&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">name&lt;/span>&lt;span class="p">);&lt;/span>
 &lt;span class="p">},&lt;/span>
@@ -1933,7 +1933,7 @@ es6 扩展运算符的写法：&lt;/p>
 &lt;span class="nx">console&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">language&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">log&lt;/span>&lt;span class="p">);&lt;/span> &lt;span class="c1">// [&amp;#39;EN&amp;#39;, &amp;#39;FA&amp;#39;]
 &lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>重要的是当取值、赋值时你可以通过&lt;code>get&lt;/code>函数以及&lt;code>set&lt;/code>函数做一些其它的事。&lt;/p>
 &lt;h2 id="4连续赋值存在的问题">4、连续赋值存在的问题&lt;/h2>
-&lt;div class="highlight">&lt;pre class="chroma">&lt;code class="language-js" data-lang="js">&lt;span class="kd">let&lt;/span> &lt;span class="nx">a&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">{};&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-js" data-lang="js">&lt;span class="kd">let&lt;/span> &lt;span class="nx">a&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">{};&lt;/span>
 &lt;span class="kd">let&lt;/span> &lt;span class="nx">b&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">a&lt;/span>&lt;span class="p">;&lt;/span>
 &lt;span class="nx">a&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">x&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">a&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="nx">n&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="mi">1&lt;/span> &lt;span class="p">};&lt;/span>
 &lt;span class="nx">console&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">a&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">x&lt;/span>&lt;span class="p">);&lt;/span> &lt;span class="c1">// undefined
@@ -1941,7 +1941,7 @@ es6 扩展运算符的写法：&lt;/p>
 &lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>不知道这段代码的结果有没有一点出人意料，原因就是在赋值之前，就已经确定了内存中的地址，然后才开始赋值&lt;/p>
 &lt;h2 id="5yield的用法">5、&lt;code>yield*&lt;/code>的用法&lt;/h2>
 &lt;p>看到了一个数组拍平的问题,其中&lt;code>yield*&lt;/code>的作用就像是一个对其它 generator 函数的代理。&lt;/p>
-&lt;div class="highlight">&lt;pre class="chroma">&lt;code class="language-js" data-lang="js">&lt;span class="kr">const&lt;/span> &lt;span class="nx">a&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="p">[[&lt;/span>&lt;span class="mi">2&lt;/span>&lt;span class="p">],&lt;/span> &lt;span class="mi">3&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">4&lt;/span>&lt;span class="p">],&lt;/span> &lt;span class="mi">5&lt;/span>&lt;span class="p">];&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-js" data-lang="js">&lt;span class="kr">const&lt;/span> &lt;span class="nx">a&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="p">[[&lt;/span>&lt;span class="mi">2&lt;/span>&lt;span class="p">],&lt;/span> &lt;span class="mi">3&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">4&lt;/span>&lt;span class="p">],&lt;/span> &lt;span class="mi">5&lt;/span>&lt;span class="p">];&lt;/span>
 &lt;span class="kd">function&lt;/span>&lt;span class="o">*&lt;/span> &lt;span class="nx">flatten2&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">arr&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
 &lt;span class="k">for&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="nx">item&lt;/span> &lt;span class="k">of&lt;/span> &lt;span class="nx">arr&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
 &lt;span class="nb">Array&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">isArray&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">item&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">?&lt;/span> &lt;span class="k">yield&lt;/span>&lt;span class="o">*&lt;/span> &lt;span class="nx">flatten2&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">item&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">:&lt;/span> &lt;span class="k">yield&lt;/span> &lt;span class="nx">item&lt;/span>&lt;span class="p">;&lt;/span>
@@ -1952,7 +1952,7 @@ es6 扩展运算符的写法：&lt;/p>
 &lt;/span>&lt;span class="c1">&lt;/span>
 &lt;span class="nx">console&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">numbers&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">next&lt;/span>&lt;span class="p">());&lt;/span> &lt;span class="c1">// 2
 &lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="6实现自己的防抖函数">6、实现自己的防抖函数&lt;/h2>
-&lt;div class="highlight">&lt;pre class="chroma">&lt;code class="language-js" data-lang="js">&lt;span class="kr">const&lt;/span> &lt;span class="nx">a&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">()&lt;/span> &lt;span class="p">=&amp;gt;&lt;/span> &lt;span class="nx">console&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;a&amp;#34;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-js" data-lang="js">&lt;span class="kr">const&lt;/span> &lt;span class="nx">a&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">()&lt;/span> &lt;span class="p">=&amp;gt;&lt;/span> &lt;span class="nx">console&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;a&amp;#34;&lt;/span>&lt;span class="p">);&lt;/span>
 &lt;span class="kr">const&lt;/span> &lt;span class="nx">choke&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="nx">fn&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">timeout&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">=&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
 &lt;span class="kd">let&lt;/span> &lt;span class="nx">start&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">;&lt;/span>
 &lt;span class="k">return&lt;/span> &lt;span class="p">()&lt;/span> &lt;span class="p">=&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
@@ -1967,7 +1967,7 @@ es6 扩展运算符的写法：&lt;/p>
 &lt;span class="nx">b&lt;/span>&lt;span class="p">();&lt;/span>
 &lt;span class="nx">b&lt;/span>&lt;span class="p">();&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="7自定义一个事件类">7、自定义一个事件类&lt;/h2>
-&lt;div class="highlight">&lt;pre class="chroma">&lt;code class="language-js" data-lang="js">&lt;span class="kr">class&lt;/span> &lt;span class="nx">Event&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-js" data-lang="js">&lt;span class="kr">class&lt;/span> &lt;span class="nx">Event&lt;/span> &lt;span class="p">{&lt;/span>
 &lt;span class="nx">constructor&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="p">{&lt;/span>
 &lt;span class="k">this&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">stack&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">{};&lt;/span>
 &lt;span class="p">}&lt;/span>
@@ -1993,7 +1993,7 @@ es6 扩展运算符的写法：&lt;/p>
 &lt;h2 id="range-方式">Range 方式&lt;/h2>
 &lt;p>这是我在项目中实现屏幕取词的方式，其关键在于&lt;code>document.caretRangeFromPoint(float x, float y)&lt;/code>方法，这个方法接收一个坐标，通过这个坐标生成一个 range 对象，通过这个 range 对象可以获取到当前点击的文本内容，以及当前点击的文本位置，我把这个实现方式封装成了一个包&lt;a class="link" href="https://www.npmjs.com/package/theword" target="_blank" rel="noopener"
 >theword&lt;/a>，已经上传到了 npm 仓库，下边通过代码分析一下：&lt;/p>
-&lt;div class="highlight">&lt;pre class="chroma">&lt;code class="language-js" data-lang="js">&lt;span class="kr">export&lt;/span> &lt;span class="k">default&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="nx">event&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">regexp&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="sr">/[a-zA-Z&amp;#39;’]/&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">=&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-js" data-lang="js">&lt;span class="kr">export&lt;/span> &lt;span class="k">default&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="nx">event&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">regexp&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="sr">/[a-zA-Z&amp;#39;’]/&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">=&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
 &lt;span class="c1">// 监测一个字符是否是构成单词的字符
 &lt;/span>&lt;span class="c1">&lt;/span> &lt;span class="kr">const&lt;/span> &lt;span class="nx">isWord&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="nx">str&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">=&amp;gt;&lt;/span> &lt;span class="nx">str&lt;/span> &lt;span class="o">&amp;amp;&amp;amp;&lt;/span> &lt;span class="nx">regexp&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">test&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">str&lt;/span>&lt;span class="p">);&lt;/span>
 &lt;span class="kr">const&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="nx">clientX&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">clientY&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">event&lt;/span>&lt;span class="p">;&lt;/span>
