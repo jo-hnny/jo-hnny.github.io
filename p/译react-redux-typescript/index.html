@@ -126,7 +126,11 @@ on-phone--column extended">
 <p>使用 Flux 架构有助于解决这两个问题，它抽象了存储数据和操作数据（即 actions）的逻辑，并且提供了简单的方法将数据传递给需要它的组件（即 Redux 中的 connect 函数）。</p>
 <h2 id=store-架构-101101-是什么梗我还特意搜了一下好像是初级的意思大概就是-store-架构初级教程吧>Store 架构 101（101 是什么梗,我还特意搜了一下，好像是初级的意思，大概就是 Store 架构初级教程吧）</h2>
 <p>Store 架构是一个初级的概念，但是如果你以前从未听说，它可能听起来很奇怪，下图很好的描述了它：</p>
-<p><img src=https://raw.githubusercontent.com/johnny19941216/storage-room/master/img/20190918203459.png alt></p>
+<p><figure>
+<a href=https://raw.githubusercontent.com/johnny19941216/storage-room/master/img/20190918203459.png>
+<img src=https://raw.githubusercontent.com/johnny19941216/storage-room/master/img/20190918203459.png loading=lazy>
+</a>
+</figure></p>
 <p>我们不再将所有数据保存到组件中，而是使用唯一的全局 Store 作为我们的事实上的数据来源。</p>
 <p>它定义了整个 UI，保存了所有动态数据-包括来自服务器的以及用户和应用的内部状态，我们基于这个 store 来构建我们的应用。</p>
 <p>当用户触发了一个操作 =》 比如在页面上点击一个按钮 =》 调用 Action（Action 是一个简单的对象，仅包含一个表明 action 类型的 type 属性和可选的补充数据）=》action 会发送到 reducer（一个具有单一作用的函数，它依据 action 和旧的 state 生成一个新的 state，比如用户点击按钮新创建了一封邮件，reducer 就会把新邮件添加到旧的邮件列表中，生成一个新的邮件列表，当然，reducer 返回的是一个完整的 state，邮件列表包含在其中）=》新的 store 传递给组件 =》组件相应的更新 UI</p>
@@ -160,7 +164,11 @@ on-phone--column extended">
   <span class=p>};</span>
 <span class=p>}</span>
 </code></pre></div><p>如果我们不正确的使用它，编辑器会给出相关提示！</p>
-<p><img src=https://raw.githubusercontent.com/johnny19941216/storage-room/master/img/20190918203523.png alt></p>
+<p><figure>
+<a href=https://raw.githubusercontent.com/johnny19941216/storage-room/master/img/20190918203523.png>
+<img src=https://raw.githubusercontent.com/johnny19941216/storage-room/master/img/20190918203523.png loading=lazy>
+</a>
+</figure></p>
 <p>截图来自于 VisualStudio Code</p>
 <h2 id=记事本-app>记事本 APP</h2>
 <p>本文会创建一个简单的记事本 APP，你可以在<a class=link href=https://github.com/SwingDev/microconf-workshops target=_blank rel=noopener>GitHub</a>找到这个仓库，如果你想在已有代码的基础上编写，你可以从 master 分支检出代码。</p>
@@ -444,6 +452,16 @@ on-phone--column extended">
 </a>
 </article>
 <article class=has-image>
+<a href=/p/github-page-%E8%87%AA%E5%8A%A8%E5%8C%96%E9%83%A8%E7%BD%B2action/>
+<div class=article-image>
+<img src=https://picsum.photos/seed/1633939919/4096/2160 loading=lazy data-key data-hash=https://picsum.photos/seed/1633939919/4096/2160>
+</div>
+<div class=article-details>
+<h2 class=article-title>Github Page 自动化部署action</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
 <a href=/p/huskyv7%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/>
 <div class=article-image>
 <img src=/p/huskyv7%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/cover.06f3d87be13834f9264f4ad640108f61_hu01741809d1f58ad23f9de5fc011deff8_4984873_250x150_fill_q75_box_smart1.jpg width=250 height=150 loading=lazy data-key data-hash="md5-BvPYe+E4NPkmT0rWQBCPYQ==">
@@ -463,16 +481,6 @@ on-phone--column extended">
 </div>
 </a>
 </article>
-<article class=has-image>
-<a href=/p/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE/>
-<div class=article-image>
-<img src=/p/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE/cover.8fad889699131199c197131d0a63bc27_huc924efba91b0c18895da55f8ccb26750_913071_250x150_fill_q75_box_smart1.jpg width=250 height=150 loading=lazy data-key data-hash="md5-j62IlpkTEZnBlxMdCmO8Jw==">
-</div>
-<div class=article-details>
-<h2 class=article-title>二分查找</h2>
-</div>
-</a>
-</article>
 </div>
 </div>
 </aside>
@@ -487,7 +495,7 @@ on-phone--column extended">
 </section>
 <section class=powerby>
 Built with <a href=https://gohugo.io/ target=_blank rel=noopener>Hugo</a> <br>
-Theme <b><a href=https://github.com/CaiJimmy/hugo-theme-stack target=_blank rel=noopener data-version=3.1.0>Stack</a></b> designed by <a href=https://jimmycai.com target=_blank rel=noopener>Jimmy</a>
+Theme <b><a href=https://github.com/CaiJimmy/hugo-theme-stack target=_blank rel=noopener data-version=3.2.0>Stack</a></b> designed by <a href=https://jimmycai.com target=_blank rel=noopener>Jimmy</a>
 </section>
 </footer>
 <div class=pswp tabindex=-1 role=dialog aria-hidden=true>

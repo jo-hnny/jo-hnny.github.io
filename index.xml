@@ -1,4 +1,30 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>冷宫</title><link>https://jo-hnny.github.io/</link><description>Recent content on 冷宫</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Tue, 06 Jul 2021 14:24:51 +0800</lastBuildDate><atom:link href="https://jo-hnny.github.io/index.xml" rel="self" type="application/rss+xml"/><item><title>Husky@v7使用指南</title><link>https://jo-hnny.github.io/p/huskyv7%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/</link><pubDate>Tue, 06 Jul 2021 14:24:51 +0800</pubDate><guid>https://jo-hnny.github.io/p/huskyv7%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/</guid><description>&lt;img src="https://jo-hnny.github.io/p/huskyv7%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/cover.jpg" alt="Featured image of post Husky@v7使用指南" />&lt;h2 id="为什么有这篇文章">为什么有这篇文章&lt;/h2>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>冷宫</title><link>https://jo-hnny.github.io/</link><description>Recent content on 冷宫</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Mon, 11 Oct 2021 16:11:59 +0800</lastBuildDate><atom:link href="https://jo-hnny.github.io/index.xml" rel="self" type="application/rss+xml"/><item><title>Github Page 自动化部署action</title><link>https://jo-hnny.github.io/p/github-page-%E8%87%AA%E5%8A%A8%E5%8C%96%E9%83%A8%E7%BD%B2action/</link><pubDate>Mon, 11 Oct 2021 16:11:59 +0800</pubDate><guid>https://jo-hnny.github.io/p/github-page-%E8%87%AA%E5%8A%A8%E5%8C%96%E9%83%A8%E7%BD%B2action/</guid><description>&lt;img src="https://picsum.photos/seed/1633939919/4096/2160" alt="Featured image of post Github Page 自动化部署action" />&lt;h2 id="记录一下我常用的一套-github-page-自动化部署-actions">记录一下我常用的一套 github-page 自动化部署 actions&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-yml" data-lang="yml">&lt;span class="nt">name&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">CI&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w">&lt;/span>&lt;span class="nt">on&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">push&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w">&lt;/span>&lt;span class="nt">jobs&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">deploy&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">runs-on&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">ubuntu-18.04&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">steps&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>- &lt;span class="nt">name&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">Git checkout&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">uses&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">actions/checkout@v2&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>- &lt;span class="nt">name&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">Setup NodeJS&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">uses&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">actions/setup-node@v2&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">with&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">node-version&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="s2">&amp;#34;14&amp;#34;&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>- &lt;span class="nt">name&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">Build&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">run&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="p">|&lt;/span>&lt;span class="sd">
+&lt;/span>&lt;span class="sd"> npm install
+&lt;/span>&lt;span class="sd"> npm run build&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>- &lt;span class="nt">name&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">Deploy&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">uses&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">peaceiris/actions-gh-pages@v3&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">with&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">personal_token&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">${{ secrets.TOKEN }}&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">publish_dir&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">./dist&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>其中 secrets.TOKEN 为 自己创建的 &lt;a class="link" href="https://github.com/settings/tokens" target="_blank" rel="noopener"
+>Personal access tokens&lt;/a>,创建成功之后将其添加到目标项目的 Settings/secrets 下&lt;/p></description></item><item><title>Husky@v7使用指南</title><link>https://jo-hnny.github.io/p/huskyv7%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/</link><pubDate>Tue, 06 Jul 2021 14:24:51 +0800</pubDate><guid>https://jo-hnny.github.io/p/huskyv7%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/</guid><description>&lt;img src="https://jo-hnny.github.io/p/huskyv7%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/cover.jpg" alt="Featured image of post Husky@v7使用指南" />&lt;h2 id="为什么有这篇文章">为什么有这篇文章&lt;/h2>
 &lt;p>最近我为开源项目 &lt;code>tkestack&lt;/code> 的前端控制台部分添加了对 commit 的 lint，在添加过程中遇到了一些困难和疑惑，在此记录一下&lt;/p>
 &lt;h2 id="v4-配置方式">v4 配置方式&lt;/h2>
 &lt;h3 id="安装-husky">安装 husky&lt;/h3>
@@ -35,7 +61,7 @@
 .git can&lt;span class="err">&amp;#39;&lt;/span>t be found &lt;span class="o">(&lt;/span>see https://git.io/Jc3F9&lt;span class="o">)&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>可以推断出原因是这条命令需要在项目根目录执行。即&lt;code>.git&lt;/code>所在的目录
 tkestack 是一个前后端同在一个仓库的项目，目录结构如下&lt;/p>
-&lt;pre>&lt;code>.
+&lt;pre tabindex="0">&lt;code>.
 └── web
 └── console
 &lt;/code>&lt;/pre>&lt;p>我们现在在 console 目录，所以正确的方式应该是&lt;/p>
@@ -187,31 +213,49 @@ post-commit &lt;span class="o">(&lt;/span>native&lt;span class="o">)&lt;/span> �
 &lt;/ol></description></item><item><title>Happy Birthday With New Year</title><link>https://jo-hnny.github.io/p/happy-birthday-with-new-year/</link><pubDate>Mon, 28 Dec 2020 11:08:45 +0800</pubDate><guid>https://jo-hnny.github.io/p/happy-birthday-with-new-year/</guid><description>&lt;img src="https://jo-hnny.github.io/p/happy-birthday-with-new-year/cover.jpg" alt="Featured image of post Happy Birthday With New Year" />&lt;h2 id="又长了一岁">又长了一岁&lt;/h2>
 &lt;p>越来越没办法忽视自己的年龄，但是每个人的路注定是不一样的，也许我的注定坎坷一点，加油， better than better&lt;/p>
 &lt;h2 id="祝大家新年新气象">祝大家新年新气象&lt;/h2>
-&lt;p>&lt;figure style="flex-grow: 66; flex-basis: 158px">
-&lt;a href="https://jo-hnny.github.io/p/happy-birthday-with-new-year/new-year.PNG" data-size="3784x5716">&lt;img src="https://jo-hnny.github.io/p/happy-birthday-with-new-year/new-year.PNG"
-srcset="https://jo-hnny.github.io/p/happy-birthday-with-new-year/new-year_huebb6f38c275b6fe8087980db183c0f07_30347436_480x0_resize_box_3.PNG 480w, https://jo-hnny.github.io/p/happy-birthday-with-new-year/new-year_huebb6f38c275b6fe8087980db183c0f07_30347436_1024x0_resize_box_3.PNG 1024w"
+&lt;p>&lt;figure
+class="gallery-image"
+style="
+flex-grow: 66;
+flex-basis: 158px"
+>
+&lt;a href="https://jo-hnny.github.io/p/happy-birthday-with-new-year/new-year.PNG" data-size="3784x5716">
+&lt;img src="https://jo-hnny.github.io/p/happy-birthday-with-new-year/new-year.PNG"
 width="3784"
 height="5716"
+srcset="https://jo-hnny.github.io/p/happy-birthday-with-new-year/new-year_huebb6f38c275b6fe8087980db183c0f07_30347436_480x0_resize_box_3.PNG 480w, https://jo-hnny.github.io/p/happy-birthday-with-new-year/new-year_huebb6f38c275b6fe8087980db183c0f07_30347436_1024x0_resize_box_3.PNG 1024w"
 loading="lazy"
 alt="Happy New Year">
 &lt;/a>
 &lt;figcaption>Happy New Year&lt;/figcaption>
 &lt;/figure>
-&lt;figure style="flex-grow: 71; flex-basis: 171px">
-&lt;a href="https://jo-hnny.github.io/p/happy-birthday-with-new-year/rabbit.PNG" data-size="1190x1670">&lt;img src="https://jo-hnny.github.io/p/happy-birthday-with-new-year/rabbit.PNG"
-srcset="https://jo-hnny.github.io/p/happy-birthday-with-new-year/rabbit_huee5fe307af317435b697f2dc2593050e_3407597_480x0_resize_box_3.PNG 480w, https://jo-hnny.github.io/p/happy-birthday-with-new-year/rabbit_huee5fe307af317435b697f2dc2593050e_3407597_1024x0_resize_box_3.PNG 1024w"
+&lt;figure
+class="gallery-image"
+style="
+flex-grow: 71;
+flex-basis: 171px"
+>
+&lt;a href="https://jo-hnny.github.io/p/happy-birthday-with-new-year/rabbit.PNG" data-size="1190x1670">
+&lt;img src="https://jo-hnny.github.io/p/happy-birthday-with-new-year/rabbit.PNG"
 width="1190"
 height="1670"
+srcset="https://jo-hnny.github.io/p/happy-birthday-with-new-year/rabbit_huee5fe307af317435b697f2dc2593050e_3407597_480x0_resize_box_3.PNG 480w, https://jo-hnny.github.io/p/happy-birthday-with-new-year/rabbit_huee5fe307af317435b697f2dc2593050e_3407597_1024x0_resize_box_3.PNG 1024w"
 loading="lazy"
 alt="Rabbit Girl">
 &lt;/a>
 &lt;figcaption>Rabbit Girl&lt;/figcaption>
 &lt;/figure>
-&lt;figure style="flex-grow: 140; flex-basis: 337px">
-&lt;a href="https://jo-hnny.github.io/p/happy-birthday-with-new-year/cat.PNG" data-size="1529x1087">&lt;img src="https://jo-hnny.github.io/p/happy-birthday-with-new-year/cat.PNG"
-srcset="https://jo-hnny.github.io/p/happy-birthday-with-new-year/cat_hucb6d5b96b67e3dd6dde42589d2255763_2955063_480x0_resize_box_3.PNG 480w, https://jo-hnny.github.io/p/happy-birthday-with-new-year/cat_hucb6d5b96b67e3dd6dde42589d2255763_2955063_1024x0_resize_box_3.PNG 1024w"
+&lt;figure
+class="gallery-image"
+style="
+flex-grow: 140;
+flex-basis: 337px"
+>
+&lt;a href="https://jo-hnny.github.io/p/happy-birthday-with-new-year/cat.PNG" data-size="1529x1087">
+&lt;img src="https://jo-hnny.github.io/p/happy-birthday-with-new-year/cat.PNG"
 width="1529"
 height="1087"
+srcset="https://jo-hnny.github.io/p/happy-birthday-with-new-year/cat_hucb6d5b96b67e3dd6dde42589d2255763_2955063_480x0_resize_box_3.PNG 480w, https://jo-hnny.github.io/p/happy-birthday-with-new-year/cat_hucb6d5b96b67e3dd6dde42589d2255763_2955063_1024x0_resize_box_3.PNG 1024w"
 loading="lazy"
 alt="Cat Girl">
 &lt;/a>
@@ -464,7 +508,14 @@ text-decoration: underline;
 &lt;p>使用 Flux 架构有助于解决这两个问题，它抽象了存储数据和操作数据（即 actions）的逻辑，并且提供了简单的方法将数据传递给需要它的组件（即 Redux 中的 connect 函数）。&lt;/p>
 &lt;h2 id="store-架构-101101-是什么梗我还特意搜了一下好像是初级的意思大概就是-store-架构初级教程吧">Store 架构 101（101 是什么梗,我还特意搜了一下，好像是初级的意思，大概就是 Store 架构初级教程吧）&lt;/h2>
 &lt;p>Store 架构是一个初级的概念，但是如果你以前从未听说，它可能听起来很奇怪，下图很好的描述了它：&lt;/p>
-&lt;p>&lt;img src="https://raw.githubusercontent.com/johnny19941216/storage-room/master/img/20190918203459.png" alt="" />&lt;/p>
+&lt;p>&lt;figure
+>
+&lt;a href="https://raw.githubusercontent.com/johnny19941216/storage-room/master/img/20190918203459.png" >
+&lt;img src="https://raw.githubusercontent.com/johnny19941216/storage-room/master/img/20190918203459.png"
+loading="lazy"
+>
+&lt;/a>
+&lt;/figure>&lt;/p>
 &lt;p>我们不再将所有数据保存到组件中，而是使用唯一的全局 Store 作为我们的事实上的数据来源。&lt;/p>
 &lt;p>它定义了整个 UI，保存了所有动态数据-包括来自服务器的以及用户和应用的内部状态，我们基于这个 store 来构建我们的应用。&lt;/p>
 &lt;p>当用户触发了一个操作 =》 比如在页面上点击一个按钮 =》 调用 Action（Action 是一个简单的对象，仅包含一个表明 action 类型的 type 属性和可选的补充数据）=》action 会发送到 reducer（一个具有单一作用的函数，它依据 action 和旧的 state 生成一个新的 state，比如用户点击按钮新创建了一封邮件，reducer 就会把新邮件添加到旧的邮件列表中，生成一个新的邮件列表，当然，reducer 返回的是一个完整的 state，邮件列表包含在其中）=》新的 store 传递给组件 =》组件相应的更新 UI&lt;/p>
@@ -497,7 +548,14 @@ text-decoration: underline;
 &lt;span class="p">};&lt;/span>
 &lt;span class="p">}&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>如果我们不正确的使用它，编辑器会给出相关提示！&lt;/p>
-&lt;p>&lt;img src="https://raw.githubusercontent.com/johnny19941216/storage-room/master/img/20190918203523.png" alt="" />&lt;/p>
+&lt;p>&lt;figure
+>
+&lt;a href="https://raw.githubusercontent.com/johnny19941216/storage-room/master/img/20190918203523.png" >
+&lt;img src="https://raw.githubusercontent.com/johnny19941216/storage-room/master/img/20190918203523.png"
+loading="lazy"
+>
+&lt;/a>
+&lt;/figure>&lt;/p>
 &lt;p>截图来自于 VisualStudio Code&lt;/p>
 &lt;h2 id="记事本-app">记事本 APP&lt;/h2>
 &lt;p>本文会创建一个简单的记事本 APP，你可以在&lt;a class="link" href="https://github.com/SwingDev/microconf-workshops" target="_blank" rel="noopener"
@@ -752,7 +810,14 @@ text-decoration: underline;
 &lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="初始化项目">初始化项目&lt;/h3>
 &lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">npm init -y
 &lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="新建文件">新建文件&lt;/h3>
-&lt;p>&lt;img src="https://raw.githubusercontent.com/johnny19941216/storage-room/master/img/20190918203412.png" alt="" />&lt;/p>
+&lt;p>&lt;figure
+>
+&lt;a href="https://raw.githubusercontent.com/johnny19941216/storage-room/master/img/20190918203412.png" >
+&lt;img src="https://raw.githubusercontent.com/johnny19941216/storage-room/master/img/20190918203412.png"
+loading="lazy"
+>
+&lt;/a>
+&lt;/figure>&lt;/p>
 &lt;h3 id="在-indexhtml-文件中引入-indexjs-文件然后其他的依赖我们都会在-indexjs-文件中引入">在 index.html 文件中引入 index.js 文件，然后其他的依赖我们都会在 index.js 文件中引入&lt;/h3>
 &lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-html" data-lang="html">&lt;span class="cp">&amp;lt;!DOCTYPE html&amp;gt;&lt;/span>
 &lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">html&lt;/span> &lt;span class="na">lang&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;en&amp;#34;&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
@@ -802,11 +867,32 @@ text-decoration: underline;
 &lt;p>之前做图片曲线调节的时候使用到了拉格朗日插值算法，主要参考了&lt;a class="link" href="https://zh.wikipedia.org/wiki/%E6%8B%89%E6%A0%BC%E6%9C%97%E6%97%A5%E6%8F%92%E5%80%BC%E6%B3%95" target="_blank" rel="noopener"
 >维基百科&lt;/a>，这里简单记录一下&lt;/p>
 &lt;h2 id="什么是拉格朗日插值算法">什么是拉格朗日插值算法&lt;/h2>
-&lt;p>&lt;img src="https://raw.githubusercontent.com/johnny19941216/storage-room/master/img/20190918203302.png" alt="" />&lt;/p>
+&lt;p>&lt;figure
+>
+&lt;a href="https://raw.githubusercontent.com/johnny19941216/storage-room/master/img/20190918203302.png" >
+&lt;img src="https://raw.githubusercontent.com/johnny19941216/storage-room/master/img/20190918203302.png"
+loading="lazy"
+>
+&lt;/a>
+&lt;/figure>&lt;/p>
 &lt;h2 id="如何通过给定的有限点得到拉格朗日插值函数">如何通过给定的有限点得到拉格朗日插值函数&lt;/h2>
-&lt;p>&lt;img src="https://raw.githubusercontent.com/johnny19941216/storage-room/master/img/20190918203320.png" alt="" />&lt;/p>
+&lt;p>&lt;figure
+>
+&lt;a href="https://raw.githubusercontent.com/johnny19941216/storage-room/master/img/20190918203320.png" >
+&lt;img src="https://raw.githubusercontent.com/johnny19941216/storage-room/master/img/20190918203320.png"
+loading="lazy"
+>
+&lt;/a>
+&lt;/figure>&lt;/p>
 &lt;h2 id="示例">示例&lt;/h2>
-&lt;p>&lt;img src="https://raw.githubusercontent.com/johnny19941216/storage-room/master/img/20190918203341.png" alt="" />&lt;/p>
+&lt;p>&lt;figure
+>
+&lt;a href="https://raw.githubusercontent.com/johnny19941216/storage-room/master/img/20190918203341.png" >
+&lt;img src="https://raw.githubusercontent.com/johnny19941216/storage-room/master/img/20190918203341.png"
+loading="lazy"
+>
+&lt;/a>
+&lt;/figure>&lt;/p>
 &lt;h2 id="维基百科上交代的算是比较明白了然后我们要做的就是用代码去实现这个算法了下面给出我的实现">维基百科上交代的算是比较明白了，然后我们要做的就是用代码去实现这个算法了，下面给出我的实现&lt;/h2>
 &lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-javascript" data-lang="javascript">&lt;span class="kr">const&lt;/span> &lt;span class="nx">points&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">[&lt;/span>
 &lt;span class="p">[&lt;/span>&lt;span class="mi">4&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">10&lt;/span>&lt;span class="p">],&lt;/span>
@@ -1014,7 +1100,15 @@ Mocha 内置对 Promise 的支持，允许直接返回 Promise，等到它的状
 &lt;p>&lt;code>npm start&lt;/code>&lt;br>
 &lt;code>npm test&lt;/code>&lt;br>
 测试就完成了&lt;br>
-&lt;img src="https://jo-hnny.github.io/images/mocha-end.png" alt="测试完成" />&lt;/p></description></item><item><title>类的实现在es5与es6下的区别</title><link>https://jo-hnny.github.io/p/%E7%B1%BB%E7%9A%84%E5%AE%9E%E7%8E%B0%E5%9C%A8es5%E4%B8%8Ees6%E4%B8%8B%E7%9A%84%E5%8C%BA%E5%88%AB/</link><pubDate>Wed, 18 Sep 2019 21:00:58 +0800</pubDate><guid>https://jo-hnny.github.io/p/%E7%B1%BB%E7%9A%84%E5%AE%9E%E7%8E%B0%E5%9C%A8es5%E4%B8%8Ees6%E4%B8%8B%E7%9A%84%E5%8C%BA%E5%88%AB/</guid><description>&lt;img src="https://picsum.photos/seed/064c5fca816c45068b6c3cd7fa82dcf2/4096/2160" alt="Featured image of post 类的实现在es5与es6下的区别" />&lt;p>写完标题就后悔了，es6 的 class 只是语法糖，那么我要想知道 es5 的类的实现不是应该去看 es6 的源码吗？虽然这样，但是我的例子都已经写完了，我还是 po 上来吧，回头再看看 es6 是怎么实现的。&lt;/p>
+&lt;figure
+>
+&lt;a href="https://jo-hnny.github.io/images/mocha-end.png" >
+&lt;img src="https://jo-hnny.github.io/images/mocha-end.png"
+loading="lazy"
+alt="测试完成">
+&lt;/a>
+&lt;figcaption>测试完成&lt;/figcaption>
+&lt;/figure>&lt;/p></description></item><item><title>类的实现在es5与es6下的区别</title><link>https://jo-hnny.github.io/p/%E7%B1%BB%E7%9A%84%E5%AE%9E%E7%8E%B0%E5%9C%A8es5%E4%B8%8Ees6%E4%B8%8B%E7%9A%84%E5%8C%BA%E5%88%AB/</link><pubDate>Wed, 18 Sep 2019 21:00:58 +0800</pubDate><guid>https://jo-hnny.github.io/p/%E7%B1%BB%E7%9A%84%E5%AE%9E%E7%8E%B0%E5%9C%A8es5%E4%B8%8Ees6%E4%B8%8B%E7%9A%84%E5%8C%BA%E5%88%AB/</guid><description>&lt;img src="https://picsum.photos/seed/064c5fca816c45068b6c3cd7fa82dcf2/4096/2160" alt="Featured image of post 类的实现在es5与es6下的区别" />&lt;p>写完标题就后悔了，es6 的 class 只是语法糖，那么我要想知道 es5 的类的实现不是应该去看 es6 的源码吗？虽然这样，但是我的例子都已经写完了，我还是 po 上来吧，回头再看看 es6 是怎么实现的。&lt;/p>
 &lt;h2 id="首先看看-es6-的-class">首先看看 ES6 的 class&lt;/h2>
 &lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-js" data-lang="js">&lt;span class="kr">class&lt;/span> &lt;span class="nx">A&lt;/span> &lt;span class="p">{&lt;/span>
 &lt;span class="nx">constructor&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">x&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
@@ -1093,7 +1187,7 @@ Mocha 内置对 Promise 的支持，允许直接返回 Promise，等到它的状
 2、为活动对象添加一个类似数组的 arguments 对象&lt;br>
 3、将定义函数时所在的执行环境对应的作用域链复制到函数内部的&lt;code>[[scope]]&lt;/code>属性上，把自己的活动对象推入作用域链的顶端&lt;br>
 4、之后发生由 ECMA-262 中所谓’活动对象’完成的’变量实例化’(Variable Instatiation)的过程&lt;/p>
-&lt;pre>&lt;code>(1)、此时将函数的形参创建为活动对象(变量对象)的属性，如果调用函数时传递的参数与形式参数一致，则将相应参数值赋给这些属性，否则，会给属性赋 undefined 值。
+&lt;pre tabindex="0">&lt;code>(1)、此时将函数的形参创建为活动对象(变量对象)的属性，如果调用函数时传递的参数与形式参数一致，则将相应参数值赋给这些属性，否则，会给属性赋 undefined 值。
 (2)、将函数内部声明的所有局部变量创建为活动对象(变量对象)的属性，其值都被'预解析'为undefined值，以上两步完成活动对象(变量对象)保存变量的过程。
 (3)、对于定义的内部函数，用声明的函数名innerMethod，为活动对象(变量对象)创建同名属性，而定义的内部函数则被创建为函数对象并指定给该属性，完成活动对象(变量对象)保存函数的过程。
 注：在这个过程中，除了实际参数和函数声明有值外，其它都被'预解析'为undefined值。
@@ -1606,13 +1700,21 @@ Mocha 内置对 Promise 的支持，允许直接返回 Promise，等到它的状
 &lt;/span>&lt;span class="c1">&lt;/span>
 &lt;span class="nx">console&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">a&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">constructor&lt;/span> &lt;span class="o">===&lt;/span> &lt;span class="nx">A&lt;/span>&lt;span class="p">);&lt;/span> &lt;span class="c1">// true
 &lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>找到一个说法&lt;/p>
-&lt;pre>&lt;code>constructor属性不影响任何JavaScript的内部属性。instanceof检测对象的原型链，通常你是无法修改的（不过某些引擎通过私有的__proto__属性暴露出来）。constructor其实没有什么用处，只是JavaScript语言设计的历史遗留物。由于constructor属性是可以变更的，所以未必真的指向对象的构造函数，只是一个提示。不过，从编程习惯上，我们应该尽量让对象的constructor指向其构造函数，以维持这个惯例。
+&lt;pre tabindex="0">&lt;code>constructor属性不影响任何JavaScript的内部属性。instanceof检测对象的原型链，通常你是无法修改的（不过某些引擎通过私有的__proto__属性暴露出来）。constructor其实没有什么用处，只是JavaScript语言设计的历史遗留物。由于constructor属性是可以变更的，所以未必真的指向对象的构造函数，只是一个提示。不过，从编程习惯上，我们应该尽量让对象的constructor指向其构造函数，以维持这个惯例。
 作者：贺师俊
 链接：https://www.zhihu.com/question/19951896/answer/13457869
 来源：知乎
 著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
 &lt;/code>&lt;/pre></description></item><item><title>初探react Native</title><link>https://jo-hnny.github.io/p/%E5%88%9D%E6%8E%A2react-native/</link><pubDate>Wed, 18 Sep 2019 20:51:20 +0800</pubDate><guid>https://jo-hnny.github.io/p/%E5%88%9D%E6%8E%A2react-native/</guid><description>&lt;img src="https://picsum.photos/seed/c2c7c029452b45aa8117a63cd653cdb4/4096/2160" alt="Featured image of post 初探react Native" />&lt;p>本文不介绍 React Native 的 API，API 可以参考官网或者 react native 中文网，主要是从环境搭建开始，利用豆瓣的开放 api 搭建一个豆瓣电影的应用。
-&lt;img src="https://raw.githubusercontent.com/johnny19941216/storage-room/master/img/Screenshot_2018-01-02-16-02-39-091_host.exp.expon.png" alt="app截图" />&lt;/p>
+&lt;figure
+>
+&lt;a href="https://raw.githubusercontent.com/johnny19941216/storage-room/master/img/Screenshot_2018-01-02-16-02-39-091_host.exp.expon.png" >
+&lt;img src="https://raw.githubusercontent.com/johnny19941216/storage-room/master/img/Screenshot_2018-01-02-16-02-39-091_host.exp.expon.png"
+loading="lazy"
+alt="app截图">
+&lt;/a>
+&lt;figcaption>app截图&lt;/figcaption>
+&lt;/figure>&lt;/p>
 &lt;h2 id="一环境搭建">一、环境搭建&lt;/h2>
 &lt;p>环境搭建可以参考&lt;a class="link" href="https://reactnative.cn/docs/0.50/getting-started.html" target="_blank" rel="noopener"
 >官网&lt;/a>&lt;br>
@@ -1634,13 +1736,21 @@ Mocha 内置对 Promise 的支持，允许直接返回 Promise，等到它的状
 &lt;a class="link" href="https://developers.douban.com/wiki/title=movie_v2#subject" target="_blank" rel="noopener"
 >豆瓣电影 API&lt;/a>
 中确认不用注册可以直接使用的接口有这些&lt;br>
-&lt;img src="https://raw.githubusercontent.com/johnny19941216/storage-room/master/img/20190918202412.png" alt="豆瓣电影api截图" />&lt;br>
+&lt;figure
+>
+&lt;a href="https://raw.githubusercontent.com/johnny19941216/storage-room/master/img/20190918202412.png" >
+&lt;img src="https://raw.githubusercontent.com/johnny19941216/storage-room/master/img/20190918202412.png"
+loading="lazy"
+alt="豆瓣电影api截图">
+&lt;/a>
+&lt;figcaption>豆瓣电影api截图&lt;/figcaption>
+&lt;/figure>&lt;br>
 按照这些 api 提供的信息大致确定页面结构为：&lt;br>
 1、tab 导航页：包括搜索页面、top250、北美票房榜页面、正在上映页面、即将上映页面&lt;br>
 2、详情页面：包括电影详情和演员详情&lt;/p>
 &lt;h2 id="四开工">四、开工&lt;/h2>
 &lt;h3 id="1项目目录结构">1、项目目录结构：&lt;/h3>
-&lt;pre>&lt;code>|------components
+&lt;pre tabindex="0">&lt;code>|------components
 |
 |------http
 |
@@ -1657,7 +1767,15 @@ package.json
 &lt;p>当接收到一个代表错误的 HTTP 状态码时，从 fetch()返回的 Promise 不会被标记为 reject， 即使该 HTTP 响应的状态码是 404 或 500。相反，它会将 Promise 状态标记为 resolve （但是会将 resolve 的返回值的 ok 属性设置为 false ）， 仅当网络故障时或请求被阻止时，才会标记为 reject。
 默认情况下, fetch 不会从服务端发送或接收任何 cookies, 如果站点依赖于用户 session，则会导致未经认证的请求（要发送 cookies，必须设置 credentials 选项）.&lt;/p>
 &lt;h4 id="各浏览器对-fetch-的支持情况">各浏览器对 fetch 的支持情况：&lt;/h4>
-&lt;p>&lt;img src="https://raw.githubusercontent.com/johnny19941216/storage-room/master//img/can_i_use_fetch.png" alt="can i use fetch" />&lt;/p>
+&lt;p>&lt;figure
+>
+&lt;a href="https://raw.githubusercontent.com/johnny19941216/storage-room/master//img/can_i_use_fetch.png" >
+&lt;img src="https://raw.githubusercontent.com/johnny19941216/storage-room/master//img/can_i_use_fetch.png"
+loading="lazy"
+alt="can i use fetch">
+&lt;/a>
+&lt;figcaption>can i use fetch&lt;/figcaption>
+&lt;/figure>&lt;/p>
 &lt;h4 id="httpfetchapijs">/http/fetchApi.js&lt;/h4>
 &lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-js" data-lang="js">&lt;span class="kr">export&lt;/span> &lt;span class="k">default&lt;/span> &lt;span class="nx">fetchApi&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="nx">url&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">=&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
 &lt;span class="k">return&lt;/span> &lt;span class="nx">fetch&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">url&lt;/span>&lt;span class="p">).&lt;/span>&lt;span class="nx">then&lt;/span>&lt;span class="p">((&lt;/span>&lt;span class="nx">rsp&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">=&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
