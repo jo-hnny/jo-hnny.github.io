@@ -115,8 +115,8 @@ on-phone--column extended">
 <div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>npm i husky -D
 </code></pre></div><h3 id=添加配置>添加配置</h3>
 <p>在 package.json 中添加如下配置</p>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-json data-lang=json><span class=err>//package.json</span>
-<span class=s2>&#34;lint-staged&#34;</span><span class=err>:</span> <span class=p>{</span>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-json data-lang=json><span class=c1>//package.json
+</span><span class=c1></span><span class=s2>&#34;lint-staged&#34;</span><span class=err>:</span> <span class=p>{</span>
     <span class=nt>&#34;./**/*.{ts,tsx,js,jsx}&#34;</span><span class=p>:</span> <span class=p>[</span>
       <span class=s2>&#34;eslint&#34;</span><span class=p>,</span>
       <span class=s2>&#34;prettier --write&#34;</span>
@@ -128,8 +128,8 @@ on-phone--column extended">
     <span class=p>}</span>
   <span class=p>}</span><span class=err>,</span>
 </code></pre></div><p>或者添加.huskyrc 文件</p>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-json data-lang=json><span class=err>//</span> <span class=err>.huskyrc</span>
-<span class=p>{</span>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-json data-lang=json><span class=c1>// .huskyrc
+</span><span class=c1></span><span class=p>{</span>
   <span class=nt>&#34;hooks&#34;</span><span class=p>:</span> <span class=p>{</span>
     <span class=nt>&#34;pre-commit&#34;</span><span class=p>:</span> <span class=s2>&#34;lint-staged&#34;</span>
   <span class=p>}</span>
@@ -158,8 +158,8 @@ npx husky install ./web/console/.husky
 <div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>npm set-script prepare <span class=s2>&#34;cd ../../ &amp;&amp; husky install ./web/console/.husky&#34;</span>
 </code></pre></div><p>注意 ⚠️：<code>npm set-script</code> 只在 npm version 7.x 生效,如果你用的是 6.x 或者更低，还是手动在<code>package.json</code>中添加吧</p>
 <p>现在查看<code>package.json</code> 应该可以看到</p>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-json data-lang=json><span class=err>//</span> <span class=err>package.json</span>
-<span class=p>{</span>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-json data-lang=json><span class=c1>// package.json
+</span><span class=c1></span><span class=p>{</span>
   <span class=nt>&#34;scripts&#34;</span><span class=p>:</span> <span class=p>{</span>
     <span class=nt>&#34;prepare&#34;</span><span class=p>:</span> <span class=s2>&#34;cd ../../ &amp;&amp; husky install ./web/console/.husky&#34;</span>
   <span class=p>}</span>
@@ -179,8 +179,8 @@ lint-staged
 
 </code></pre></div><p>大致可以猜测到当 pre-commit 时，实际是执行了这个 shell 脚本，由于我们的 lint-staged 并不是全局安装，在这里并不能执行
 所以我们在 package.json 中添加一个 script</p>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-json data-lang=json><span class=err>//</span> <span class=err>package.json</span>
-<span class=p>{</span>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-json data-lang=json><span class=c1>// package.json
+</span><span class=c1></span><span class=p>{</span>
   <span class=nt>&#34;scripts&#34;</span><span class=p>:</span> <span class=p>{</span>
     <span class=nt>&#34;prepare&#34;</span><span class=p>:</span> <span class=s2>&#34;cd ../../ &amp;&amp; husky install&#34;</span><span class=p>,</span>
     <span class=nt>&#34;pre-commit&#34;</span><span class=p>:</span> <span class=s2>&#34;lint-staged&#34;</span>
@@ -270,6 +270,16 @@ post-commit <span class=o>(</span>native<span class=o>)</span> → husky/runner.
 <div class=related-contents>
 <div class="flex article-list--tile">
 <article class=has-image>
+<a href=/p/git%E5%88%9B%E5%BB%BA%E7%A9%BA%E5%88%86%E6%94%AF/>
+<div class=article-image>
+<img src=https://picsum.photos/seed/1638516077/4096/2160 loading=lazy data-key data-hash=https://picsum.photos/seed/1638516077/4096/2160>
+</div>
+<div class=article-details>
+<h2 class=article-title>Git创建空分支</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
 <a href=/p/github-page-%E8%87%AA%E5%8A%A8%E5%8C%96%E9%83%A8%E7%BD%B2action/>
 <div class=article-image>
 <img src=https://picsum.photos/seed/1633939919/4096/2160 loading=lazy data-key data-hash=https://picsum.photos/seed/1633939919/4096/2160>
@@ -306,16 +316,6 @@ post-commit <span class=o>(</span>native<span class=o>)</span> → husky/runner.
 </div>
 <div class=article-details>
 <h2 class=article-title>在scss和css_module环境中切换主题</h2>
-</div>
-</a>
-</article>
-<article class=has-image>
-<a href=/p/react%E9%A1%B9%E7%9B%AE%E4%B8%AD%E5%90%8C%E6%97%B6%E6%B7%BB%E5%8A%A0css-modules%E4%B8%8E%E6%99%AE%E9%80%9Aclass/>
-<div class=article-image>
-<img src=/p/react%E9%A1%B9%E7%9B%AE%E4%B8%AD%E5%90%8C%E6%97%B6%E6%B7%BB%E5%8A%A0css-modules%E4%B8%8E%E6%99%AE%E9%80%9Aclass/cover.bdc150a4798601b6ec3bc81d237bc4b1_huefcbb9b8b5b12eb8cf00ffdf2b15a7b8_2697992_250x150_fill_q75_box_smart1.jpg width=250 height=150 loading=lazy data-key data-hash="md5-vcFQpHmGAbbsO8gdI3vEsQ==">
-</div>
-<div class=article-details>
-<h2 class=article-title>React项目中同时添加css Modules与普通class</h2>
 </div>
 </a>
 </article>
