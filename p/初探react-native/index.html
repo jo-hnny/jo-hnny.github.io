@@ -1,7 +1,4 @@
-<!doctype html><html lang=zh-cn>
-<head><meta charset=utf-8>
-<meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="本文不介绍 React Native 的 API，API 可以参考官网或者 react native 中文网，主要是从环境搭建开始，利用豆瓣的开放 api 搭建一个豆瓣电影的应用。  app截图 
-一、环境搭建 环境搭建可以参考官网
+<!doctype html><html lang=zh-cn><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="本文不介绍 React Native 的 API，API 可以参考官网或者 react native 中文网，主要是从环境搭建开始，利用豆瓣的开放 api 搭建一个豆瓣电影的应用。 app截图 一、环境搭建 环境搭建可以参考官网
 必要的依赖
 ①、Python 2
 ②、Node
@@ -15,15 +12,10 @@ cd douban_movie
 npm start
 等待命令行出现一个二维码，然后在手机上打开 expo 扫面这个二维码，就可以实时预览 app 效果了。
 三、项目构思 目前在 豆瓣电影 API 中确认不用注册可以直接使用的接口有这些
- 豆瓣电影api截图 
-按照这些 api 提供的信息大致确定页面结构为：
+豆瓣电影api截图 按照这些 api 提供的信息大致确定页面结构为：
 1、tab 导航页：包括搜索页面、top250、北美票房榜页面、正在上映页面、即将上映页面
 2、详情页面：包括电影详情和演员详情
-四、开工 1、项目目录结构： |------components | |------http | |------views | App.js | package.json 2、获取接口数据 在 react native 中进行 http 请求使用的 api 是fetch fetch是一种新的web HTTP请求api，现在已经内置在了大多数的浏览器中，在此之前web HTTP请求都是通过 XMLHttpRequest实现的"><title>初探react Native</title>
-<link rel=canonical href=https://jo-hnny.github.io/p/%E5%88%9D%E6%8E%A2react-native/>
-<link rel=stylesheet href=/scss/style.min.css><meta property="og:title" content="初探react Native">
-<meta property="og:description" content="本文不介绍 React Native 的 API，API 可以参考官网或者 react native 中文网，主要是从环境搭建开始，利用豆瓣的开放 api 搭建一个豆瓣电影的应用。  app截图 
-一、环境搭建 环境搭建可以参考官网
+四、开工 1、项目目录结构： |------components | |------http | |------views | App.js | package.json 2、获取接口数据 在 react native 中进行 http 请求使用的 api 是fetch fetch是一种新的web HTTP请求api，现在已经内置在了大多数的浏览器中，在此之前web HTTP请求都是通过 XMLHttpRequest实现的"><title>初探react Native</title><link rel=canonical href=https://jo-hnny.github.io/p/%E5%88%9D%E6%8E%A2react-native/><link rel=stylesheet href=/scss/style.min.css><meta property="og:title" content="初探react Native"><meta property="og:description" content="本文不介绍 React Native 的 API，API 可以参考官网或者 react native 中文网，主要是从环境搭建开始，利用豆瓣的开放 api 搭建一个豆瓣电影的应用。 app截图 一、环境搭建 环境搭建可以参考官网
 必要的依赖
 ①、Python 2
 ②、Node
@@ -37,17 +29,10 @@ cd douban_movie
 npm start
 等待命令行出现一个二维码，然后在手机上打开 expo 扫面这个二维码，就可以实时预览 app 效果了。
 三、项目构思 目前在 豆瓣电影 API 中确认不用注册可以直接使用的接口有这些
- 豆瓣电影api截图 
-按照这些 api 提供的信息大致确定页面结构为：
+豆瓣电影api截图 按照这些 api 提供的信息大致确定页面结构为：
 1、tab 导航页：包括搜索页面、top250、北美票房榜页面、正在上映页面、即将上映页面
 2、详情页面：包括电影详情和演员详情
-四、开工 1、项目目录结构： |------components | |------http | |------views | App.js | package.json 2、获取接口数据 在 react native 中进行 http 请求使用的 api 是fetch fetch是一种新的web HTTP请求api，现在已经内置在了大多数的浏览器中，在此之前web HTTP请求都是通过 XMLHttpRequest实现的">
-<meta property="og:url" content="https://jo-hnny.github.io/p/%E5%88%9D%E6%8E%A2react-native/">
-<meta property="og:site_name" content="冷宫">
-<meta property="og:type" content="article"><meta property="article:section" content="Post"><meta property="article:published_time" content="2019-09-18T20:51:20+08:00"><meta property="article:modified_time" content="2019-09-18T20:51:20+08:00"><meta property="og:image" content="https://picsum.photos/seed/c2c7c029452b45aa8117a63cd653cdb4/4096/2160">
-<meta name=twitter:title content="初探react Native">
-<meta name=twitter:description content="本文不介绍 React Native 的 API，API 可以参考官网或者 react native 中文网，主要是从环境搭建开始，利用豆瓣的开放 api 搭建一个豆瓣电影的应用。  app截图 
-一、环境搭建 环境搭建可以参考官网
+四、开工 1、项目目录结构： |------components | |------http | |------views | App.js | package.json 2、获取接口数据 在 react native 中进行 http 请求使用的 api 是fetch fetch是一种新的web HTTP请求api，现在已经内置在了大多数的浏览器中，在此之前web HTTP请求都是通过 XMLHttpRequest实现的"><meta property="og:url" content="https://jo-hnny.github.io/p/%E5%88%9D%E6%8E%A2react-native/"><meta property="og:site_name" content="冷宫"><meta property="og:type" content="article"><meta property="article:section" content="Post"><meta property="article:published_time" content="2019-09-18T20:51:20+08:00"><meta property="article:modified_time" content="2019-09-18T20:51:20+08:00"><meta property="og:image" content="https://picsum.photos/seed/c2c7c029452b45aa8117a63cd653cdb4/4096/2160"><meta name=twitter:title content="初探react Native"><meta name=twitter:description content="本文不介绍 React Native 的 API，API 可以参考官网或者 react native 中文网，主要是从环境搭建开始，利用豆瓣的开放 api 搭建一个豆瓣电影的应用。 app截图 一、环境搭建 环境搭建可以参考官网
 必要的依赖
 ①、Python 2
 ②、Node
@@ -61,128 +46,16 @@ cd douban_movie
 npm start
 等待命令行出现一个二维码，然后在手机上打开 expo 扫面这个二维码，就可以实时预览 app 效果了。
 三、项目构思 目前在 豆瓣电影 API 中确认不用注册可以直接使用的接口有这些
- 豆瓣电影api截图 
-按照这些 api 提供的信息大致确定页面结构为：
+豆瓣电影api截图 按照这些 api 提供的信息大致确定页面结构为：
 1、tab 导航页：包括搜索页面、top250、北美票房榜页面、正在上映页面、即将上映页面
 2、详情页面：包括电影详情和演员详情
-四、开工 1、项目目录结构： |------components | |------http | |------views | App.js | package.json 2、获取接口数据 在 react native 中进行 http 请求使用的 api 是fetch fetch是一种新的web HTTP请求api，现在已经内置在了大多数的浏览器中，在此之前web HTTP请求都是通过 XMLHttpRequest实现的"><meta name=twitter:card content="summary_large_image">
-<meta name=twitter:image content="https://picsum.photos/seed/c2c7c029452b45aa8117a63cd653cdb4/4096/2160">
-<link rel="shortcut icon" href=/img/favicon.ico>
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-TFV4P906GT"></script>
-<script>var doNotTrack=!1;if(!doNotTrack){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config','G-TFV4P906GT',{anonymize_ip:!1})}</script>
-</head>
-<body class=article-page>
-<script>(function(){const a='StackColorScheme';localStorage.getItem(a)||localStorage.setItem(a,"auto")})()</script><script>(function(){const b='StackColorScheme',a=localStorage.getItem(b),c=window.matchMedia('(prefers-color-scheme: dark)').matches===!0;a=='dark'||a==='auto'&&c?document.documentElement.dataset.scheme='dark':document.documentElement.dataset.scheme='light'})()</script>
-<div class="container main-container flex
-on-phone--column extended">
-<aside class="sidebar left-sidebar sticky">
-<button class="hamburger hamburger--spin" type=button id=toggle-menu aria-label=切换菜单>
-<span class=hamburger-box>
-<span class=hamburger-inner></span>
-</span>
-</button>
-<header class=site-info>
-<figure class=site-avatar>
-<img src=/img/avatar_hud170f2c6bd12f3a098a294aad792bf80_1699879_300x0_resize_box_3.png width=300 height=195 class=site-logo loading=lazy alt=Avatar>
-<span class=emoji>🏂🏻</span>
-</figure>
-<h1 class=site-name><a href=https://jo-hnny.github.io/>冷宫</a></h1>
-<h2 class=site-description>她们都被我打入了冷宫，但是偶尔还是会过来看一下</h2>
-</header>
-<ol class=menu id=main-menu>
-<li>
-<a href=/><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><polyline points="5 12 3 12 12 3 21 12 19 12"/><path d="M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"/><path d="M9 21v-6a2 2 0 012-2h2a2 2 0 012 2v6"/></svg>
-<span>Home</span>
-</a>
-</li>
-<li>
-<a href=/about><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="7" r="4"/><path d="M6 21v-2a4 4 0 014-4h4a4 4 0 014 4v2"/></svg>
-<span>About</span>
-</a>
-</li>
-<li>
-<a href=/talks><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-hipchat" width="44" height="44" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M17.802 17.292s.077-.055.2-.149C19.845 15.718 21 13.653 21 11.354c0-4.286-4.03-7.764-8.998-7.764C7.032 3.59 3 7.068 3 11.354 3 15.642 7.03 19 12 19c.424.0 1.12-.028 2.088-.084 1.262.82 3.104 1.493 4.716 1.493.499.0.734-.41.414-.828-.486-.596-1.156-1.551-1.416-2.29z"/><path d="M7.5 13.5c2.5 2.5 6.5 2.5 9 0"/></svg>
-<span>Talks</span>
-</a>
-</li>
-<li>
-<a href=/archives><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><rect x="3" y="4" width="18" height="4" rx="2"/><path d="M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8"/><line x1="10" y1="12" x2="14" y2="12"/></svg>
-<span>Archives</span>
-</a>
-</li>
-<li>
-<a href=/search><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="10" cy="10" r="7"/><line x1="21" y1="21" x2="15" y2="15"/></svg>
-<span>Search</span>
-</a>
-</li>
-<li>
-<a href=/index.xml><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-rss" width="44" height="44" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><circle cx="5" cy="19" r="1"/><path d="M4 4a16 16 0 0116 16"/><path d="M4 11a9 9 0 019 9"/></svg>
-<span>Feed</span>
-</a>
-</li>
-<li id=dark-mode-toggle><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="8" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="16" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg>
-<span>暗色模式</span>
-</li>
-</ol>
-</aside>
-<main class="main full-width">
-<article class="has-image main-article">
-<header class=article-header>
-<div class=article-image>
-<a href=/p/%E5%88%9D%E6%8E%A2react-native/>
-<img src=https://picsum.photos/seed/c2c7c029452b45aa8117a63cd653cdb4/4096/2160 loading=lazy alt="Featured image of post 初探react Native">
-</a>
-</div>
-<div class=article-details>
-<h2 class=article-title>
-<a href=/p/%E5%88%9D%E6%8E%A2react-native/>初探react Native</a>
-</h2>
-<footer class=article-time>
-<div><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M11.795 21H5a2 2 0 01-2-2V7a2 2 0 012-2h12a2 2 0 012 2v4"/><circle cx="18" cy="18" r="4"/><path d="M15 3v4"/><path d="M7 3v4"/><path d="M3 11h16"/><path d="M18 16.496V18l1 1"/></svg>
-<time class=article-time--published>Sep 18, 2019</time>
-</div>
-</footer>
-</div>
-</header>
-<section class=article-content>
-<p>本文不介绍 React Native 的 API，API 可以参考官网或者 react native 中文网，主要是从环境搭建开始，利用豆瓣的开放 api 搭建一个豆瓣电影的应用。
-<figure>
-<a href=https://raw.githubusercontent.com/johnny19941216/storage-room/master/img/Screenshot_2018-01-02-16-02-39-091_host.exp.expon.png>
-<img src=https://raw.githubusercontent.com/johnny19941216/storage-room/master/img/Screenshot_2018-01-02-16-02-39-091_host.exp.expon.png loading=lazy alt=app截图>
-</a>
-<figcaption>app截图</figcaption>
-</figure></p>
-<h2 id=一环境搭建>一、环境搭建</h2>
-<p>环境搭建可以参考<a class=link href=https://reactnative.cn/docs/0.50/getting-started.html target=_blank rel=noopener>官网</a><br>
-必要的依赖<br>
-①、Python 2<br>
-②、Node<br>
-③、yarn<br>
-④、Android Studio<br>
-⑤、Expo</p>
-<h2 id=二hello-world>二、Hello World</h2>
-<p><code>npm install -g create-react-native-app</code><br>
-选择一个文件夹作为你的项目地址<br>
-<code>create-react-native-app douban_movie</code><br>
-<code>cd douban_movie</code><br>
-<code>npm start</code><br>
-等待命令行出现一个二维码，然后在手机上打开 expo 扫面这个二维码，就可以实时预览 app 效果了。</p>
-<h2 id=三项目构思>三、项目构思</h2>
-<p>目前在
+四、开工 1、项目目录结构： |------components | |------http | |------views | App.js | package.json 2、获取接口数据 在 react native 中进行 http 请求使用的 api 是fetch fetch是一种新的web HTTP请求api，现在已经内置在了大多数的浏览器中，在此之前web HTTP请求都是通过 XMLHttpRequest实现的"><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content="https://picsum.photos/seed/c2c7c029452b45aa8117a63cd653cdb4/4096/2160"><link rel="shortcut icon" href=/img/favicon.ico><script async src="https://www.googletagmanager.com/gtag/js?id=G-TFV4P906GT"></script>
+<script>var doNotTrack=!1;if(!doNotTrack){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-TFV4P906GT",{anonymize_ip:!1})}</script></head><body class=article-page><script>(function(){const e="StackColorScheme";localStorage.getItem(e)||localStorage.setItem(e,"auto")})()</script><script>(function(){const t="StackColorScheme",e=localStorage.getItem(t),n=window.matchMedia("(prefers-color-scheme: dark)").matches===!0;e=="dark"||e==="auto"&&n?document.documentElement.dataset.scheme="dark":document.documentElement.dataset.scheme="light"})()</script><div class="container main-container flex
+on-phone--column extended"><aside class="sidebar left-sidebar sticky"><button class="hamburger hamburger--spin" type=button id=toggle-menu aria-label=切换菜单>
+<span class=hamburger-box><span class=hamburger-inner></span></span></button><header class=site-info><figure class=site-avatar><img src=/img/avatar_hud170f2c6bd12f3a098a294aad792bf80_1699879_300x0_resize_box_3.png width=300 height=195 class=site-logo loading=lazy alt=Avatar>
+<span class=emoji>🏂🏻</span></figure><h1 class=site-name><a href=https://jo-hnny.github.io/>冷宫</a></h1><h2 class=site-description>她们都被我打入了冷宫，但是偶尔还是会过来看一下</h2></header><ol class=menu id=main-menu><li><a href=/><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><polyline points="5 12 3 12 12 3 21 12 19 12"/><path d="M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"/><path d="M9 21v-6a2 2 0 012-2h2a2 2 0 012 2v6"/></svg><span>Home</span></a></li><li><a href=/about><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="7" r="4"/><path d="M6 21v-2a4 4 0 014-4h4a4 4 0 014 4v2"/></svg><span>About</span></a></li><li><a href=/talks><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-hipchat" width="44" height="44" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M17.802 17.292s.077-.055.2-.149C19.845 15.718 21 13.653 21 11.354c0-4.286-4.03-7.764-8.998-7.764C7.032 3.59 3 7.068 3 11.354 3 15.642 7.03 19 12 19c.424.0 1.12-.028 2.088-.084 1.262.82 3.104 1.493 4.716 1.493.499.0.734-.41.414-.828-.486-.596-1.156-1.551-1.416-2.29z"/><path d="M7.5 13.5c2.5 2.5 6.5 2.5 9 0"/></svg><span>Talks</span></a></li><li><a href=/archives><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><rect x="3" y="4" width="18" height="4" rx="2"/><path d="M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8"/><line x1="10" y1="12" x2="14" y2="12"/></svg><span>Archives</span></a></li><li><a href=/search><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="10" cy="10" r="7"/><line x1="21" y1="21" x2="15" y2="15"/></svg><span>Search</span></a></li><li><a href=/index.xml><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-rss" width="44" height="44" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><circle cx="5" cy="19" r="1"/><path d="M4 4a16 16 0 0116 16"/><path d="M4 11a9 9 0 019 9"/></svg><span>Feed</span></a></li><li id=dark-mode-toggle><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="8" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="16" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg><span>暗色模式</span></li></ol></aside><main class="main full-width"><article class="has-image main-article"><header class=article-header><div class=article-image><a href=/p/%E5%88%9D%E6%8E%A2react-native/><img src=https://picsum.photos/seed/c2c7c029452b45aa8117a63cd653cdb4/4096/2160 loading=lazy alt="Featured image of post 初探react Native"></a></div><div class=article-details><h2 class=article-title><a href=/p/%E5%88%9D%E6%8E%A2react-native/>初探react Native</a></h2><footer class=article-time><div><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M11.795 21H5a2 2 0 01-2-2V7a2 2 0 012-2h12a2 2 0 012 2v4"/><circle cx="18" cy="18" r="4"/><path d="M15 3v4"/><path d="M7 3v4"/><path d="M3 11h16"/><path d="M18 16.496V18l1 1"/></svg><time class=article-time--published>Sep 18, 2019</time></div></footer></div></header><section class=article-content><p>本文不介绍 React Native 的 API，API 可以参考官网或者 react native 中文网，主要是从环境搭建开始，利用豆瓣的开放 api 搭建一个豆瓣电影的应用。<figure><a href=https://raw.githubusercontent.com/johnny19941216/storage-room/master/img/Screenshot_2018-01-02-16-02-39-091_host.exp.expon.png><img src=https://raw.githubusercontent.com/johnny19941216/storage-room/master/img/Screenshot_2018-01-02-16-02-39-091_host.exp.expon.png loading=lazy alt=app截图></a><figcaption>app截图</figcaption></figure></p><h2 id=一环境搭建>一、环境搭建</h2><p>环境搭建可以参考<a class=link href=https://reactnative.cn/docs/0.50/getting-started.html target=_blank rel=noopener>官网</a><br>必要的依赖<br>①、Python 2<br>②、Node<br>③、yarn<br>④、Android Studio<br>⑤、Expo</p><h2 id=二hello-world>二、Hello World</h2><p><code>npm install -g create-react-native-app</code><br>选择一个文件夹作为你的项目地址<br><code>create-react-native-app douban_movie</code><br><code>cd douban_movie</code><br><code>npm start</code><br>等待命令行出现一个二维码，然后在手机上打开 expo 扫面这个二维码，就可以实时预览 app 效果了。</p><h2 id=三项目构思>三、项目构思</h2><p>目前在
 <a class=link href="https://developers.douban.com/wiki/title=movie_v2#subject" target=_blank rel=noopener>豆瓣电影 API</a>
-中确认不用注册可以直接使用的接口有这些<br>
-<figure>
-<a href=https://raw.githubusercontent.com/johnny19941216/storage-room/master/img/20190918202412.png>
-<img src=https://raw.githubusercontent.com/johnny19941216/storage-room/master/img/20190918202412.png loading=lazy alt=豆瓣电影api截图>
-</a>
-<figcaption>豆瓣电影api截图</figcaption>
-</figure><br>
-按照这些 api 提供的信息大致确定页面结构为：<br>
-1、tab 导航页：包括搜索页面、top250、北美票房榜页面、正在上映页面、即将上映页面<br>
-2、详情页面：包括电影详情和演员详情</p>
-<h2 id=四开工>四、开工</h2>
-<h3 id=1项目目录结构>1、项目目录结构：</h3>
-<pre tabindex=0><code>|------components
+中确认不用注册可以直接使用的接口有这些<br><figure><a href=https://raw.githubusercontent.com/johnny19941216/storage-room/master/img/20190918202412.png><img src=https://raw.githubusercontent.com/johnny19941216/storage-room/master/img/20190918202412.png loading=lazy alt=豆瓣电影api截图></a><figcaption>豆瓣电影api截图</figcaption></figure><br>按照这些 api 提供的信息大致确定页面结构为：<br>1、tab 导航页：包括搜索页面、top250、北美票房榜页面、正在上映页面、即将上映页面<br>2、详情页面：包括电影详情和演员详情</p><h2 id=四开工>四、开工</h2><h3 id=1项目目录结构>1、项目目录结构：</h3><pre tabindex=0><code>|------components
 |
 |------http
 |
@@ -191,324 +64,244 @@ on-phone--column extended">
 App.js
 |
 package.json
-</code></pre><h3 id=2获取接口数据>2、获取接口数据</h3>
-<h4 id=在-react-native-中进行-http-请求使用的-api-是fetchhttpsdevelopermozillaorgzh-cndocswebapifetch_apiusing_fetch>在 react native 中进行 http 请求使用的 api 是<a class=link href=https://developer.mozilla.org/zh-CN/docs/Web/API/Fetch_API/Using_Fetch target=_blank rel=noopener>fetch</a></h4>
-<p><code>fetch是一种新的web HTTP请求api，现在已经内置在了大多数的浏览器中，在此之前web HTTP请求都是通过 XMLHttpRequest实现的</code></p>
-<h4 id=请注意fetch-规范与-jqueryajax-主要有两种方式的不同牢记>请注意，fetch 规范与 jQuery.ajax() 主要有两种方式的不同，牢记：</h4>
-<p>当接收到一个代表错误的 HTTP 状态码时，从 fetch()返回的 Promise 不会被标记为 reject， 即使该 HTTP 响应的状态码是 404 或 500。相反，它会将 Promise 状态标记为 resolve （但是会将 resolve 的返回值的 ok 属性设置为 false ）， 仅当网络故障时或请求被阻止时，才会标记为 reject。
-默认情况下, fetch 不会从服务端发送或接收任何 cookies, 如果站点依赖于用户 session，则会导致未经认证的请求（要发送 cookies，必须设置 credentials 选项）.</p>
-<h4 id=各浏览器对-fetch-的支持情况>各浏览器对 fetch 的支持情况：</h4>
-<p><figure>
-<a href=https://raw.githubusercontent.com/johnny19941216/storage-room/master//img/can_i_use_fetch.png>
-<img src=https://raw.githubusercontent.com/johnny19941216/storage-room/master//img/can_i_use_fetch.png loading=lazy alt="can i use fetch">
-</a>
-<figcaption>can i use fetch</figcaption>
-</figure></p>
-<h4 id=httpfetchapijs>/http/fetchApi.js</h4>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-js data-lang=js><span class=kr>export</span> <span class=k>default</span> <span class=nx>fetchApi</span> <span class=o>=</span> <span class=p>(</span><span class=nx>url</span><span class=p>)</span> <span class=p>=&gt;</span> <span class=p>{</span>
-  <span class=k>return</span> <span class=nx>fetch</span><span class=p>(</span><span class=nx>url</span><span class=p>).</span><span class=nx>then</span><span class=p>((</span><span class=nx>rsp</span><span class=p>)</span> <span class=p>=&gt;</span> <span class=p>{</span>
-    <span class=k>if</span> <span class=p>(</span><span class=nx>rsp</span><span class=p>.</span><span class=nx>ok</span><span class=p>)</span> <span class=k>return</span> <span class=nx>rsp</span><span class=p>.</span><span class=nx>json</span><span class=p>();</span>
-    <span class=k>return</span> <span class=nb>Promise</span><span class=p>.</span><span class=nx>reject</span><span class=p>(</span><span class=nx>rsp</span><span class=p>.</span><span class=nx>json</span><span class=p>());</span>
-  <span class=p>});</span>
-<span class=p>};</span>
-</code></pre></div><h4 id=httpapijs>/http/api.js</h4>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-js data-lang=js><span class=kr>import</span> <span class=nx>fetchApi</span> <span class=nx>from</span> <span class=s2>&#34;./fetchApi&#34;</span><span class=p>;</span>
-<span class=kr>const</span> <span class=nx>baseUrl</span> <span class=o>=</span> <span class=s2>&#34;https://api.douban.com/v2/movie/&#34;</span><span class=p>;</span>
-
-<span class=nx>exports</span><span class=p>.</span><span class=nx>movieInfo</span> <span class=o>=</span> <span class=p>(</span><span class=nx>id</span><span class=p>)</span> <span class=p>=&gt;</span> <span class=nx>fetchApi</span><span class=p>(</span><span class=sb>`</span><span class=si>${</span><span class=nx>baseUrl</span><span class=si>}</span><span class=sb>subject/</span><span class=si>${</span><span class=nx>id</span><span class=si>}</span><span class=sb>`</span><span class=p>);</span>
-
-<span class=nx>exports</span><span class=p>.</span><span class=nx>actorInfo</span> <span class=o>=</span> <span class=p>(</span><span class=nx>id</span><span class=p>)</span> <span class=p>=&gt;</span> <span class=nx>fetchApi</span><span class=p>(</span><span class=sb>`</span><span class=si>${</span><span class=nx>baseUrl</span><span class=si>}</span><span class=sb>celebrity/</span><span class=si>${</span><span class=nx>id</span><span class=si>}</span><span class=sb>`</span><span class=p>);</span>
-
-<span class=nx>exports</span><span class=p>.</span><span class=nx>search</span> <span class=o>=</span> <span class=p>(</span><span class=nx>q</span><span class=p>,</span> <span class=nx>start</span> <span class=o>=</span> <span class=mi>0</span><span class=p>,</span> <span class=nx>count</span> <span class=o>=</span> <span class=mi>10</span><span class=p>)</span> <span class=p>=&gt;</span>
-  <span class=nx>fetchApi</span><span class=p>(</span><span class=sb>`</span><span class=si>${</span><span class=nx>baseUrl</span><span class=si>}</span><span class=sb>search?q=</span><span class=si>${</span><span class=nx>q</span><span class=si>}</span><span class=sb>&amp;start=</span><span class=si>${</span><span class=nx>start</span><span class=si>}</span><span class=sb>&amp;count=</span><span class=si>${</span><span class=nx>count</span><span class=si>}</span><span class=sb>`</span><span class=p>);</span>
-
-<span class=nx>exports</span><span class=p>.</span><span class=nx>top250</span> <span class=o>=</span> <span class=p>(</span><span class=nx>start</span> <span class=o>=</span> <span class=mi>0</span><span class=p>,</span> <span class=nx>count</span> <span class=o>=</span> <span class=mi>10</span><span class=p>)</span> <span class=p>=&gt;</span>
-  <span class=nx>fetchApi</span><span class=p>(</span><span class=sb>`</span><span class=si>${</span><span class=nx>baseUrl</span><span class=si>}</span><span class=sb>top250?start=</span><span class=si>${</span><span class=nx>start</span><span class=si>}</span><span class=sb>&amp;count=</span><span class=si>${</span><span class=nx>count</span><span class=si>}</span><span class=sb>`</span><span class=p>);</span>
-
-<span class=nx>exports</span><span class=p>.</span><span class=nx>usBox</span> <span class=o>=</span> <span class=p>()</span> <span class=p>=&gt;</span> <span class=nx>fetchApi</span><span class=p>(</span><span class=sb>`</span><span class=si>${</span><span class=nx>baseUrl</span><span class=si>}</span><span class=sb>us_box`</span><span class=p>);</span>
-
-<span class=nx>exports</span><span class=p>.</span><span class=nx>showing</span> <span class=o>=</span> <span class=p>()</span> <span class=p>=&gt;</span> <span class=nx>fetchApi</span><span class=p>(</span><span class=sb>`</span><span class=si>${</span><span class=nx>baseUrl</span><span class=si>}</span><span class=sb>in_theaters`</span><span class=p>);</span>
-
-<span class=nx>exports</span><span class=p>.</span><span class=nx>comingSoon</span> <span class=o>=</span> <span class=p>(</span><span class=nx>start</span> <span class=o>=</span> <span class=mi>0</span><span class=p>,</span> <span class=nx>count</span> <span class=o>=</span> <span class=mi>10</span><span class=p>)</span> <span class=p>=&gt;</span>
-  <span class=nx>fetchApi</span><span class=p>(</span><span class=sb>`</span><span class=si>${</span><span class=nx>baseUrl</span><span class=si>}</span><span class=sb>coming_soon?start=</span><span class=si>${</span><span class=nx>start</span><span class=si>}</span><span class=sb>&amp;count=</span><span class=si>${</span><span class=nx>count</span><span class=si>}</span><span class=sb>`</span><span class=p>);</span>
-</code></pre></div><h3 id=3基础组件-components>3、基础组件 /components</h3>
-<h4 id=首先需要一个卡片组件来展示最基本的电影信息---电影名称海报评分-componentsmoviecardjs>首先需要一个卡片组件来展示最基本的电影信息&mdash;电影名称、海报、评分 /components/MovieCard.js</h4>
-<p>这里用到了一个组件库<a class=link href=https://react-native-training.github.io/react-native-elements/ target=_blank rel=noopener>react-native-elements</a></p>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-jsx data-lang=jsx><span class=kr>import</span> <span class=nx>React</span> <span class=nx>from</span> <span class=s2>&#34;react&#34;</span><span class=p>;</span>
-<span class=kr>import</span> <span class=p>{</span> <span class=nx>StyleSheet</span><span class=p>,</span> <span class=nx>Text</span><span class=p>,</span> <span class=nx>Image</span> <span class=p>}</span> <span class=nx>from</span> <span class=s2>&#34;react-native&#34;</span><span class=p>;</span>
-<span class=kr>import</span> <span class=p>{</span> <span class=nx>Card</span><span class=p>,</span> <span class=nx>Rating</span> <span class=p>}</span> <span class=nx>from</span> <span class=s2>&#34;react-native-elements&#34;</span><span class=p>;</span>
-
-<span class=kr>export</span> <span class=k>default</span> <span class=kr>class</span> <span class=nx>MovieCard</span> <span class=kr>extends</span> <span class=nx>React</span><span class=p>.</span><span class=nx>Component</span> <span class=p>{</span>
-  <span class=nx>constructor</span><span class=p>(</span><span class=nx>props</span><span class=p>)</span> <span class=p>{</span>
-    <span class=kr>super</span><span class=p>(</span><span class=nx>props</span><span class=p>);</span>
-  <span class=p>}</span>
-  <span class=nx>render</span><span class=p>()</span> <span class=p>{</span>
-    <span class=k>return</span> <span class=p>(</span>
-      <span class=p>&lt;</span><span class=nt>Card</span>
-        <span class=na>title</span><span class=o>=</span><span class=p>{</span><span class=k>this</span><span class=p>.</span><span class=nx>props</span><span class=p>.</span><span class=nx>title</span><span class=p>}</span>
-        <span class=na>image</span><span class=o>=</span><span class=p>{{</span> <span class=nx>uri</span><span class=o>:</span> <span class=k>this</span><span class=p>.</span><span class=nx>props</span><span class=p>.</span><span class=nx>img</span> <span class=p>}}</span>
-        <span class=na>containerStyle</span><span class=o>=</span><span class=p>{</span><span class=nx>styles</span><span class=p>.</span><span class=nx>card</span><span class=p>}</span>
-      <span class=p>&gt;</span>
-        <span class=p>&lt;</span><span class=nt>Rating</span>
-          <span class=na>type</span><span class=o>=</span><span class=s>&#34;star&#34;</span>
-          <span class=na>fractions</span><span class=o>=</span><span class=p>{</span><span class=mi>1</span><span class=p>}</span>
-          <span class=na>startingValue</span><span class=o>=</span><span class=p>{</span><span class=k>this</span><span class=p>.</span><span class=nx>props</span><span class=p>.</span><span class=nx>rating</span><span class=p>}</span>
-          <span class=na>readonly</span>
-          <span class=na>imageSize</span><span class=o>=</span><span class=p>{</span><span class=mi>25</span><span class=p>}</span>
-        <span class=p>/&gt;</span>
-      <span class=p>&lt;/</span><span class=nt>Card</span><span class=p>&gt;</span>
-    <span class=p>);</span>
-  <span class=p>}</span>
-<span class=p>}</span>
-
-<span class=kr>const</span> <span class=nx>styles</span> <span class=o>=</span> <span class=nx>StyleSheet</span><span class=p>.</span><span class=nx>create</span><span class=p>({</span>
-  <span class=nx>card</span><span class=o>:</span> <span class=p>{</span>
-    <span class=nx>width</span><span class=o>:</span> <span class=mi>150</span><span class=p>,</span>
-    <span class=nx>height</span><span class=o>:</span> <span class=mi>240</span><span class=p>,</span>
-    <span class=nx>justifyContent</span><span class=o>:</span> <span class=s2>&#34;space-around&#34;</span><span class=p>,</span>
-    <span class=nx>alignItems</span><span class=o>:</span> <span class=s2>&#34;center&#34;</span><span class=p>,</span>
-  <span class=p>},</span>
-<span class=p>});</span>
-</code></pre></div><h4 id=卡片列表组件-componentslistpagejs>卡片列表组件 /components/ListPage.js</h4>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-jsx data-lang=jsx><span class=kr>import</span> <span class=nx>React</span> <span class=nx>from</span> <span class=s2>&#34;react&#34;</span><span class=p>;</span>
-<span class=kr>import</span> <span class=p>{</span> <span class=nx>FlatList</span><span class=p>,</span> <span class=nx>TouchableHighlight</span><span class=p>,</span> <span class=nx>View</span><span class=p>,</span> <span class=nx>StyleSheet</span> <span class=p>}</span> <span class=nx>from</span> <span class=s2>&#34;react-native&#34;</span><span class=p>;</span>
-<span class=kr>import</span> <span class=nx>MovieCard</span> <span class=nx>from</span> <span class=s2>&#34;./MovieCard&#34;</span><span class=p>;</span>
-
-<span class=kr>export</span> <span class=k>default</span> <span class=kr>class</span> <span class=nx>ListPage</span> <span class=kr>extends</span> <span class=nx>React</span><span class=p>.</span><span class=nx>Component</span> <span class=p>{</span>
-  <span class=nx>constructor</span><span class=p>(</span><span class=nx>props</span><span class=p>)</span> <span class=p>{</span>
-    <span class=kr>super</span><span class=p>(</span><span class=nx>props</span><span class=p>);</span>
-  <span class=p>}</span>
-
-  <span class=nx>render</span><span class=p>()</span> <span class=p>{</span>
-    <span class=kr>const</span> <span class=p>{</span> <span class=nx>navigate</span> <span class=p>}</span> <span class=o>=</span> <span class=k>this</span><span class=p>.</span><span class=nx>props</span><span class=p>.</span><span class=nx>navigation</span><span class=p>;</span>
-    <span class=k>if</span> <span class=p>(</span><span class=o>!</span><span class=k>this</span><span class=p>.</span><span class=nx>props</span><span class=p>.</span><span class=nx>movies</span><span class=p>.</span><span class=nx>length</span><span class=p>)</span> <span class=k>return</span> <span class=p>&lt;</span><span class=nt>View</span><span class=p>&gt;&lt;/</span><span class=nt>View</span><span class=p>&gt;;</span>
-    <span class=k>return</span> <span class=p>(</span>
-      <span class=p>&lt;</span><span class=nt>FlatList</span>
-        <span class=na>data</span><span class=o>=</span><span class=p>{</span><span class=k>this</span><span class=p>.</span><span class=nx>props</span><span class=p>.</span><span class=nx>movies</span><span class=p>}</span>
-        <span class=na>renderItem</span><span class=o>=</span><span class=p>{({</span> <span class=nx>item</span> <span class=p>})</span> <span class=p>=&gt;</span> <span class=p>(</span>
-          <span class=p>&lt;</span><span class=nt>TouchableHighlight</span>
-            <span class=na>onPress</span><span class=o>=</span><span class=p>{()</span> <span class=p>=&gt;</span> <span class=nx>navigate</span><span class=p>(</span><span class=s2>&#34;MovieInfo&#34;</span><span class=p>,</span> <span class=p>{</span> <span class=nx>id</span><span class=o>:</span> <span class=nx>item</span><span class=p>.</span><span class=nx>id</span> <span class=p>})}</span>
-          <span class=p>&gt;</span>
-            <span class=p>&lt;</span><span class=nt>View</span><span class=p>&gt;</span>
-              <span class=p>&lt;</span><span class=nt>MovieCard</span>
-                <span class=na>img</span><span class=o>=</span><span class=p>{</span><span class=nx>item</span><span class=p>.</span><span class=nx>images</span><span class=p>.</span><span class=nx>small</span><span class=p>}</span>
-                <span class=na>rating</span><span class=o>=</span><span class=p>{</span><span class=nx>item</span><span class=p>.</span><span class=nx>rating</span><span class=p>.</span><span class=nx>average</span><span class=p>}</span>
-                <span class=na>title</span><span class=o>=</span><span class=p>{</span><span class=nx>item</span><span class=p>.</span><span class=nx>title</span><span class=p>}</span>
-              <span class=p>/&gt;</span>
-            <span class=p>&lt;/</span><span class=nt>View</span><span class=p>&gt;</span>
-          <span class=p>&lt;/</span><span class=nt>TouchableHighlight</span><span class=p>&gt;</span>
-        <span class=p>)}</span>
-        <span class=na>keyExtractor</span><span class=o>=</span><span class=p>{(</span><span class=nx>item</span><span class=p>)</span> <span class=p>=&gt;</span> <span class=nx>item</span><span class=p>.</span><span class=nx>id</span><span class=p>}</span>
-        <span class=na>numColumns</span><span class=o>=</span><span class=p>{</span><span class=mi>2</span><span class=p>}</span>
-        <span class=na>onEndReachedThreshold</span><span class=o>=</span><span class=p>{</span><span class=mf>0.5</span><span class=p>}</span>
-        <span class=na>onEndReached</span><span class=o>=</span><span class=p>{</span><span class=k>this</span><span class=p>.</span><span class=nx>props</span><span class=p>.</span><span class=nx>loadData</span><span class=p>}</span>
-      <span class=p>/&gt;</span>
-    <span class=p>);</span>
-  <span class=p>}</span>
-<span class=p>}</span>
-</code></pre></div><h3 id=4页面-views>4、页面 /views</h3>
-<h4 id=viewstop250-viewsusboxjs-viewsshowingjs-viewscomingsoonjs-这几个页面的逻辑是相似的只是数据不一样而已就只看一下-top250js-的代码>/views/Top250 /views/UsBox.js /views/Showing.js /views/ComingSoon.js 这几个页面的逻辑是相似的，只是数据不一样而已,就只看一下 Top250.js 的代码</h4>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-jsx data-lang=jsx><span class=kr>import</span> <span class=nx>React</span> <span class=nx>from</span> <span class=s2>&#34;react&#34;</span><span class=p>;</span>
-<span class=kr>import</span> <span class=p>{</span> <span class=nx>top250</span> <span class=p>}</span> <span class=nx>from</span> <span class=s2>&#34;../http/api&#34;</span><span class=p>;</span>
-<span class=kr>import</span> <span class=nx>ListPage</span> <span class=nx>from</span> <span class=s2>&#34;../components/ListPage&#34;</span><span class=p>;</span>
-
-<span class=kr>export</span> <span class=k>default</span> <span class=kr>class</span> <span class=nx>Top250</span> <span class=kr>extends</span> <span class=nx>React</span><span class=p>.</span><span class=nx>Component</span> <span class=p>{</span>
-  <span class=nx>constructor</span><span class=p>()</span> <span class=p>{</span>
-    <span class=kr>super</span><span class=p>();</span>
-    <span class=k>this</span><span class=p>.</span><span class=nx>state</span> <span class=o>=</span> <span class=p>{</span>
-      <span class=nx>movies</span><span class=o>:</span> <span class=p>[],</span>
-    <span class=p>};</span>
-    <span class=k>this</span><span class=p>.</span><span class=nx>getTop250</span><span class=p>();</span>
-  <span class=p>}</span>
-
-  <span class=kr>static</span> <span class=nx>navigationOptions</span> <span class=o>=</span> <span class=p>{</span>
-    <span class=nx>tabBarLabel</span><span class=o>:</span> <span class=s2>&#34;Top 250&#34;</span><span class=p>,</span>
-  <span class=p>};</span>
-
-  <span class=nx>getTop250</span> <span class=o>=</span> <span class=p>()</span> <span class=p>=&gt;</span> <span class=p>{</span>
-    <span class=nx>top250</span><span class=p>(</span><span class=k>this</span><span class=p>.</span><span class=nx>state</span><span class=p>.</span><span class=nx>movies</span><span class=p>.</span><span class=nx>length</span><span class=p>)</span>
-      <span class=p>.</span><span class=nx>then</span><span class=p>((</span><span class=nx>rsp</span><span class=p>)</span> <span class=p>=&gt;</span> <span class=p>{</span>
-        <span class=k>this</span><span class=p>.</span><span class=nx>setState</span><span class=p>((</span><span class=nx>preSate</span><span class=p>)</span> <span class=p>=&gt;</span> <span class=p>({</span>
-          <span class=nx>movies</span><span class=o>:</span> <span class=nx>preSate</span><span class=p>.</span><span class=nx>movies</span><span class=p>.</span><span class=nx>concat</span><span class=p>(</span><span class=nx>rsp</span><span class=p>.</span><span class=nx>subjects</span><span class=p>),</span>
-        <span class=p>}));</span>
-      <span class=p>})</span>
-      <span class=p>.</span><span class=k>catch</span><span class=p>((</span><span class=nx>err</span><span class=p>)</span> <span class=p>=&gt;</span> <span class=p>{</span>
-        <span class=nx>console</span><span class=p>.</span><span class=nx>log</span><span class=p>(</span><span class=s2>&#34;getTop250 error&#34;</span><span class=p>,</span> <span class=nx>err</span><span class=p>);</span>
-      <span class=p>});</span>
-  <span class=p>};</span>
-
-  <span class=nx>render</span><span class=p>()</span> <span class=p>{</span>
-    <span class=k>return</span> <span class=p>(</span>
-      <span class=p>&lt;</span><span class=nt>ListPage</span>
-        <span class=na>movies</span><span class=o>=</span><span class=p>{</span><span class=k>this</span><span class=p>.</span><span class=nx>state</span><span class=p>.</span><span class=nx>movies</span><span class=p>}</span>
-        <span class=na>loadData</span><span class=o>=</span><span class=p>{</span><span class=k>this</span><span class=p>.</span><span class=nx>getTop250</span><span class=p>}</span>
-        <span class=na>navigation</span><span class=o>=</span><span class=p>{</span><span class=k>this</span><span class=p>.</span><span class=nx>props</span><span class=p>.</span><span class=nx>navigation</span><span class=p>}</span>
-      <span class=p>/&gt;</span>
-    <span class=p>);</span>
-  <span class=p>}</span>
-<span class=p>}</span>
-</code></pre></div><h4 id=搜索页面-viewshomejs>搜索页面 /views/Home.js</h4>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-jsx data-lang=jsx><span class=kr>import</span> <span class=nx>React</span> <span class=nx>from</span> <span class=s2>&#34;react&#34;</span><span class=p>;</span>
-<span class=kr>import</span> <span class=p>{</span> <span class=nx>StyleSheet</span><span class=p>,</span> <span class=nx>View</span> <span class=p>}</span> <span class=nx>from</span> <span class=s2>&#34;react-native&#34;</span><span class=p>;</span>
-<span class=kr>import</span> <span class=p>{</span> <span class=nx>SearchBar</span> <span class=p>}</span> <span class=nx>from</span> <span class=s2>&#34;react-native-elements&#34;</span><span class=p>;</span>
-<span class=kr>import</span> <span class=p>{</span> <span class=nx>search</span> <span class=p>}</span> <span class=nx>from</span> <span class=s2>&#34;../http/api&#34;</span><span class=p>;</span>
-<span class=kr>import</span> <span class=nx>ListPage</span> <span class=nx>from</span> <span class=s2>&#34;../components/ListPage&#34;</span><span class=p>;</span>
-
-<span class=kr>export</span> <span class=k>default</span> <span class=kr>class</span> <span class=nx>Home</span> <span class=kr>extends</span> <span class=nx>React</span><span class=p>.</span><span class=nx>Component</span> <span class=p>{</span>
-  <span class=nx>constructor</span><span class=p>()</span> <span class=p>{</span>
-    <span class=kr>super</span><span class=p>();</span>
-    <span class=k>this</span><span class=p>.</span><span class=nx>state</span> <span class=o>=</span> <span class=p>{</span>
-      <span class=nx>movies</span><span class=o>:</span> <span class=p>[],</span>
-      <span class=nx>key</span><span class=o>:</span> <span class=s2>&#34;&#34;</span><span class=p>,</span>
-    <span class=p>};</span>
-  <span class=p>}</span>
-
-  <span class=kr>static</span> <span class=nx>navigationOptions</span> <span class=o>=</span> <span class=p>{</span>
-    <span class=nx>tabBarLabel</span><span class=o>:</span> <span class=s2>&#34;主页&#34;</span><span class=p>,</span>
-  <span class=p>};</span>
-
-  <span class=nx>keyChange</span> <span class=o>=</span> <span class=p>(</span><span class=nx>key</span><span class=p>)</span> <span class=p>=&gt;</span> <span class=p>{</span>
-    <span class=k>this</span><span class=p>.</span><span class=nx>setState</span><span class=p>({</span>
-      <span class=nx>key</span><span class=p>,</span>
-    <span class=p>});</span>
-    <span class=k>this</span><span class=p>.</span><span class=nx>getSearch</span><span class=p>();</span>
-  <span class=p>};</span>
-
-  <span class=nx>getSearch</span> <span class=o>=</span> <span class=p>()</span> <span class=p>=&gt;</span> <span class=p>{</span>
-    <span class=nx>search</span><span class=p>(</span><span class=k>this</span><span class=p>.</span><span class=nx>state</span><span class=p>.</span><span class=nx>key</span><span class=p>).</span><span class=nx>then</span><span class=p>((</span><span class=nx>rsp</span><span class=p>)</span> <span class=p>=&gt;</span> <span class=p>{</span>
-      <span class=k>this</span><span class=p>.</span><span class=nx>setState</span><span class=p>({</span>
-        <span class=nx>movies</span><span class=o>:</span> <span class=nx>rsp</span><span class=p>.</span><span class=nx>subjects</span><span class=p>,</span>
-      <span class=p>});</span>
-    <span class=p>});</span>
-  <span class=p>};</span>
-
-  <span class=nx>render</span><span class=p>()</span> <span class=p>{</span>
-    <span class=k>return</span> <span class=p>(</span>
-      <span class=p>&lt;</span><span class=nt>View</span><span class=p>&gt;</span>
-        <span class=p>&lt;</span><span class=nt>SearchBar</span> <span class=na>onChangeText</span><span class=o>=</span><span class=p>{</span><span class=k>this</span><span class=p>.</span><span class=nx>keyChange</span><span class=p>}</span> <span class=na>placeholder</span><span class=o>=</span><span class=s>&#34;输入关键字搜索&#34;</span> <span class=p>/&gt;</span>
-        <span class=p>&lt;</span><span class=nt>ListPage</span>
-          <span class=na>movies</span><span class=o>=</span><span class=p>{</span><span class=k>this</span><span class=p>.</span><span class=nx>state</span><span class=p>.</span><span class=nx>movies</span><span class=p>}</span>
-          <span class=na>loadData</span><span class=o>=</span><span class=p>{</span><span class=k>this</span><span class=p>.</span><span class=nx>getSearch</span><span class=p>}</span>
-          <span class=na>navigation</span><span class=o>=</span><span class=p>{</span><span class=k>this</span><span class=p>.</span><span class=nx>props</span><span class=p>.</span><span class=nx>navigation</span><span class=p>}</span>
-        <span class=p>/&gt;</span>
-      <span class=p>&lt;/</span><span class=nt>View</span><span class=p>&gt;</span>
-    <span class=p>);</span>
-  <span class=p>}</span>
-<span class=p>}</span>
-</code></pre></div><h3 id=5导航实现>5、导航实现</h3>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-jsx data-lang=jsx><span class=kr>import</span> <span class=nx>React</span> <span class=nx>from</span> <span class=s2>&#34;react&#34;</span><span class=p>;</span>
-<span class=kr>import</span> <span class=p>{</span> <span class=nx>TabNavigator</span><span class=p>,</span> <span class=nx>StackNavigator</span> <span class=p>}</span> <span class=nx>from</span> <span class=s2>&#34;react-navigation&#34;</span><span class=p>;</span>
-<span class=kr>import</span> <span class=nx>Home</span> <span class=nx>from</span> <span class=s2>&#34;./views/Home&#34;</span><span class=p>;</span>
-<span class=kr>import</span> <span class=nx>Top250</span> <span class=nx>from</span> <span class=s2>&#34;./views/Top250&#34;</span><span class=p>;</span>
-<span class=kr>import</span> <span class=nx>UsBox</span> <span class=nx>from</span> <span class=s2>&#34;./views/UsBox&#34;</span><span class=p>;</span>
-<span class=kr>import</span> <span class=nx>Showing</span> <span class=nx>from</span> <span class=s2>&#34;./views/Showing&#34;</span><span class=p>;</span>
-<span class=kr>import</span> <span class=nx>ComingSoon</span> <span class=nx>from</span> <span class=s2>&#34;./views/ComingSoon&#34;</span><span class=p>;</span>
-<span class=kr>import</span> <span class=nx>MovieInfo</span> <span class=nx>from</span> <span class=s2>&#34;./views/MovieInfo&#34;</span><span class=p>;</span>
-<span class=kr>import</span> <span class=nx>ActorInfo</span> <span class=nx>from</span> <span class=s2>&#34;./views/ActorInfo&#34;</span><span class=p>;</span>
-
-<span class=kr>export</span> <span class=k>default</span> <span class=nx>MyApp</span> <span class=o>=</span> <span class=nx>StackNavigator</span><span class=p>(</span>
-  <span class=p>{</span>
-    <span class=nx>FirstScreen</span><span class=o>:</span> <span class=p>{</span>
-      <span class=nx>screen</span><span class=o>:</span> <span class=nx>TabNavigator</span><span class=p>(</span>
-        <span class=p>{</span>
-          <span class=nx>Top250</span><span class=o>:</span> <span class=p>{</span>
-            <span class=nx>screen</span><span class=o>:</span> <span class=nx>Top250</span><span class=p>,</span>
-          <span class=p>},</span>
-          <span class=nx>UsBox</span><span class=o>:</span> <span class=p>{</span>
-            <span class=nx>screen</span><span class=o>:</span> <span class=nx>UsBox</span><span class=p>,</span>
-          <span class=p>},</span>
-          <span class=nx>Home</span><span class=o>:</span> <span class=p>{</span>
-            <span class=nx>screen</span><span class=o>:</span> <span class=nx>Home</span><span class=p>,</span>
-          <span class=p>},</span>
-          <span class=nx>Showing</span><span class=o>:</span> <span class=p>{</span>
-            <span class=nx>screen</span><span class=o>:</span> <span class=nx>Showing</span><span class=p>,</span>
-          <span class=p>},</span>
-          <span class=nx>ComingSoon</span><span class=o>:</span> <span class=p>{</span>
-            <span class=nx>screen</span><span class=o>:</span> <span class=nx>ComingSoon</span><span class=p>,</span>
-          <span class=p>},</span>
-        <span class=p>},</span>
-        <span class=p>{</span>
-          <span class=nx>tabBarPosition</span><span class=o>:</span> <span class=s2>&#34;bottom&#34;</span><span class=p>,</span>
-          <span class=nx>animationEnabled</span><span class=o>:</span> <span class=kc>true</span><span class=p>,</span>
-          <span class=nx>lazy</span><span class=o>:</span> <span class=kc>true</span><span class=p>,</span>
-          <span class=nx>initialRouteName</span><span class=o>:</span> <span class=s2>&#34;Home&#34;</span><span class=p>,</span>
-        <span class=p>}</span>
-      <span class=p>),</span>
-    <span class=p>},</span>
-    <span class=nx>MovieInfo</span><span class=o>:</span> <span class=p>{</span>
-      <span class=nx>screen</span><span class=o>:</span> <span class=nx>MovieInfo</span><span class=p>,</span>
-    <span class=p>},</span>
-    <span class=nx>ActorInfo</span><span class=o>:</span> <span class=p>{</span>
-      <span class=nx>screen</span><span class=o>:</span> <span class=nx>ActorInfo</span><span class=p>,</span>
-    <span class=p>},</span>
-  <span class=p>},</span>
-  <span class=p>{</span>
-    <span class=nx>headerMode</span><span class=o>:</span> <span class=s2>&#34;none&#34;</span><span class=p>,</span>
-  <span class=p>}</span>
-<span class=p>);</span>
-</code></pre></div>
-</section>
-<footer class=article-footer>
-<section class=article-copyright><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><path d="M14.5 9a3.5 4 0 100 6"/></svg>
-<span>Licensed under CC BY-NC-SA 4.0</span>
-</section>
-</footer>
-</article>
-<aside class=related-contents--wrapper>
-</aside>
-<script src=https://utteranc.es/client.js repo=jo-hnny/jo-hnny.github.io issue-term=title label=comments crossorigin=anonymous async></script>
-<style>.utterances{max-width:unset}</style>
-<script>function setUtterancesTheme(b){let a=document.querySelector('.utterances iframe');a&&a.contentWindow.postMessage({type:'set-theme',theme:`github-${b}`},'https://utteranc.es')}addEventListener('message',a=>{if(a.origin!=='https://utteranc.es')return;setUtterancesTheme(document.documentElement.dataset.scheme)}),window.addEventListener('onColorSchemeChange',a=>{setUtterancesTheme(a.detail)})</script>
-<footer class=site-footer>
-<section class=copyright>
-&copy;
+</code></pre><h3 id=2获取接口数据>2、获取接口数据</h3><h4 id=在-react-native-中进行-http-请求使用的-api-是fetchhttpsdevelopermozillaorgzh-cndocswebapifetch_apiusing_fetch>在 react native 中进行 http 请求使用的 api 是<a class=link href=https://developer.mozilla.org/zh-CN/docs/Web/API/Fetch_API/Using_Fetch target=_blank rel=noopener>fetch</a></h4><p><code>fetch是一种新的web HTTP请求api，现在已经内置在了大多数的浏览器中，在此之前web HTTP请求都是通过 XMLHttpRequest实现的</code></p><h4 id=请注意fetch-规范与-jqueryajax-主要有两种方式的不同牢记>请注意，fetch 规范与 jQuery.ajax() 主要有两种方式的不同，牢记：</h4><p>当接收到一个代表错误的 HTTP 状态码时，从 fetch()返回的 Promise 不会被标记为 reject， 即使该 HTTP 响应的状态码是 404 或 500。相反，它会将 Promise 状态标记为 resolve （但是会将 resolve 的返回值的 ok 属性设置为 false ）， 仅当网络故障时或请求被阻止时，才会标记为 reject。
+默认情况下, fetch 不会从服务端发送或接收任何 cookies, 如果站点依赖于用户 session，则会导致未经认证的请求（要发送 cookies，必须设置 credentials 选项）.</p><h4 id=各浏览器对-fetch-的支持情况>各浏览器对 fetch 的支持情况：</h4><p><figure><a href=https://raw.githubusercontent.com/johnny19941216/storage-room/master//img/can_i_use_fetch.png><img src=https://raw.githubusercontent.com/johnny19941216/storage-room/master//img/can_i_use_fetch.png loading=lazy alt="can i use fetch"></a><figcaption>can i use fetch</figcaption></figure></p><h4 id=httpfetchapijs>/http/fetchApi.js</h4><div class=highlight><pre tabindex=0 class=chroma><code class=language-js data-lang=js><span class=line><span class=cl><span class=kr>export</span> <span class=k>default</span> <span class=nx>fetchApi</span> <span class=o>=</span> <span class=p>(</span><span class=nx>url</span><span class=p>)</span> <span class=p>=&gt;</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=k>return</span> <span class=nx>fetch</span><span class=p>(</span><span class=nx>url</span><span class=p>).</span><span class=nx>then</span><span class=p>((</span><span class=nx>rsp</span><span class=p>)</span> <span class=p>=&gt;</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=p>(</span><span class=nx>rsp</span><span class=p>.</span><span class=nx>ok</span><span class=p>)</span> <span class=k>return</span> <span class=nx>rsp</span><span class=p>.</span><span class=nx>json</span><span class=p>();</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=nb>Promise</span><span class=p>.</span><span class=nx>reject</span><span class=p>(</span><span class=nx>rsp</span><span class=p>.</span><span class=nx>json</span><span class=p>());</span>
+</span></span><span class=line><span class=cl>  <span class=p>});</span>
+</span></span><span class=line><span class=cl><span class=p>};</span>
+</span></span></code></pre></div><h4 id=httpapijs>/http/api.js</h4><div class=highlight><pre tabindex=0 class=chroma><code class=language-js data-lang=js><span class=line><span class=cl><span class=kr>import</span> <span class=nx>fetchApi</span> <span class=nx>from</span> <span class=s2>&#34;./fetchApi&#34;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=kr>const</span> <span class=nx>baseUrl</span> <span class=o>=</span> <span class=s2>&#34;https://api.douban.com/v2/movie/&#34;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=nx>exports</span><span class=p>.</span><span class=nx>movieInfo</span> <span class=o>=</span> <span class=p>(</span><span class=nx>id</span><span class=p>)</span> <span class=p>=&gt;</span> <span class=nx>fetchApi</span><span class=p>(</span><span class=sb>`</span><span class=si>${</span><span class=nx>baseUrl</span><span class=si>}</span><span class=sb>subject/</span><span class=si>${</span><span class=nx>id</span><span class=si>}</span><span class=sb>`</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=nx>exports</span><span class=p>.</span><span class=nx>actorInfo</span> <span class=o>=</span> <span class=p>(</span><span class=nx>id</span><span class=p>)</span> <span class=p>=&gt;</span> <span class=nx>fetchApi</span><span class=p>(</span><span class=sb>`</span><span class=si>${</span><span class=nx>baseUrl</span><span class=si>}</span><span class=sb>celebrity/</span><span class=si>${</span><span class=nx>id</span><span class=si>}</span><span class=sb>`</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=nx>exports</span><span class=p>.</span><span class=nx>search</span> <span class=o>=</span> <span class=p>(</span><span class=nx>q</span><span class=p>,</span> <span class=nx>start</span> <span class=o>=</span> <span class=mi>0</span><span class=p>,</span> <span class=nx>count</span> <span class=o>=</span> <span class=mi>10</span><span class=p>)</span> <span class=p>=&gt;</span>
+</span></span><span class=line><span class=cl>  <span class=nx>fetchApi</span><span class=p>(</span><span class=sb>`</span><span class=si>${</span><span class=nx>baseUrl</span><span class=si>}</span><span class=sb>search?q=</span><span class=si>${</span><span class=nx>q</span><span class=si>}</span><span class=sb>&amp;start=</span><span class=si>${</span><span class=nx>start</span><span class=si>}</span><span class=sb>&amp;count=</span><span class=si>${</span><span class=nx>count</span><span class=si>}</span><span class=sb>`</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=nx>exports</span><span class=p>.</span><span class=nx>top250</span> <span class=o>=</span> <span class=p>(</span><span class=nx>start</span> <span class=o>=</span> <span class=mi>0</span><span class=p>,</span> <span class=nx>count</span> <span class=o>=</span> <span class=mi>10</span><span class=p>)</span> <span class=p>=&gt;</span>
+</span></span><span class=line><span class=cl>  <span class=nx>fetchApi</span><span class=p>(</span><span class=sb>`</span><span class=si>${</span><span class=nx>baseUrl</span><span class=si>}</span><span class=sb>top250?start=</span><span class=si>${</span><span class=nx>start</span><span class=si>}</span><span class=sb>&amp;count=</span><span class=si>${</span><span class=nx>count</span><span class=si>}</span><span class=sb>`</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=nx>exports</span><span class=p>.</span><span class=nx>usBox</span> <span class=o>=</span> <span class=p>()</span> <span class=p>=&gt;</span> <span class=nx>fetchApi</span><span class=p>(</span><span class=sb>`</span><span class=si>${</span><span class=nx>baseUrl</span><span class=si>}</span><span class=sb>us_box`</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=nx>exports</span><span class=p>.</span><span class=nx>showing</span> <span class=o>=</span> <span class=p>()</span> <span class=p>=&gt;</span> <span class=nx>fetchApi</span><span class=p>(</span><span class=sb>`</span><span class=si>${</span><span class=nx>baseUrl</span><span class=si>}</span><span class=sb>in_theaters`</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=nx>exports</span><span class=p>.</span><span class=nx>comingSoon</span> <span class=o>=</span> <span class=p>(</span><span class=nx>start</span> <span class=o>=</span> <span class=mi>0</span><span class=p>,</span> <span class=nx>count</span> <span class=o>=</span> <span class=mi>10</span><span class=p>)</span> <span class=p>=&gt;</span>
+</span></span><span class=line><span class=cl>  <span class=nx>fetchApi</span><span class=p>(</span><span class=sb>`</span><span class=si>${</span><span class=nx>baseUrl</span><span class=si>}</span><span class=sb>coming_soon?start=</span><span class=si>${</span><span class=nx>start</span><span class=si>}</span><span class=sb>&amp;count=</span><span class=si>${</span><span class=nx>count</span><span class=si>}</span><span class=sb>`</span><span class=p>);</span>
+</span></span></code></pre></div><h3 id=3基础组件-components>3、基础组件 /components</h3><h4 id=首先需要一个卡片组件来展示最基本的电影信息---电影名称海报评分-componentsmoviecardjs>首先需要一个卡片组件来展示最基本的电影信息&mdash;电影名称、海报、评分 /components/MovieCard.js</h4><p>这里用到了一个组件库<a class=link href=https://react-native-training.github.io/react-native-elements/ target=_blank rel=noopener>react-native-elements</a></p><div class=highlight><pre tabindex=0 class=chroma><code class=language-jsx data-lang=jsx><span class=line><span class=cl><span class=kr>import</span> <span class=nx>React</span> <span class=nx>from</span> <span class=s2>&#34;react&#34;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=kr>import</span> <span class=p>{</span> <span class=nx>StyleSheet</span><span class=p>,</span> <span class=nx>Text</span><span class=p>,</span> <span class=nx>Image</span> <span class=p>}</span> <span class=nx>from</span> <span class=s2>&#34;react-native&#34;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=kr>import</span> <span class=p>{</span> <span class=nx>Card</span><span class=p>,</span> <span class=nx>Rating</span> <span class=p>}</span> <span class=nx>from</span> <span class=s2>&#34;react-native-elements&#34;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kr>export</span> <span class=k>default</span> <span class=kr>class</span> <span class=nx>MovieCard</span> <span class=kr>extends</span> <span class=nx>React</span><span class=p>.</span><span class=nx>Component</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=nx>constructor</span><span class=p>(</span><span class=nx>props</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=kr>super</span><span class=p>(</span><span class=nx>props</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl>  <span class=nx>render</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=p>(</span>
+</span></span><span class=line><span class=cl>      <span class=p>&lt;</span><span class=nt>Card</span>
+</span></span><span class=line><span class=cl>        <span class=na>title</span><span class=o>=</span><span class=p>{</span><span class=k>this</span><span class=p>.</span><span class=nx>props</span><span class=p>.</span><span class=nx>title</span><span class=p>}</span>
+</span></span><span class=line><span class=cl>        <span class=na>image</span><span class=o>=</span><span class=p>{{</span> <span class=nx>uri</span><span class=o>:</span> <span class=k>this</span><span class=p>.</span><span class=nx>props</span><span class=p>.</span><span class=nx>img</span> <span class=p>}}</span>
+</span></span><span class=line><span class=cl>        <span class=na>containerStyle</span><span class=o>=</span><span class=p>{</span><span class=nx>styles</span><span class=p>.</span><span class=nx>card</span><span class=p>}</span>
+</span></span><span class=line><span class=cl>      <span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>        <span class=p>&lt;</span><span class=nt>Rating</span>
+</span></span><span class=line><span class=cl>          <span class=na>type</span><span class=o>=</span><span class=s>&#34;star&#34;</span>
+</span></span><span class=line><span class=cl>          <span class=na>fractions</span><span class=o>=</span><span class=p>{</span><span class=mi>1</span><span class=p>}</span>
+</span></span><span class=line><span class=cl>          <span class=na>startingValue</span><span class=o>=</span><span class=p>{</span><span class=k>this</span><span class=p>.</span><span class=nx>props</span><span class=p>.</span><span class=nx>rating</span><span class=p>}</span>
+</span></span><span class=line><span class=cl>          <span class=na>readonly</span>
+</span></span><span class=line><span class=cl>          <span class=na>imageSize</span><span class=o>=</span><span class=p>{</span><span class=mi>25</span><span class=p>}</span>
+</span></span><span class=line><span class=cl>        <span class=p>/&gt;</span>
+</span></span><span class=line><span class=cl>      <span class=p>&lt;/</span><span class=nt>Card</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>    <span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kr>const</span> <span class=nx>styles</span> <span class=o>=</span> <span class=nx>StyleSheet</span><span class=p>.</span><span class=nx>create</span><span class=p>({</span>
+</span></span><span class=line><span class=cl>  <span class=nx>card</span><span class=o>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nx>width</span><span class=o>:</span> <span class=mi>150</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=nx>height</span><span class=o>:</span> <span class=mi>240</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=nx>justifyContent</span><span class=o>:</span> <span class=s2>&#34;space-around&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=nx>alignItems</span><span class=o>:</span> <span class=s2>&#34;center&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>  <span class=p>},</span>
+</span></span><span class=line><span class=cl><span class=p>});</span>
+</span></span></code></pre></div><h4 id=卡片列表组件-componentslistpagejs>卡片列表组件 /components/ListPage.js</h4><div class=highlight><pre tabindex=0 class=chroma><code class=language-jsx data-lang=jsx><span class=line><span class=cl><span class=kr>import</span> <span class=nx>React</span> <span class=nx>from</span> <span class=s2>&#34;react&#34;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=kr>import</span> <span class=p>{</span> <span class=nx>FlatList</span><span class=p>,</span> <span class=nx>TouchableHighlight</span><span class=p>,</span> <span class=nx>View</span><span class=p>,</span> <span class=nx>StyleSheet</span> <span class=p>}</span> <span class=nx>from</span> <span class=s2>&#34;react-native&#34;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=kr>import</span> <span class=nx>MovieCard</span> <span class=nx>from</span> <span class=s2>&#34;./MovieCard&#34;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kr>export</span> <span class=k>default</span> <span class=kr>class</span> <span class=nx>ListPage</span> <span class=kr>extends</span> <span class=nx>React</span><span class=p>.</span><span class=nx>Component</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=nx>constructor</span><span class=p>(</span><span class=nx>props</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=kr>super</span><span class=p>(</span><span class=nx>props</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=nx>render</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=kr>const</span> <span class=p>{</span> <span class=nx>navigate</span> <span class=p>}</span> <span class=o>=</span> <span class=k>this</span><span class=p>.</span><span class=nx>props</span><span class=p>.</span><span class=nx>navigation</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=p>(</span><span class=o>!</span><span class=k>this</span><span class=p>.</span><span class=nx>props</span><span class=p>.</span><span class=nx>movies</span><span class=p>.</span><span class=nx>length</span><span class=p>)</span> <span class=k>return</span> <span class=p>&lt;</span><span class=nt>View</span><span class=p>&gt;&lt;/</span><span class=nt>View</span><span class=p>&gt;;</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=p>(</span>
+</span></span><span class=line><span class=cl>      <span class=p>&lt;</span><span class=nt>FlatList</span>
+</span></span><span class=line><span class=cl>        <span class=na>data</span><span class=o>=</span><span class=p>{</span><span class=k>this</span><span class=p>.</span><span class=nx>props</span><span class=p>.</span><span class=nx>movies</span><span class=p>}</span>
+</span></span><span class=line><span class=cl>        <span class=na>renderItem</span><span class=o>=</span><span class=p>{({</span> <span class=nx>item</span> <span class=p>})</span> <span class=p>=&gt;</span> <span class=p>(</span>
+</span></span><span class=line><span class=cl>          <span class=p>&lt;</span><span class=nt>TouchableHighlight</span>
+</span></span><span class=line><span class=cl>            <span class=na>onPress</span><span class=o>=</span><span class=p>{()</span> <span class=p>=&gt;</span> <span class=nx>navigate</span><span class=p>(</span><span class=s2>&#34;MovieInfo&#34;</span><span class=p>,</span> <span class=p>{</span> <span class=nx>id</span><span class=o>:</span> <span class=nx>item</span><span class=p>.</span><span class=nx>id</span> <span class=p>})}</span>
+</span></span><span class=line><span class=cl>          <span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>            <span class=p>&lt;</span><span class=nt>View</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>              <span class=p>&lt;</span><span class=nt>MovieCard</span>
+</span></span><span class=line><span class=cl>                <span class=na>img</span><span class=o>=</span><span class=p>{</span><span class=nx>item</span><span class=p>.</span><span class=nx>images</span><span class=p>.</span><span class=nx>small</span><span class=p>}</span>
+</span></span><span class=line><span class=cl>                <span class=na>rating</span><span class=o>=</span><span class=p>{</span><span class=nx>item</span><span class=p>.</span><span class=nx>rating</span><span class=p>.</span><span class=nx>average</span><span class=p>}</span>
+</span></span><span class=line><span class=cl>                <span class=na>title</span><span class=o>=</span><span class=p>{</span><span class=nx>item</span><span class=p>.</span><span class=nx>title</span><span class=p>}</span>
+</span></span><span class=line><span class=cl>              <span class=p>/&gt;</span>
+</span></span><span class=line><span class=cl>            <span class=p>&lt;/</span><span class=nt>View</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>          <span class=p>&lt;/</span><span class=nt>TouchableHighlight</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>        <span class=p>)}</span>
+</span></span><span class=line><span class=cl>        <span class=na>keyExtractor</span><span class=o>=</span><span class=p>{(</span><span class=nx>item</span><span class=p>)</span> <span class=p>=&gt;</span> <span class=nx>item</span><span class=p>.</span><span class=nx>id</span><span class=p>}</span>
+</span></span><span class=line><span class=cl>        <span class=na>numColumns</span><span class=o>=</span><span class=p>{</span><span class=mi>2</span><span class=p>}</span>
+</span></span><span class=line><span class=cl>        <span class=na>onEndReachedThreshold</span><span class=o>=</span><span class=p>{</span><span class=mf>0.5</span><span class=p>}</span>
+</span></span><span class=line><span class=cl>        <span class=na>onEndReached</span><span class=o>=</span><span class=p>{</span><span class=k>this</span><span class=p>.</span><span class=nx>props</span><span class=p>.</span><span class=nx>loadData</span><span class=p>}</span>
+</span></span><span class=line><span class=cl>      <span class=p>/&gt;</span>
+</span></span><span class=line><span class=cl>    <span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></div><h3 id=4页面-views>4、页面 /views</h3><h4 id=viewstop250-viewsusboxjs-viewsshowingjs-viewscomingsoonjs-这几个页面的逻辑是相似的只是数据不一样而已就只看一下-top250js-的代码>/views/Top250 /views/UsBox.js /views/Showing.js /views/ComingSoon.js 这几个页面的逻辑是相似的，只是数据不一样而已,就只看一下 Top250.js 的代码</h4><div class=highlight><pre tabindex=0 class=chroma><code class=language-jsx data-lang=jsx><span class=line><span class=cl><span class=kr>import</span> <span class=nx>React</span> <span class=nx>from</span> <span class=s2>&#34;react&#34;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=kr>import</span> <span class=p>{</span> <span class=nx>top250</span> <span class=p>}</span> <span class=nx>from</span> <span class=s2>&#34;../http/api&#34;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=kr>import</span> <span class=nx>ListPage</span> <span class=nx>from</span> <span class=s2>&#34;../components/ListPage&#34;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kr>export</span> <span class=k>default</span> <span class=kr>class</span> <span class=nx>Top250</span> <span class=kr>extends</span> <span class=nx>React</span><span class=p>.</span><span class=nx>Component</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=nx>constructor</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=kr>super</span><span class=p>();</span>
+</span></span><span class=line><span class=cl>    <span class=k>this</span><span class=p>.</span><span class=nx>state</span> <span class=o>=</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=nx>movies</span><span class=o>:</span> <span class=p>[],</span>
+</span></span><span class=line><span class=cl>    <span class=p>};</span>
+</span></span><span class=line><span class=cl>    <span class=k>this</span><span class=p>.</span><span class=nx>getTop250</span><span class=p>();</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=kr>static</span> <span class=nx>navigationOptions</span> <span class=o>=</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nx>tabBarLabel</span><span class=o>:</span> <span class=s2>&#34;Top 250&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>  <span class=p>};</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=nx>getTop250</span> <span class=o>=</span> <span class=p>()</span> <span class=p>=&gt;</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nx>top250</span><span class=p>(</span><span class=k>this</span><span class=p>.</span><span class=nx>state</span><span class=p>.</span><span class=nx>movies</span><span class=p>.</span><span class=nx>length</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>      <span class=p>.</span><span class=nx>then</span><span class=p>((</span><span class=nx>rsp</span><span class=p>)</span> <span class=p>=&gt;</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=k>this</span><span class=p>.</span><span class=nx>setState</span><span class=p>((</span><span class=nx>preSate</span><span class=p>)</span> <span class=p>=&gt;</span> <span class=p>({</span>
+</span></span><span class=line><span class=cl>          <span class=nx>movies</span><span class=o>:</span> <span class=nx>preSate</span><span class=p>.</span><span class=nx>movies</span><span class=p>.</span><span class=nx>concat</span><span class=p>(</span><span class=nx>rsp</span><span class=p>.</span><span class=nx>subjects</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>        <span class=p>}));</span>
+</span></span><span class=line><span class=cl>      <span class=p>})</span>
+</span></span><span class=line><span class=cl>      <span class=p>.</span><span class=k>catch</span><span class=p>((</span><span class=nx>err</span><span class=p>)</span> <span class=p>=&gt;</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=nx>console</span><span class=p>.</span><span class=nx>log</span><span class=p>(</span><span class=s2>&#34;getTop250 error&#34;</span><span class=p>,</span> <span class=nx>err</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>      <span class=p>});</span>
+</span></span><span class=line><span class=cl>  <span class=p>};</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=nx>render</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=p>(</span>
+</span></span><span class=line><span class=cl>      <span class=p>&lt;</span><span class=nt>ListPage</span>
+</span></span><span class=line><span class=cl>        <span class=na>movies</span><span class=o>=</span><span class=p>{</span><span class=k>this</span><span class=p>.</span><span class=nx>state</span><span class=p>.</span><span class=nx>movies</span><span class=p>}</span>
+</span></span><span class=line><span class=cl>        <span class=na>loadData</span><span class=o>=</span><span class=p>{</span><span class=k>this</span><span class=p>.</span><span class=nx>getTop250</span><span class=p>}</span>
+</span></span><span class=line><span class=cl>        <span class=na>navigation</span><span class=o>=</span><span class=p>{</span><span class=k>this</span><span class=p>.</span><span class=nx>props</span><span class=p>.</span><span class=nx>navigation</span><span class=p>}</span>
+</span></span><span class=line><span class=cl>      <span class=p>/&gt;</span>
+</span></span><span class=line><span class=cl>    <span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></div><h4 id=搜索页面-viewshomejs>搜索页面 /views/Home.js</h4><div class=highlight><pre tabindex=0 class=chroma><code class=language-jsx data-lang=jsx><span class=line><span class=cl><span class=kr>import</span> <span class=nx>React</span> <span class=nx>from</span> <span class=s2>&#34;react&#34;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=kr>import</span> <span class=p>{</span> <span class=nx>StyleSheet</span><span class=p>,</span> <span class=nx>View</span> <span class=p>}</span> <span class=nx>from</span> <span class=s2>&#34;react-native&#34;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=kr>import</span> <span class=p>{</span> <span class=nx>SearchBar</span> <span class=p>}</span> <span class=nx>from</span> <span class=s2>&#34;react-native-elements&#34;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=kr>import</span> <span class=p>{</span> <span class=nx>search</span> <span class=p>}</span> <span class=nx>from</span> <span class=s2>&#34;../http/api&#34;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=kr>import</span> <span class=nx>ListPage</span> <span class=nx>from</span> <span class=s2>&#34;../components/ListPage&#34;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kr>export</span> <span class=k>default</span> <span class=kr>class</span> <span class=nx>Home</span> <span class=kr>extends</span> <span class=nx>React</span><span class=p>.</span><span class=nx>Component</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=nx>constructor</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=kr>super</span><span class=p>();</span>
+</span></span><span class=line><span class=cl>    <span class=k>this</span><span class=p>.</span><span class=nx>state</span> <span class=o>=</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=nx>movies</span><span class=o>:</span> <span class=p>[],</span>
+</span></span><span class=line><span class=cl>      <span class=nx>key</span><span class=o>:</span> <span class=s2>&#34;&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=p>};</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=kr>static</span> <span class=nx>navigationOptions</span> <span class=o>=</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nx>tabBarLabel</span><span class=o>:</span> <span class=s2>&#34;主页&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>  <span class=p>};</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=nx>keyChange</span> <span class=o>=</span> <span class=p>(</span><span class=nx>key</span><span class=p>)</span> <span class=p>=&gt;</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>this</span><span class=p>.</span><span class=nx>setState</span><span class=p>({</span>
+</span></span><span class=line><span class=cl>      <span class=nx>key</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=p>});</span>
+</span></span><span class=line><span class=cl>    <span class=k>this</span><span class=p>.</span><span class=nx>getSearch</span><span class=p>();</span>
+</span></span><span class=line><span class=cl>  <span class=p>};</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=nx>getSearch</span> <span class=o>=</span> <span class=p>()</span> <span class=p>=&gt;</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nx>search</span><span class=p>(</span><span class=k>this</span><span class=p>.</span><span class=nx>state</span><span class=p>.</span><span class=nx>key</span><span class=p>).</span><span class=nx>then</span><span class=p>((</span><span class=nx>rsp</span><span class=p>)</span> <span class=p>=&gt;</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=k>this</span><span class=p>.</span><span class=nx>setState</span><span class=p>({</span>
+</span></span><span class=line><span class=cl>        <span class=nx>movies</span><span class=o>:</span> <span class=nx>rsp</span><span class=p>.</span><span class=nx>subjects</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=p>});</span>
+</span></span><span class=line><span class=cl>    <span class=p>});</span>
+</span></span><span class=line><span class=cl>  <span class=p>};</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=nx>render</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=p>(</span>
+</span></span><span class=line><span class=cl>      <span class=p>&lt;</span><span class=nt>View</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>        <span class=p>&lt;</span><span class=nt>SearchBar</span> <span class=na>onChangeText</span><span class=o>=</span><span class=p>{</span><span class=k>this</span><span class=p>.</span><span class=nx>keyChange</span><span class=p>}</span> <span class=na>placeholder</span><span class=o>=</span><span class=s>&#34;输入关键字搜索&#34;</span> <span class=p>/&gt;</span>
+</span></span><span class=line><span class=cl>        <span class=p>&lt;</span><span class=nt>ListPage</span>
+</span></span><span class=line><span class=cl>          <span class=na>movies</span><span class=o>=</span><span class=p>{</span><span class=k>this</span><span class=p>.</span><span class=nx>state</span><span class=p>.</span><span class=nx>movies</span><span class=p>}</span>
+</span></span><span class=line><span class=cl>          <span class=na>loadData</span><span class=o>=</span><span class=p>{</span><span class=k>this</span><span class=p>.</span><span class=nx>getSearch</span><span class=p>}</span>
+</span></span><span class=line><span class=cl>          <span class=na>navigation</span><span class=o>=</span><span class=p>{</span><span class=k>this</span><span class=p>.</span><span class=nx>props</span><span class=p>.</span><span class=nx>navigation</span><span class=p>}</span>
+</span></span><span class=line><span class=cl>        <span class=p>/&gt;</span>
+</span></span><span class=line><span class=cl>      <span class=p>&lt;/</span><span class=nt>View</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>    <span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></div><h3 id=5导航实现>5、导航实现</h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-jsx data-lang=jsx><span class=line><span class=cl><span class=kr>import</span> <span class=nx>React</span> <span class=nx>from</span> <span class=s2>&#34;react&#34;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=kr>import</span> <span class=p>{</span> <span class=nx>TabNavigator</span><span class=p>,</span> <span class=nx>StackNavigator</span> <span class=p>}</span> <span class=nx>from</span> <span class=s2>&#34;react-navigation&#34;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=kr>import</span> <span class=nx>Home</span> <span class=nx>from</span> <span class=s2>&#34;./views/Home&#34;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=kr>import</span> <span class=nx>Top250</span> <span class=nx>from</span> <span class=s2>&#34;./views/Top250&#34;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=kr>import</span> <span class=nx>UsBox</span> <span class=nx>from</span> <span class=s2>&#34;./views/UsBox&#34;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=kr>import</span> <span class=nx>Showing</span> <span class=nx>from</span> <span class=s2>&#34;./views/Showing&#34;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=kr>import</span> <span class=nx>ComingSoon</span> <span class=nx>from</span> <span class=s2>&#34;./views/ComingSoon&#34;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=kr>import</span> <span class=nx>MovieInfo</span> <span class=nx>from</span> <span class=s2>&#34;./views/MovieInfo&#34;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=kr>import</span> <span class=nx>ActorInfo</span> <span class=nx>from</span> <span class=s2>&#34;./views/ActorInfo&#34;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kr>export</span> <span class=k>default</span> <span class=nx>MyApp</span> <span class=o>=</span> <span class=nx>StackNavigator</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>  <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nx>FirstScreen</span><span class=o>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=nx>screen</span><span class=o>:</span> <span class=nx>TabNavigator</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>        <span class=p>{</span>
+</span></span><span class=line><span class=cl>          <span class=nx>Top250</span><span class=o>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>            <span class=nx>screen</span><span class=o>:</span> <span class=nx>Top250</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>          <span class=p>},</span>
+</span></span><span class=line><span class=cl>          <span class=nx>UsBox</span><span class=o>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>            <span class=nx>screen</span><span class=o>:</span> <span class=nx>UsBox</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>          <span class=p>},</span>
+</span></span><span class=line><span class=cl>          <span class=nx>Home</span><span class=o>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>            <span class=nx>screen</span><span class=o>:</span> <span class=nx>Home</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>          <span class=p>},</span>
+</span></span><span class=line><span class=cl>          <span class=nx>Showing</span><span class=o>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>            <span class=nx>screen</span><span class=o>:</span> <span class=nx>Showing</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>          <span class=p>},</span>
+</span></span><span class=line><span class=cl>          <span class=nx>ComingSoon</span><span class=o>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>            <span class=nx>screen</span><span class=o>:</span> <span class=nx>ComingSoon</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>          <span class=p>},</span>
+</span></span><span class=line><span class=cl>        <span class=p>},</span>
+</span></span><span class=line><span class=cl>        <span class=p>{</span>
+</span></span><span class=line><span class=cl>          <span class=nx>tabBarPosition</span><span class=o>:</span> <span class=s2>&#34;bottom&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>          <span class=nx>animationEnabled</span><span class=o>:</span> <span class=kc>true</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>          <span class=nx>lazy</span><span class=o>:</span> <span class=kc>true</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>          <span class=nx>initialRouteName</span><span class=o>:</span> <span class=s2>&#34;Home&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=p>}</span>
+</span></span><span class=line><span class=cl>      <span class=p>),</span>
+</span></span><span class=line><span class=cl>    <span class=p>},</span>
+</span></span><span class=line><span class=cl>    <span class=nx>MovieInfo</span><span class=o>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=nx>screen</span><span class=o>:</span> <span class=nx>MovieInfo</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=p>},</span>
+</span></span><span class=line><span class=cl>    <span class=nx>ActorInfo</span><span class=o>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=nx>screen</span><span class=o>:</span> <span class=nx>ActorInfo</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=p>},</span>
+</span></span><span class=line><span class=cl>  <span class=p>},</span>
+</span></span><span class=line><span class=cl>  <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nx>headerMode</span><span class=o>:</span> <span class=s2>&#34;none&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>);</span>
+</span></span></code></pre></div></section><footer class=article-footer><section class=article-copyright><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><path d="M14.5 9a3.5 4 0 100 6"/></svg><span>Licensed under CC BY-NC-SA 4.0</span></section></footer></article><aside class=related-contents--wrapper></aside><script src=https://utteranc.es/client.js repo=jo-hnny/jo-hnny.github.io issue-term=title label=comments crossorigin=anonymous async></script><style>.utterances{max-width:unset}</style><script>function setUtterancesTheme(e){let t=document.querySelector(".utterances iframe");t&&t.contentWindow.postMessage({type:"set-theme",theme:`github-${e}`},"https://utteranc.es")}addEventListener("message",e=>{if(e.origin!=="https://utteranc.es")return;setUtterancesTheme(document.documentElement.dataset.scheme)}),window.addEventListener("onColorSchemeChange",e=>{setUtterancesTheme(e.detail)})</script><footer class=site-footer><section class=copyright>&copy;
 2020 -
-2021 冷宫
-</section>
-<section class=powerby>
-Built with <a href=https://gohugo.io/ target=_blank rel=noopener>Hugo</a> <br>
-Theme <b><a href=https://github.com/CaiJimmy/hugo-theme-stack target=_blank rel=noopener data-version=3.2.0>Stack</a></b> designed by <a href=https://jimmycai.com target=_blank rel=noopener>Jimmy</a>
-</section>
-</footer>
-<div class=pswp tabindex=-1 role=dialog aria-hidden=true>
-<div class=pswp__bg></div>
-<div class=pswp__scroll-wrap>
-<div class=pswp__container>
-<div class=pswp__item></div>
-<div class=pswp__item></div>
-<div class=pswp__item></div>
-</div>
-<div class="pswp__ui pswp__ui--hidden">
-<div class=pswp__top-bar>
-<div class=pswp__counter></div>
-<button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+2022 冷宫</section><section class=powerby>Built with <a href=https://gohugo.io/ target=_blank rel=noopener>Hugo</a><br>Theme <b><a href=https://github.com/CaiJimmy/hugo-theme-stack target=_blank rel=noopener data-version=3.2.0>Stack</a></b> designed by <a href=https://jimmycai.com target=_blank rel=noopener>Jimmy</a></section></footer><div class=pswp tabindex=-1 role=dialog aria-hidden=true><div class=pswp__bg></div><div class=pswp__scroll-wrap><div class=pswp__container><div class=pswp__item></div><div class=pswp__item></div><div class=pswp__item></div></div><div class="pswp__ui pswp__ui--hidden"><div class=pswp__top-bar><div class=pswp__counter></div><button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
 <button class="pswp__button pswp__button--share" title=Share></button>
 <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
-<button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
-<div class=pswp__preloader>
-<div class=pswp__preloader__icn>
-<div class=pswp__preloader__cut>
-<div class=pswp__preloader__donut></div>
-</div>
-</div>
-</div>
-</div>
-<div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
-<div class=pswp__share-tooltip></div>
-</div>
-<button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
-</button>
-<button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
-</button>
-<div class=pswp__caption>
-<div class=pswp__caption__center></div>
-</div>
-</div>
-</div>
-</div><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo=" crossorigin=anonymous defer></script><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU=" crossorigin=anonymous defer></script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css integrity="sha256-c0uckgykQ9v5k+IqViZOZKc47Jn7KQil4/MP3ySA3F8=" crossorigin=anonymous><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.css integrity="sha256-SBLU4vv6CA6lHsZ1XyTdhyjJxCjPif/TRkjnsyGAGnE=" crossorigin=anonymous>
-</main>
-</div>
-<script src=https://cdn.jsdelivr.net/npm/node-vibrant@3.1.5/dist/vibrant.min.js integrity="sha256-5NovOZc4iwiAWTYIFiIM7DxKUXKWvpVEuMEPLzcm5/g=" crossorigin=anonymous defer></script><script type=text/javascript src=/ts/main.js defer></script>
-<script>(function(){const a=document.createElement('link');a.href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap",a.type="text/css",a.rel="stylesheet",document.head.appendChild(a)})()</script>
-</body>
-</html>
+<button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button><div class=pswp__preloader><div class=pswp__preloader__icn><div class=pswp__preloader__cut><div class=pswp__preloader__donut></div></div></div></div></div><div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap"><div class=pswp__share-tooltip></div></div><button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)"></button>
+<button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button><div class=pswp__caption><div class=pswp__caption__center></div></div></div></div></div><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo=" crossorigin=anonymous defer></script><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU=" crossorigin=anonymous defer></script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css integrity="sha256-c0uckgykQ9v5k+IqViZOZKc47Jn7KQil4/MP3ySA3F8=" crossorigin=anonymous><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.css integrity="sha256-SBLU4vv6CA6lHsZ1XyTdhyjJxCjPif/TRkjnsyGAGnE=" crossorigin=anonymous></main></div><script src=https://cdn.jsdelivr.net/npm/node-vibrant@3.1.5/dist/vibrant.min.js integrity="sha256-5NovOZc4iwiAWTYIFiIM7DxKUXKWvpVEuMEPLzcm5/g=" crossorigin=anonymous defer></script><script type=text/javascript src=/ts/main.js defer></script>
+<script>(function(){const e=document.createElement("link");e.href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap",e.type="text/css",e.rel="stylesheet",document.head.appendChild(e)})()</script></body></html>

@@ -8,4 +8,5 @@ Failed to connect to raw.github.com port 443: Connection refused
 所以我换了个方法，先把 ohmyzsh 的 GitHub 仓库克隆下来,然后再安装：
 git clone https://github.com/ohmyzsh/ohmyzsh.git sh -c ohmyzsh/tools/install.sh zsh 插件和主题配置 安装spaceship主题 git clone https://github.com/denysdovhan/spaceship-prompt.git &amp;quot;$ZSH_CUSTOM/themes/spaceship-prompt&amp;quot; --depth=1 ln -s &amp;quot;$ZSH_CUSTOM/themes/spaceship-prompt/spaceship.zsh-theme&amp;quot; &amp;quot;$ZSH_CUSTOM/themes/spaceship.zsh-theme&amp;quot; 安装zsh-autosuggestions插件 这个插件主要作用是记录下历史命令，在你输入一部分时自动提示补全
 git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
-安装zsh-syntax-highlighting插件 这个插件主要功能是高亮你输入的正确的命令</description></item></channel></rss>
+安装zsh-syntax-highlighting插件 这个插件主要功能是高亮你输入的正确的命令
+git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting</description></item></channel></rss>

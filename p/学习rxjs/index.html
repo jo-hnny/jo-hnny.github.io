@@ -1,324 +1,146 @@
-<!doctype html><html lang=zh-cn>
-<head><meta charset=utf-8>
-<meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="一直想学习一下 RxJS，从一开始学习 android 的时候就听说过 RxJAVA，但是之前每次都看不下去，不太清楚这个是干什么的。今天下定决心要好好看一看。
+<!doctype html><html lang=zh-cn><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="一直想学习一下 RxJS，从一开始学习 android 的时候就听说过 RxJAVA，但是之前每次都看不下去，不太清楚这个是干什么的。今天下定决心要好好看一看。
 1、Observable (可观察对象) RxJS 的核心概念就是观察者模式，也就是一个可观察对象会推送数据，一个观察者通过订阅接受这些数据，
 创建一个可观察对象
 var observable = Rx.Observable.create(function (observer) { observer.next(1); observer.next(2); observer.next(3); setTimeout(() =&amp;gt; { observer.next(4); observer.complete(); }, 1000); }); 每个 next()会向外抛出一个数据
 2、Observer (观察者) 观察者通过订阅来拉取可观察对象的数据。
 创建一个观察者
-var observer = { next: (x) =&amp;gt; console.log(&amp;#34;Observer got a next value: &amp;#34; + x), error: (err) =&amp;gt; console.error(&amp;#34;Observer got an error: &amp;#34; + err), complete: () =&amp;gt; console.log(&amp;#34;Observer got a complete notification&amp;#34;), }; 观察者对象中你可以省略某一个函数，另外观察者也可以只是一个函数，那么它对应的就是 next 通知的处理方法。"><title>学习RxJS</title>
-<link rel=canonical href=https://jo-hnny.github.io/p/%E5%AD%A6%E4%B9%A0rxjs/>
-<link rel=stylesheet href=/scss/style.min.css><meta property="og:title" content="学习RxJS">
-<meta property="og:description" content="一直想学习一下 RxJS，从一开始学习 android 的时候就听说过 RxJAVA，但是之前每次都看不下去，不太清楚这个是干什么的。今天下定决心要好好看一看。
+var observer = { next: (x) =&amp;gt; console.log(&amp;#34;Observer got a next value: &amp;#34; + x), error: (err) =&amp;gt; console.error(&amp;#34;Observer got an error: &amp;#34; + err), complete: () =&amp;gt; console.log(&amp;#34;Observer got a complete notification&amp;#34;), }; 观察者对象中你可以省略某一个函数，另外观察者也可以只是一个函数，那么它对应的就是 next 通知的处理方法。"><title>学习RxJS</title><link rel=canonical href=https://jo-hnny.github.io/p/%E5%AD%A6%E4%B9%A0rxjs/><link rel=stylesheet href=/scss/style.min.css><meta property="og:title" content="学习RxJS"><meta property="og:description" content="一直想学习一下 RxJS，从一开始学习 android 的时候就听说过 RxJAVA，但是之前每次都看不下去，不太清楚这个是干什么的。今天下定决心要好好看一看。
 1、Observable (可观察对象) RxJS 的核心概念就是观察者模式，也就是一个可观察对象会推送数据，一个观察者通过订阅接受这些数据，
 创建一个可观察对象
 var observable = Rx.Observable.create(function (observer) { observer.next(1); observer.next(2); observer.next(3); setTimeout(() =&amp;gt; { observer.next(4); observer.complete(); }, 1000); }); 每个 next()会向外抛出一个数据
 2、Observer (观察者) 观察者通过订阅来拉取可观察对象的数据。
 创建一个观察者
-var observer = { next: (x) =&amp;gt; console.log(&amp;#34;Observer got a next value: &amp;#34; + x), error: (err) =&amp;gt; console.error(&amp;#34;Observer got an error: &amp;#34; + err), complete: () =&amp;gt; console.log(&amp;#34;Observer got a complete notification&amp;#34;), }; 观察者对象中你可以省略某一个函数，另外观察者也可以只是一个函数，那么它对应的就是 next 通知的处理方法。">
-<meta property="og:url" content="https://jo-hnny.github.io/p/%E5%AD%A6%E4%B9%A0rxjs/">
-<meta property="og:site_name" content="冷宫">
-<meta property="og:type" content="article"><meta property="article:section" content="Post"><meta property="article:published_time" content="2019-09-18T20:58:39+08:00"><meta property="article:modified_time" content="2019-09-18T20:58:39+08:00"><meta property="og:image" content="https://picsum.photos/seed/b950dc5fee90419792f927c90bc40a88/4096/2160">
-<meta name=twitter:title content="学习RxJS">
-<meta name=twitter:description content="一直想学习一下 RxJS，从一开始学习 android 的时候就听说过 RxJAVA，但是之前每次都看不下去，不太清楚这个是干什么的。今天下定决心要好好看一看。
+var observer = { next: (x) =&amp;gt; console.log(&amp;#34;Observer got a next value: &amp;#34; + x), error: (err) =&amp;gt; console.error(&amp;#34;Observer got an error: &amp;#34; + err), complete: () =&amp;gt; console.log(&amp;#34;Observer got a complete notification&amp;#34;), }; 观察者对象中你可以省略某一个函数，另外观察者也可以只是一个函数，那么它对应的就是 next 通知的处理方法。"><meta property="og:url" content="https://jo-hnny.github.io/p/%E5%AD%A6%E4%B9%A0rxjs/"><meta property="og:site_name" content="冷宫"><meta property="og:type" content="article"><meta property="article:section" content="Post"><meta property="article:published_time" content="2019-09-18T20:58:39+08:00"><meta property="article:modified_time" content="2019-09-18T20:58:39+08:00"><meta property="og:image" content="https://picsum.photos/seed/b950dc5fee90419792f927c90bc40a88/4096/2160"><meta name=twitter:title content="学习RxJS"><meta name=twitter:description content="一直想学习一下 RxJS，从一开始学习 android 的时候就听说过 RxJAVA，但是之前每次都看不下去，不太清楚这个是干什么的。今天下定决心要好好看一看。
 1、Observable (可观察对象) RxJS 的核心概念就是观察者模式，也就是一个可观察对象会推送数据，一个观察者通过订阅接受这些数据，
 创建一个可观察对象
 var observable = Rx.Observable.create(function (observer) { observer.next(1); observer.next(2); observer.next(3); setTimeout(() =&amp;gt; { observer.next(4); observer.complete(); }, 1000); }); 每个 next()会向外抛出一个数据
 2、Observer (观察者) 观察者通过订阅来拉取可观察对象的数据。
 创建一个观察者
-var observer = { next: (x) =&amp;gt; console.log(&amp;#34;Observer got a next value: &amp;#34; + x), error: (err) =&amp;gt; console.error(&amp;#34;Observer got an error: &amp;#34; + err), complete: () =&amp;gt; console.log(&amp;#34;Observer got a complete notification&amp;#34;), }; 观察者对象中你可以省略某一个函数，另外观察者也可以只是一个函数，那么它对应的就是 next 通知的处理方法。"><meta name=twitter:card content="summary_large_image">
-<meta name=twitter:image content="https://picsum.photos/seed/b950dc5fee90419792f927c90bc40a88/4096/2160">
-<link rel="shortcut icon" href=/img/favicon.ico>
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-TFV4P906GT"></script>
-<script>var doNotTrack=!1;if(!doNotTrack){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config','G-TFV4P906GT',{anonymize_ip:!1})}</script>
-</head>
-<body class=article-page>
-<script>(function(){const a='StackColorScheme';localStorage.getItem(a)||localStorage.setItem(a,"auto")})()</script><script>(function(){const b='StackColorScheme',a=localStorage.getItem(b),c=window.matchMedia('(prefers-color-scheme: dark)').matches===!0;a=='dark'||a==='auto'&&c?document.documentElement.dataset.scheme='dark':document.documentElement.dataset.scheme='light'})()</script>
-<div class="container main-container flex
-on-phone--column extended">
-<aside class="sidebar left-sidebar sticky">
-<button class="hamburger hamburger--spin" type=button id=toggle-menu aria-label=切换菜单>
-<span class=hamburger-box>
-<span class=hamburger-inner></span>
-</span>
-</button>
-<header class=site-info>
-<figure class=site-avatar>
-<img src=/img/avatar_hud170f2c6bd12f3a098a294aad792bf80_1699879_300x0_resize_box_3.png width=300 height=195 class=site-logo loading=lazy alt=Avatar>
-<span class=emoji>🏂🏻</span>
-</figure>
-<h1 class=site-name><a href=https://jo-hnny.github.io/>冷宫</a></h1>
-<h2 class=site-description>她们都被我打入了冷宫，但是偶尔还是会过来看一下</h2>
-</header>
-<ol class=menu id=main-menu>
-<li>
-<a href=/><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><polyline points="5 12 3 12 12 3 21 12 19 12"/><path d="M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"/><path d="M9 21v-6a2 2 0 012-2h2a2 2 0 012 2v6"/></svg>
-<span>Home</span>
-</a>
-</li>
-<li>
-<a href=/about><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="7" r="4"/><path d="M6 21v-2a4 4 0 014-4h4a4 4 0 014 4v2"/></svg>
-<span>About</span>
-</a>
-</li>
-<li>
-<a href=/talks><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-hipchat" width="44" height="44" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M17.802 17.292s.077-.055.2-.149C19.845 15.718 21 13.653 21 11.354c0-4.286-4.03-7.764-8.998-7.764C7.032 3.59 3 7.068 3 11.354 3 15.642 7.03 19 12 19c.424.0 1.12-.028 2.088-.084 1.262.82 3.104 1.493 4.716 1.493.499.0.734-.41.414-.828-.486-.596-1.156-1.551-1.416-2.29z"/><path d="M7.5 13.5c2.5 2.5 6.5 2.5 9 0"/></svg>
-<span>Talks</span>
-</a>
-</li>
-<li>
-<a href=/archives><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><rect x="3" y="4" width="18" height="4" rx="2"/><path d="M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8"/><line x1="10" y1="12" x2="14" y2="12"/></svg>
-<span>Archives</span>
-</a>
-</li>
-<li>
-<a href=/search><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="10" cy="10" r="7"/><line x1="21" y1="21" x2="15" y2="15"/></svg>
-<span>Search</span>
-</a>
-</li>
-<li>
-<a href=/index.xml><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-rss" width="44" height="44" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><circle cx="5" cy="19" r="1"/><path d="M4 4a16 16 0 0116 16"/><path d="M4 11a9 9 0 019 9"/></svg>
-<span>Feed</span>
-</a>
-</li>
-<li id=dark-mode-toggle><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="8" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="16" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg>
-<span>暗色模式</span>
-</li>
-</ol>
-</aside>
-<main class="main full-width">
-<article class="has-image main-article">
-<header class=article-header>
-<div class=article-image>
-<a href=/p/%E5%AD%A6%E4%B9%A0rxjs/>
-<img src=https://picsum.photos/seed/b950dc5fee90419792f927c90bc40a88/4096/2160 loading=lazy alt="Featured image of post 学习RxJS">
-</a>
-</div>
-<div class=article-details>
-<h2 class=article-title>
-<a href=/p/%E5%AD%A6%E4%B9%A0rxjs/>学习RxJS</a>
-</h2>
-<footer class=article-time>
-<div><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M11.795 21H5a2 2 0 01-2-2V7a2 2 0 012-2h12a2 2 0 012 2v4"/><circle cx="18" cy="18" r="4"/><path d="M15 3v4"/><path d="M7 3v4"/><path d="M3 11h16"/><path d="M18 16.496V18l1 1"/></svg>
-<time class=article-time--published>Sep 18, 2019</time>
-</div>
-</footer>
-</div>
-</header>
-<section class=article-content>
-<p>一直想学习一下 RxJS，从一开始学习 android 的时候就听说过 RxJAVA，但是之前每次都看不下去，不太清楚这个是干什么的。今天下定决心要好好看一看。</p>
-<h2 id=1observable-可观察对象>1、Observable (可观察对象)</h2>
-<p>RxJS 的核心概念就是观察者模式，也就是一个可观察对象会推送数据，一个观察者通过订阅接受这些数据，<br>
-创建一个可观察对象</p>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-js data-lang=js><span class=kd>var</span> <span class=nx>observable</span> <span class=o>=</span> <span class=nx>Rx</span><span class=p>.</span><span class=nx>Observable</span><span class=p>.</span><span class=nx>create</span><span class=p>(</span><span class=kd>function</span> <span class=p>(</span><span class=nx>observer</span><span class=p>)</span> <span class=p>{</span>
-  <span class=nx>observer</span><span class=p>.</span><span class=nx>next</span><span class=p>(</span><span class=mi>1</span><span class=p>);</span>
-  <span class=nx>observer</span><span class=p>.</span><span class=nx>next</span><span class=p>(</span><span class=mi>2</span><span class=p>);</span>
-  <span class=nx>observer</span><span class=p>.</span><span class=nx>next</span><span class=p>(</span><span class=mi>3</span><span class=p>);</span>
-  <span class=nx>setTimeout</span><span class=p>(()</span> <span class=p>=&gt;</span> <span class=p>{</span>
-    <span class=nx>observer</span><span class=p>.</span><span class=nx>next</span><span class=p>(</span><span class=mi>4</span><span class=p>);</span>
-    <span class=nx>observer</span><span class=p>.</span><span class=nx>complete</span><span class=p>();</span>
-  <span class=p>},</span> <span class=mi>1000</span><span class=p>);</span>
-<span class=p>});</span>
-</code></pre></div><p>每个 next()会向外抛出一个数据</p>
-<h2 id=2observer-观察者>2、Observer (观察者)</h2>
-<p>观察者通过订阅来拉取可观察对象的数据。<br>
-创建一个观察者</p>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-js data-lang=js><span class=kd>var</span> <span class=nx>observer</span> <span class=o>=</span> <span class=p>{</span>
-  <span class=nx>next</span><span class=o>:</span> <span class=p>(</span><span class=nx>x</span><span class=p>)</span> <span class=p>=&gt;</span> <span class=nx>console</span><span class=p>.</span><span class=nx>log</span><span class=p>(</span><span class=s2>&#34;Observer got a next value: &#34;</span> <span class=o>+</span> <span class=nx>x</span><span class=p>),</span>
-  <span class=nx>error</span><span class=o>:</span> <span class=p>(</span><span class=nx>err</span><span class=p>)</span> <span class=p>=&gt;</span> <span class=nx>console</span><span class=p>.</span><span class=nx>error</span><span class=p>(</span><span class=s2>&#34;Observer got an error: &#34;</span> <span class=o>+</span> <span class=nx>err</span><span class=p>),</span>
-  <span class=nx>complete</span><span class=o>:</span> <span class=p>()</span> <span class=p>=&gt;</span> <span class=nx>console</span><span class=p>.</span><span class=nx>log</span><span class=p>(</span><span class=s2>&#34;Observer got a complete notification&#34;</span><span class=p>),</span>
-<span class=p>};</span>
-</code></pre></div><p>观察者对象中你可以省略某一个函数，另外观察者也可以只是一个函数，那么它对应的就是 next 通知的处理方法。</p>
-<h2 id=3subscription-订阅>3、Subscription (订阅)</h2>
-<p>上边我们有了一个可观察对象和以一个可观察者，那么现在我们就需要使用订阅将他们联系起来</p>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-js data-lang=js><span class=kd>var</span> <span class=nx>subscription</span> <span class=o>=</span> <span class=nx>observable</span><span class=p>.</span><span class=nx>subscribe</span><span class=p>(</span><span class=nx>observer</span><span class=p>);</span>
-<span class=c1>// Observer got a next value: 1
-</span><span class=c1>// Observer got a next value: 2
-</span><span class=c1>// Observer got a next value: 3
-</span><span class=c1>// Observer got a next value: 4
-</span><span class=c1>// Observer got a complete notification
-</span></code></pre></div><p>当你订阅的时候，观察者就开始拉取数据了，同时会得到一个 Subscription 对象,它有一个<code>unsubscribe()</code>函数可以取消订阅，还有一个<code>add()</code>方法可以把另一个 Subscription 对象合并到自己身上，以及一个<code>remove(otherSubscription)</code> 方法，用来撤销一个已添加的子 Subscription。</p>
-<p>上边就是 RxJS 的基本概念了，下边会讲一些其它的扩展</p>
-<h2 id=4subject-主体>4、Subject (主体)</h2>
-<p>subject 即是 Observable，又是 Observer</p>
-<h3 id=作为-observable可观察对象>作为 Observable（可观察对象）</h3>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-js data-lang=js><span class=kd>var</span> <span class=nx>subject</span> <span class=o>=</span> <span class=k>new</span> <span class=nx>Rx</span><span class=p>.</span><span class=nx>Subject</span><span class=p>();</span>
-
-<span class=nx>subject</span><span class=p>.</span><span class=nx>subscribe</span><span class=p>({</span>
-  <span class=nx>next</span><span class=o>:</span> <span class=p>(</span><span class=nx>v</span><span class=p>)</span> <span class=p>=&gt;</span> <span class=nx>console</span><span class=p>.</span><span class=nx>log</span><span class=p>(</span><span class=s2>&#34;observerA: &#34;</span> <span class=o>+</span> <span class=nx>v</span><span class=p>),</span>
-<span class=p>});</span>
-
-<span class=nx>subject</span><span class=p>.</span><span class=nx>subscribe</span><span class=p>({</span>
-  <span class=nx>next</span><span class=o>:</span> <span class=p>(</span><span class=nx>v</span><span class=p>)</span> <span class=p>=&gt;</span> <span class=nx>console</span><span class=p>.</span><span class=nx>log</span><span class=p>(</span><span class=s2>&#34;observerB: &#34;</span> <span class=o>+</span> <span class=nx>v</span><span class=p>),</span>
-<span class=p>});</span>
-
-<span class=nx>subject</span><span class=p>.</span><span class=nx>next</span><span class=p>(</span><span class=mi>1</span><span class=p>);</span>
-<span class=nx>subject</span><span class=p>.</span><span class=nx>next</span><span class=p>(</span><span class=mi>2</span><span class=p>);</span>
-
-<span class=c1>// 打印结果:
-</span><span class=c1></span>
-<span class=cm>/*
-</span><span class=cm>observerA: 1
-</span><span class=cm>observerB: 1
-</span><span class=cm>observerA: 2
-</span><span class=cm>observerB: 2
-</span><span class=cm>*/</span>
-</code></pre></div><h3 id=作为-observer观察者>作为 Observer（观察者）</h3>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-js data-lang=js><span class=kd>var</span> <span class=nx>subject</span> <span class=o>=</span> <span class=k>new</span> <span class=nx>Rx</span><span class=p>.</span><span class=nx>Subject</span><span class=p>();</span>
-
-<span class=nx>subject</span><span class=p>.</span><span class=nx>subscribe</span><span class=p>({</span>
-  <span class=nx>next</span><span class=o>:</span> <span class=p>(</span><span class=nx>v</span><span class=p>)</span> <span class=p>=&gt;</span> <span class=nx>console</span><span class=p>.</span><span class=nx>log</span><span class=p>(</span><span class=s2>&#34;observerA: &#34;</span> <span class=o>+</span> <span class=nx>v</span><span class=p>),</span>
-<span class=p>});</span>
-<span class=nx>subject</span><span class=p>.</span><span class=nx>subscribe</span><span class=p>({</span>
-  <span class=nx>next</span><span class=o>:</span> <span class=p>(</span><span class=nx>v</span><span class=p>)</span> <span class=p>=&gt;</span> <span class=nx>console</span><span class=p>.</span><span class=nx>log</span><span class=p>(</span><span class=s2>&#34;observerB: &#34;</span> <span class=o>+</span> <span class=nx>v</span><span class=p>),</span>
-<span class=p>});</span>
-
-<span class=kd>var</span> <span class=nx>observable</span> <span class=o>=</span> <span class=nx>Rx</span><span class=p>.</span><span class=nx>Observable</span><span class=p>.</span><span class=nx>from</span><span class=p>([</span><span class=mi>1</span><span class=p>,</span> <span class=mi>2</span><span class=p>,</span> <span class=mi>3</span><span class=p>]);</span>
-
-<span class=nx>observable</span><span class=p>.</span><span class=nx>subscribe</span><span class=p>(</span><span class=nx>subject</span><span class=p>);</span> <span class=c1>// 你可以提供一个 Subject 进行订阅
-</span><span class=c1></span>
-<span class=c1>// 打印结果
-</span><span class=c1></span>
-<span class=cm>/*
-</span><span class=cm>observerA: 1
-</span><span class=cm>observerB: 1
-</span><span class=cm>observerA: 2
-</span><span class=cm>observerB: 2
-</span><span class=cm>observerA: 3
-</span><span class=cm>observerB: 3
-</span><span class=cm>*/</span>
-</code></pre></div><h3 id=subject-的多播>subject 的多播</h3>
-<p>多播这个我有点不知道怎么说，普通的 observable 是单播的，意思就是两个订阅是互不影响、独立的，一个订阅完毕之后再进行下一个订阅，但是 subject 是多播的，下边通过代码看一下他们的区别：</p>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-js data-lang=js><span class=c1>// 普通observable单播
-</span><span class=c1></span><span class=kr>const</span> <span class=p>{</span> <span class=nx>Observable</span><span class=p>,</span> <span class=nx>Subject</span> <span class=p>}</span> <span class=o>=</span> <span class=nx>require</span><span class=p>(</span><span class=s2>&#34;rxjs&#34;</span><span class=p>);</span>
-
-<span class=kr>const</span> <span class=nx>observable</span> <span class=o>=</span> <span class=nx>Observable</span><span class=p>.</span><span class=nx>create</span><span class=p>((</span><span class=nx>observer</span><span class=p>)</span> <span class=p>=&gt;</span> <span class=p>{</span>
-  <span class=nx>observer</span><span class=p>.</span><span class=nx>next</span><span class=p>(</span><span class=mi>1</span><span class=p>);</span>
-  <span class=nx>observer</span><span class=p>.</span><span class=nx>next</span><span class=p>(</span><span class=mi>2</span><span class=p>);</span>
-<span class=p>});</span>
-
-<span class=nx>observable</span><span class=p>.</span><span class=nx>subscribe</span><span class=p>((</span><span class=nx>k</span><span class=p>)</span> <span class=p>=&gt;</span> <span class=nx>console</span><span class=p>.</span><span class=nx>log</span><span class=p>(</span><span class=s2>&#34;from observer a:&#34;</span><span class=p>,</span> <span class=nx>k</span><span class=p>));</span>
-
-<span class=nx>observable</span><span class=p>.</span><span class=nx>subscribe</span><span class=p>((</span><span class=nx>k</span><span class=p>)</span> <span class=p>=&gt;</span> <span class=nx>console</span><span class=p>.</span><span class=nx>log</span><span class=p>(</span><span class=s2>&#34;from observer b:&#34;</span><span class=p>,</span> <span class=nx>k</span><span class=p>));</span>
-
-<span class=c1>// from observer a: 1
-</span><span class=c1>// from observer a: 2
-</span><span class=c1>// from observer b: 1
-</span><span class=c1>// from observer b: 2
-</span></code></pre></div><p>可以通过打印结果看出来，两个订阅是独立的，先打印完了 a，再打印完了 b。</p>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-js data-lang=js><span class=kr>const</span> <span class=p>{</span> <span class=nx>Observable</span><span class=p>,</span> <span class=nx>Subject</span> <span class=p>}</span> <span class=o>=</span> <span class=nx>require</span><span class=p>(</span><span class=s2>&#34;rxjs&#34;</span><span class=p>);</span>
-
-<span class=kr>const</span> <span class=nx>subject</span> <span class=o>=</span> <span class=k>new</span> <span class=nx>Subject</span><span class=p>();</span>
-
-<span class=kr>const</span> <span class=nx>observable</span> <span class=o>=</span> <span class=nx>Observable</span><span class=p>.</span><span class=nx>create</span><span class=p>((</span><span class=nx>observer</span><span class=p>)</span> <span class=p>=&gt;</span> <span class=p>{</span>
-  <span class=nx>observer</span><span class=p>.</span><span class=nx>next</span><span class=p>(</span><span class=mi>1</span><span class=p>);</span>
-  <span class=nx>observer</span><span class=p>.</span><span class=nx>next</span><span class=p>(</span><span class=mi>2</span><span class=p>);</span>
-<span class=p>});</span>
-
-<span class=nx>subject</span><span class=p>.</span><span class=nx>subscribe</span><span class=p>((</span><span class=nx>k</span><span class=p>)</span> <span class=p>=&gt;</span> <span class=nx>console</span><span class=p>.</span><span class=nx>log</span><span class=p>(</span><span class=s2>&#34;from observer a:&#34;</span><span class=p>,</span> <span class=nx>k</span><span class=p>));</span>
-
-<span class=nx>subject</span><span class=p>.</span><span class=nx>subscribe</span><span class=p>((</span><span class=nx>k</span><span class=p>)</span> <span class=p>=&gt;</span> <span class=nx>console</span><span class=p>.</span><span class=nx>log</span><span class=p>(</span><span class=s2>&#34;from observer b:&#34;</span><span class=p>,</span> <span class=nx>k</span><span class=p>));</span>
-
-<span class=nx>observable</span><span class=p>.</span><span class=nx>subscribe</span><span class=p>(</span><span class=nx>subject</span><span class=p>);</span>
-
-<span class=c1>// from observer a: 1
-</span><span class=c1>// from observer b: 1
-</span><span class=c1>// from observer a: 2
-</span><span class=c1>// from observer b: 2
-</span></code></pre></div><p>两个订阅是同时执行的。</p>
-<p>另外 subject 还有几个变种，我回头再补充。</p>
-<p>这一次的先讲到这吧，rxjs 的东西好多，头痛，下次更新 observable 的几种创建方法以及常用的操作符</p>
-<h2 id=5今天补充-observable-的几种创建方法>5、今天补充 observable 的几种创建方法</h2>
-<h3 id=来自一个或多个值>来自一个或多个值</h3>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-js data-lang=js><span class=nx>Rx</span><span class=p>.</span><span class=nx>Observable</span><span class=p>.</span><span class=k>of</span><span class=p>(</span><span class=s2>&#34;foo&#34;</span><span class=p>,</span> <span class=s2>&#34;bar&#34;</span><span class=p>);</span>
-</code></pre></div><h3 id=来自数组>来自数组</h3>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-js data-lang=js><span class=nx>Rx</span><span class=p>.</span><span class=nx>Observable</span><span class=p>.</span><span class=nx>from</span><span class=p>([</span><span class=mi>1</span><span class=p>,</span> <span class=mi>2</span><span class=p>,</span> <span class=mi>3</span><span class=p>]);</span>
-</code></pre></div><h3 id=来自事件>来自事件</h3>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-js data-lang=js><span class=nx>Rx</span><span class=p>.</span><span class=nx>Observable</span><span class=p>.</span><span class=nx>fromEvent</span><span class=p>(</span><span class=nb>document</span><span class=p>.</span><span class=nx>querySelector</span><span class=p>(</span><span class=s2>&#34;button&#34;</span><span class=p>),</span> <span class=s2>&#34;click&#34;</span><span class=p>);</span>
-</code></pre></div><h3 id=来自-promise>来自 promise</h3>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-js data-lang=js><span class=nx>Rx</span><span class=p>.</span><span class=nx>Observable</span><span class=p>.</span><span class=nx>fromPromise</span><span class=p>(</span><span class=nx>fetch</span><span class=p>(</span><span class=s2>&#34;/users&#34;</span><span class=p>));</span>
-</code></pre></div><h3 id=来自回调函数>来自回调函数</h3>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-js data-lang=js><span class=c1>// fs.exists = (path, cb(exists))
-</span><span class=c1></span><span class=kr>const</span> <span class=nx>exists</span> <span class=o>=</span> <span class=nx>Rx</span><span class=p>.</span><span class=nx>Observable</span><span class=p>.</span><span class=nx>bindCallback</span><span class=p>(</span><span class=nx>fs</span><span class=p>.</span><span class=nx>exists</span><span class=p>);</span>
-<span class=nx>exists</span><span class=p>(</span><span class=s2>&#34;file.txt&#34;</span><span class=p>).</span><span class=nx>subscribe</span><span class=p>((</span><span class=nx>exists</span><span class=p>)</span> <span class=p>=&gt;</span>
-  <span class=nx>console</span><span class=p>.</span><span class=nx>log</span><span class=p>(</span><span class=s2>&#34;Does file exist?&#34;</span><span class=p>,</span> <span class=nx>exists</span><span class=p>)</span>
-<span class=p>);</span>
-</code></pre></div><h3 id=自己创建>自己创建</h3>
-<p>一开始讲到得 observable 都是这种自己创建得。</p>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-js data-lang=js><span class=kd>var</span> <span class=nx>myObservable</span> <span class=o>=</span> <span class=k>new</span> <span class=nx>Rx</span><span class=p>.</span><span class=nx>Subject</span><span class=p>();</span>
-<span class=nx>myObservable</span><span class=p>.</span><span class=nx>subscribe</span><span class=p>((</span><span class=nx>value</span><span class=p>)</span> <span class=p>=&gt;</span> <span class=nx>console</span><span class=p>.</span><span class=nx>log</span><span class=p>(</span><span class=nx>value</span><span class=p>));</span>
-<span class=nx>myObservable</span><span class=p>.</span><span class=nx>next</span><span class=p>(</span><span class=s2>&#34;foo&#34;</span><span class=p>);</span>
-</code></pre></div><div class=highlight><pre tabindex=0 class=chroma><code class=language-js data-lang=js><span class=kd>var</span> <span class=nx>myObservable</span> <span class=o>=</span> <span class=nx>Rx</span><span class=p>.</span><span class=nx>Observable</span><span class=p>.</span><span class=nx>create</span><span class=p>((</span><span class=nx>observer</span><span class=p>)</span> <span class=p>=&gt;</span> <span class=p>{</span>
-  <span class=nx>observer</span><span class=p>.</span><span class=nx>next</span><span class=p>(</span><span class=s2>&#34;foo&#34;</span><span class=p>);</span>
-  <span class=nx>setTimeout</span><span class=p>(()</span> <span class=p>=&gt;</span> <span class=nx>observer</span><span class=p>.</span><span class=nx>next</span><span class=p>(</span><span class=s2>&#34;bar&#34;</span><span class=p>),</span> <span class=mi>1000</span><span class=p>);</span>
-<span class=p>});</span>
-<span class=nx>myObservable</span><span class=p>.</span><span class=nx>subscribe</span><span class=p>((</span><span class=nx>value</span><span class=p>)</span> <span class=p>=&gt;</span> <span class=nx>console</span><span class=p>.</span><span class=nx>log</span><span class=p>(</span><span class=nx>value</span><span class=p>));</span>
-</code></pre></div><h2 id=6操作符>6、操作符</h2>
-<p><code>操作符是 Observable 类型上的方法，比如 .map(...)、.filter(...)、.merge(...)，等等。当操作符被调用时，它们不会改变已经存在的 Observable 实例。相反，它们返回一个新的 Observable ，它的 subscription 逻辑基于第一个 Observable 。</code><br>
-看着看着发现其实 RxJS 的操作符的概念很宽，并不止我一开始以为的<code>map</code>、<code>filter</code>这些东西，总的来说它把操作符分为了实例操作符和静态操作符，和 js 中的实例方法与静态方法的意思差不多。<br>
-简单来说实例操作符就是<code>Observable</code>实例上的方法，比如<code>map</code>、<code>filter</code>，而静态操作符就是<code>Observable</code>上挂载的方法，比如各种创建 Observable 实例的方法<code>create</code>、<code>of</code>、<code>from</code></p>
-</section>
-<footer class=article-footer>
-<section class=article-copyright><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><path d="M14.5 9a3.5 4 0 100 6"/></svg>
-<span>Licensed under CC BY-NC-SA 4.0</span>
-</section>
-</footer>
-</article>
-<aside class=related-contents--wrapper>
-</aside>
-<script src=https://utteranc.es/client.js repo=jo-hnny/jo-hnny.github.io issue-term=title label=comments crossorigin=anonymous async></script>
-<style>.utterances{max-width:unset}</style>
-<script>function setUtterancesTheme(b){let a=document.querySelector('.utterances iframe');a&&a.contentWindow.postMessage({type:'set-theme',theme:`github-${b}`},'https://utteranc.es')}addEventListener('message',a=>{if(a.origin!=='https://utteranc.es')return;setUtterancesTheme(document.documentElement.dataset.scheme)}),window.addEventListener('onColorSchemeChange',a=>{setUtterancesTheme(a.detail)})</script>
-<footer class=site-footer>
-<section class=copyright>
-&copy;
+var observer = { next: (x) =&amp;gt; console.log(&amp;#34;Observer got a next value: &amp;#34; + x), error: (err) =&amp;gt; console.error(&amp;#34;Observer got an error: &amp;#34; + err), complete: () =&amp;gt; console.log(&amp;#34;Observer got a complete notification&amp;#34;), }; 观察者对象中你可以省略某一个函数，另外观察者也可以只是一个函数，那么它对应的就是 next 通知的处理方法。"><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content="https://picsum.photos/seed/b950dc5fee90419792f927c90bc40a88/4096/2160"><link rel="shortcut icon" href=/img/favicon.ico><script async src="https://www.googletagmanager.com/gtag/js?id=G-TFV4P906GT"></script>
+<script>var doNotTrack=!1;if(!doNotTrack){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-TFV4P906GT",{anonymize_ip:!1})}</script></head><body class=article-page><script>(function(){const e="StackColorScheme";localStorage.getItem(e)||localStorage.setItem(e,"auto")})()</script><script>(function(){const t="StackColorScheme",e=localStorage.getItem(t),n=window.matchMedia("(prefers-color-scheme: dark)").matches===!0;e=="dark"||e==="auto"&&n?document.documentElement.dataset.scheme="dark":document.documentElement.dataset.scheme="light"})()</script><div class="container main-container flex
+on-phone--column extended"><aside class="sidebar left-sidebar sticky"><button class="hamburger hamburger--spin" type=button id=toggle-menu aria-label=切换菜单>
+<span class=hamburger-box><span class=hamburger-inner></span></span></button><header class=site-info><figure class=site-avatar><img src=/img/avatar_hud170f2c6bd12f3a098a294aad792bf80_1699879_300x0_resize_box_3.png width=300 height=195 class=site-logo loading=lazy alt=Avatar>
+<span class=emoji>🏂🏻</span></figure><h1 class=site-name><a href=https://jo-hnny.github.io/>冷宫</a></h1><h2 class=site-description>她们都被我打入了冷宫，但是偶尔还是会过来看一下</h2></header><ol class=menu id=main-menu><li><a href=/><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><polyline points="5 12 3 12 12 3 21 12 19 12"/><path d="M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"/><path d="M9 21v-6a2 2 0 012-2h2a2 2 0 012 2v6"/></svg><span>Home</span></a></li><li><a href=/about><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="7" r="4"/><path d="M6 21v-2a4 4 0 014-4h4a4 4 0 014 4v2"/></svg><span>About</span></a></li><li><a href=/talks><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-hipchat" width="44" height="44" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M17.802 17.292s.077-.055.2-.149C19.845 15.718 21 13.653 21 11.354c0-4.286-4.03-7.764-8.998-7.764C7.032 3.59 3 7.068 3 11.354 3 15.642 7.03 19 12 19c.424.0 1.12-.028 2.088-.084 1.262.82 3.104 1.493 4.716 1.493.499.0.734-.41.414-.828-.486-.596-1.156-1.551-1.416-2.29z"/><path d="M7.5 13.5c2.5 2.5 6.5 2.5 9 0"/></svg><span>Talks</span></a></li><li><a href=/archives><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><rect x="3" y="4" width="18" height="4" rx="2"/><path d="M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8"/><line x1="10" y1="12" x2="14" y2="12"/></svg><span>Archives</span></a></li><li><a href=/search><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="10" cy="10" r="7"/><line x1="21" y1="21" x2="15" y2="15"/></svg><span>Search</span></a></li><li><a href=/index.xml><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-rss" width="44" height="44" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><circle cx="5" cy="19" r="1"/><path d="M4 4a16 16 0 0116 16"/><path d="M4 11a9 9 0 019 9"/></svg><span>Feed</span></a></li><li id=dark-mode-toggle><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="8" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="16" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg><span>暗色模式</span></li></ol></aside><main class="main full-width"><article class="has-image main-article"><header class=article-header><div class=article-image><a href=/p/%E5%AD%A6%E4%B9%A0rxjs/><img src=https://picsum.photos/seed/b950dc5fee90419792f927c90bc40a88/4096/2160 loading=lazy alt="Featured image of post 学习RxJS"></a></div><div class=article-details><h2 class=article-title><a href=/p/%E5%AD%A6%E4%B9%A0rxjs/>学习RxJS</a></h2><footer class=article-time><div><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M11.795 21H5a2 2 0 01-2-2V7a2 2 0 012-2h12a2 2 0 012 2v4"/><circle cx="18" cy="18" r="4"/><path d="M15 3v4"/><path d="M7 3v4"/><path d="M3 11h16"/><path d="M18 16.496V18l1 1"/></svg><time class=article-time--published>Sep 18, 2019</time></div></footer></div></header><section class=article-content><p>一直想学习一下 RxJS，从一开始学习 android 的时候就听说过 RxJAVA，但是之前每次都看不下去，不太清楚这个是干什么的。今天下定决心要好好看一看。</p><h2 id=1observable-可观察对象>1、Observable (可观察对象)</h2><p>RxJS 的核心概念就是观察者模式，也就是一个可观察对象会推送数据，一个观察者通过订阅接受这些数据，<br>创建一个可观察对象</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-js data-lang=js><span class=line><span class=cl><span class=kd>var</span> <span class=nx>observable</span> <span class=o>=</span> <span class=nx>Rx</span><span class=p>.</span><span class=nx>Observable</span><span class=p>.</span><span class=nx>create</span><span class=p>(</span><span class=kd>function</span> <span class=p>(</span><span class=nx>observer</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=nx>observer</span><span class=p>.</span><span class=nx>next</span><span class=p>(</span><span class=mi>1</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=nx>observer</span><span class=p>.</span><span class=nx>next</span><span class=p>(</span><span class=mi>2</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=nx>observer</span><span class=p>.</span><span class=nx>next</span><span class=p>(</span><span class=mi>3</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=nx>setTimeout</span><span class=p>(()</span> <span class=p>=&gt;</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nx>observer</span><span class=p>.</span><span class=nx>next</span><span class=p>(</span><span class=mi>4</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=nx>observer</span><span class=p>.</span><span class=nx>complete</span><span class=p>();</span>
+</span></span><span class=line><span class=cl>  <span class=p>},</span> <span class=mi>1000</span><span class=p>);</span>
+</span></span><span class=line><span class=cl><span class=p>});</span>
+</span></span></code></pre></div><p>每个 next()会向外抛出一个数据</p><h2 id=2observer-观察者>2、Observer (观察者)</h2><p>观察者通过订阅来拉取可观察对象的数据。<br>创建一个观察者</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-js data-lang=js><span class=line><span class=cl><span class=kd>var</span> <span class=nx>observer</span> <span class=o>=</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=nx>next</span><span class=o>:</span> <span class=p>(</span><span class=nx>x</span><span class=p>)</span> <span class=p>=&gt;</span> <span class=nx>console</span><span class=p>.</span><span class=nx>log</span><span class=p>(</span><span class=s2>&#34;Observer got a next value: &#34;</span> <span class=o>+</span> <span class=nx>x</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>  <span class=nx>error</span><span class=o>:</span> <span class=p>(</span><span class=nx>err</span><span class=p>)</span> <span class=p>=&gt;</span> <span class=nx>console</span><span class=p>.</span><span class=nx>error</span><span class=p>(</span><span class=s2>&#34;Observer got an error: &#34;</span> <span class=o>+</span> <span class=nx>err</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>  <span class=nx>complete</span><span class=o>:</span> <span class=p>()</span> <span class=p>=&gt;</span> <span class=nx>console</span><span class=p>.</span><span class=nx>log</span><span class=p>(</span><span class=s2>&#34;Observer got a complete notification&#34;</span><span class=p>),</span>
+</span></span><span class=line><span class=cl><span class=p>};</span>
+</span></span></code></pre></div><p>观察者对象中你可以省略某一个函数，另外观察者也可以只是一个函数，那么它对应的就是 next 通知的处理方法。</p><h2 id=3subscription-订阅>3、Subscription (订阅)</h2><p>上边我们有了一个可观察对象和以一个可观察者，那么现在我们就需要使用订阅将他们联系起来</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-js data-lang=js><span class=line><span class=cl><span class=kd>var</span> <span class=nx>subscription</span> <span class=o>=</span> <span class=nx>observable</span><span class=p>.</span><span class=nx>subscribe</span><span class=p>(</span><span class=nx>observer</span><span class=p>);</span>
+</span></span><span class=line><span class=cl><span class=c1>// Observer got a next value: 1
+</span></span></span><span class=line><span class=cl><span class=c1>// Observer got a next value: 2
+</span></span></span><span class=line><span class=cl><span class=c1>// Observer got a next value: 3
+</span></span></span><span class=line><span class=cl><span class=c1>// Observer got a next value: 4
+</span></span></span><span class=line><span class=cl><span class=c1>// Observer got a complete notification
+</span></span></span></code></pre></div><p>当你订阅的时候，观察者就开始拉取数据了，同时会得到一个 Subscription 对象,它有一个<code>unsubscribe()</code>函数可以取消订阅，还有一个<code>add()</code>方法可以把另一个 Subscription 对象合并到自己身上，以及一个<code>remove(otherSubscription)</code> 方法，用来撤销一个已添加的子 Subscription。</p><p>上边就是 RxJS 的基本概念了，下边会讲一些其它的扩展</p><h2 id=4subject-主体>4、Subject (主体)</h2><p>subject 即是 Observable，又是 Observer</p><h3 id=作为-observable可观察对象>作为 Observable（可观察对象）</h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-js data-lang=js><span class=line><span class=cl><span class=kd>var</span> <span class=nx>subject</span> <span class=o>=</span> <span class=k>new</span> <span class=nx>Rx</span><span class=p>.</span><span class=nx>Subject</span><span class=p>();</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=nx>subject</span><span class=p>.</span><span class=nx>subscribe</span><span class=p>({</span>
+</span></span><span class=line><span class=cl>  <span class=nx>next</span><span class=o>:</span> <span class=p>(</span><span class=nx>v</span><span class=p>)</span> <span class=p>=&gt;</span> <span class=nx>console</span><span class=p>.</span><span class=nx>log</span><span class=p>(</span><span class=s2>&#34;observerA: &#34;</span> <span class=o>+</span> <span class=nx>v</span><span class=p>),</span>
+</span></span><span class=line><span class=cl><span class=p>});</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=nx>subject</span><span class=p>.</span><span class=nx>subscribe</span><span class=p>({</span>
+</span></span><span class=line><span class=cl>  <span class=nx>next</span><span class=o>:</span> <span class=p>(</span><span class=nx>v</span><span class=p>)</span> <span class=p>=&gt;</span> <span class=nx>console</span><span class=p>.</span><span class=nx>log</span><span class=p>(</span><span class=s2>&#34;observerB: &#34;</span> <span class=o>+</span> <span class=nx>v</span><span class=p>),</span>
+</span></span><span class=line><span class=cl><span class=p>});</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=nx>subject</span><span class=p>.</span><span class=nx>next</span><span class=p>(</span><span class=mi>1</span><span class=p>);</span>
+</span></span><span class=line><span class=cl><span class=nx>subject</span><span class=p>.</span><span class=nx>next</span><span class=p>(</span><span class=mi>2</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>// 打印结果:
+</span></span></span><span class=line><span class=cl><span class=c1></span>
+</span></span><span class=line><span class=cl><span class=cm>/*
+</span></span></span><span class=line><span class=cl><span class=cm>observerA: 1
+</span></span></span><span class=line><span class=cl><span class=cm>observerB: 1
+</span></span></span><span class=line><span class=cl><span class=cm>observerA: 2
+</span></span></span><span class=line><span class=cl><span class=cm>observerB: 2
+</span></span></span><span class=line><span class=cl><span class=cm>*/</span>
+</span></span></code></pre></div><h3 id=作为-observer观察者>作为 Observer（观察者）</h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-js data-lang=js><span class=line><span class=cl><span class=kd>var</span> <span class=nx>subject</span> <span class=o>=</span> <span class=k>new</span> <span class=nx>Rx</span><span class=p>.</span><span class=nx>Subject</span><span class=p>();</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=nx>subject</span><span class=p>.</span><span class=nx>subscribe</span><span class=p>({</span>
+</span></span><span class=line><span class=cl>  <span class=nx>next</span><span class=o>:</span> <span class=p>(</span><span class=nx>v</span><span class=p>)</span> <span class=p>=&gt;</span> <span class=nx>console</span><span class=p>.</span><span class=nx>log</span><span class=p>(</span><span class=s2>&#34;observerA: &#34;</span> <span class=o>+</span> <span class=nx>v</span><span class=p>),</span>
+</span></span><span class=line><span class=cl><span class=p>});</span>
+</span></span><span class=line><span class=cl><span class=nx>subject</span><span class=p>.</span><span class=nx>subscribe</span><span class=p>({</span>
+</span></span><span class=line><span class=cl>  <span class=nx>next</span><span class=o>:</span> <span class=p>(</span><span class=nx>v</span><span class=p>)</span> <span class=p>=&gt;</span> <span class=nx>console</span><span class=p>.</span><span class=nx>log</span><span class=p>(</span><span class=s2>&#34;observerB: &#34;</span> <span class=o>+</span> <span class=nx>v</span><span class=p>),</span>
+</span></span><span class=line><span class=cl><span class=p>});</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>var</span> <span class=nx>observable</span> <span class=o>=</span> <span class=nx>Rx</span><span class=p>.</span><span class=nx>Observable</span><span class=p>.</span><span class=nx>from</span><span class=p>([</span><span class=mi>1</span><span class=p>,</span> <span class=mi>2</span><span class=p>,</span> <span class=mi>3</span><span class=p>]);</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=nx>observable</span><span class=p>.</span><span class=nx>subscribe</span><span class=p>(</span><span class=nx>subject</span><span class=p>);</span> <span class=c1>// 你可以提供一个 Subject 进行订阅
+</span></span></span><span class=line><span class=cl><span class=c1></span>
+</span></span><span class=line><span class=cl><span class=c1>// 打印结果
+</span></span></span><span class=line><span class=cl><span class=c1></span>
+</span></span><span class=line><span class=cl><span class=cm>/*
+</span></span></span><span class=line><span class=cl><span class=cm>observerA: 1
+</span></span></span><span class=line><span class=cl><span class=cm>observerB: 1
+</span></span></span><span class=line><span class=cl><span class=cm>observerA: 2
+</span></span></span><span class=line><span class=cl><span class=cm>observerB: 2
+</span></span></span><span class=line><span class=cl><span class=cm>observerA: 3
+</span></span></span><span class=line><span class=cl><span class=cm>observerB: 3
+</span></span></span><span class=line><span class=cl><span class=cm>*/</span>
+</span></span></code></pre></div><h3 id=subject-的多播>subject 的多播</h3><p>多播这个我有点不知道怎么说，普通的 observable 是单播的，意思就是两个订阅是互不影响、独立的，一个订阅完毕之后再进行下一个订阅，但是 subject 是多播的，下边通过代码看一下他们的区别：</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-js data-lang=js><span class=line><span class=cl><span class=c1>// 普通observable单播
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kr>const</span> <span class=p>{</span> <span class=nx>Observable</span><span class=p>,</span> <span class=nx>Subject</span> <span class=p>}</span> <span class=o>=</span> <span class=nx>require</span><span class=p>(</span><span class=s2>&#34;rxjs&#34;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kr>const</span> <span class=nx>observable</span> <span class=o>=</span> <span class=nx>Observable</span><span class=p>.</span><span class=nx>create</span><span class=p>((</span><span class=nx>observer</span><span class=p>)</span> <span class=p>=&gt;</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=nx>observer</span><span class=p>.</span><span class=nx>next</span><span class=p>(</span><span class=mi>1</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=nx>observer</span><span class=p>.</span><span class=nx>next</span><span class=p>(</span><span class=mi>2</span><span class=p>);</span>
+</span></span><span class=line><span class=cl><span class=p>});</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=nx>observable</span><span class=p>.</span><span class=nx>subscribe</span><span class=p>((</span><span class=nx>k</span><span class=p>)</span> <span class=p>=&gt;</span> <span class=nx>console</span><span class=p>.</span><span class=nx>log</span><span class=p>(</span><span class=s2>&#34;from observer a:&#34;</span><span class=p>,</span> <span class=nx>k</span><span class=p>));</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=nx>observable</span><span class=p>.</span><span class=nx>subscribe</span><span class=p>((</span><span class=nx>k</span><span class=p>)</span> <span class=p>=&gt;</span> <span class=nx>console</span><span class=p>.</span><span class=nx>log</span><span class=p>(</span><span class=s2>&#34;from observer b:&#34;</span><span class=p>,</span> <span class=nx>k</span><span class=p>));</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>// from observer a: 1
+</span></span></span><span class=line><span class=cl><span class=c1>// from observer a: 2
+</span></span></span><span class=line><span class=cl><span class=c1>// from observer b: 1
+</span></span></span><span class=line><span class=cl><span class=c1>// from observer b: 2
+</span></span></span></code></pre></div><p>可以通过打印结果看出来，两个订阅是独立的，先打印完了 a，再打印完了 b。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-js data-lang=js><span class=line><span class=cl><span class=kr>const</span> <span class=p>{</span> <span class=nx>Observable</span><span class=p>,</span> <span class=nx>Subject</span> <span class=p>}</span> <span class=o>=</span> <span class=nx>require</span><span class=p>(</span><span class=s2>&#34;rxjs&#34;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kr>const</span> <span class=nx>subject</span> <span class=o>=</span> <span class=k>new</span> <span class=nx>Subject</span><span class=p>();</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kr>const</span> <span class=nx>observable</span> <span class=o>=</span> <span class=nx>Observable</span><span class=p>.</span><span class=nx>create</span><span class=p>((</span><span class=nx>observer</span><span class=p>)</span> <span class=p>=&gt;</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=nx>observer</span><span class=p>.</span><span class=nx>next</span><span class=p>(</span><span class=mi>1</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=nx>observer</span><span class=p>.</span><span class=nx>next</span><span class=p>(</span><span class=mi>2</span><span class=p>);</span>
+</span></span><span class=line><span class=cl><span class=p>});</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=nx>subject</span><span class=p>.</span><span class=nx>subscribe</span><span class=p>((</span><span class=nx>k</span><span class=p>)</span> <span class=p>=&gt;</span> <span class=nx>console</span><span class=p>.</span><span class=nx>log</span><span class=p>(</span><span class=s2>&#34;from observer a:&#34;</span><span class=p>,</span> <span class=nx>k</span><span class=p>));</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=nx>subject</span><span class=p>.</span><span class=nx>subscribe</span><span class=p>((</span><span class=nx>k</span><span class=p>)</span> <span class=p>=&gt;</span> <span class=nx>console</span><span class=p>.</span><span class=nx>log</span><span class=p>(</span><span class=s2>&#34;from observer b:&#34;</span><span class=p>,</span> <span class=nx>k</span><span class=p>));</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=nx>observable</span><span class=p>.</span><span class=nx>subscribe</span><span class=p>(</span><span class=nx>subject</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>// from observer a: 1
+</span></span></span><span class=line><span class=cl><span class=c1>// from observer b: 1
+</span></span></span><span class=line><span class=cl><span class=c1>// from observer a: 2
+</span></span></span><span class=line><span class=cl><span class=c1>// from observer b: 2
+</span></span></span></code></pre></div><p>两个订阅是同时执行的。</p><p>另外 subject 还有几个变种，我回头再补充。</p><p>这一次的先讲到这吧，rxjs 的东西好多，头痛，下次更新 observable 的几种创建方法以及常用的操作符</p><h2 id=5今天补充-observable-的几种创建方法>5、今天补充 observable 的几种创建方法</h2><h3 id=来自一个或多个值>来自一个或多个值</h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-js data-lang=js><span class=line><span class=cl><span class=nx>Rx</span><span class=p>.</span><span class=nx>Observable</span><span class=p>.</span><span class=k>of</span><span class=p>(</span><span class=s2>&#34;foo&#34;</span><span class=p>,</span> <span class=s2>&#34;bar&#34;</span><span class=p>);</span>
+</span></span></code></pre></div><h3 id=来自数组>来自数组</h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-js data-lang=js><span class=line><span class=cl><span class=nx>Rx</span><span class=p>.</span><span class=nx>Observable</span><span class=p>.</span><span class=nx>from</span><span class=p>([</span><span class=mi>1</span><span class=p>,</span> <span class=mi>2</span><span class=p>,</span> <span class=mi>3</span><span class=p>]);</span>
+</span></span></code></pre></div><h3 id=来自事件>来自事件</h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-js data-lang=js><span class=line><span class=cl><span class=nx>Rx</span><span class=p>.</span><span class=nx>Observable</span><span class=p>.</span><span class=nx>fromEvent</span><span class=p>(</span><span class=nb>document</span><span class=p>.</span><span class=nx>querySelector</span><span class=p>(</span><span class=s2>&#34;button&#34;</span><span class=p>),</span> <span class=s2>&#34;click&#34;</span><span class=p>);</span>
+</span></span></code></pre></div><h3 id=来自-promise>来自 promise</h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-js data-lang=js><span class=line><span class=cl><span class=nx>Rx</span><span class=p>.</span><span class=nx>Observable</span><span class=p>.</span><span class=nx>fromPromise</span><span class=p>(</span><span class=nx>fetch</span><span class=p>(</span><span class=s2>&#34;/users&#34;</span><span class=p>));</span>
+</span></span></code></pre></div><h3 id=来自回调函数>来自回调函数</h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-js data-lang=js><span class=line><span class=cl><span class=c1>// fs.exists = (path, cb(exists))
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kr>const</span> <span class=nx>exists</span> <span class=o>=</span> <span class=nx>Rx</span><span class=p>.</span><span class=nx>Observable</span><span class=p>.</span><span class=nx>bindCallback</span><span class=p>(</span><span class=nx>fs</span><span class=p>.</span><span class=nx>exists</span><span class=p>);</span>
+</span></span><span class=line><span class=cl><span class=nx>exists</span><span class=p>(</span><span class=s2>&#34;file.txt&#34;</span><span class=p>).</span><span class=nx>subscribe</span><span class=p>((</span><span class=nx>exists</span><span class=p>)</span> <span class=p>=&gt;</span>
+</span></span><span class=line><span class=cl>  <span class=nx>console</span><span class=p>.</span><span class=nx>log</span><span class=p>(</span><span class=s2>&#34;Does file exist?&#34;</span><span class=p>,</span> <span class=nx>exists</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=p>);</span>
+</span></span></code></pre></div><h3 id=自己创建>自己创建</h3><p>一开始讲到得 observable 都是这种自己创建得。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-js data-lang=js><span class=line><span class=cl><span class=kd>var</span> <span class=nx>myObservable</span> <span class=o>=</span> <span class=k>new</span> <span class=nx>Rx</span><span class=p>.</span><span class=nx>Subject</span><span class=p>();</span>
+</span></span><span class=line><span class=cl><span class=nx>myObservable</span><span class=p>.</span><span class=nx>subscribe</span><span class=p>((</span><span class=nx>value</span><span class=p>)</span> <span class=p>=&gt;</span> <span class=nx>console</span><span class=p>.</span><span class=nx>log</span><span class=p>(</span><span class=nx>value</span><span class=p>));</span>
+</span></span><span class=line><span class=cl><span class=nx>myObservable</span><span class=p>.</span><span class=nx>next</span><span class=p>(</span><span class=s2>&#34;foo&#34;</span><span class=p>);</span>
+</span></span></code></pre></div><div class=highlight><pre tabindex=0 class=chroma><code class=language-js data-lang=js><span class=line><span class=cl><span class=kd>var</span> <span class=nx>myObservable</span> <span class=o>=</span> <span class=nx>Rx</span><span class=p>.</span><span class=nx>Observable</span><span class=p>.</span><span class=nx>create</span><span class=p>((</span><span class=nx>observer</span><span class=p>)</span> <span class=p>=&gt;</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=nx>observer</span><span class=p>.</span><span class=nx>next</span><span class=p>(</span><span class=s2>&#34;foo&#34;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=nx>setTimeout</span><span class=p>(()</span> <span class=p>=&gt;</span> <span class=nx>observer</span><span class=p>.</span><span class=nx>next</span><span class=p>(</span><span class=s2>&#34;bar&#34;</span><span class=p>),</span> <span class=mi>1000</span><span class=p>);</span>
+</span></span><span class=line><span class=cl><span class=p>});</span>
+</span></span><span class=line><span class=cl><span class=nx>myObservable</span><span class=p>.</span><span class=nx>subscribe</span><span class=p>((</span><span class=nx>value</span><span class=p>)</span> <span class=p>=&gt;</span> <span class=nx>console</span><span class=p>.</span><span class=nx>log</span><span class=p>(</span><span class=nx>value</span><span class=p>));</span>
+</span></span></code></pre></div><h2 id=6操作符>6、操作符</h2><p><code>操作符是 Observable 类型上的方法，比如 .map(...)、.filter(...)、.merge(...)，等等。当操作符被调用时，它们不会改变已经存在的 Observable 实例。相反，它们返回一个新的 Observable ，它的 subscription 逻辑基于第一个 Observable 。</code><br>看着看着发现其实 RxJS 的操作符的概念很宽，并不止我一开始以为的<code>map</code>、<code>filter</code>这些东西，总的来说它把操作符分为了实例操作符和静态操作符，和 js 中的实例方法与静态方法的意思差不多。<br>简单来说实例操作符就是<code>Observable</code>实例上的方法，比如<code>map</code>、<code>filter</code>，而静态操作符就是<code>Observable</code>上挂载的方法，比如各种创建 Observable 实例的方法<code>create</code>、<code>of</code>、<code>from</code></p></section><footer class=article-footer><section class=article-copyright><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><path d="M14.5 9a3.5 4 0 100 6"/></svg><span>Licensed under CC BY-NC-SA 4.0</span></section></footer></article><aside class=related-contents--wrapper></aside><script src=https://utteranc.es/client.js repo=jo-hnny/jo-hnny.github.io issue-term=title label=comments crossorigin=anonymous async></script><style>.utterances{max-width:unset}</style><script>function setUtterancesTheme(e){let t=document.querySelector(".utterances iframe");t&&t.contentWindow.postMessage({type:"set-theme",theme:`github-${e}`},"https://utteranc.es")}addEventListener("message",e=>{if(e.origin!=="https://utteranc.es")return;setUtterancesTheme(document.documentElement.dataset.scheme)}),window.addEventListener("onColorSchemeChange",e=>{setUtterancesTheme(e.detail)})</script><footer class=site-footer><section class=copyright>&copy;
 2020 -
-2021 冷宫
-</section>
-<section class=powerby>
-Built with <a href=https://gohugo.io/ target=_blank rel=noopener>Hugo</a> <br>
-Theme <b><a href=https://github.com/CaiJimmy/hugo-theme-stack target=_blank rel=noopener data-version=3.2.0>Stack</a></b> designed by <a href=https://jimmycai.com target=_blank rel=noopener>Jimmy</a>
-</section>
-</footer>
-<div class=pswp tabindex=-1 role=dialog aria-hidden=true>
-<div class=pswp__bg></div>
-<div class=pswp__scroll-wrap>
-<div class=pswp__container>
-<div class=pswp__item></div>
-<div class=pswp__item></div>
-<div class=pswp__item></div>
-</div>
-<div class="pswp__ui pswp__ui--hidden">
-<div class=pswp__top-bar>
-<div class=pswp__counter></div>
-<button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+2022 冷宫</section><section class=powerby>Built with <a href=https://gohugo.io/ target=_blank rel=noopener>Hugo</a><br>Theme <b><a href=https://github.com/CaiJimmy/hugo-theme-stack target=_blank rel=noopener data-version=3.2.0>Stack</a></b> designed by <a href=https://jimmycai.com target=_blank rel=noopener>Jimmy</a></section></footer><div class=pswp tabindex=-1 role=dialog aria-hidden=true><div class=pswp__bg></div><div class=pswp__scroll-wrap><div class=pswp__container><div class=pswp__item></div><div class=pswp__item></div><div class=pswp__item></div></div><div class="pswp__ui pswp__ui--hidden"><div class=pswp__top-bar><div class=pswp__counter></div><button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
 <button class="pswp__button pswp__button--share" title=Share></button>
 <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
-<button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
-<div class=pswp__preloader>
-<div class=pswp__preloader__icn>
-<div class=pswp__preloader__cut>
-<div class=pswp__preloader__donut></div>
-</div>
-</div>
-</div>
-</div>
-<div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
-<div class=pswp__share-tooltip></div>
-</div>
-<button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
-</button>
-<button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
-</button>
-<div class=pswp__caption>
-<div class=pswp__caption__center></div>
-</div>
-</div>
-</div>
-</div><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo=" crossorigin=anonymous defer></script><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU=" crossorigin=anonymous defer></script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css integrity="sha256-c0uckgykQ9v5k+IqViZOZKc47Jn7KQil4/MP3ySA3F8=" crossorigin=anonymous><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.css integrity="sha256-SBLU4vv6CA6lHsZ1XyTdhyjJxCjPif/TRkjnsyGAGnE=" crossorigin=anonymous>
-</main>
-</div>
-<script src=https://cdn.jsdelivr.net/npm/node-vibrant@3.1.5/dist/vibrant.min.js integrity="sha256-5NovOZc4iwiAWTYIFiIM7DxKUXKWvpVEuMEPLzcm5/g=" crossorigin=anonymous defer></script><script type=text/javascript src=/ts/main.js defer></script>
-<script>(function(){const a=document.createElement('link');a.href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap",a.type="text/css",a.rel="stylesheet",document.head.appendChild(a)})()</script>
-</body>
-</html>
+<button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button><div class=pswp__preloader><div class=pswp__preloader__icn><div class=pswp__preloader__cut><div class=pswp__preloader__donut></div></div></div></div></div><div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap"><div class=pswp__share-tooltip></div></div><button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)"></button>
+<button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button><div class=pswp__caption><div class=pswp__caption__center></div></div></div></div></div><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo=" crossorigin=anonymous defer></script><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU=" crossorigin=anonymous defer></script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css integrity="sha256-c0uckgykQ9v5k+IqViZOZKc47Jn7KQil4/MP3ySA3F8=" crossorigin=anonymous><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.css integrity="sha256-SBLU4vv6CA6lHsZ1XyTdhyjJxCjPif/TRkjnsyGAGnE=" crossorigin=anonymous></main></div><script src=https://cdn.jsdelivr.net/npm/node-vibrant@3.1.5/dist/vibrant.min.js integrity="sha256-5NovOZc4iwiAWTYIFiIM7DxKUXKWvpVEuMEPLzcm5/g=" crossorigin=anonymous defer></script><script type=text/javascript src=/ts/main.js defer></script>
+<script>(function(){const e=document.createElement("link");e.href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap",e.type="text/css",e.rel="stylesheet",document.head.appendChild(e)})()</script></body></html>

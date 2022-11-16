@@ -1,542 +1,237 @@
-<!doctype html><html lang=zh-cn>
-<head><meta charset=utf-8>
-<meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="React + Redux + TypeScript - 成为更好的前端（教程） 我在开始构建 React 应用，但是我希望我的应用有一个好的构建方式，这是我在 Medium 上看到的一篇不错的教程，为了方便我理解，顺便学英语，翻译在此，英语版的可以点击查看原文
+<!doctype html><html lang=zh-cn><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="React + Redux + TypeScript - 成为更好的前端（教程） 我在开始构建 React 应用，但是我希望我的应用有一个好的构建方式，这是我在 Medium 上看到的一篇不错的教程，为了方便我理解，顺便学英语，翻译在此，英语版的可以点击查看原文
 构建一个满意的 React 应用程序是比较困难的（主要是比较难找到一份 React 的最佳实践，这点 Angular 还是很优秀的，但是我喜欢 jsx）。当你掌握了 VirtualDOM 的概念以及框架是如何工作的时候，你会很快意识到单单使用 React 本身不足以构建比 TODO-LIST 更大的应用。这个时候你开始学习使用类似 Flux 这样的 store 架构，比如说应用最广泛的 Redux，很快你会沉没在 actions 和 reducers 中，并且你开始在保持数据分离上遇到更多的困难，这听起来你是不是很熟悉？
 在本文中，我将介绍如何构建一个可扩展的应用程序，再看接下里的内容之前，我希望你已经明白 React 是如何工作的，并且对 Flux 或者 Redux 有一点了解。
 本文是我由 2018 年 7 月 25 日 SwingDev 在 microConf 大会上的演讲整理而成的书面版本。更多的信息可以点击microconf.io.
 为什么要使用 Store 如果你已经使用 React 编写过一个小的应用程序，那么你会发现好像少了些什么。
 假设我们正在创建由两个主要组件构成的简单应用：包含所有电子邮件列表的侧边栏组件和显示当前所选电子邮件内容的内容组件。单击侧边栏的元素时，我们使用路由来更改页面的 URL 并将电子邮件的 ID 放在其中。但是我们需要在内容组件中获取到电子邮件的具体内容，即使侧边栏组件中已经存在该数据，我们依然无法在他的兄弟组件中获取到该数据。
 你也许已经想到，我们可以把数据移动到父组件（包含了侧边栏组件和内容组件）来解决这个问题，但是这会产生许多潜在的问题和瓶颈。首先我们需要从父组件传递数据到子组件，并且将所有数据处理逻辑放到父组件中（例如删除邮件）。
-使用 Flux 架构有助于解决这两个问题，它抽象了存储数据和操作数据（即 actions）的逻辑，并且提供了简单的方法将数据传递给需要它的组件（即 Redux 中的 connect 函数）。"><title>(译)React+Redux+Typescript</title>
-<link rel=canonical href=https://jo-hnny.github.io/p/%E8%AF%91react-redux-typescript/>
-<link rel=stylesheet href=/scss/style.min.css><meta property="og:title" content="(译)React+Redux+Typescript">
-<meta property="og:description" content="React + Redux + TypeScript - 成为更好的前端（教程） 我在开始构建 React 应用，但是我希望我的应用有一个好的构建方式，这是我在 Medium 上看到的一篇不错的教程，为了方便我理解，顺便学英语，翻译在此，英语版的可以点击查看原文
+使用 Flux 架构有助于解决这两个问题，它抽象了存储数据和操作数据（即 actions）的逻辑，并且提供了简单的方法将数据传递给需要它的组件（即 Redux 中的 connect 函数）。"><title>(译)React+Redux+Typescript</title><link rel=canonical href=https://jo-hnny.github.io/p/%E8%AF%91react-redux-typescript/><link rel=stylesheet href=/scss/style.min.css><meta property="og:title" content="(译)React+Redux+Typescript"><meta property="og:description" content="React + Redux + TypeScript - 成为更好的前端（教程） 我在开始构建 React 应用，但是我希望我的应用有一个好的构建方式，这是我在 Medium 上看到的一篇不错的教程，为了方便我理解，顺便学英语，翻译在此，英语版的可以点击查看原文
 构建一个满意的 React 应用程序是比较困难的（主要是比较难找到一份 React 的最佳实践，这点 Angular 还是很优秀的，但是我喜欢 jsx）。当你掌握了 VirtualDOM 的概念以及框架是如何工作的时候，你会很快意识到单单使用 React 本身不足以构建比 TODO-LIST 更大的应用。这个时候你开始学习使用类似 Flux 这样的 store 架构，比如说应用最广泛的 Redux，很快你会沉没在 actions 和 reducers 中，并且你开始在保持数据分离上遇到更多的困难，这听起来你是不是很熟悉？
 在本文中，我将介绍如何构建一个可扩展的应用程序，再看接下里的内容之前，我希望你已经明白 React 是如何工作的，并且对 Flux 或者 Redux 有一点了解。
 本文是我由 2018 年 7 月 25 日 SwingDev 在 microConf 大会上的演讲整理而成的书面版本。更多的信息可以点击microconf.io.
 为什么要使用 Store 如果你已经使用 React 编写过一个小的应用程序，那么你会发现好像少了些什么。
 假设我们正在创建由两个主要组件构成的简单应用：包含所有电子邮件列表的侧边栏组件和显示当前所选电子邮件内容的内容组件。单击侧边栏的元素时，我们使用路由来更改页面的 URL 并将电子邮件的 ID 放在其中。但是我们需要在内容组件中获取到电子邮件的具体内容，即使侧边栏组件中已经存在该数据，我们依然无法在他的兄弟组件中获取到该数据。
 你也许已经想到，我们可以把数据移动到父组件（包含了侧边栏组件和内容组件）来解决这个问题，但是这会产生许多潜在的问题和瓶颈。首先我们需要从父组件传递数据到子组件，并且将所有数据处理逻辑放到父组件中（例如删除邮件）。
-使用 Flux 架构有助于解决这两个问题，它抽象了存储数据和操作数据（即 actions）的逻辑，并且提供了简单的方法将数据传递给需要它的组件（即 Redux 中的 connect 函数）。">
-<meta property="og:url" content="https://jo-hnny.github.io/p/%E8%AF%91react-redux-typescript/">
-<meta property="og:site_name" content="冷宫">
-<meta property="og:type" content="article"><meta property="article:section" content="Post"><meta property="article:tag" content="typescript"><meta property="article:tag" content="react"><meta property="article:tag" content="redux"><meta property="article:published_time" content="2019-09-18T21:14:23+08:00"><meta property="article:modified_time" content="2019-09-18T21:14:23+08:00"><meta property="og:image" content="https://jo-hnny.github.io/p/%E8%AF%91react-redux-typescript/cover.jpg">
-<meta name=twitter:title content="(译)React+Redux+Typescript">
-<meta name=twitter:description content="React + Redux + TypeScript - 成为更好的前端（教程） 我在开始构建 React 应用，但是我希望我的应用有一个好的构建方式，这是我在 Medium 上看到的一篇不错的教程，为了方便我理解，顺便学英语，翻译在此，英语版的可以点击查看原文
+使用 Flux 架构有助于解决这两个问题，它抽象了存储数据和操作数据（即 actions）的逻辑，并且提供了简单的方法将数据传递给需要它的组件（即 Redux 中的 connect 函数）。"><meta property="og:url" content="https://jo-hnny.github.io/p/%E8%AF%91react-redux-typescript/"><meta property="og:site_name" content="冷宫"><meta property="og:type" content="article"><meta property="article:section" content="Post"><meta property="article:tag" content="typescript"><meta property="article:tag" content="react"><meta property="article:tag" content="redux"><meta property="article:published_time" content="2019-09-18T21:14:23+08:00"><meta property="article:modified_time" content="2019-09-18T21:14:23+08:00"><meta property="og:image" content="https://jo-hnny.github.io/p/%E8%AF%91react-redux-typescript/cover.jpg"><meta name=twitter:title content="(译)React+Redux+Typescript"><meta name=twitter:description content="React + Redux + TypeScript - 成为更好的前端（教程） 我在开始构建 React 应用，但是我希望我的应用有一个好的构建方式，这是我在 Medium 上看到的一篇不错的教程，为了方便我理解，顺便学英语，翻译在此，英语版的可以点击查看原文
 构建一个满意的 React 应用程序是比较困难的（主要是比较难找到一份 React 的最佳实践，这点 Angular 还是很优秀的，但是我喜欢 jsx）。当你掌握了 VirtualDOM 的概念以及框架是如何工作的时候，你会很快意识到单单使用 React 本身不足以构建比 TODO-LIST 更大的应用。这个时候你开始学习使用类似 Flux 这样的 store 架构，比如说应用最广泛的 Redux，很快你会沉没在 actions 和 reducers 中，并且你开始在保持数据分离上遇到更多的困难，这听起来你是不是很熟悉？
 在本文中，我将介绍如何构建一个可扩展的应用程序，再看接下里的内容之前，我希望你已经明白 React 是如何工作的，并且对 Flux 或者 Redux 有一点了解。
 本文是我由 2018 年 7 月 25 日 SwingDev 在 microConf 大会上的演讲整理而成的书面版本。更多的信息可以点击microconf.io.
 为什么要使用 Store 如果你已经使用 React 编写过一个小的应用程序，那么你会发现好像少了些什么。
 假设我们正在创建由两个主要组件构成的简单应用：包含所有电子邮件列表的侧边栏组件和显示当前所选电子邮件内容的内容组件。单击侧边栏的元素时，我们使用路由来更改页面的 URL 并将电子邮件的 ID 放在其中。但是我们需要在内容组件中获取到电子邮件的具体内容，即使侧边栏组件中已经存在该数据，我们依然无法在他的兄弟组件中获取到该数据。
 你也许已经想到，我们可以把数据移动到父组件（包含了侧边栏组件和内容组件）来解决这个问题，但是这会产生许多潜在的问题和瓶颈。首先我们需要从父组件传递数据到子组件，并且将所有数据处理逻辑放到父组件中（例如删除邮件）。
-使用 Flux 架构有助于解决这两个问题，它抽象了存储数据和操作数据（即 actions）的逻辑，并且提供了简单的方法将数据传递给需要它的组件（即 Redux 中的 connect 函数）。"><meta name=twitter:card content="summary_large_image">
-<meta name=twitter:image content="https://jo-hnny.github.io/p/%E8%AF%91react-redux-typescript/cover.jpg">
-<link rel="shortcut icon" href=/img/favicon.ico>
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-TFV4P906GT"></script>
-<script>var doNotTrack=!1;if(!doNotTrack){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config','G-TFV4P906GT',{anonymize_ip:!1})}</script>
-</head>
-<body class=article-page>
-<script>(function(){const a='StackColorScheme';localStorage.getItem(a)||localStorage.setItem(a,"auto")})()</script><script>(function(){const b='StackColorScheme',a=localStorage.getItem(b),c=window.matchMedia('(prefers-color-scheme: dark)').matches===!0;a=='dark'||a==='auto'&&c?document.documentElement.dataset.scheme='dark':document.documentElement.dataset.scheme='light'})()</script>
-<div class="container main-container flex
-on-phone--column extended">
-<aside class="sidebar left-sidebar sticky">
-<button class="hamburger hamburger--spin" type=button id=toggle-menu aria-label=切换菜单>
-<span class=hamburger-box>
-<span class=hamburger-inner></span>
-</span>
-</button>
-<header class=site-info>
-<figure class=site-avatar>
-<img src=/img/avatar_hud170f2c6bd12f3a098a294aad792bf80_1699879_300x0_resize_box_3.png width=300 height=195 class=site-logo loading=lazy alt=Avatar>
-<span class=emoji>🏂🏻</span>
-</figure>
-<h1 class=site-name><a href=https://jo-hnny.github.io/>冷宫</a></h1>
-<h2 class=site-description>她们都被我打入了冷宫，但是偶尔还是会过来看一下</h2>
-</header>
-<ol class=menu id=main-menu>
-<li>
-<a href=/><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><polyline points="5 12 3 12 12 3 21 12 19 12"/><path d="M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"/><path d="M9 21v-6a2 2 0 012-2h2a2 2 0 012 2v6"/></svg>
-<span>Home</span>
-</a>
-</li>
-<li>
-<a href=/about><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="7" r="4"/><path d="M6 21v-2a4 4 0 014-4h4a4 4 0 014 4v2"/></svg>
-<span>About</span>
-</a>
-</li>
-<li>
-<a href=/talks><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-hipchat" width="44" height="44" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M17.802 17.292s.077-.055.2-.149C19.845 15.718 21 13.653 21 11.354c0-4.286-4.03-7.764-8.998-7.764C7.032 3.59 3 7.068 3 11.354 3 15.642 7.03 19 12 19c.424.0 1.12-.028 2.088-.084 1.262.82 3.104 1.493 4.716 1.493.499.0.734-.41.414-.828-.486-.596-1.156-1.551-1.416-2.29z"/><path d="M7.5 13.5c2.5 2.5 6.5 2.5 9 0"/></svg>
-<span>Talks</span>
-</a>
-</li>
-<li>
-<a href=/archives><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><rect x="3" y="4" width="18" height="4" rx="2"/><path d="M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8"/><line x1="10" y1="12" x2="14" y2="12"/></svg>
-<span>Archives</span>
-</a>
-</li>
-<li>
-<a href=/search><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="10" cy="10" r="7"/><line x1="21" y1="21" x2="15" y2="15"/></svg>
-<span>Search</span>
-</a>
-</li>
-<li>
-<a href=/index.xml><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-rss" width="44" height="44" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><circle cx="5" cy="19" r="1"/><path d="M4 4a16 16 0 0116 16"/><path d="M4 11a9 9 0 019 9"/></svg>
-<span>Feed</span>
-</a>
-</li>
-<li id=dark-mode-toggle><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="8" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="16" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg>
-<span>暗色模式</span>
-</li>
-</ol>
-</aside>
-<main class="main full-width">
-<article class="has-image main-article">
-<header class=article-header>
-<div class=article-image>
-<a href=/p/%E8%AF%91react-redux-typescript/>
-<img src=/p/%E8%AF%91react-redux-typescript/cover_hu214c846e4a0e357a14266a12e8b1a4b9_1120274_800x0_resize_q75_box.jpg srcset="/p/%E8%AF%91react-redux-typescript/cover_hu214c846e4a0e357a14266a12e8b1a4b9_1120274_800x0_resize_q75_box.jpg 800w, /p/%E8%AF%91react-redux-typescript/cover_hu214c846e4a0e357a14266a12e8b1a4b9_1120274_1600x0_resize_q75_box.jpg 1600w" width=800 height=1000 loading=lazy alt="Featured image of post (译)React+Redux+Typescript">
-</a>
-</div>
-<div class=article-details>
-<header class=article-category>
-<a href=/categories/%E7%BC%96%E7%A8%8B/>
-编程
-</a>
-</header>
-<h2 class=article-title>
-<a href=/p/%E8%AF%91react-redux-typescript/>(译)React+Redux+Typescript</a>
-</h2>
-<footer class=article-time>
-<div><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M11.795 21H5a2 2 0 01-2-2V7a2 2 0 012-2h12a2 2 0 012 2v4"/><circle cx="18" cy="18" r="4"/><path d="M15 3v4"/><path d="M7 3v4"/><path d="M3 11h16"/><path d="M18 16.496V18l1 1"/></svg>
-<time class=article-time--published>Sep 18, 2019</time>
-</div>
-</footer>
-</div>
-</header>
-<section class=article-content>
-<h1 id=react--redux--typescript---成为更好的前端教程>React + Redux + TypeScript - 成为更好的前端（教程）</h1>
-<p>我在开始构建 React 应用，但是我希望我的应用有一个好的构建方式，这是我在 Medium 上看到的一篇不错的教程，为了方便我理解，顺便学英语，翻译在此，英语版的可以<a class=link href=https://medium.com/swinginc/react-redux-typescript-into-the-better-frontend-tutorial-d32f46e97995 target=_blank rel=noopener>点击查看原文</a></p>
-<p>构建一个满意的 React 应用程序是比较困难的（主要是比较难找到一份 React 的最佳实践，这点 Angular 还是很优秀的，但是我喜欢 jsx）。当你掌握了 VirtualDOM 的概念以及框架是如何工作的时候，你会很快意识到单单使用 React 本身不足以构建比 TODO-LIST 更大的应用。这个时候你开始学习使用类似 Flux 这样的 store 架构，比如说应用最广泛的 Redux，很快你会沉没在 actions 和 reducers 中，并且你开始在保持数据分离上遇到更多的困难，这听起来你是不是很熟悉？</p>
-<p>在本文中，我将介绍如何构建一个可扩展的应用程序，再看接下里的内容之前，我希望你已经明白 React 是如何工作的，并且对 Flux 或者 Redux 有一点了解。</p>
-<p>本文是我由 2018 年 7 月 25 日 SwingDev 在 microConf 大会上的演讲整理而成的书面版本。更多的信息可以点击<a class=link href=http://www.microconf.io/ target=_blank rel=noopener>microconf.io</a>.</p>
-<h2 id=为什么要使用-store>为什么要使用 Store</h2>
-<p>如果你已经使用 React 编写过一个小的应用程序，那么你会发现好像少了些什么。</p>
-<p>假设我们正在创建由两个主要组件构成的简单应用：包含所有电子邮件列表的<strong>侧边栏组件</strong>和显示当前所选电子邮件内容的<strong>内容组件</strong>。单击侧边栏的元素时，我们使用路由来更改页面的 URL 并将电子邮件的 ID 放在其中。但是我们需要在内容组件中获取到电子邮件的具体内容，即使侧边栏组件中已经存在该数据，我们依然无法在他的兄弟组件中获取到该数据。</p>
-<p>你也许已经想到，我们可以把数据移动到父组件（包含了侧边栏组件和内容组件）来解决这个问题，但是这会产生许多潜在的问题和瓶颈。首先我们需要从父组件传递数据到子组件，并且将所有数据处理逻辑放到父组件中（例如删除邮件）。</p>
-<p>使用 Flux 架构有助于解决这两个问题，它抽象了存储数据和操作数据（即 actions）的逻辑，并且提供了简单的方法将数据传递给需要它的组件（即 Redux 中的 connect 函数）。</p>
-<h2 id=store-架构-101101-是什么梗我还特意搜了一下好像是初级的意思大概就是-store-架构初级教程吧>Store 架构 101（101 是什么梗,我还特意搜了一下，好像是初级的意思，大概就是 Store 架构初级教程吧）</h2>
-<p>Store 架构是一个初级的概念，但是如果你以前从未听说，它可能听起来很奇怪，下图很好的描述了它：</p>
-<p><figure>
-<a href=https://raw.githubusercontent.com/johnny19941216/storage-room/master/img/20190918203459.png>
-<img src=https://raw.githubusercontent.com/johnny19941216/storage-room/master/img/20190918203459.png loading=lazy>
-</a>
-</figure></p>
-<p>我们不再将所有数据保存到组件中，而是使用唯一的全局 Store 作为我们的事实上的数据来源。</p>
-<p>它定义了整个 UI，保存了所有动态数据-包括来自服务器的以及用户和应用的内部状态，我们基于这个 store 来构建我们的应用。</p>
-<p>当用户触发了一个操作 =》 比如在页面上点击一个按钮 =》 调用 Action（Action 是一个简单的对象，仅包含一个表明 action 类型的 type 属性和可选的补充数据）=》action 会发送到 reducer（一个具有单一作用的函数，它依据 action 和旧的 state 生成一个新的 state，比如用户点击按钮新创建了一封邮件，reducer 就会把新邮件添加到旧的邮件列表中，生成一个新的邮件列表，当然，reducer 返回的是一个完整的 state，邮件列表包含在其中）=》新的 store 传递给组件 =》组件相应的更新 UI</p>
-<h2 id=typescript--react-->TypeScript + React = ❤️</h2>
-<p>Angular 开发者默认使用 TypeScript 作为开发语言。React 应用仍然主要使用 javascript 开发，使用强类型语言可能会在一开始使得开发变得复杂，但是如果你按照规则使用，则会在后续的开发中给你带来极大的作用。我们在本文中构建 的应用程序使用 Typescript 进行开发，以表明在 Typescript 的帮助下重构 Redux store 是多么容易。</p>
-<p>将 TypeScript 与 React 一起使用可以从多方面获益。除了使用类型化语言的常见好处之外（您可以<a class=link href=https://atomicobject.com/resources/oo-programming/object-oriented-typing target=_blank rel=noopener>在此处</a>阅读更多相关信息），在编写 React 项目时您可以轻松输入 Props 和 State，比如你使用一个组件时，IDE 会提示该组件所需要的所有 props，如果你忘记了添加组件需要的必须属性，Typescript 也会提醒你（确实会避免很多低级错误，往往这种低级 bug 最为致命，浪费极多的时间）。</p>
-<p>但是不仅如此，使用 Typescript 扩展 Redux 还有更多的好处，你的 store 键入就是其中之一，你无须点击跳转到 Reducer 来推测 store 的数据结构，此外当你键入 action 或者 action 生成器（工厂模式）时不用猜测它们接收什么类型的参数。</p>
-<p>让我们来写个示例：</p>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-js data-lang=js><span class=kd>function</span> <span class=nx>searchAction</span><span class=p>(</span><span class=nx>options</span><span class=p>)</span> <span class=p>{</span>
-  <span class=k>return</span> <span class=p>{</span>
-    <span class=nx>type</span><span class=o>:</span> <span class=err>‘</span><span class=nx>SEARCH</span><span class=err>’</span><span class=p>,</span>
-    <span class=p>...</span><span class=nx>options</span>
-  <span class=p>};</span>
-<span class=p>}</span>
-</code></pre></div><p>这是一个简单的 action 生成器，它接收 options 参数生成一个 type 为 SEARCH 的新 action，你能告诉我它到底要接收一个什么样的 options 吗？</p>
-<p>没有任何提示我们到底要传递什么参数给它，你可能会找遍整个项目来搞明白 options 对象到底是个什么，但是很有可能你找遍整个项目还是不知道到底要传什么参数！（深有体会，有时候甚至需要打开开发者工具查看接口到底返回了什么，然后再去推导数据结构）</p>
-<p>下面是重写为 Typescript 的版本，一眼看去可能会觉得有点复杂，但是附加的 interface 清除了所有混乱，使用此代码，你可以清晰的看到该函数需要唯一的一个包含有必要属性 text 和可选属性 tags（由数字构成的数组）的对象。</p>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-typescript data-lang=typescript><span class=kr>interface</span> <span class=nx>SearchActionOptions</span> <span class=p>{</span>
-  <span class=nx>text</span>: <span class=kt>string</span><span class=p>;</span>
-  <span class=nx>tags?</span>: <span class=kt>number</span><span class=p>[];</span>
-<span class=p>}</span>
-
-<span class=kr>interface</span> <span class=nx>ISearchAction</span> <span class=kr>extends</span> <span class=nx>SearchActionOptions</span> <span class=p>{</span>
-  <span class=kr>type</span><span class=o>:</span> <span class=kt>string</span><span class=p>;</span>
-<span class=p>}</span>
-
-<span class=kd>function</span> <span class=nx>searchAction</span><span class=p>(</span><span class=nx>options</span>: <span class=kt>SearchActionOptions</span><span class=p>)</span><span class=o>:</span> <span class=nx>ISearchAction</span> <span class=p>{</span>
-  <span class=k>return</span> <span class=p>{</span>
-    <span class=kr>type</span><span class=o>:</span> <span class=s2>&#34;SEARCH&#34;</span><span class=p>,</span>
-    <span class=p>...</span><span class=nx>options</span><span class=p>,</span>
-  <span class=p>};</span>
-<span class=p>}</span>
-</code></pre></div><p>如果我们不正确的使用它，编辑器会给出相关提示！</p>
-<p><figure>
-<a href=https://raw.githubusercontent.com/johnny19941216/storage-room/master/img/20190918203523.png>
-<img src=https://raw.githubusercontent.com/johnny19941216/storage-room/master/img/20190918203523.png loading=lazy>
-</a>
-</figure></p>
-<p>截图来自于 VisualStudio Code</p>
-<h2 id=记事本-app>记事本 APP</h2>
-<p>本文会创建一个简单的记事本 APP，你可以在<a class=link href=https://github.com/SwingDev/microconf-workshops target=_blank rel=noopener>GitHub</a>找到这个仓库，如果你想在已有代码的基础上编写，你可以从 master 分支检出代码。</p>
-<p>在仓库里你可以找到已配置的 React + TypeScript 项目，其中实现了所有组件并定义了所有基本 action，虽然缺少了 store。</p>
-<p>在这个应用中我们有三个 action：</p>
-<ul>
-<li><em>NOTES_FETCH</em> 应用开始获取数据时调用</li>
-<li><em>NOTES_FETCH_SUCCESS</em> 应用获取数据成功时调用</li>
-<li><em>NOTES_FETCH_ERROR</em> 应用获取数据出错时调用</li>
-</ul>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-typescript data-lang=typescript><span class=kr>export</span> <span class=kr>interface</span> <span class=nx>IActionNotesFetch</span> <span class=kr>extends</span> <span class=nx>Action</span> <span class=p>{</span>
-  <span class=kr>type</span><span class=o>:</span> <span class=s2>&#34;NOTES_FETCH&#34;</span><span class=p>;</span>
-<span class=p>}</span>
-
-<span class=kr>export</span> <span class=kr>interface</span> <span class=nx>IActionNotesFetchSuccess</span> <span class=kr>extends</span> <span class=nx>Action</span> <span class=p>{</span>
-  <span class=kr>type</span><span class=o>:</span> <span class=s2>&#34;NOTES_FETCH_SUCCESS&#34;</span><span class=p>;</span>
-  <span class=nx>notes</span>: <span class=kt>NoteModel</span><span class=p>[];</span>
-<span class=p>}</span>
-
-<span class=kr>export</span> <span class=kr>interface</span> <span class=nx>IActionNotesFetchError</span> <span class=kr>extends</span> <span class=nx>Action</span> <span class=p>{</span>
-  <span class=kr>type</span><span class=o>:</span> <span class=s2>&#34;NOTES_FETCH_ERROR&#34;</span><span class=p>;</span>
-  <span class=nx>errorMessage</span>: <span class=kt>string</span><span class=p>;</span>
-<span class=p>}</span>
-
-<span class=kr>export</span> <span class=kr>type</span> <span class=nx>AppActions</span> <span class=o>=</span>
-  <span class=o>|</span> <span class=nx>IActionNotesFetch</span>
-  <span class=o>|</span> <span class=nx>IActionNotesFetchSuccess</span>
-  <span class=o>|</span> <span class=nx>IActionNotesFetchError</span><span class=p>;</span>
-</code></pre></div><p>我们应该如何构造 store 以方便向用户展示数据？</p>
-<h2 id=常见不推荐方法>常见（不推荐）方法</h2>
-<p>最基本的 store 构造可能如下所示：</p>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-typescript data-lang=typescript><span class=kr>export</span> <span class=kr>interface</span> <span class=nx>NotesListState</span> <span class=p>{</span>
-  <span class=nx>state</span>: <span class=kt>string</span><span class=p>;</span> <span class=c1>// &#39;INIT&#39;, &#39;LOADING&#39; | &#39;LOADED&#39; | &#39;ERROR&#39;,
-</span><span class=c1></span>  <span class=nx>notes</span>: <span class=kt>NoteModel</span><span class=p>[];</span>
-  <span class=nx>errorMessage?</span>: <span class=kt>string</span><span class=p>;</span>
-<span class=p>}</span>
-</code></pre></div><p>我们存储这个列表的当前状态：</p>
-<ul>
-<li>初始状态 - 向服务器发送请求之前</li>
-<li>加载中 - 等待服务器返回</li>
-<li>加载完毕 - 已经获取数据到本地</li>
-<li>错误 - 无法连接或者服务器错误</li>
-</ul>
-<p>在此架构中对应的 reducer 可能如下：</p>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-typescript data-lang=typescript><span class=kr>export</span> <span class=kd>function</span> <span class=nx>notesListReducer</span><span class=p>(</span>
-  <span class=nx>state</span>: <span class=kt>NotesListState</span><span class=p>,</span>
-  <span class=nx>action</span>: <span class=kt>AppActions</span>
-<span class=p>)</span><span class=o>:</span> <span class=nx>NotesListState</span> <span class=p>{</span>
-  <span class=k>if</span> <span class=p>(</span><span class=nx>action</span><span class=p>.</span><span class=kr>type</span> <span class=o>===</span> <span class=s2>&#34;NOTES_FETCH&#34;</span><span class=p>)</span> <span class=p>{</span>
-    <span class=k>return</span> <span class=p>{</span>
-      <span class=p>...</span><span class=nx>state</span><span class=p>,</span>
-      <span class=nx>state</span><span class=o>:</span> <span class=s2>&#34;LOADING&#34;</span><span class=p>,</span>
-      <span class=nx>notes</span><span class=o>:</span> <span class=p>[],</span>
-    <span class=p>};</span>
-  <span class=p>}</span>
-  <span class=k>if</span> <span class=p>(</span><span class=nx>action</span><span class=p>.</span><span class=kr>type</span> <span class=o>===</span> <span class=s2>&#34;NOTES_FETCH_SUCCESS&#34;</span><span class=p>)</span> <span class=p>{</span>
-    <span class=k>return</span> <span class=p>{</span>
-      <span class=p>...</span><span class=nx>state</span><span class=p>,</span>
-      <span class=nx>state</span><span class=o>:</span> <span class=s2>&#34;LOADED&#34;</span><span class=p>,</span>
-      <span class=nx>notes</span>: <span class=kt>action.notes</span><span class=p>,</span>
-    <span class=p>};</span>
-  <span class=p>}</span>
-  <span class=k>if</span> <span class=p>(</span><span class=nx>action</span><span class=p>.</span><span class=kr>type</span> <span class=o>===</span> <span class=s2>&#34;NOTES_FETCH_ERROR&#34;</span><span class=p>)</span> <span class=p>{</span>
-    <span class=k>return</span> <span class=p>{</span>
-      <span class=p>...</span><span class=nx>state</span><span class=p>,</span>
-      <span class=nx>state</span><span class=o>:</span> <span class=s2>&#34;ERROR&#34;</span><span class=p>,</span>
-      <span class=nx>notes</span><span class=o>:</span> <span class=p>[],</span>
-      <span class=nx>errorMessage</span>: <span class=kt>action.errorMessage</span><span class=p>,</span>
-    <span class=p>};</span>
-  <span class=p>}</span>
-  <span class=k>return</span> <span class=nx>state</span><span class=p>;</span>
-<span class=p>}</span>
-</code></pre></div><p>这是一个简单的函数，只有三个条件语句，分别对每个 action 做出反应。</p>
-<p>接下来唯一要做的就是把 store 与 React 组件连接起来，Redux 有一个函数 connect 可以很方便的帮我们实现这个功能，它接收两个回调函数，第一个将我们的全局 state 转换为组件的 props，第二个回调函数定义组件可用的 actions，我们把第一个函数更新为以下形式：</p>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-typescript data-lang=typescript><span class=kr>const</span> <span class=nx>mapStateToProps</span> <span class=o>=</span> <span class=p>(</span><span class=nx>state</span>: <span class=kt>AppState</span><span class=p>,</span> <span class=nx>ownProps</span>: <span class=kt>HomeViewProps</span><span class=p>)</span> <span class=o>=&gt;</span> <span class=p>{</span>
-  <span class=k>return</span> <span class=p>{</span>
-    <span class=nx>notes</span>: <span class=kt>state.list.notes</span><span class=p>,</span>
-    <span class=nx>state</span>: <span class=kt>state.list.state</span><span class=p>,</span>
-    <span class=nx>errorMessage</span>: <span class=kt>state.list.errorMessage</span><span class=p>,</span>
-  <span class=p>};</span>
-<span class=p>};</span>
-</code></pre></div><p>你可以在 github 仓库中的<em>sprint1-finish</em> tag 下找到可用的版本。</p>
-<h2 id=问与答>问与答</h2>
-<p>这个版本可以成功的加载和显示笔记（notes）。但是让我们思考一下，加入我们需要添加的下一个功能是-搜索。由于我们的 store 是一个全局单一数据源，所以当我们过滤掉某些 note 时，它就会从我们的 store 移除，这意味着在每次用户搜索时，我们都需要从服务器加载数据，以便向用户展示数据。</p>
-<p>但是如果我们想要展示另一个具有相同数据的列表，那么势必会有一些相同的条目同时出现在两个列表中，这会产生不必要的冗余，如果实际的内容和第二个列表的条目不同，又会产生歧义。</p>
-<p>不过，我们有一个叫做 store 规范化的方案可以将我们的 React/Redux 应用提升到一个新的水平。</p>
-<h2 id=store-规范化>store 规范化</h2>
-<p>要使用规范化，我们需要重新构思 store，在这里我们将它分为两类：</p>
-<ul>
-<li>第一个是我们可以视为前端数据库的数据 store，它保存着可用实体的相关信息。该 store 必须独立于用户正在与之交互的实际视图。</li>
-<li>第二个是我们的 UI store，这里包含有所有有关用户 UI 状态的信息，但是我的意思不是在 UI store 另外保存一份实体数据，而是保存条目的 id。</li>
-</ul>
-<p><a class=link href=https://redux.js.org/recipes/structuringreducers/normalizingstateshape target=_blank rel=noopener>Redux 本身推荐的结构</a>如下：</p>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-typescript data-lang=typescript><span class=p>{</span>
-  <span class=nx>entities</span><span class=o>:</span> <span class=p>{</span>
-    <span class=nx>notes</span><span class=o>:</span> <span class=p>{</span>
-      <span class=nx>byId</span><span class=o>:</span> <span class=p>{</span>
-        <span class=mi>1</span><span class=o>:</span> <span class=p>{</span>
-          <span class=nx>id</span>: <span class=kt>1</span><span class=p>,</span>
-          <span class=nx>title</span><span class=o>:</span> <span class=s1>&#39;First Note&#39;</span><span class=p>,</span>
-            <span class=nx>description</span><span class=o>:</span> <span class=s1>&#39;Lorem Ipsum&#39;</span>
-        <span class=p>},</span>
-        <span class=mi>3</span><span class=o>:</span> <span class=p>{</span>
-          <span class=nx>id</span>: <span class=kt>3</span><span class=p>,</span>
-          <span class=nx>title</span><span class=o>:</span> <span class=s1>&#39;Another Note&#39;</span><span class=p>,</span>
-            <span class=nx>description</span><span class=o>:</span> <span class=s1>&#39;Dolor Sit Amet&#39;</span>
-        <span class=p>}</span>
-      <span class=p>},</span>
-      <span class=nx>allIds</span><span class=o>:</span> <span class=p>[</span><span class=mi>1</span><span class=p>,</span> <span class=mi>3</span><span class=p>]</span>
-    <span class=p>},</span>
-  <span class=p>},</span>
-  <span class=nx>ui</span><span class=o>:</span> <span class=p>{</span>
-    <span class=nx>dashboardList</span><span class=o>:</span> <span class=p>{</span>
-      <span class=nx>state</span><span class=o>:</span> <span class=s1>&#39;LOADED&#39;</span><span class=p>,</span>
-      <span class=nx>notes</span><span class=o>:</span> <span class=p>[</span><span class=mi>1</span><span class=p>,</span> <span class=mi>3</span><span class=p>]</span>
-    <span class=p>}</span>
-  <span class=p>}</span>
-<span class=p>}</span>
-</code></pre></div><p>我们主要的 store 分为两部分：entities 和 ui，ui 属性下的数据结构由开发者决定，但是最重要的是我们没有保存真正的笔记数据，而是保存笔记的 id。</p>
-<p>数据存储更加结构化。对于每个实体类型，我们保持对象包含两个属性：</p>
-<ul>
-<li>byId:将实体的 id 映射到其内容的对象</li>
-<li>allIds 是我们当前商店中所有 ID 的数组</li>
-</ul>
-<p>如果你想了解有关 store 规范化的更多信息，建议参考<a class=link href=https://hackernoon.com/shape-your-redux-store-like-your-database-98faa4754fd5 target=_blank rel=noopener>Using the Redux Store Like a Database by Nick Sweeting</a> 和在 StackOverflow 上的讨论 <a class=link href=https://stackoverflow.com/questions/38222312/redux-why-normalize target=_blank rel=noopener>Redux - Why normalize?</a></p>
-<h2 id=改良版>改良版</h2>
-<p>让我们使用规范化重写一下，首先我们需要将 reducer 转换为 UI store，然后使用.map 函数将笔记映射到 ID 属性下：</p>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-typescript data-lang=typescript><span class=kr>export</span> <span class=kd>function</span> <span class=nx>notesListReducer</span><span class=p>(</span><span class=nx>state</span>: <span class=kt>NotesListState</span><span class=p>,</span> <span class=nx>action</span>: <span class=kt>AppActions</span><span class=p>)</span><span class=o>:</span> <span class=nx>NotesListState</span> <span class=p>{</span>
-  <span class=k>if</span> <span class=p>(</span><span class=nx>action</span><span class=p>.</span><span class=kr>type</span> <span class=o>===</span> <span class=s1>&#39;NOTES_FETCH&#39;</span><span class=p>)</span> <span class=p>{</span>
-    <span class=k>return</span> <span class=p>{</span>
-      <span class=p>...</span><span class=nx>state</span><span class=p>,</span>
-      <span class=nx>state</span><span class=o>:</span> <span class=s1>&#39;LOADING&#39;</span><span class=p>,</span>
-      <span class=nx>notes</span><span class=o>:</span> <span class=p>[],</span>
-    <span class=p>};</span>
-  <span class=p>}</span>
-  <span class=k>if</span> <span class=p>(</span><span class=nx>action</span><span class=p>.</span><span class=kr>type</span> <span class=o>===</span> <span class=s1>&#39;NOTES_FETCH_SUCCESS&#39;</span><span class=p>)</span> <span class=p>{</span>
-    <span class=k>return</span> <span class=p>{</span>
-      <span class=p>...</span><span class=nx>state</span><span class=p>,</span>
-      <span class=nx>state</span><span class=o>:</span> <span class=s1>&#39;LOADED&#39;</span><span class=p>,</span>
-      <span class=nx>notes</span>: <span class=kt>action.notes</span><span class=o>*</span><span class=p>.</span><span class=nx>map</span><span class=p>((</span><span class=nx>n</span>: <span class=kt>NoteModel</span><span class=p>)</span> <span class=o>=&gt;</span> <span class=nx>n</span><span class=p>.</span><span class=nx>id</span><span class=o>**</span><span class=p>)</span><span class=o>*</span><span class=p>,</span>
-    <span class=p>};</span>
-  <span class=p>}</span>
-  <span class=k>if</span> <span class=p>(</span><span class=nx>action</span><span class=p>.</span><span class=kr>type</span> <span class=o>===</span> <span class=s1>&#39;NOTES_FETCH_ERROR&#39;</span><span class=p>)</span> <span class=p>{</span>
-    <span class=k>return</span> <span class=p>{</span>
-      <span class=p>...</span><span class=nx>state</span><span class=p>,</span>
-      <span class=nx>state</span><span class=o>:</span> <span class=s1>&#39;ERROR&#39;</span><span class=p>,</span>
-      <span class=nx>notes</span><span class=o>:</span> <span class=p>[],</span>
-      <span class=nx>errorMessage</span>: <span class=kt>action.errorMessage</span>
-    <span class=p>};</span>
-  <span class=p>}</span>
-  <span class=k>return</span> <span class=nx>state</span><span class=p>;</span>
-<span class=p>}</span>
-</code></pre></div><p>接下来我们需要为数据 store 定义 type，我们可以通过以下方式实现：</p>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-typescript data-lang=typescript><span class=kr>export</span> <span class=kr>type</span> <span class=nx>NotesDict</span> <span class=o>=</span> <span class=p>{</span>
-  <span class=p>[</span><span class=nx>Key</span>: <span class=kt>number</span><span class=p>]</span><span class=o>:</span> <span class=nx>NoteModel</span><span class=p>;</span>
-<span class=p>};</span>
-
-<span class=kr>export</span> <span class=kr>type</span> <span class=nx>NotesDictState</span> <span class=o>=</span> <span class=p>{</span>
-  <span class=nx>byId</span>: <span class=kt>NotesDict</span><span class=p>;</span>
-  <span class=nx>allIds</span>: <span class=kt>number</span><span class=p>[];</span>
-<span class=p>};</span>
-</code></pre></div><p>第一个 interface 是用 Typescript 的方式声明特定形式的对象，在这里我们定义 ById 为一个对象，以数字 id 作为键，NoteModel 作为属性。</p>
-<p>现在我们重新编写一个 reducer 更新 store：</p>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-typescript data-lang=typescript><span class=kr>export</span> <span class=kd>function</span> <span class=nx>notesDictReducer</span><span class=p>(</span>
-  <span class=nx>state</span>: <span class=kt>NotesDictState</span><span class=p>,</span>
-  <span class=nx>action</span>: <span class=kt>AppActions</span>
-<span class=p>)</span><span class=o>:</span> <span class=nx>NotesDictState</span> <span class=p>{</span>
-  <span class=k>if</span> <span class=p>(</span><span class=nx>action</span><span class=p>.</span><span class=kr>type</span> <span class=o>===</span> <span class=s2>&#34;NOTES_FETCH_SUCCESS&#34;</span><span class=p>)</span> <span class=p>{</span>
-    <span class=k>return</span> <span class=p>{</span>
-      <span class=nx>byId</span>: <span class=kt>action.notes.reduce</span><span class=p>(</span>
-        <span class=p>(</span><span class=nx>acc</span><span class=p>,</span> <span class=nx>note</span><span class=p>)</span> <span class=o>=&gt;</span> <span class=p>({</span> <span class=p>...</span><span class=nx>acc</span><span class=p>,</span> <span class=p>[</span><span class=nx>note</span><span class=p>.</span><span class=nx>id</span><span class=p>]</span><span class=o>:</span> <span class=nx>note</span> <span class=p>}),</span>
-        <span class=nx>state</span>
-      <span class=p>),</span>
-      <span class=nx>allIds</span>: <span class=kt>action.notes.map</span><span class=p>((</span><span class=nx>n</span><span class=p>)</span> <span class=o>=&gt;</span> <span class=nx>n</span><span class=p>.</span><span class=nx>id</span><span class=p>),</span>
-    <span class=p>};</span>
-  <span class=p>}</span>
-  <span class=k>return</span> <span class=nx>state</span><span class=p>;</span>
-<span class=p>}</span>
-</code></pre></div><p>我们只对<em>NOTES_FETCH_SUCCESS</em>这个 action 做出反应，因为这是提供新数据的唯一操作，然后我们构建以 id 作为键的对象和包含所有 id 的数组。</p>
-<p>现在我们需要合并所有的 reducer 并且创建一个 main store 来保存这些数据：</p>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-typescript data-lang=typescript><span class=kr>export</span> <span class=kd>function</span> <span class=nx>mainReducer</span><span class=p>(</span><span class=nx>state</span>: <span class=kt>AppState</span> <span class=o>=</span> <span class=nx>defaultState</span><span class=p>(),</span> <span class=nx>action</span>: <span class=kt>Action</span><span class=p>)</span> <span class=p>{</span>
-  <span class=k>return</span> <span class=p>{</span>
-    <span class=nx>entities</span><span class=o>:</span> <span class=p>{</span>
-      <span class=nx>notes</span>: <span class=kt>notesDictReducer</span><span class=p>(</span><span class=nx>state</span><span class=p>.</span><span class=nx>entities</span><span class=p>.</span><span class=nx>notes</span><span class=p>,</span> <span class=nx>action</span><span class=p>),</span>
-    <span class=p>},</span>
-    <span class=nx>ui</span><span class=o>:</span> <span class=p>{</span>
-      <span class=nx>list</span>: <span class=kt>notesListReducer</span><span class=p>(</span><span class=nx>state</span><span class=p>.</span><span class=nx>ui</span><span class=p>.</span><span class=nx>list</span><span class=p>,</span> <span class=nx>action</span><span class=p>),</span>
-    <span class=p>},</span>
-  <span class=p>};</span>
-<span class=p>}</span>
-</code></pre></div><p>在实际项目中你可能会使用<em>combineReducers</em>来简化代码。</p>
-<p>接下来唯一要做的事就是更新我们的连接器（connector），现在我们的 UI 笔记列表只包含 id，因此我们需要将它映射到实际的笔记对象：</p>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-typescript data-lang=typescript><span class=kr>const</span> <span class=nx>mapStateToProps</span> <span class=o>=</span> <span class=p>(</span><span class=nx>state</span>: <span class=kt>AppState</span><span class=p>,</span> <span class=nx>ownProps</span>: <span class=kt>HomeViewProps</span><span class=p>)</span> <span class=o>=&gt;</span> <span class=p>{</span>
-  <span class=k>return</span> <span class=p>{</span>
-    <span class=nx>notes</span>: <span class=kt>state.ui.list.notes.map</span><span class=p>(</span>
-      <span class=p>(</span><span class=nx>noteId</span><span class=p>)</span> <span class=o>=&gt;</span> <span class=nx>state</span><span class=p>.</span><span class=nx>entities</span><span class=p>.</span><span class=nx>notes</span><span class=p>.</span><span class=nx>byId</span><span class=p>[</span><span class=nx>noteId</span><span class=p>]</span>
-    <span class=p>),</span>
-    <span class=nx>state</span>: <span class=kt>state.ui.list.state</span><span class=p>,</span>
-    <span class=nx>errorMessage</span>: <span class=kt>state.ui.list.errorMessage</span><span class=p>,</span>
-  <span class=p>};</span>
-<span class=p>};</span>
-</code></pre></div><h2 id=添加搜索>添加搜索</h2>
-<p>使用新架构添加搜索完全不是问题，首先，我们需要创建一个新的 action interface，看起来像下面这样：</p>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-typescript data-lang=typescript><span class=kr>export</span> <span class=kr>interface</span> <span class=nx>IActionSearchNotes</span> <span class=p>{</span>
-  <span class=kr>type</span><span class=o>:</span> <span class=s2>&#34;NOTES_SEARCH&#34;</span><span class=p>;</span>
-  <span class=nx>options</span><span class=o>:</span> <span class=p>{</span>
-    <span class=nx>searchText</span>: <span class=kt>string</span><span class=p>;</span>
-  <span class=p>};</span>
-<span class=p>}</span>
-</code></pre></div><p>接下里我们需要更新 UI reducer：</p>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-typescript data-lang=typescript><span class=kr>export</span> <span class=kd>function</span> <span class=nx>notesListReducer</span><span class=p>(</span>
-  <span class=nx>state</span>: <span class=kt>NotesListState</span><span class=p>,</span>
-  <span class=nx>action</span>: <span class=kt>AppActions</span><span class=p>,</span>
-  <span class=nx>notes</span>: <span class=kt>NotesDictState</span>
-<span class=p>)</span><span class=o>:</span> <span class=nx>NotesListState</span> <span class=p>{</span>
-  <span class=cm>/* all other reducers */</span>
-  <span class=k>if</span> <span class=p>(</span><span class=nx>action</span><span class=p>.</span><span class=kr>type</span> <span class=o>===</span> <span class=s2>&#34;NOTES_SEARCH&#34;</span><span class=p>)</span> <span class=p>{</span>
-    <span class=k>return</span> <span class=p>{</span>
-      <span class=p>...</span><span class=nx>state</span><span class=p>,</span>
-      <span class=nx>notes</span>: <span class=kt>notes.allIds</span>
-        <span class=p>.</span><span class=nx>map</span><span class=p>((</span><span class=nx>id</span><span class=p>)</span> <span class=o>=&gt;</span> <span class=nx>notes</span><span class=p>.</span><span class=nx>byId</span><span class=p>[</span><span class=nx>id</span><span class=p>])</span>
-        <span class=p>.</span><span class=nx>filter</span><span class=p>(</span><span class=nx>filterByText</span><span class=p>(</span><span class=nx>action</span><span class=p>.</span><span class=nx>options</span><span class=p>.</span><span class=nx>searchText</span><span class=p>.</span><span class=nx>toLowerCase</span><span class=p>()))</span>
-        <span class=p>.</span><span class=nx>map</span><span class=p>((</span><span class=nx>n</span><span class=p>)</span> <span class=o>=&gt;</span> <span class=nx>n</span><span class=p>.</span><span class=nx>id</span><span class=p>),</span>
-    <span class=p>};</span>
-  <span class=p>}</span>
-  <span class=k>return</span> <span class=nx>state</span><span class=p>;</span>
-<span class=p>}</span>
-</code></pre></div><p>请注意，我们需要将数据 store 传递到 reducer 中，以便能够遍历所有元素并仅过滤出与搜索字符匹配的结果，你可以通过各种方式实现 filterByText 函数，下面是其中一种实现方式：</p>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-typescript data-lang=typescript><span class=kd>function</span> <span class=nx>filterByText</span><span class=p>(</span><span class=nx>text</span>: <span class=kt>string</span><span class=p>)</span><span class=o>:</span> <span class=p>(</span><span class=nx>n</span>: <span class=kt>NoteModel</span><span class=p>)</span> <span class=o>=&gt;</span> <span class=kr>boolean</span> <span class=p>{</span>
-  <span class=k>return</span> <span class=p>(</span><span class=nx>note</span>: <span class=kt>NoteModel</span><span class=p>)</span><span class=o>:</span> <span class=kr>boolean</span> <span class=o>=&gt;</span> <span class=p>{</span>
-    <span class=k>return</span> <span class=p>(</span>
-      <span class=nx>note</span><span class=p>.</span><span class=nx>title</span><span class=p>.</span><span class=nx>toLowerCase</span><span class=p>().</span><span class=nx>indexOf</span><span class=p>(</span><span class=nx>text</span><span class=p>)</span> <span class=o>&gt;</span> <span class=o>-</span><span class=mi>1</span> <span class=o>||</span>
-      <span class=nx>note</span><span class=p>.</span><span class=nx>content</span><span class=p>.</span><span class=nx>toLowerCase</span><span class=p>().</span><span class=nx>indexOf</span><span class=p>(</span><span class=nx>text</span><span class=p>)</span> <span class=o>&gt;</span> <span class=o>-</span><span class=mi>1</span>
-    <span class=p>);</span>
-  <span class=p>};</span>
-<span class=p>}</span>
-</code></pre></div><p>该函数检查了笔记的标题或者内容是否能够与搜索匹配。</p>
-<p>好了，就是这么多了，我们已经实现了搜索，请注意我们事实上并没有触及连接器（connector），因为我们的 store 已经规范化，所以无需更新视图。添加更多的搜索功能或者排序功能也不需要有太多的更改。如果我们需要添加刷新功能与后台保持同步，我们应用中的所有实例将自动更新。</p>
-<h2 id=摘要>摘要</h2>
-<p>我希望本文能够让您基本了解 Redux store 规范化的工作原理以及如何使用它来改进项目。如果您想通过此示例进行更多操作，我建议您执行以下一项或所有练习：</p>
-<ul>
-<li>删除元素的功能</li>
-<li>添加标记功能</li>
-<li>添加按标签搜索的选项</li>
-</ul>
-<p>本文基于 2018 年 7 月 25 日在波兰华沙举行的 SwingDev microConf“State of the State in React”研讨会。如果您想了解有关该活动的更多信息，请访问<a class=link href=https://www.microconf.io/ target=_blank rel=noopener>www.microconf.io</a>。</p>
-</section>
-<footer class=article-footer>
-<section class=article-tags>
-<a href=/tags/typescript/>typescript</a>
+使用 Flux 架构有助于解决这两个问题，它抽象了存储数据和操作数据（即 actions）的逻辑，并且提供了简单的方法将数据传递给需要它的组件（即 Redux 中的 connect 函数）。"><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content="https://jo-hnny.github.io/p/%E8%AF%91react-redux-typescript/cover.jpg"><link rel="shortcut icon" href=/img/favicon.ico><script async src="https://www.googletagmanager.com/gtag/js?id=G-TFV4P906GT"></script>
+<script>var doNotTrack=!1;if(!doNotTrack){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-TFV4P906GT",{anonymize_ip:!1})}</script></head><body class=article-page><script>(function(){const e="StackColorScheme";localStorage.getItem(e)||localStorage.setItem(e,"auto")})()</script><script>(function(){const t="StackColorScheme",e=localStorage.getItem(t),n=window.matchMedia("(prefers-color-scheme: dark)").matches===!0;e=="dark"||e==="auto"&&n?document.documentElement.dataset.scheme="dark":document.documentElement.dataset.scheme="light"})()</script><div class="container main-container flex
+on-phone--column extended"><aside class="sidebar left-sidebar sticky"><button class="hamburger hamburger--spin" type=button id=toggle-menu aria-label=切换菜单>
+<span class=hamburger-box><span class=hamburger-inner></span></span></button><header class=site-info><figure class=site-avatar><img src=/img/avatar_hud170f2c6bd12f3a098a294aad792bf80_1699879_300x0_resize_box_3.png width=300 height=195 class=site-logo loading=lazy alt=Avatar>
+<span class=emoji>🏂🏻</span></figure><h1 class=site-name><a href=https://jo-hnny.github.io/>冷宫</a></h1><h2 class=site-description>她们都被我打入了冷宫，但是偶尔还是会过来看一下</h2></header><ol class=menu id=main-menu><li><a href=/><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><polyline points="5 12 3 12 12 3 21 12 19 12"/><path d="M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"/><path d="M9 21v-6a2 2 0 012-2h2a2 2 0 012 2v6"/></svg><span>Home</span></a></li><li><a href=/about><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="7" r="4"/><path d="M6 21v-2a4 4 0 014-4h4a4 4 0 014 4v2"/></svg><span>About</span></a></li><li><a href=/talks><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-hipchat" width="44" height="44" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M17.802 17.292s.077-.055.2-.149C19.845 15.718 21 13.653 21 11.354c0-4.286-4.03-7.764-8.998-7.764C7.032 3.59 3 7.068 3 11.354 3 15.642 7.03 19 12 19c.424.0 1.12-.028 2.088-.084 1.262.82 3.104 1.493 4.716 1.493.499.0.734-.41.414-.828-.486-.596-1.156-1.551-1.416-2.29z"/><path d="M7.5 13.5c2.5 2.5 6.5 2.5 9 0"/></svg><span>Talks</span></a></li><li><a href=/archives><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><rect x="3" y="4" width="18" height="4" rx="2"/><path d="M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8"/><line x1="10" y1="12" x2="14" y2="12"/></svg><span>Archives</span></a></li><li><a href=/search><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="10" cy="10" r="7"/><line x1="21" y1="21" x2="15" y2="15"/></svg><span>Search</span></a></li><li><a href=/index.xml><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-rss" width="44" height="44" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><circle cx="5" cy="19" r="1"/><path d="M4 4a16 16 0 0116 16"/><path d="M4 11a9 9 0 019 9"/></svg><span>Feed</span></a></li><li id=dark-mode-toggle><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="8" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="16" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg><span>暗色模式</span></li></ol></aside><main class="main full-width"><article class="has-image main-article"><header class=article-header><div class=article-image><a href=/p/%E8%AF%91react-redux-typescript/><img src=/p/%E8%AF%91react-redux-typescript/cover_hu214c846e4a0e357a14266a12e8b1a4b9_1120274_800x0_resize_q75_box.jpg srcset="/p/%E8%AF%91react-redux-typescript/cover_hu214c846e4a0e357a14266a12e8b1a4b9_1120274_800x0_resize_q75_box.jpg 800w, /p/%E8%AF%91react-redux-typescript/cover_hu214c846e4a0e357a14266a12e8b1a4b9_1120274_1600x0_resize_q75_box.jpg 1600w" width=800 height=1000 loading=lazy alt="Featured image of post (译)React+Redux+Typescript"></a></div><div class=article-details><header class=article-category><a href=/categories/%E7%BC%96%E7%A8%8B/>编程</a></header><h2 class=article-title><a href=/p/%E8%AF%91react-redux-typescript/>(译)React+Redux+Typescript</a></h2><footer class=article-time><div><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M11.795 21H5a2 2 0 01-2-2V7a2 2 0 012-2h12a2 2 0 012 2v4"/><circle cx="18" cy="18" r="4"/><path d="M15 3v4"/><path d="M7 3v4"/><path d="M3 11h16"/><path d="M18 16.496V18l1 1"/></svg><time class=article-time--published>Sep 18, 2019</time></div></footer></div></header><section class=article-content><h1 id=react--redux--typescript---成为更好的前端教程>React + Redux + TypeScript - 成为更好的前端（教程）</h1><p>我在开始构建 React 应用，但是我希望我的应用有一个好的构建方式，这是我在 Medium 上看到的一篇不错的教程，为了方便我理解，顺便学英语，翻译在此，英语版的可以<a class=link href=https://medium.com/swinginc/react-redux-typescript-into-the-better-frontend-tutorial-d32f46e97995 target=_blank rel=noopener>点击查看原文</a></p><p>构建一个满意的 React 应用程序是比较困难的（主要是比较难找到一份 React 的最佳实践，这点 Angular 还是很优秀的，但是我喜欢 jsx）。当你掌握了 VirtualDOM 的概念以及框架是如何工作的时候，你会很快意识到单单使用 React 本身不足以构建比 TODO-LIST 更大的应用。这个时候你开始学习使用类似 Flux 这样的 store 架构，比如说应用最广泛的 Redux，很快你会沉没在 actions 和 reducers 中，并且你开始在保持数据分离上遇到更多的困难，这听起来你是不是很熟悉？</p><p>在本文中，我将介绍如何构建一个可扩展的应用程序，再看接下里的内容之前，我希望你已经明白 React 是如何工作的，并且对 Flux 或者 Redux 有一点了解。</p><p>本文是我由 2018 年 7 月 25 日 SwingDev 在 microConf 大会上的演讲整理而成的书面版本。更多的信息可以点击<a class=link href=http://www.microconf.io/ target=_blank rel=noopener>microconf.io</a>.</p><h2 id=为什么要使用-store>为什么要使用 Store</h2><p>如果你已经使用 React 编写过一个小的应用程序，那么你会发现好像少了些什么。</p><p>假设我们正在创建由两个主要组件构成的简单应用：包含所有电子邮件列表的<strong>侧边栏组件</strong>和显示当前所选电子邮件内容的<strong>内容组件</strong>。单击侧边栏的元素时，我们使用路由来更改页面的 URL 并将电子邮件的 ID 放在其中。但是我们需要在内容组件中获取到电子邮件的具体内容，即使侧边栏组件中已经存在该数据，我们依然无法在他的兄弟组件中获取到该数据。</p><p>你也许已经想到，我们可以把数据移动到父组件（包含了侧边栏组件和内容组件）来解决这个问题，但是这会产生许多潜在的问题和瓶颈。首先我们需要从父组件传递数据到子组件，并且将所有数据处理逻辑放到父组件中（例如删除邮件）。</p><p>使用 Flux 架构有助于解决这两个问题，它抽象了存储数据和操作数据（即 actions）的逻辑，并且提供了简单的方法将数据传递给需要它的组件（即 Redux 中的 connect 函数）。</p><h2 id=store-架构-101101-是什么梗我还特意搜了一下好像是初级的意思大概就是-store-架构初级教程吧>Store 架构 101（101 是什么梗,我还特意搜了一下，好像是初级的意思，大概就是 Store 架构初级教程吧）</h2><p>Store 架构是一个初级的概念，但是如果你以前从未听说，它可能听起来很奇怪，下图很好的描述了它：</p><p><figure><a href=https://raw.githubusercontent.com/johnny19941216/storage-room/master/img/20190918203459.png><img src=https://raw.githubusercontent.com/johnny19941216/storage-room/master/img/20190918203459.png loading=lazy></a></figure></p><p>我们不再将所有数据保存到组件中，而是使用唯一的全局 Store 作为我们的事实上的数据来源。</p><p>它定义了整个 UI，保存了所有动态数据-包括来自服务器的以及用户和应用的内部状态，我们基于这个 store 来构建我们的应用。</p><p>当用户触发了一个操作 =》 比如在页面上点击一个按钮 =》 调用 Action（Action 是一个简单的对象，仅包含一个表明 action 类型的 type 属性和可选的补充数据）=》action 会发送到 reducer（一个具有单一作用的函数，它依据 action 和旧的 state 生成一个新的 state，比如用户点击按钮新创建了一封邮件，reducer 就会把新邮件添加到旧的邮件列表中，生成一个新的邮件列表，当然，reducer 返回的是一个完整的 state，邮件列表包含在其中）=》新的 store 传递给组件 =》组件相应的更新 UI</p><h2 id=typescript--react-->TypeScript + React = ❤️</h2><p>Angular 开发者默认使用 TypeScript 作为开发语言。React 应用仍然主要使用 javascript 开发，使用强类型语言可能会在一开始使得开发变得复杂，但是如果你按照规则使用，则会在后续的开发中给你带来极大的作用。我们在本文中构建 的应用程序使用 Typescript 进行开发，以表明在 Typescript 的帮助下重构 Redux store 是多么容易。</p><p>将 TypeScript 与 React 一起使用可以从多方面获益。除了使用类型化语言的常见好处之外（您可以<a class=link href=https://atomicobject.com/resources/oo-programming/object-oriented-typing target=_blank rel=noopener>在此处</a>阅读更多相关信息），在编写 React 项目时您可以轻松输入 Props 和 State，比如你使用一个组件时，IDE 会提示该组件所需要的所有 props，如果你忘记了添加组件需要的必须属性，Typescript 也会提醒你（确实会避免很多低级错误，往往这种低级 bug 最为致命，浪费极多的时间）。</p><p>但是不仅如此，使用 Typescript 扩展 Redux 还有更多的好处，你的 store 键入就是其中之一，你无须点击跳转到 Reducer 来推测 store 的数据结构，此外当你键入 action 或者 action 生成器（工厂模式）时不用猜测它们接收什么类型的参数。</p><p>让我们来写个示例：</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-js data-lang=js><span class=line><span class=cl><span class=kd>function</span> <span class=nx>searchAction</span><span class=p>(</span><span class=nx>options</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=k>return</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nx>type</span><span class=o>:</span> <span class=err>‘</span><span class=nx>SEARCH</span><span class=err>’</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=p>...</span><span class=nx>options</span>
+</span></span><span class=line><span class=cl>  <span class=p>};</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></div><p>这是一个简单的 action 生成器，它接收 options 参数生成一个 type 为 SEARCH 的新 action，你能告诉我它到底要接收一个什么样的 options 吗？</p><p>没有任何提示我们到底要传递什么参数给它，你可能会找遍整个项目来搞明白 options 对象到底是个什么，但是很有可能你找遍整个项目还是不知道到底要传什么参数！（深有体会，有时候甚至需要打开开发者工具查看接口到底返回了什么，然后再去推导数据结构）</p><p>下面是重写为 Typescript 的版本，一眼看去可能会觉得有点复杂，但是附加的 interface 清除了所有混乱，使用此代码，你可以清晰的看到该函数需要唯一的一个包含有必要属性 text 和可选属性 tags（由数字构成的数组）的对象。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-typescript data-lang=typescript><span class=line><span class=cl><span class=kr>interface</span> <span class=nx>SearchActionOptions</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=nx>text</span>: <span class=kt>string</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=nx>tags?</span>: <span class=kt>number</span><span class=p>[];</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kr>interface</span> <span class=nx>ISearchAction</span> <span class=kr>extends</span> <span class=nx>SearchActionOptions</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=kr>type</span><span class=o>:</span> <span class=kt>string</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>function</span> <span class=nx>searchAction</span><span class=p>(</span><span class=nx>options</span>: <span class=kt>SearchActionOptions</span><span class=p>)</span><span class=o>:</span> <span class=nx>ISearchAction</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=k>return</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=kr>type</span><span class=o>:</span> <span class=s2>&#34;SEARCH&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=p>...</span><span class=nx>options</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>  <span class=p>};</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></div><p>如果我们不正确的使用它，编辑器会给出相关提示！</p><p><figure><a href=https://raw.githubusercontent.com/johnny19941216/storage-room/master/img/20190918203523.png><img src=https://raw.githubusercontent.com/johnny19941216/storage-room/master/img/20190918203523.png loading=lazy></a></figure></p><p>截图来自于 VisualStudio Code</p><h2 id=记事本-app>记事本 APP</h2><p>本文会创建一个简单的记事本 APP，你可以在<a class=link href=https://github.com/SwingDev/microconf-workshops target=_blank rel=noopener>GitHub</a>找到这个仓库，如果你想在已有代码的基础上编写，你可以从 master 分支检出代码。</p><p>在仓库里你可以找到已配置的 React + TypeScript 项目，其中实现了所有组件并定义了所有基本 action，虽然缺少了 store。</p><p>在这个应用中我们有三个 action：</p><ul><li><em>NOTES_FETCH</em> 应用开始获取数据时调用</li><li><em>NOTES_FETCH_SUCCESS</em> 应用获取数据成功时调用</li><li><em>NOTES_FETCH_ERROR</em> 应用获取数据出错时调用</li></ul><div class=highlight><pre tabindex=0 class=chroma><code class=language-typescript data-lang=typescript><span class=line><span class=cl><span class=kr>export</span> <span class=kr>interface</span> <span class=nx>IActionNotesFetch</span> <span class=kr>extends</span> <span class=nx>Action</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=kr>type</span><span class=o>:</span> <span class=s2>&#34;NOTES_FETCH&#34;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kr>export</span> <span class=kr>interface</span> <span class=nx>IActionNotesFetchSuccess</span> <span class=kr>extends</span> <span class=nx>Action</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=kr>type</span><span class=o>:</span> <span class=s2>&#34;NOTES_FETCH_SUCCESS&#34;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=nx>notes</span>: <span class=kt>NoteModel</span><span class=p>[];</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kr>export</span> <span class=kr>interface</span> <span class=nx>IActionNotesFetchError</span> <span class=kr>extends</span> <span class=nx>Action</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=kr>type</span><span class=o>:</span> <span class=s2>&#34;NOTES_FETCH_ERROR&#34;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=nx>errorMessage</span>: <span class=kt>string</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kr>export</span> <span class=kr>type</span> <span class=nx>AppActions</span> <span class=o>=</span>
+</span></span><span class=line><span class=cl>  <span class=o>|</span> <span class=nx>IActionNotesFetch</span>
+</span></span><span class=line><span class=cl>  <span class=o>|</span> <span class=nx>IActionNotesFetchSuccess</span>
+</span></span><span class=line><span class=cl>  <span class=o>|</span> <span class=nx>IActionNotesFetchError</span><span class=p>;</span>
+</span></span></code></pre></div><p>我们应该如何构造 store 以方便向用户展示数据？</p><h2 id=常见不推荐方法>常见（不推荐）方法</h2><p>最基本的 store 构造可能如下所示：</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-typescript data-lang=typescript><span class=line><span class=cl><span class=kr>export</span> <span class=kr>interface</span> <span class=nx>NotesListState</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=nx>state</span>: <span class=kt>string</span><span class=p>;</span> <span class=c1>// &#39;INIT&#39;, &#39;LOADING&#39; | &#39;LOADED&#39; | &#39;ERROR&#39;,
+</span></span></span><span class=line><span class=cl><span class=c1></span>  <span class=nx>notes</span>: <span class=kt>NoteModel</span><span class=p>[];</span>
+</span></span><span class=line><span class=cl>  <span class=nx>errorMessage?</span>: <span class=kt>string</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></div><p>我们存储这个列表的当前状态：</p><ul><li>初始状态 - 向服务器发送请求之前</li><li>加载中 - 等待服务器返回</li><li>加载完毕 - 已经获取数据到本地</li><li>错误 - 无法连接或者服务器错误</li></ul><p>在此架构中对应的 reducer 可能如下：</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-typescript data-lang=typescript><span class=line><span class=cl><span class=kr>export</span> <span class=kd>function</span> <span class=nx>notesListReducer</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>  <span class=nx>state</span>: <span class=kt>NotesListState</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>  <span class=nx>action</span>: <span class=kt>AppActions</span>
+</span></span><span class=line><span class=cl><span class=p>)</span><span class=o>:</span> <span class=nx>NotesListState</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=k>if</span> <span class=p>(</span><span class=nx>action</span><span class=p>.</span><span class=kr>type</span> <span class=o>===</span> <span class=s2>&#34;NOTES_FETCH&#34;</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=p>...</span><span class=nx>state</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=nx>state</span><span class=o>:</span> <span class=s2>&#34;LOADING&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=nx>notes</span><span class=o>:</span> <span class=p>[],</span>
+</span></span><span class=line><span class=cl>    <span class=p>};</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl>  <span class=k>if</span> <span class=p>(</span><span class=nx>action</span><span class=p>.</span><span class=kr>type</span> <span class=o>===</span> <span class=s2>&#34;NOTES_FETCH_SUCCESS&#34;</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=p>...</span><span class=nx>state</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=nx>state</span><span class=o>:</span> <span class=s2>&#34;LOADED&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=nx>notes</span>: <span class=kt>action.notes</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=p>};</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl>  <span class=k>if</span> <span class=p>(</span><span class=nx>action</span><span class=p>.</span><span class=kr>type</span> <span class=o>===</span> <span class=s2>&#34;NOTES_FETCH_ERROR&#34;</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=p>...</span><span class=nx>state</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=nx>state</span><span class=o>:</span> <span class=s2>&#34;ERROR&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=nx>notes</span><span class=o>:</span> <span class=p>[],</span>
+</span></span><span class=line><span class=cl>      <span class=nx>errorMessage</span>: <span class=kt>action.errorMessage</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=p>};</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl>  <span class=k>return</span> <span class=nx>state</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></div><p>这是一个简单的函数，只有三个条件语句，分别对每个 action 做出反应。</p><p>接下来唯一要做的就是把 store 与 React 组件连接起来，Redux 有一个函数 connect 可以很方便的帮我们实现这个功能，它接收两个回调函数，第一个将我们的全局 state 转换为组件的 props，第二个回调函数定义组件可用的 actions，我们把第一个函数更新为以下形式：</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-typescript data-lang=typescript><span class=line><span class=cl><span class=kr>const</span> <span class=nx>mapStateToProps</span> <span class=o>=</span> <span class=p>(</span><span class=nx>state</span>: <span class=kt>AppState</span><span class=p>,</span> <span class=nx>ownProps</span>: <span class=kt>HomeViewProps</span><span class=p>)</span> <span class=o>=&gt;</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=k>return</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nx>notes</span>: <span class=kt>state.list.notes</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=nx>state</span>: <span class=kt>state.list.state</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=nx>errorMessage</span>: <span class=kt>state.list.errorMessage</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>  <span class=p>};</span>
+</span></span><span class=line><span class=cl><span class=p>};</span>
+</span></span></code></pre></div><p>你可以在 github 仓库中的<em>sprint1-finish</em> tag 下找到可用的版本。</p><h2 id=问与答>问与答</h2><p>这个版本可以成功的加载和显示笔记（notes）。但是让我们思考一下，加入我们需要添加的下一个功能是-搜索。由于我们的 store 是一个全局单一数据源，所以当我们过滤掉某些 note 时，它就会从我们的 store 移除，这意味着在每次用户搜索时，我们都需要从服务器加载数据，以便向用户展示数据。</p><p>但是如果我们想要展示另一个具有相同数据的列表，那么势必会有一些相同的条目同时出现在两个列表中，这会产生不必要的冗余，如果实际的内容和第二个列表的条目不同，又会产生歧义。</p><p>不过，我们有一个叫做 store 规范化的方案可以将我们的 React/Redux 应用提升到一个新的水平。</p><h2 id=store-规范化>store 规范化</h2><p>要使用规范化，我们需要重新构思 store，在这里我们将它分为两类：</p><ul><li>第一个是我们可以视为前端数据库的数据 store，它保存着可用实体的相关信息。该 store 必须独立于用户正在与之交互的实际视图。</li><li>第二个是我们的 UI store，这里包含有所有有关用户 UI 状态的信息，但是我的意思不是在 UI store 另外保存一份实体数据，而是保存条目的 id。</li></ul><p><a class=link href=https://redux.js.org/recipes/structuringreducers/normalizingstateshape target=_blank rel=noopener>Redux 本身推荐的结构</a>如下：</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-typescript data-lang=typescript><span class=line><span class=cl><span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=nx>entities</span><span class=o>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nx>notes</span><span class=o>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=nx>byId</span><span class=o>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=mi>1</span><span class=o>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>          <span class=nx>id</span>: <span class=kt>1</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>          <span class=nx>title</span><span class=o>:</span> <span class=s1>&#39;First Note&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>            <span class=nx>description</span><span class=o>:</span> <span class=s1>&#39;Lorem Ipsum&#39;</span>
+</span></span><span class=line><span class=cl>        <span class=p>},</span>
+</span></span><span class=line><span class=cl>        <span class=mi>3</span><span class=o>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>          <span class=nx>id</span>: <span class=kt>3</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>          <span class=nx>title</span><span class=o>:</span> <span class=s1>&#39;Another Note&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>            <span class=nx>description</span><span class=o>:</span> <span class=s1>&#39;Dolor Sit Amet&#39;</span>
+</span></span><span class=line><span class=cl>        <span class=p>}</span>
+</span></span><span class=line><span class=cl>      <span class=p>},</span>
+</span></span><span class=line><span class=cl>      <span class=nx>allIds</span><span class=o>:</span> <span class=p>[</span><span class=mi>1</span><span class=p>,</span> <span class=mi>3</span><span class=p>]</span>
+</span></span><span class=line><span class=cl>    <span class=p>},</span>
+</span></span><span class=line><span class=cl>  <span class=p>},</span>
+</span></span><span class=line><span class=cl>  <span class=nx>ui</span><span class=o>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nx>dashboardList</span><span class=o>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=nx>state</span><span class=o>:</span> <span class=s1>&#39;LOADED&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=nx>notes</span><span class=o>:</span> <span class=p>[</span><span class=mi>1</span><span class=p>,</span> <span class=mi>3</span><span class=p>]</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></div><p>我们主要的 store 分为两部分：entities 和 ui，ui 属性下的数据结构由开发者决定，但是最重要的是我们没有保存真正的笔记数据，而是保存笔记的 id。</p><p>数据存储更加结构化。对于每个实体类型，我们保持对象包含两个属性：</p><ul><li>byId:将实体的 id 映射到其内容的对象</li><li>allIds 是我们当前商店中所有 ID 的数组</li></ul><p>如果你想了解有关 store 规范化的更多信息，建议参考<a class=link href=https://hackernoon.com/shape-your-redux-store-like-your-database-98faa4754fd5 target=_blank rel=noopener>Using the Redux Store Like a Database by Nick Sweeting</a> 和在 StackOverflow 上的讨论 <a class=link href=https://stackoverflow.com/questions/38222312/redux-why-normalize target=_blank rel=noopener>Redux - Why normalize?</a></p><h2 id=改良版>改良版</h2><p>让我们使用规范化重写一下，首先我们需要将 reducer 转换为 UI store，然后使用.map 函数将笔记映射到 ID 属性下：</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-typescript data-lang=typescript><span class=line><span class=cl><span class=kr>export</span> <span class=kd>function</span> <span class=nx>notesListReducer</span><span class=p>(</span><span class=nx>state</span>: <span class=kt>NotesListState</span><span class=p>,</span> <span class=nx>action</span>: <span class=kt>AppActions</span><span class=p>)</span><span class=o>:</span> <span class=nx>NotesListState</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=k>if</span> <span class=p>(</span><span class=nx>action</span><span class=p>.</span><span class=kr>type</span> <span class=o>===</span> <span class=s1>&#39;NOTES_FETCH&#39;</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=p>...</span><span class=nx>state</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=nx>state</span><span class=o>:</span> <span class=s1>&#39;LOADING&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=nx>notes</span><span class=o>:</span> <span class=p>[],</span>
+</span></span><span class=line><span class=cl>    <span class=p>};</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl>  <span class=k>if</span> <span class=p>(</span><span class=nx>action</span><span class=p>.</span><span class=kr>type</span> <span class=o>===</span> <span class=s1>&#39;NOTES_FETCH_SUCCESS&#39;</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=p>...</span><span class=nx>state</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=nx>state</span><span class=o>:</span> <span class=s1>&#39;LOADED&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=nx>notes</span>: <span class=kt>action.notes</span><span class=o>*</span><span class=p>.</span><span class=nx>map</span><span class=p>((</span><span class=nx>n</span>: <span class=kt>NoteModel</span><span class=p>)</span> <span class=o>=&gt;</span> <span class=nx>n</span><span class=p>.</span><span class=nx>id</span><span class=o>**</span><span class=p>)</span><span class=o>*</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=p>};</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl>  <span class=k>if</span> <span class=p>(</span><span class=nx>action</span><span class=p>.</span><span class=kr>type</span> <span class=o>===</span> <span class=s1>&#39;NOTES_FETCH_ERROR&#39;</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=p>...</span><span class=nx>state</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=nx>state</span><span class=o>:</span> <span class=s1>&#39;ERROR&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=nx>notes</span><span class=o>:</span> <span class=p>[],</span>
+</span></span><span class=line><span class=cl>      <span class=nx>errorMessage</span>: <span class=kt>action.errorMessage</span>
+</span></span><span class=line><span class=cl>    <span class=p>};</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl>  <span class=k>return</span> <span class=nx>state</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></div><p>接下来我们需要为数据 store 定义 type，我们可以通过以下方式实现：</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-typescript data-lang=typescript><span class=line><span class=cl><span class=kr>export</span> <span class=kr>type</span> <span class=nx>NotesDict</span> <span class=o>=</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=p>[</span><span class=nx>Key</span>: <span class=kt>number</span><span class=p>]</span><span class=o>:</span> <span class=nx>NoteModel</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=p>};</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kr>export</span> <span class=kr>type</span> <span class=nx>NotesDictState</span> <span class=o>=</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=nx>byId</span>: <span class=kt>NotesDict</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=nx>allIds</span>: <span class=kt>number</span><span class=p>[];</span>
+</span></span><span class=line><span class=cl><span class=p>};</span>
+</span></span></code></pre></div><p>第一个 interface 是用 Typescript 的方式声明特定形式的对象，在这里我们定义 ById 为一个对象，以数字 id 作为键，NoteModel 作为属性。</p><p>现在我们重新编写一个 reducer 更新 store：</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-typescript data-lang=typescript><span class=line><span class=cl><span class=kr>export</span> <span class=kd>function</span> <span class=nx>notesDictReducer</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>  <span class=nx>state</span>: <span class=kt>NotesDictState</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>  <span class=nx>action</span>: <span class=kt>AppActions</span>
+</span></span><span class=line><span class=cl><span class=p>)</span><span class=o>:</span> <span class=nx>NotesDictState</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=k>if</span> <span class=p>(</span><span class=nx>action</span><span class=p>.</span><span class=kr>type</span> <span class=o>===</span> <span class=s2>&#34;NOTES_FETCH_SUCCESS&#34;</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=nx>byId</span>: <span class=kt>action.notes.reduce</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>        <span class=p>(</span><span class=nx>acc</span><span class=p>,</span> <span class=nx>note</span><span class=p>)</span> <span class=o>=&gt;</span> <span class=p>({</span> <span class=p>...</span><span class=nx>acc</span><span class=p>,</span> <span class=p>[</span><span class=nx>note</span><span class=p>.</span><span class=nx>id</span><span class=p>]</span><span class=o>:</span> <span class=nx>note</span> <span class=p>}),</span>
+</span></span><span class=line><span class=cl>        <span class=nx>state</span>
+</span></span><span class=line><span class=cl>      <span class=p>),</span>
+</span></span><span class=line><span class=cl>      <span class=nx>allIds</span>: <span class=kt>action.notes.map</span><span class=p>((</span><span class=nx>n</span><span class=p>)</span> <span class=o>=&gt;</span> <span class=nx>n</span><span class=p>.</span><span class=nx>id</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>    <span class=p>};</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl>  <span class=k>return</span> <span class=nx>state</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></div><p>我们只对<em>NOTES_FETCH_SUCCESS</em>这个 action 做出反应，因为这是提供新数据的唯一操作，然后我们构建以 id 作为键的对象和包含所有 id 的数组。</p><p>现在我们需要合并所有的 reducer 并且创建一个 main store 来保存这些数据：</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-typescript data-lang=typescript><span class=line><span class=cl><span class=kr>export</span> <span class=kd>function</span> <span class=nx>mainReducer</span><span class=p>(</span><span class=nx>state</span>: <span class=kt>AppState</span> <span class=o>=</span> <span class=nx>defaultState</span><span class=p>(),</span> <span class=nx>action</span>: <span class=kt>Action</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=k>return</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nx>entities</span><span class=o>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=nx>notes</span>: <span class=kt>notesDictReducer</span><span class=p>(</span><span class=nx>state</span><span class=p>.</span><span class=nx>entities</span><span class=p>.</span><span class=nx>notes</span><span class=p>,</span> <span class=nx>action</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>    <span class=p>},</span>
+</span></span><span class=line><span class=cl>    <span class=nx>ui</span><span class=o>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=nx>list</span>: <span class=kt>notesListReducer</span><span class=p>(</span><span class=nx>state</span><span class=p>.</span><span class=nx>ui</span><span class=p>.</span><span class=nx>list</span><span class=p>,</span> <span class=nx>action</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>    <span class=p>},</span>
+</span></span><span class=line><span class=cl>  <span class=p>};</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></div><p>在实际项目中你可能会使用<em>combineReducers</em>来简化代码。</p><p>接下来唯一要做的事就是更新我们的连接器（connector），现在我们的 UI 笔记列表只包含 id，因此我们需要将它映射到实际的笔记对象：</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-typescript data-lang=typescript><span class=line><span class=cl><span class=kr>const</span> <span class=nx>mapStateToProps</span> <span class=o>=</span> <span class=p>(</span><span class=nx>state</span>: <span class=kt>AppState</span><span class=p>,</span> <span class=nx>ownProps</span>: <span class=kt>HomeViewProps</span><span class=p>)</span> <span class=o>=&gt;</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=k>return</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nx>notes</span>: <span class=kt>state.ui.list.notes.map</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>      <span class=p>(</span><span class=nx>noteId</span><span class=p>)</span> <span class=o>=&gt;</span> <span class=nx>state</span><span class=p>.</span><span class=nx>entities</span><span class=p>.</span><span class=nx>notes</span><span class=p>.</span><span class=nx>byId</span><span class=p>[</span><span class=nx>noteId</span><span class=p>]</span>
+</span></span><span class=line><span class=cl>    <span class=p>),</span>
+</span></span><span class=line><span class=cl>    <span class=nx>state</span>: <span class=kt>state.ui.list.state</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=nx>errorMessage</span>: <span class=kt>state.ui.list.errorMessage</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>  <span class=p>};</span>
+</span></span><span class=line><span class=cl><span class=p>};</span>
+</span></span></code></pre></div><h2 id=添加搜索>添加搜索</h2><p>使用新架构添加搜索完全不是问题，首先，我们需要创建一个新的 action interface，看起来像下面这样：</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-typescript data-lang=typescript><span class=line><span class=cl><span class=kr>export</span> <span class=kr>interface</span> <span class=nx>IActionSearchNotes</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=kr>type</span><span class=o>:</span> <span class=s2>&#34;NOTES_SEARCH&#34;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=nx>options</span><span class=o>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nx>searchText</span>: <span class=kt>string</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=p>};</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></div><p>接下里我们需要更新 UI reducer：</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-typescript data-lang=typescript><span class=line><span class=cl><span class=kr>export</span> <span class=kd>function</span> <span class=nx>notesListReducer</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>  <span class=nx>state</span>: <span class=kt>NotesListState</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>  <span class=nx>action</span>: <span class=kt>AppActions</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>  <span class=nx>notes</span>: <span class=kt>NotesDictState</span>
+</span></span><span class=line><span class=cl><span class=p>)</span><span class=o>:</span> <span class=nx>NotesListState</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=cm>/* all other reducers */</span>
+</span></span><span class=line><span class=cl>  <span class=k>if</span> <span class=p>(</span><span class=nx>action</span><span class=p>.</span><span class=kr>type</span> <span class=o>===</span> <span class=s2>&#34;NOTES_SEARCH&#34;</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=p>...</span><span class=nx>state</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=nx>notes</span>: <span class=kt>notes.allIds</span>
+</span></span><span class=line><span class=cl>        <span class=p>.</span><span class=nx>map</span><span class=p>((</span><span class=nx>id</span><span class=p>)</span> <span class=o>=&gt;</span> <span class=nx>notes</span><span class=p>.</span><span class=nx>byId</span><span class=p>[</span><span class=nx>id</span><span class=p>])</span>
+</span></span><span class=line><span class=cl>        <span class=p>.</span><span class=nx>filter</span><span class=p>(</span><span class=nx>filterByText</span><span class=p>(</span><span class=nx>action</span><span class=p>.</span><span class=nx>options</span><span class=p>.</span><span class=nx>searchText</span><span class=p>.</span><span class=nx>toLowerCase</span><span class=p>()))</span>
+</span></span><span class=line><span class=cl>        <span class=p>.</span><span class=nx>map</span><span class=p>((</span><span class=nx>n</span><span class=p>)</span> <span class=o>=&gt;</span> <span class=nx>n</span><span class=p>.</span><span class=nx>id</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>    <span class=p>};</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl>  <span class=k>return</span> <span class=nx>state</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></div><p>请注意，我们需要将数据 store 传递到 reducer 中，以便能够遍历所有元素并仅过滤出与搜索字符匹配的结果，你可以通过各种方式实现 filterByText 函数，下面是其中一种实现方式：</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-typescript data-lang=typescript><span class=line><span class=cl><span class=kd>function</span> <span class=nx>filterByText</span><span class=p>(</span><span class=nx>text</span>: <span class=kt>string</span><span class=p>)</span><span class=o>:</span> <span class=p>(</span><span class=nx>n</span>: <span class=kt>NoteModel</span><span class=p>)</span> <span class=o>=&gt;</span> <span class=kr>boolean</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=k>return</span> <span class=p>(</span><span class=nx>note</span>: <span class=kt>NoteModel</span><span class=p>)</span><span class=o>:</span> <span class=kr>boolean</span> <span class=o>=&gt;</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=p>(</span>
+</span></span><span class=line><span class=cl>      <span class=nx>note</span><span class=p>.</span><span class=nx>title</span><span class=p>.</span><span class=nx>toLowerCase</span><span class=p>().</span><span class=nx>indexOf</span><span class=p>(</span><span class=nx>text</span><span class=p>)</span> <span class=o>&gt;</span> <span class=o>-</span><span class=mi>1</span> <span class=o>||</span>
+</span></span><span class=line><span class=cl>      <span class=nx>note</span><span class=p>.</span><span class=nx>content</span><span class=p>.</span><span class=nx>toLowerCase</span><span class=p>().</span><span class=nx>indexOf</span><span class=p>(</span><span class=nx>text</span><span class=p>)</span> <span class=o>&gt;</span> <span class=o>-</span><span class=mi>1</span>
+</span></span><span class=line><span class=cl>    <span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=p>};</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></div><p>该函数检查了笔记的标题或者内容是否能够与搜索匹配。</p><p>好了，就是这么多了，我们已经实现了搜索，请注意我们事实上并没有触及连接器（connector），因为我们的 store 已经规范化，所以无需更新视图。添加更多的搜索功能或者排序功能也不需要有太多的更改。如果我们需要添加刷新功能与后台保持同步，我们应用中的所有实例将自动更新。</p><h2 id=摘要>摘要</h2><p>我希望本文能够让您基本了解 Redux store 规范化的工作原理以及如何使用它来改进项目。如果您想通过此示例进行更多操作，我建议您执行以下一项或所有练习：</p><ul><li>删除元素的功能</li><li>添加标记功能</li><li>添加按标签搜索的选项</li></ul><p>本文基于 2018 年 7 月 25 日在波兰华沙举行的 SwingDev microConf“State of the State in React”研讨会。如果您想了解有关该活动的更多信息，请访问<a class=link href=https://www.microconf.io/ target=_blank rel=noopener>www.microconf.io</a>。</p></section><footer class=article-footer><section class=article-tags><a href=/tags/typescript/>typescript</a>
 <a href=/tags/react/>react</a>
-<a href=/tags/redux/>redux</a>
-</section>
-<section class=article-copyright><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><path d="M14.5 9a3.5 4 0 100 6"/></svg>
-<span>Licensed under CC BY-NC-SA 4.0</span>
-</section>
-</footer>
-</article>
-<aside class=related-contents--wrapper>
-<h2 class=section-title>相关文章</h2>
-<div class=related-contents>
-<div class="flex article-list--tile">
-<article class=has-image>
-<a href=/p/%E5%9C%A8scss%E5%92%8Ccss_module%E7%8E%AF%E5%A2%83%E4%B8%AD%E5%88%87%E6%8D%A2%E4%B8%BB%E9%A2%98/>
-<div class=article-image>
-<img src=/p/%E5%9C%A8scss%E5%92%8Ccss_module%E7%8E%AF%E5%A2%83%E4%B8%AD%E5%88%87%E6%8D%A2%E4%B8%BB%E9%A2%98/cover.16825d5d6f097c3d41a25d20e9b9b2d4_hu9efe6025afacf0be349490fd897a8728_1800161_250x150_fill_q75_box_smart1.jpg width=250 height=150 loading=lazy data-key data-hash="md5-FoJdXW8JfD1Bol0g6bmy1A==">
-</div>
-<div class=article-details>
-<h2 class=article-title>在scss和css_module环境中切换主题</h2>
-</div>
-</a>
-</article>
-<article class=has-image>
-<a href=/p/react%E9%A1%B9%E7%9B%AE%E4%B8%AD%E5%90%8C%E6%97%B6%E6%B7%BB%E5%8A%A0css-modules%E4%B8%8E%E6%99%AE%E9%80%9Aclass/>
-<div class=article-image>
-<img src=/p/react%E9%A1%B9%E7%9B%AE%E4%B8%AD%E5%90%8C%E6%97%B6%E6%B7%BB%E5%8A%A0css-modules%E4%B8%8E%E6%99%AE%E9%80%9Aclass/cover.bdc150a4798601b6ec3bc81d237bc4b1_huefcbb9b8b5b12eb8cf00ffdf2b15a7b8_2697992_250x150_fill_q75_box_smart1.jpg width=250 height=150 loading=lazy data-key data-hash="md5-vcFQpHmGAbbsO8gdI3vEsQ==">
-</div>
-<div class=article-details>
-<h2 class=article-title>React项目中同时添加css Modules与普通class</h2>
-</div>
-</a>
-</article>
-<article class=has-image>
-<a href=/p/git%E5%88%9B%E5%BB%BA%E7%A9%BA%E5%88%86%E6%94%AF/>
-<div class=article-image>
-<img src=https://picsum.photos/seed/1638516077/4096/2160 loading=lazy data-key data-hash=https://picsum.photos/seed/1638516077/4096/2160>
-</div>
-<div class=article-details>
-<h2 class=article-title>Git创建空分支</h2>
-</div>
-</a>
-</article>
-<article class=has-image>
-<a href=/p/github-page-%E8%87%AA%E5%8A%A8%E5%8C%96%E9%83%A8%E7%BD%B2action/>
-<div class=article-image>
-<img src=https://picsum.photos/seed/1633939919/4096/2160 loading=lazy data-key data-hash=https://picsum.photos/seed/1633939919/4096/2160>
-</div>
-<div class=article-details>
-<h2 class=article-title>Github Page 自动化部署action</h2>
-</div>
-</a>
-</article>
-<article class=has-image>
-<a href=/p/huskyv7%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/>
-<div class=article-image>
-<img src=/p/huskyv7%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/cover.06f3d87be13834f9264f4ad640108f61_hu01741809d1f58ad23f9de5fc011deff8_4984873_250x150_fill_q75_box_smart1.jpg width=250 height=150 loading=lazy data-key data-hash="md5-BvPYe+E4NPkmT0rWQBCPYQ==">
-</div>
-<div class=article-details>
-<h2 class=article-title>Husky@v7使用指南</h2>
-</div>
-</a>
-</article>
-</div>
-</div>
-</aside>
-<script src=https://utteranc.es/client.js repo=jo-hnny/jo-hnny.github.io issue-term=title label=comments crossorigin=anonymous async></script>
-<style>.utterances{max-width:unset}</style>
-<script>function setUtterancesTheme(b){let a=document.querySelector('.utterances iframe');a&&a.contentWindow.postMessage({type:'set-theme',theme:`github-${b}`},'https://utteranc.es')}addEventListener('message',a=>{if(a.origin!=='https://utteranc.es')return;setUtterancesTheme(document.documentElement.dataset.scheme)}),window.addEventListener('onColorSchemeChange',a=>{setUtterancesTheme(a.detail)})</script>
-<footer class=site-footer>
-<section class=copyright>
-&copy;
+<a href=/tags/redux/>redux</a></section><section class=article-copyright><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><path d="M14.5 9a3.5 4 0 100 6"/></svg><span>Licensed under CC BY-NC-SA 4.0</span></section></footer></article><aside class=related-contents--wrapper><h2 class=section-title>相关文章</h2><div class=related-contents><div class="flex article-list--tile"><article class=has-image><a href=/p/%E5%9C%A8scss%E5%92%8Ccss_module%E7%8E%AF%E5%A2%83%E4%B8%AD%E5%88%87%E6%8D%A2%E4%B8%BB%E9%A2%98/><div class=article-image><img src=/p/%E5%9C%A8scss%E5%92%8Ccss_module%E7%8E%AF%E5%A2%83%E4%B8%AD%E5%88%87%E6%8D%A2%E4%B8%BB%E9%A2%98/cover.16825d5d6f097c3d41a25d20e9b9b2d4_hu9efe6025afacf0be349490fd897a8728_1800161_250x150_fill_q75_box_smart1.jpg width=250 height=150 loading=lazy data-key data-hash="md5-FoJdXW8JfD1Bol0g6bmy1A=="></div><div class=article-details><h2 class=article-title>在scss和css_module环境中切换主题</h2></div></a></article><article class=has-image><a href=/p/react%E9%A1%B9%E7%9B%AE%E4%B8%AD%E5%90%8C%E6%97%B6%E6%B7%BB%E5%8A%A0css-modules%E4%B8%8E%E6%99%AE%E9%80%9Aclass/><div class=article-image><img src=/p/react%E9%A1%B9%E7%9B%AE%E4%B8%AD%E5%90%8C%E6%97%B6%E6%B7%BB%E5%8A%A0css-modules%E4%B8%8E%E6%99%AE%E9%80%9Aclass/cover.bdc150a4798601b6ec3bc81d237bc4b1_huefcbb9b8b5b12eb8cf00ffdf2b15a7b8_2697992_250x150_fill_q75_box_smart1.jpg width=250 height=150 loading=lazy data-key data-hash="md5-vcFQpHmGAbbsO8gdI3vEsQ=="></div><div class=article-details><h2 class=article-title>React项目中同时添加css Modules与普通class</h2></div></a></article><article class=has-image><a href=/p/git%E5%88%9B%E5%BB%BA%E7%A9%BA%E5%88%86%E6%94%AF/><div class=article-image><img src=https://picsum.photos/seed/1638516077/4096/2160 loading=lazy data-key data-hash=https://picsum.photos/seed/1638516077/4096/2160></div><div class=article-details><h2 class=article-title>Git创建空分支</h2></div></a></article><article class=has-image><a href=/p/github-page-%E8%87%AA%E5%8A%A8%E5%8C%96%E9%83%A8%E7%BD%B2action/><div class=article-image><img src=https://picsum.photos/seed/1633939919/4096/2160 loading=lazy data-key data-hash=https://picsum.photos/seed/1633939919/4096/2160></div><div class=article-details><h2 class=article-title>Github Page 自动化部署action</h2></div></a></article><article class=has-image><a href=/p/huskyv7%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/><div class=article-image><img src=/p/huskyv7%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/cover.06f3d87be13834f9264f4ad640108f61_hu01741809d1f58ad23f9de5fc011deff8_4984873_250x150_fill_q75_box_smart1.jpg width=250 height=150 loading=lazy data-key data-hash="md5-BvPYe+E4NPkmT0rWQBCPYQ=="></div><div class=article-details><h2 class=article-title>Husky@v7使用指南</h2></div></a></article></div></div></aside><script src=https://utteranc.es/client.js repo=jo-hnny/jo-hnny.github.io issue-term=title label=comments crossorigin=anonymous async></script><style>.utterances{max-width:unset}</style><script>function setUtterancesTheme(e){let t=document.querySelector(".utterances iframe");t&&t.contentWindow.postMessage({type:"set-theme",theme:`github-${e}`},"https://utteranc.es")}addEventListener("message",e=>{if(e.origin!=="https://utteranc.es")return;setUtterancesTheme(document.documentElement.dataset.scheme)}),window.addEventListener("onColorSchemeChange",e=>{setUtterancesTheme(e.detail)})</script><footer class=site-footer><section class=copyright>&copy;
 2020 -
-2021 冷宫
-</section>
-<section class=powerby>
-Built with <a href=https://gohugo.io/ target=_blank rel=noopener>Hugo</a> <br>
-Theme <b><a href=https://github.com/CaiJimmy/hugo-theme-stack target=_blank rel=noopener data-version=3.2.0>Stack</a></b> designed by <a href=https://jimmycai.com target=_blank rel=noopener>Jimmy</a>
-</section>
-</footer>
-<div class=pswp tabindex=-1 role=dialog aria-hidden=true>
-<div class=pswp__bg></div>
-<div class=pswp__scroll-wrap>
-<div class=pswp__container>
-<div class=pswp__item></div>
-<div class=pswp__item></div>
-<div class=pswp__item></div>
-</div>
-<div class="pswp__ui pswp__ui--hidden">
-<div class=pswp__top-bar>
-<div class=pswp__counter></div>
-<button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+2022 冷宫</section><section class=powerby>Built with <a href=https://gohugo.io/ target=_blank rel=noopener>Hugo</a><br>Theme <b><a href=https://github.com/CaiJimmy/hugo-theme-stack target=_blank rel=noopener data-version=3.2.0>Stack</a></b> designed by <a href=https://jimmycai.com target=_blank rel=noopener>Jimmy</a></section></footer><div class=pswp tabindex=-1 role=dialog aria-hidden=true><div class=pswp__bg></div><div class=pswp__scroll-wrap><div class=pswp__container><div class=pswp__item></div><div class=pswp__item></div><div class=pswp__item></div></div><div class="pswp__ui pswp__ui--hidden"><div class=pswp__top-bar><div class=pswp__counter></div><button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
 <button class="pswp__button pswp__button--share" title=Share></button>
 <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
-<button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
-<div class=pswp__preloader>
-<div class=pswp__preloader__icn>
-<div class=pswp__preloader__cut>
-<div class=pswp__preloader__donut></div>
-</div>
-</div>
-</div>
-</div>
-<div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
-<div class=pswp__share-tooltip></div>
-</div>
-<button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
-</button>
-<button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
-</button>
-<div class=pswp__caption>
-<div class=pswp__caption__center></div>
-</div>
-</div>
-</div>
-</div><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo=" crossorigin=anonymous defer></script><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU=" crossorigin=anonymous defer></script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css integrity="sha256-c0uckgykQ9v5k+IqViZOZKc47Jn7KQil4/MP3ySA3F8=" crossorigin=anonymous><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.css integrity="sha256-SBLU4vv6CA6lHsZ1XyTdhyjJxCjPif/TRkjnsyGAGnE=" crossorigin=anonymous>
-</main>
-</div>
-<script src=https://cdn.jsdelivr.net/npm/node-vibrant@3.1.5/dist/vibrant.min.js integrity="sha256-5NovOZc4iwiAWTYIFiIM7DxKUXKWvpVEuMEPLzcm5/g=" crossorigin=anonymous defer></script><script type=text/javascript src=/ts/main.js defer></script>
-<script>(function(){const a=document.createElement('link');a.href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap",a.type="text/css",a.rel="stylesheet",document.head.appendChild(a)})()</script>
-</body>
-</html>
+<button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button><div class=pswp__preloader><div class=pswp__preloader__icn><div class=pswp__preloader__cut><div class=pswp__preloader__donut></div></div></div></div></div><div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap"><div class=pswp__share-tooltip></div></div><button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)"></button>
+<button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button><div class=pswp__caption><div class=pswp__caption__center></div></div></div></div></div><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo=" crossorigin=anonymous defer></script><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU=" crossorigin=anonymous defer></script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css integrity="sha256-c0uckgykQ9v5k+IqViZOZKc47Jn7KQil4/MP3ySA3F8=" crossorigin=anonymous><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.css integrity="sha256-SBLU4vv6CA6lHsZ1XyTdhyjJxCjPif/TRkjnsyGAGnE=" crossorigin=anonymous></main></div><script src=https://cdn.jsdelivr.net/npm/node-vibrant@3.1.5/dist/vibrant.min.js integrity="sha256-5NovOZc4iwiAWTYIFiIM7DxKUXKWvpVEuMEPLzcm5/g=" crossorigin=anonymous defer></script><script type=text/javascript src=/ts/main.js defer></script>
+<script>(function(){const e=document.createElement("link");e.href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap",e.type="text/css",e.rel="stylesheet",document.head.appendChild(e)})()</script></body></html>
